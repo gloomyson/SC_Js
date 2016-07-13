@@ -18,9 +18,9 @@ Classic RTS game at html5 canvas and javascript, only js codes, copyright materi
 * Three additional levels for playing: Champain, HUNTERXHUNTER and ProtectAthena
 
 ## Newly added features in latest version
-* Basic network playing frame, level 2 supports multiplayer mode, can chat with each other
 * One additional level added: Tower Defense
 * Support replay your game playing
+* Experimental: Basic network playing frame, level 2 supports multiplayer mode, can chat with each other
 * Experimental: Android install package for play on mobile devices
 * Check svn.log for other detailed changes
 
