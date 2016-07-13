@@ -31,8 +31,7 @@ Classic RTS game at html5 canvas and javascript, only js codes, copyright materi
 	* Install NodeJs on your machine
 	* Install websocket module: input 'npm install websocket' in cmd
 	* Start SC_server: input 'node GameRule\SC_server.js' in cmd
-3. To play it on mobile device, install Android install package on your device:
-	http://www.nvhae.com/starcraft/starcraft.apk
+3. To play it on mobile device, install Android install package on your device: [SC.apk](http://www.nvhae.com/starcraft/starcraft.apk)
 
 ## Try it online at:
-[SC Online](http://www.nvhae.com/starcraft/)
+[SC Html5 Online](http://www.nvhae.com/starcraft/)
