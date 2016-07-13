@@ -1,0 +1,38 @@
+# Starcraft-Js
+Classic RTS game at html5 canvas and javascript, only js codes, copyright materials removed
+
+## Getting started
+* Download the latest version from github: https://github.com/gloomyson/SC_Js/archive/master.zip
+* Unzip the folder
+* Extract original resources from starcraft and add into bgm&img folder
+* Double click `index.html` in the folder (this should open the game with your browser)
+* Press the radio button (circle next to the level name) to select a level and play
+
+## Former 2015 version features:
+* All units/buildings/bullets/maps/magics and animations completed
+* Support war fog, zerg creep
+* Control panel, different buttons and icons
+* Support cheat code
+* Mouse and key control complete
+* Seven basic levels to test units and buildings
+* Three additional levels for playing: Champain, HUNTERXHUNTER and ProtectAthena
+
+## Newly added features in latest version
+* Basic network playing frame, level 2 supports multiplayer mode, can chat with each other
+* One additional level added: Tower Defense
+* Support replay your game playing
+* Experimental: Android install package for play on mobile devices
+* Check svn.log for other detailed changes
+
+## Notice
+1. Need extract resource from orginal starcraft game, and add them into bgm/img folder before play
+	* List serveral useful extract tools: MpqWorkshop, GRPEdit and RetroGRP
+2. Need setup server before play in multiplayer mode, follow below steps:
+	* Install NodeJs on your machine
+	* Install websocket module: input 'npm install websocket' in cmd
+	* Start SC_server: input 'node GameRule\SC_server.js' in cmd
+3. To play it on mobile device, install Android install package on your device:
+	http://www.nvhae.com/starcraft/starcraft.apk
+
+## Try it online at:
+[SC Online](http://www.nvhae.com/starcraft/)

@@ -1,0 +1,41 @@
+div#GamePlay div.panel_Map canvas[name='mini_map']{
+    position:absolute;
+    left:5px;
+    top:32px;
+    width:130px;
+    height:130px;
+    background-image: url('../img/Maps/Snapshot.jpg');
+}
+canvas[name='mini_map'].Switchback {
+    background-position: 0 0;
+}
+canvas[name='mini_map'].Volcanis {
+    background-position: -130px 0;
+}
+canvas[name='mini_map'].TrenchWars {
+    background-position: -260px 0;
+}
+canvas[name='mini_map'].BloodBath {
+    background-position: -390px 0;
+}
+canvas[name='mini_map'].OrbitalRelay {
+    background-position: -520px 0;
+}
+canvas[name='mini_map'].ThinIce {
+    background-position: 0 -130px;
+}
+canvas[name='mini_map'].BigGameHunters {
+    background-position: -130px -130px;
+}
+canvas[name='mini_map'].TheHunters {
+    background-position: -260px -130px;
+}
+canvas[name='mini_map'].Turbo {
+    background-position: -390px -130px;
+}
+canvas[name='mini_map'].Grass {
+    background-position: -520px -130px;
+}
+canvas[name='mini_map'].TowerDefense {
+    background-position: -390px -130px;
+}

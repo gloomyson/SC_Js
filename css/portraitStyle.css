@@ -1,0 +1,183 @@
+/*Zerg Protraits*/
+div[name="portrait"].Drone{
+    background-position: 0 0;
+}
+div[name="portrait"].Zergling{
+    background-position: -60px 0;
+}
+div[name="portrait"].Overlord{
+    background-position: -120px 0;
+}
+div[name="portrait"].Hydralisk{
+    background-position: -180px 0;
+}
+div[name="portrait"].Lurker{
+    background-position: -240px 0;
+}
+div[name="portrait"].Mutalisk{
+    background-position: -300px 0;
+}
+div[name="portrait"].Guardian{
+    background-position: -360px 0;
+}
+div[name="portrait"].Devourer{
+    background-position: -420px 0;
+}
+div[name="portrait"].Scourge{
+    background-position: -480px 0;
+}
+div[name="portrait"].Queen{
+    background-position: -540px 0;
+}
+div[name="portrait"].Broodling{
+    background-position: -720px 0;
+}
+div[name="portrait"].Ultralisk{
+    background-position: -600px 0;
+}
+div[name="portrait"].Defiler{
+    background-position: -660px 0;
+}
+div[name="portrait"].InfestedTerran{
+    background-position: -780px 0;
+}
+div[name="portrait"].Larva{
+    background-position: -900px 0;
+}
+div[name="portrait"].Egg{
+    background-position: -840px 0;
+}
+div[name="portrait"].Cocoon{
+    background-position: -360px -224px;
+}
+/*Terran Protraits*/
+div[name="portrait"].SCV{
+    background-position: 0 -56px;
+}
+div[name="portrait"].Marine{
+    background-position: -60px -56px;
+}
+div[name="portrait"].Firebat{
+    background-position: -120px -56px;
+}
+div[name="portrait"].Ghost{
+    background-position: -180px -56px;
+}
+div[name="portrait"].Medic{
+    background-position: -240px -56px;
+}
+div[name="portrait"].Vulture{
+    background-position: -300px -56px;
+}
+div[name="portrait"].Tank{
+    background-position: -360px -56px;
+}
+div[name="portrait"].Goliath{
+    background-position: -420px -56px;
+}
+div[name="portrait"].Wraith{
+    background-position: -480px -56px;
+}
+div[name="portrait"].Dropship{
+    background-position: -540px -56px;
+}
+div[name="portrait"].Vessel{
+    background-position: -600px -56px;
+}
+div[name="portrait"].BattleCruiser{
+    background-position: -660px -56px;
+}
+div[name="portrait"].Valkyrie{
+    background-position: -720px -56px;
+}
+div[name="portrait"].Civilian{
+    background-position: -900px -56px;
+}
+/*Protoss Protraits*/
+div[name="portrait"].Probe{
+    background-position: 0 -112px;
+}
+div[name="portrait"].Zealot{
+    background-position: -60px -112px;
+}
+div[name="portrait"].Dragoon{
+    background-position: -120px -112px;
+}
+div[name="portrait"].Templar{
+    background-position: -180px -112px;
+}
+div[name="portrait"].DarkTemplar{
+    background-position: -240px -112px;
+}
+div[name="portrait"].Shuttle{
+    background-position: -300px -112px;
+}
+div[name="portrait"].Reaver{
+    background-position: -360px -112px;
+}
+div[name="portrait"].Observer{
+    background-position: -420px -112px;
+}
+div[name="portrait"].Scout{
+    background-position: -480px -112px;
+}
+div[name="portrait"].Carrier{
+    background-position: -540px -112px;
+}
+div[name="portrait"].Arbiter{
+    background-position: -660px -112px;
+}
+div[name="portrait"].Corsair{
+    background-position: -720px -112px;
+}
+div[name="portrait"].Archon{
+    background-position: -780px -112px;
+}
+div[name="portrait"].DarkArchon{
+    background-position: -840px -112px;
+}
+/*Hero Protraits*/
+div[name="portrait"].HeroCruiser{
+    background-position: -240px -168px;
+}
+div[name="portrait"].Kerrigan{
+    background-position: -540px -168px;
+}
+div[name="portrait"].Sarah{
+    background-position: -120px -168px;
+}
+div[name="portrait"].DevilHunter{
+    background-position: -600px -224px;
+}
+div[name="portrait"].Tassadar{
+    background-position: -660px -168px;
+}
+/*Neutral Protraits*/
+div[name="portrait"].Ragnasaur{
+    background-position: 0 -224px;
+}
+div[name="portrait"].Rhynsdon{
+    background-position: -60px -224px;
+}
+div[name="portrait"].Ursadon{
+    background-position: -120px -224px;
+}
+div[name="portrait"].Bengalaas{
+    background-position: -180px -224px;
+}
+div[name="portrait"].Scantid{
+    background-position: -240px -224px;
+}
+div[name="portrait"].Kakaru{
+    background-position: -300px -224px;
+}
+/*Building Protraits*/
+div[name="portrait"].ZergBuilding{
+    background-position: 0 -168px;
+}
+div[name="portrait"].TerranBuilding{
+    background-position: -780px -56px;
+}
+div[name="portrait"].ProtossBuilding{
+    background-position: -900px -112px;
+}

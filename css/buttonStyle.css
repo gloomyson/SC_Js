@@ -1,0 +1,848 @@
+/*Panel control style*/
+div.panel_Control button{
+    position: absolute;
+    width:36px;
+    height:34px;
+    display:none;
+    background-image: url('../img/Menu/CmdIcons.png');
+    border-width:2px;
+    cursor:url('../img/Menu/cursor.ico'),auto;
+    /*For text inside button*/
+    color:red;
+    font-weight:bolder;
+    text-align:right;
+    line-height:46px;
+    vertical-align:bottom;
+}
+div.panel_Control button[disabled='disabled']{
+    background-image: url('../img/Menu/CmdIconsDisabled.png');
+    /*filter:grayscale(100%);
+    -webkit-filter:grayscale(100%);
+    -moz-filter:grayscale(100%);
+    -ms-filter:grayscale(100%);
+    -o-filter:grayscale(100%);*/
+}
+button[num='1']{
+    left:16px;
+    top:32px;
+}
+button[num='2']{
+    left:62px;
+    top:32px;
+}
+button[num='3']{
+    left:108px;
+    top:32px;
+}
+button[num='4']{
+    left:16px;
+    top:72px;
+}
+button[num='5']{
+    left:62px;
+    top:72px;
+}
+button[num='6']{
+    left:108px;
+    top:72px;
+}
+button[num='7']{
+    left:16px;
+    top:112px;
+}
+button[num='8']{
+    left:62px;
+    top:112px;
+}
+button[num='9']{
+    left:108px;
+    top:112px;
+}
+/*Control buttons*/
+.move{
+    background-position: -396px -340px;
+}
+.stop{
+    background-position: -432px -340px;
+}
+.attack{
+    background-position: 0 -374px;
+}
+.repair{
+    background-position: -72px -374px;
+}
+.gather{
+    background-position: -36px -374px;
+}
+.patrol{
+    background-position: -396px -408px;
+}
+.hold{
+    background-position: -432px -408px;
+}
+.Cancel{
+    background-position: -216px -374px;
+}
+.Load{
+    background-position: 0 -578px;
+}
+.UnloadAll{
+    background-position: -108px -578px;
+}
+.BasicMutation{
+    background-position: -36px -442px;
+}
+.AdvancedMutation{
+    background-position: -72px -442px;
+}
+.BasicBuilding{
+    background-position: -144px -374px;
+}
+.AdvancedBuilding{
+    background-position: -180px -374px;
+}
+.BasicStructure{
+    background-position: -108px -476px;
+}
+.AdvancedStructure{
+    background-position: -144px -476px;
+}
+.SelectLarva{
+    background-position: -144px -34px;
+}
+.SetRallyPoint{
+    background-position: -108px -510px;
+}
+
+/*****************Unit*****************/
+/*Terran*/
+.SCV{
+    background-position: -180px 0;
+}
+.Marine{
+    background-position: 0 0;
+}
+.Firebat{
+    background-position: -288px 0;
+}
+.Ghost{
+    background-position: -36px 0;
+}
+.Medic{
+    background-position: -108px -34px;
+}
+.Vulture{
+    background-position: -72px 0;
+}
+.Tank{
+    background-position: -144px 0;
+}
+.Goliath{
+    background-position: -108px 0;
+}
+.Wraith{
+    background-position: -216px 0;
+}
+.Dropship{
+    background-position: -324px 0;
+}
+.Vessel{
+    background-position: -252px 0;
+}
+.BattleCruiser{
+    background-position: -360px 0;
+}
+.Valkyrie{
+    background-position: -216px -68px;
+}
+.Civilian{
+    background-position: 0 -34px;
+}
+.SpiderMines{
+    background-position: -396px 0;
+}
+/*Zerg*/
+.Drone{
+    background-position: -360px -34px;
+}
+.Zergling{
+    background-position: -216px -34px;
+}
+.Overlord{
+    background-position: -396px -34px;
+}
+.Hydralisk{
+    background-position: -252px -34px;
+}
+.Lurker{
+    background-position: -36px -136px;
+}
+.Mutalisk{
+    background-position: -432px -34px;
+}
+.Guardian{
+    background-position: 0 -68px;
+}
+.Devourer{
+    background-position: -360px -68px;
+}
+.Scourge{
+    background-position: -108px -68px;
+}
+.Queen{
+    background-position: -36px -68px;
+}
+.Broodling{
+    background-position: -324px -34px;
+}
+.Ultralisk{
+    background-position: -288px -34px;
+}
+.Defiler{
+    background-position: -72px -68px;
+}
+.InfestedTerran{
+    background-position: -144px -68px;
+}
+/*Protoss*/
+.Probe{
+    background-position: -432px -68px;
+}
+.Zealot{
+    background-position: 0 -102px;
+}
+.Dragoon{
+    background-position: -36px -102px;
+}
+.Templar{
+    background-position: -72px -102px;
+}
+.DarkTemplar{
+    background-position: -324px -68px;
+}
+.Archon{
+    background-position: -108px -102px;
+}
+.DarkArchon{
+    background-position: -396px -68px;
+}
+.Shuttle{
+    background-position: -144px -102px;
+}
+.Reaver{
+    background-position: -324px -102px;
+}
+.Observer{
+    background-position: -360px -102px;
+}
+.Scout{
+    background-position: -180px -102px;
+}
+.Carrier{
+    background-position: -252px -102px;
+}
+.Arbiter{
+    background-position: -216px -102px;
+}
+.Corsair{
+    background-position: -288px -68px;
+}
+.Scarab{
+    background-position: -396px -102px;
+}
+.Interceptor{
+    background-position: -288px -102px;
+}
+/*Hero*/
+.Kerrigan{
+    background-position: -36px -34px;
+}
+.Sarah{
+    background-position: -180px -68px;
+}
+
+/*****************Building*****************/
+/*Terran*/
+.CommandCenter{
+    background-position: -288px -136px;
+}
+.SupplyDepot{
+    background-position: -396px -136px;
+}
+.Refinery{
+    background-position: -432px -136px;
+}
+.Barracks{
+    background-position: 0 -170px;
+}
+.EngineeringBay{
+    background-position: -360px -170px;
+}
+.MissileTurret{
+    background-position: -432px -170px;
+}
+.Academy{
+    background-position: -36px -170px;
+}
+.Bunker{
+    background-position: 0 -204px;
+}
+.Factory{
+    background-position: -72px -170px;
+}
+.Starport{
+    background-position: -108px -170px;
+}
+.ScienceFacility{
+    background-position: -180px -170px;
+}
+.Armory{
+    background-position: -396px -170px;
+}
+.ComstatStation{
+    background-position: -324px -136px;
+}
+.NuclearSilo{
+    background-position: -360px -136px;
+}
+.MachineShop{
+    background-position: -288px -170px;
+}
+.ControlTower{
+    background-position: -144px -170px;
+}
+.ConvertOps{
+    background-position: -216px -170px;
+}
+.PhysicsLab{
+    background-position: -252px -170px;
+}
+.CrashCruiser{
+    background-position: -36px -204px;
+}
+.BigCannon{
+    background-position: -72px -204px;
+}
+/*Zerg*/
+.Hatchery{
+    background-position: -180px -204px;
+}
+.Lair{
+    background-position: -216px -204px;
+}
+.Hive{
+    background-position: -252px -204px;
+}
+.CreepColony{
+    background-position: -144px -238px;
+}
+.SunkenColony{
+    background-position: -216px -238px;
+}
+.SporeColony{
+    background-position: -180px -238px;
+}
+.Extractor{
+    background-position: -324px -238px;
+}
+.SpawningPool{
+    background-position: -108px -238px;
+}
+.EvolutionChamber{
+    background-position: 0 -238px;
+}
+.HydraliskDen{
+    background-position: -324px -204px;
+}
+.Spire{
+    background-position: -72px -238px;
+}
+.GreaterSpire{
+    background-position: -396px -204px;
+}
+.QueenNest{
+    background-position: -432px -204px;
+}
+.NydusCanal{
+    background-position: -288px -204px;
+}
+.UltraliskCavern{
+    background-position: -36px -238px;
+}
+.DefilerMound{
+    background-position: -360px -204px;
+}
+.InfestedBase{
+    background-position: -144px -204px;
+}
+.OvermindI{
+    background-position: -288px -238px;
+}
+.OvermindII{
+    background-position: -252px -238px;
+}
+/*Protoss*/
+.Nexus{
+    background-position: -432px -238px;
+}
+.Pylon{
+    background-position: -36px -272px;
+}
+.Assimilator{
+    background-position: -72px -272px;
+}
+.Gateway{
+    background-position: -144px -272px;
+}
+.Forge{
+    background-position: -324px -272px;
+}
+.PhotonCannon{
+    background-position: -180px -272px;
+}
+.CyberneticsCore{
+    background-position: -252px -272px;
+}
+.ShieldBattery{
+    background-position: -72px -306px;
+}
+.RoboticsFacility{
+    background-position: 0 -272px;
+}
+.StarGate{
+    background-position: -360px -272px;
+}
+.CitadelOfAdun{
+    background-position: -216px -272px;
+}
+.RoboticsSupportBay{
+    background-position: -36px -306px;
+}
+.FleetBeacon{
+    background-position: -432px -272px;
+}
+.TemplarArchives{
+    background-position: -288px -272px;
+}
+.Observatory{
+    background-position: -108px -272px;
+}
+.ArbiterTribunal{
+    background-position: 0 -306px;
+}
+.TeleportGate{
+    background-position: -360px -306px;
+}
+.Pyramid{
+    background-position: -180px -306px;
+}
+.TeleportPoint{
+    background-position: 0 -340px;
+}
+/*****************Magic*****************/
+/*Terran*/
+.StimPacks{
+    background-position: -252px -374px;
+}
+.Cloak{
+    background-position: -324px -408px;
+}
+.Decloak{
+    background-position: -360px -408px;
+}
+.Lockdown{
+    background-position: -360px -374px;
+}
+.NuclearStrike{
+    background-position: -72px -578px;
+}
+.Heal{
+    background-position: -288px -680px;
+}
+.Restoration{
+    background-position: -324px -680px;
+}
+.OpticalFlare{
+    background-position: -36px -714px;
+}
+.SeigeMode{
+    background-position: -72px -408px;
+}
+.DefensiveMatrix{
+    background-position: -144px -408px;
+}
+.EMPShockwave{
+    background-position: -396px -374px;
+}
+.Irradiate{
+    background-position: -432px -374px;
+}
+.Yamato{
+    background-position: -288px -408px;
+}
+.ScannerSweep{
+    background-position: -252px -408px;
+}
+.ArmNuclearSilo{
+    background-position: -432px 0;
+}
+.LiftOff{
+    background-position: -432px -476px;
+}
+.Land{
+    background-position: 0 -510px;
+}
+/*Zerg*/
+.Burrow{
+    background-position: -108px -442px;
+}
+.Unburrow{
+    background-position: -144px -442px;
+}
+.InfestTerranCommandCenter{
+    background-position: -144px -578px;
+}
+.Parasite{
+    background-position: -72px -476px;
+}
+.SpawnBroodlings{
+    background-position: -324px -34px;
+}
+.Ensnare{
+    background-position: -396px -442px;
+}
+.Consume{
+    background-position: -216px -544px;
+}
+.DarkSwarm{
+    background-position: -36px -476px;
+}
+.Plague{
+    background-position: -324px -442px;
+}
+/*Protoss*/
+.PsionicStorm{
+    background-position: -216px -476px;
+}
+.Hallucination{
+    background-position: -288px -476px;
+}
+.Feedback{
+    background-position: 0 -714px;
+}
+.MindControl{
+    background-position: -432px -680px;
+}
+.MaelStorm{
+    background-position: -288px -714px;
+}
+.Recall{
+    background-position: -360px -476px;
+}
+.StasisField{
+    background-position: -324px -476px;
+}
+.DisruptionWeb{
+    background-position: -360px -680px;
+}
+.RechargeShields{
+    background-position: -432px -544px;
+}
+
+/*****************Upgrade*****************/
+/*Terran*/
+    /*Barracks*/
+.UpgradeInfantryWeapons{
+    background-position: -180px -510px;
+}
+.UpgradeInfantryArmors{
+    background-position: -324px -510px;
+}
+    /*Academy*/
+.ResearchU238Shells{
+    background-position: -288px -374px;
+}
+.ResearchStimPackTech{
+    background-position: -252px -374px;
+}
+.ResearchRestoration{
+    background-position: -324px -680px;
+}
+.ResearchOpticalFlare{
+    background-position: -36px -714px;
+}
+.ResearchCaduceusReactor{
+    background-position: -396px -714px;
+}
+    /*MachineShop*/
+.ResearchIonThrusters{
+    background-position: -144px -510px;
+}
+.ResearchSpiderMines{
+    background-position: -252px -680px;
+}
+.ResearchSiegeTech{
+    background-position: -72px -408px;
+}
+.ResearchCharonBoosters{
+    background-position: -252px -714px;
+}
+    /*ControlTower*/
+.ResearchCloakingField{
+    background-position: -324px -408px;
+}
+.ResearchApolloReactor{
+    background-position: -36px -510px;
+}
+    /*ScienceFacility*/
+.ActivateDefensiveMatrix{
+    background-position: -144px -408px;
+}
+.ResearchEMPShockwaves{
+    background-position: -396px -374px;
+}
+.ResearchIrradiate{
+    background-position: -432px -374px;
+}
+.ResearchTitanReactor{
+    background-position: -180px -408px;
+}
+    /*ConvertOps*/
+.ResearchLockdown{
+    background-position: -360px -374px;
+}
+.ResearchPersonalCloaking{
+    background-position: -324px -408px;
+}
+.ResearchOcularImplants{
+    background-position: -216px -408px;
+}
+.ResearchMoebiusReactor{
+    background-position: 0 -442px;
+}
+    /*PhysicsLab*/
+.ResearchYamatoGun{
+    background-position: -288px -408px;
+}
+.ResearchColossusReactor{
+    background-position: -72px -510px;
+}
+    /*Armory*/
+.UpgradeVehicleWeapons{
+    background-position: -216px -510px;
+}
+.UpgradeShipWeapons{
+    background-position: -252px -510px;
+}
+.UpgradeVehicleArmors{
+    background-position: -360px -510px;
+}
+.UpgradeShipArmors{
+    background-position: -288px -510px;
+}
+/*Zerg*/
+    /*Base*/
+.EvolveBurrow{
+    background-position: -108px -442px;
+}
+.EvolveVentralSacs{
+    background-position: -180px -442px;
+}
+.EvolveAntennas{
+    background-position: -216px -442px;
+}
+.EvolvePneumatizedCarapace{
+    background-position: 0 -544px;
+}
+    /*Zergling*/
+.EvolveMetabolicBoost{
+    background-position: -252px -442px;
+}
+.EvolveAdrenalGlands{
+    background-position: -288px -442px;
+}
+    /*EvolutionChamber*/
+.UpgradeMeleeAttacks{
+    background-position: -108px -544px;
+}
+.UpgradeMissileAttacks{
+    background-position: -144px -544px;
+}
+.EvolveCarapace{
+    background-position: -36px -544px;
+}
+    /*Hydra*/
+.EvolveMuscularAugments{
+    background-position: -360px -442px;
+}
+.EvolveGroovedSpines{
+    background-position: -432px -442px;
+}
+.EvolveLurkerAspect{
+    background-position: -36px -136px;
+}
+    /*Mutalisk*/
+.UpgradeFlyerAttacks{
+    background-position: -180px -544px;
+}
+.UpgradeFlyerCarapace{
+    background-position: -72px -544px;
+}
+    /*Queen*/
+.EvolveSpawnBroodling{
+    background-position: -324px -34px;
+}
+.EvolveEnsnare{
+    background-position: -396px -442px;
+}
+.EvolveGameteMeiosis{
+    background-position: -396px -510px;
+}
+    /*Ultralisk*/
+.EvolveAnabolicSynthesis{
+    background-position: -180px -714px;
+}
+.EvolveChitinousPlating{
+    background-position: -216px -714px;
+}
+    /*Defiler*/
+.EvolvePlague{
+    background-position: -324px -442px;
+}
+.EvolveConsume{
+    background-position: -216px -544px;
+}
+.EvolveMetasynapticNode{
+    background-position: -432px -510px;
+}
+/*Protoss*/
+    /*Forge*/
+.UpgradeGroundWeapons{
+    background-position: -324px -544px;
+}
+.UpgradeGroundArmor{
+    background-position: -252px -544px;
+}
+.UpgradePlasmaShields{
+    background-position: -36px -578px;
+}
+    /*CyberneticsCore*/
+.UpgradeAirWeapons{
+    background-position: -360px -544px;
+}
+.UpgradeAirArmor{
+    background-position: -288px -544px;
+}
+.DevelopSingularityCharge{
+    background-position: -396px -476px;
+}
+    /*CitadelOfAdun*/
+.DevelopLegEnhancements{
+    background-position: -396px -544px;
+}
+    /*RoboticsSupportBay*/
+.UpgradeScarabDamage{
+    background-position: -180px -578px;
+}
+.IncreaseReaverCapacity{
+    background-position: -216px -578px;
+}
+.DevelopGraviticDrive{
+    background-position: -252px -578px;
+}
+    /*FleetBeacon*/
+.DevelopApialSensors{
+    background-position: -360px -578px;
+}
+.DevelopGraviticThrusters{
+    background-position: -396px -578px;
+}
+.IncreaseCarrierCapacity{
+    background-position: -432px -578px;
+}
+.DevelopDistruptionWeb{
+    background-position: -360px -680px;
+}
+.DevelopArgusJewel{
+    background-position: -360px -714px;
+}
+    /*TemplarArchives*/
+.DevelopPsionicStorm{
+    background-position: -216px -476px;
+}
+.DevelopHallucination{
+    background-position: -288px -476px;
+}
+.DevelopKhaydarinAmulet{
+    background-position: -324px -578px;
+}
+.DevelopMindControl{
+    background-position: -432px -680px;
+}
+.DevelopMaelStorm{
+    background-position: -288px -714px;
+}
+.DevelopArgusTalisman{
+    background-position: -432px -714px;
+}
+    /*Observatory*/
+.DevelopGraviticBooster{
+    background-position: -252px -476px;
+}
+.DevelopSensorArray{
+    background-position: -288px -578px;
+}
+    /*ArbiterTribunal*/
+.DevelopRecall{
+    background-position: -360px -476px;
+}
+.DevelopStasisField{
+    background-position: -324px -476px;
+}
+.DevelopKhaydarinCore{
+    background-position: 0 -612px;
+}
+    /*TowerDefense*/
+.UpgradeSunkenDamage{
+    background-position: -324px -646px;
+}
+.EnlargeSunkenArea{
+    background-position: -144px -646px;
+}
+.UpgradeSporeDamage{
+    background-position: -288px -646px;
+}
+.EnlargeSporeChain{
+    background-position: -252px -646px;
+}
+.UpgradeMissileDamage{
+    background-position: 0 -646px;
+}
+.IncreaseMissileCount{
+    background-position: -324px -612px;
+}
+.UpgradePhotonCannonDamage{
+    background-position: 0 -680px;
+}
+.IncreasePhotonCannonCount{
+    background-position: -180px -680px;
+}
+.CleanScreen{
+    background-position: -180px -34px;
+}
+    /*Replay*/
+.Play{
+    background-position: 0 -748px;
+}
+.Pause{
+    background-position: -36px -748px;
+}
+.SpeedUp{
+    background-position: -72px -748px;
+}
+.SlowDown{
+    background-position: -108px -748px;
+}
+.Replay{
+    background-position: -144px -748px;
+}

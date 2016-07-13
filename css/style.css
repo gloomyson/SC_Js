@@ -1,0 +1,463 @@
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    /*min-width:800px;
+    min-height:400px;*/
+}
+div.GameLayer{
+    width:100%;
+    height:100%;
+    position:absolute;
+    display:none;
+    cursor:url('../img/Menu/cursor.ico'),auto;
+}
+.GameLayer img{
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:-1;/*As background*/
+}
+div.GameLayer[status="button"]{
+    cursor:url('../img/Menu/cursorLocating.ico'),auto;
+}
+#backCanvas{
+    position:absolute;
+    z-index:-1;
+    background-color: black;
+}
+#middleCanvas{
+    position:absolute;
+    z-index:0;
+}
+#frontCanvas{
+    position:absolute;
+    z-index:1;
+}
+#fogCanvas{
+    position:absolute;
+    z-index:2;
+}
+#GameLoading{
+    text-align:center;
+    font:bold 25px Arial;
+    color:red;
+}
+.LoadingDiv{
+    width:60%;
+    height:12%;
+    position:absolute;
+    left:50%;
+    margin-left:-30%;
+    top:50%;
+    margin-top:-6%;
+    padding:0;
+}
+.LoadingMsg{
+    width:100%;
+    height:50%;
+    text-align:center;
+    font:bold 25px Georgia,Verdana;
+    color:blue;
+}
+.LoadingBlock{
+    width:100%;
+    height:50%;
+    background-color:gray;
+}
+.LoadedBlock{
+    width:0;
+    height:100%;
+    background-color:red;
+}
+.levelSelectionBg{
+    position:absolute;
+    left:50%;
+    margin-left:-250px;
+    bottom:0;
+    width:500px;
+    height:400px;
+    background-color:gray;
+    opacity:0.6;
+    overflow:hidden;
+}
+.levelItem {
+    width: 300px;
+    height: 30px;
+    border: 3px solid yellow;
+    margin:0 auto -3px auto;
+    padding-left:100px;
+    background-color: blue;
+    font: bold 24px Verdana, Georgia, Arial;
+    color: red;
+}
+.levelItem input[type="radio"] {
+    cursor: pointer;
+    margin-right:5px;
+}
+div#GamePlay div {
+    position:absolute;
+    z-index:10;
+}
+div#GamePlay div.panel_Map {
+    left:0;
+    bottom:0;
+    width:145px;
+    height:165px;
+    background-image: url('../img/Menu/ControlPanel.png');
+}
+div#GamePlay div.panel_Info {
+    left:145px;
+    bottom:0;
+    height:110px;
+    background:black none;
+    background-clip:content-box;
+}
+div#GamePlay div.panel_Info div.infoLeft {
+    left:10%;
+    top:0;
+    width:200px;
+    height:100%;
+}
+div#GamePlay div.panel_Info div.infoLeft div {
+    position:relative;
+    margin:0 auto 1px auto;
+    font:bold 12px Verdana,Arial;
+}
+div#GamePlay div.panel_Info div.infoLeft div[name="portrait"] {
+    width:60px;
+    height:56px;
+    margin-top:12px;
+    background-image:url('../img/Charas/Portrait.png');
+}
+div.infoLeft div#HP_SP,div.infoLeft div#MP {
+    width:100%;
+    text-align:center;
+}
+div.panel_Info>div{
+    display:none;
+}
+div.infoLeft span._Health {
+    color:green;
+}
+div.infoLeft span._Shield {
+    color:white;
+}
+div.infoLeft span._Magic {
+    color:darkviolet;
+}
+div#GamePlay div.panel_Info div.infoCenter {
+    left:45%;
+    top:0;
+    width:300px;
+    height:100%;
+    color:white;
+}
+div#GamePlay div.panel_Info div.infoCenter h3 {
+    margin:0;
+    font:18px Verdana,Arial;
+}
+div#GamePlay div.panel_Info div.infoCenter p {
+    margin:2px 0;
+    font:12px Verdana,Arial;
+}
+div#GamePlay div.panel_Info div.infoCenter p.detector {
+    color:yellow;
+}
+div#GamePlay div.panel_Info div.infoCenter p.icons span {
+    display:inline-block;
+    width:36px;
+    height:34px;
+    background-image: url('../img/Menu/CmdIcons.png');
+    border:2px solid white;
+    border-radius:6px;
+    margin-right:1px;
+}
+div#GamePlay div.panel_Info div.infoRight {
+    right:10px;
+    top:0;
+    width:200px;
+    height:100%;
+}
+div.infoRight>div{
+    width:100%;
+    height:34px;
+    padding:0 2px;
+    border:2px solid;
+    border-radius:6px;
+    color:white;
+    font:bold 0.6em Verdana,Arial;
+    vertical-align:middle;
+    line-height:34px;
+    display:none;
+}
+div.infoRight div.upgraded{
+    top:10px;
+    border-color:lime;
+}
+div.infoRight div.upgrading{
+    bottom:10px;
+    border-color:blue;
+}
+div.infoRight div[name='icon']{
+    width:32px;
+    height:34px;
+    background-image: url('../img/Menu/CmdIcons.png');
+    /*For text inside icon*/
+    color:red;
+    font:bolder 1.8em Verdana,Arial;
+    text-align:right;
+    line-height:46px;
+    vertical-align:bottom;
+}
+div#GamePlay div.infoRight div.upgraded div[name='icon']{
+    position:relative;
+    display:inline-block;
+}
+div.infoRight div[name='icon'][disabled='true']{
+    background-image: url('../img/Menu/CmdIconsDisabled.png');
+}
+div.infoRight div.upgrading div[name='processing']{
+    right:6px;
+    width:156px;
+    height:100%;
+    text-align:center;
+    color:white;
+    font:bold 0.6em Arial;
+}
+div.infoRight div.upgrading div.processBar{
+    width:100%;
+    height:14px;
+    background:url('../img/Menu/Thingy.png') 0 -14px;
+}
+div.infoRight div.upgrading div.processedBar{
+    height:100%;
+    background:url('../img/Menu/Thingy.png') 0 -28px;
+}
+div#GamePlay div.panel_Control {
+    right:0;
+    bottom:0;
+    width:150px;
+    height:155px;
+    background-image: url('../img/Menu/ControlPanel.png');
+}
+div#GamePlay div.panel_Info {
+    border-width:22px 0 0 0;
+    border-style:solid;
+}
+div#GamePlay[race="Zerg"] div.panel_Map {
+    background-position: 0 bottom;
+}
+div#GamePlay[race="Zerg"] div.panel_Info {
+    -webkit-border-image: url('../img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
+    -o-border-image: url('../img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
+    border-image: url('../img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
+}
+div#GamePlay[race="Zerg"] div.panel_Control {
+    background-position: -400px bottom;
+}
+div#GamePlay[race="Protoss"] div.panel_Map {
+    background-position: -555px bottom;
+}
+div#GamePlay[race="Protoss"] div.panel_Info {
+    -webkit-border-image: url('../img/Menu/ControlPanel.png') 22 743 0 745 repeat;
+    -o-border-image: url('../img/Menu/ControlPanel.png') 22 743 0 745 repeat;
+    border-image: url('../img/Menu/ControlPanel.png') 22 743 0 745 repeat;
+}
+div#GamePlay[race="Protoss"] div.panel_Control {
+    background-position: -958px bottom;
+}
+div#GamePlay[race="Terran"] div.panel_Map {
+    background-position: -1110px bottom;
+}
+div#GamePlay[race="Terran"] div.panel_Info {
+    -webkit-border-image: url('../img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
+    -o-border-image: url('../img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
+    border-image: url('../img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
+}
+div#GamePlay[race="Terran"] div.panel_Control {
+    background-position: -1516px bottom;
+}
+div#GamePlay div.panel_Info div.override{
+    width:100%;
+    height:100%;
+    background:black;
+    position:relative;
+}
+div#GamePlay div.panel_Info div.override div{
+    position:relative;
+}
+div#GamePlay div.override div.multiSelection{
+    margin:0 auto;
+    width:330px;
+    height:104px;
+    overflow:hidden;
+    display:none;
+}
+div#GamePlay div.panel_Info div.override div.multiSelection div{
+    float:left;
+    width:45px;
+    height:42px;
+    background-image:url('../img/Charas/Portrait.png');
+    background-size:720px 210px;
+    border:3px solid white;
+    border-radius:6px;
+    margin:2px;
+}
+div#GamePlay div.warning_Box {
+    width:400px;
+    height:30px;
+    left:50%;
+    margin-left:-200px;
+    background: rgba(255,255,255,0.3);
+    text-align:center;
+    line-height:30px;
+    font:bold 24px Verdana,Arial;
+    color:red;
+    display:none;
+}
+div#GamePlay div#cheat_Box {
+    width:400px;
+    height:30px;
+    text-align:center;
+    left:50%;
+    margin-left:-200px;
+    bottom:130px;
+    font:bold 15px Verdana,Arial;
+    color:white;
+    display:none;
+}
+div#GamePlay div#cheat_Box input#cheatInput {
+    width:300px;
+    background-color:transparent;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom:2px solid white;
+    font:bold 1em Arial;
+    color:white;
+}
+div#GamePlay div.message_Box {
+    width:400px;
+    left:50%;
+    margin-left:-200px;
+    bottom:140px;
+    text-align:center;
+    font:bolder 0.8em Verdana,Arial;
+    color:white;
+    display:none;
+}
+div#GamePlay div.message_Box p {
+    margin:0;
+}
+div#GamePlay div.resource_Box {
+    right:30px;
+    top:20px;
+    font:bolder 1em Verdana,Arial;
+    color: #00ff00;
+}
+div#GamePlay div.resource_Box div, div#GamePlay div.tooltip_Box div.cost div{
+    position:relative;
+    width:14px;
+    height:14px;
+    background-image:url('../img/Menu/Thingy.png');
+    display:inline-block;
+}
+div#GamePlay div.mine{
+    background-position:0 0;
+}
+div#GamePlay[race="Zerg"] div.gas{
+    background-position:-14px 0;
+}
+div#GamePlay[race="Terran"] div.gas{
+    background-position:-28px 0;
+}
+div#GamePlay[race="Protoss"] div.gas{
+    background-position:-42px 0;
+}
+div#GamePlay[race="Zerg"] div.man{
+    background-position:-56px 0;
+}
+div#GamePlay[race="Terran"] div.man{
+    background-position:-70px 0;
+}
+div#GamePlay[race="Protoss"] div.man{
+    background-position:-84px 0;
+}
+div#GamePlay div.magic{
+    background-position:-98px 0;
+}
+div#GamePlay div.resource_Box>span{
+    position:relative;
+    min-width:50px;
+    display:inline-block;
+}
+div#GamePlay div.tooltip_Box {
+    font:bold 0.8em Arial;
+    color:white;
+    background:black none;
+    border:2px solid blue;
+    padding-right:10px;
+    display:none;
+}
+div#GamePlay div.tooltip_Box *{
+    vertical-align:top;
+    position:relative;
+    display:none;
+}
+div#GamePlay div.tooltip_Box div.itemName{
+    text-transform:capitalize;
+    display:block;
+}
+/* For mobile */
+@media screen and (max-width: 700px){
+    .levelSelectionBg{
+        transform:scale(0.7);
+        transform-origin:bottom;
+        -ms-transform:scale(0.7);
+        -ms-transform-origin:bottom;
+        -moz-transform:scale(0.7);
+        -moz-transform-origin:bottom;
+        -webkit-transform:scale(0.7);
+        -webkit-transform-origin:bottom;
+        -o-transform:scale(0.7);
+        -o-transform-origin:bottom;
+    }
+    div#GamePlay div.panel_Info div.infoLeft {
+        left:5px;
+        width:auto;
+    }
+    div#GamePlay div.panel_Info div.infoLeft div {
+        font-size:10px;
+    }
+    div#GamePlay div.panel_Info div.infoCenter {
+        left:30%;
+        width:auto;
+    }
+    div#GamePlay div.panel_Info div.infoRight {
+        width:160px;
+        transform:scale(0.8);
+        transform-origin:right;
+        -ms-transform:scale(0.8);
+        -ms-transform-origin:right;
+        -moz-transform:scale(0.8);
+        -moz-transform-origin:right;
+        -webkit-transform:scale(0.8);
+        -webkit-transform-origin:right;
+        -o-transform:scale(0.8);
+        -o-transform-origin:right;
+    }
+    div.infoRight div.upgrading div[name='processing']{
+        right:0;
+        transform:scaleX(0.8);
+        transform-origin:right;
+        -ms-transform:scaleX(0.8);
+        -ms-transform-origin:right;
+        -moz-transform:scaleX(0.8);
+        -moz-transform-origin:right;
+        -webkit-transform:scaleX(0.8);
+        -webkit-transform-origin:right;
+        -o-transform:scaleX(0.8);
+        -o-transform-origin:right;
+    }
+}

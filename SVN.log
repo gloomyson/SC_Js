@@ -1,0 +1,1943 @@
+Revision: 139
+Author: gloomyson
+Date: 14:21:12, 2016-7-13
+Message:
+1.And keywords, descriptions and author in index.html
+2.Use _$.mixin to replace $.makeArray, make custom game frame clean
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/index.html
+
+Revision: 138
+Author: gloomyson
+Date: 13:56:31, 2016-4-29
+Message:
+1.Save replays into indexedDB, has offline flag to SAF
+2.Avoid collision draft added
+3.Add cache.manifest
+4.Pause when hide window
+5.Disable panel buttons after replay ended
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Added : /StarCraft/cache.manifest
+
+Revision: 137
+Author: gloomyson
+Date: 23:23:21, 2016-4-13
+Message:
+1.Add replay panel buttons and progress bar
+2.Add replay button icons
+3.Fix icon position issue
+4.Fix invisible farmer cannot build issue
+5.Adjust some of Button.reset()
+6.Fix 2 fingers touch rectangle incorrect issue
+7.Remove some redundant css
+8.Fix compatible issues for css3 styles: border-image and transform
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/keyController.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/img/Menu/CmdIcons.png
+Modified : /StarCraft/img/Menu/CmdIconsDisabled.png
+
+Revision: 136
+Author: gloomyson
+Date: 2:12:41, 2016-4-9
+Message:
+1.Another css set for mobile
+2.Finish all kinds of mobile event handlers, add Game.isApp
+3.Fix cannot hide tooltip issue in mobile
+4.Delete 2 nbsp besides "Upgraded:" to save space
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/style.css
+
+Revision: 135
+Author: gloomyson
+Date: 18:25:00, 2016-4-1
+Message:
+1.Fix tower defense cannot upgrade during replay issue
+2.Disable touch event during replay
+3.Add mobile control for tap/press/pan events
+4.Fix mobile cannot enter level 10 issue
+5.Add 10000 money for some levels
+6.Add hummer.js into jquery.js
+----
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/Utils/jquery.min.js
+
+Revision: 134
+Author: gloomyson
+Date: 13:56:08, 2016-3-16
+Message:
+1.Add shortcut key pageUp and pageDown for replay speed adjust
+2.Add hackFlag to control hacking user info or not
+3.Enable fog during replay
+4.Add more ### to surround replay data
+5.Fix overlord using hold error issue
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Controller/keyController.js
+Modified : /StarCraft/GameRule/SC_server.js
+
+Revision: 133
+Author: gloomyson
+Date: 17:01:58, 2016-3-14
+Message:
+1.Add replay speed up and slow down feature
+2.Stop animation when replay ended
+3.Send replay to server instead of snapshot
+4.Can save replay before game ended
+5.Add Game.commandInterval and Game.getNextRandom to reduce uncontrollable random
+6.Fix Game.showMessage cannot line break issue
+7.Fix random team selection in replay mode issue
+8.Remove HUNTERxNHUNTER easy mode popup dialog
+9.Remove redundant button callback code
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Controller/keyController.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/SC_server.js
+Modified : /StarCraft/GameRule/Referee.js
+
+Revision: 132
+Author: gloomyson
+Date: 17:34:45, 2016-3-10
+Message:
+1.Can replay single player game
+2.Single play moves latency to next frame
+3.Fix lurker evolve doesn't have rally point issue
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Controller/mouseController.js
+
+Revision: 131
+Author: gloomyson
+Date: 16:27:06, 2016-3-2
+Message:
+Enrich login user info collection feature:
+1.Collect OS&Browser version
+2.Collect snapshot every 1 minute: Unit/Building status and click times
+3.Collect location
+----
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/SC_server.js
+
+Revision: 130
+Author: gloomyson
+Date: 17:02:28, 2016-3-1
+Message:
+1.Fix close socket cannot show time bug, onclose and logout event cannot use bug
+2.Get login user random team info
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/GameRule/SC_server.js
+
+Revision: 129
+Author: gloomyson
+Date: 16:29:05, 2016-3-1
+Message:
+1.Collect login user info in online site
+2.Disable multiplayer mode in most of levels
+3.Random team selection for most of levels
+4.Forbid cheat during replay
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/GameRule/SC_server.js
+Modified : /StarCraft/GameRule/Cheat.js
+
+Revision: 128
+Author: gloomyson
+Date: 17:59:23, 2016-1-7
+Message:
+1.Support replay (Need add menu with button Pause/Faster/Slower/ChangeTeam)
+2.Fix room.replay saves all empty frames with [] command issue
+3.Stop all units after completely fade out
+4.Add Multiplayer.parseTickCmd function
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/SC_server.js
+
+Revision: 127
+Author: gloomyson
+Date: 17:27:51, 2016-1-6
+Message:
+1.Support some bullets have fixed speed
+2.Middle bullet in multiple causes damage
+3.Lurker thron has 5 bullets
+4.Change transport icon style
+5.Fix larva cannot move in level issue
+6.Fix some bugs
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+
+Revision: 126
+Author: gloomyson
+Date: 18:14:40, 2015-12-29
+Message:
+1.Add life status color on passenger border
+2.Make game continue when other user disconnect with server
+3.Adjust info center position and width, adjust passenger margin
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/SC_server.js
+
+Revision: 125
+Author: gloomyson
+Date: 17:48:00, 2015-12-28
+Message:
+1.Paypal sync for upgrade/unit/evolve/building
+2.Add transport icons for ships
+3.Add filter to hide enemy passenger and process bar
+4.Give mine and gas to all teams
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/css/style.css
+
+Revision: 124
+Author: gloomyson
+Date: 0:10:00, 2015-12-28
+Message:
+1.Make consume magic sync in multiplayer mode (cloak/yamato/scarab)
+2.Add new magic Load and UnloadAll (add manLimit, splice from team, show passenger number and die with transport) and their audios
+3.Add new magic SetRallyPoint
+4.Reduce frequency of Button.reset
+5.Add needLocation prop for some magic
+6.Replace Resource.creditBill with this.creditBill to prevent conflict
+7.Resource.paypal need to cost correct team resource
+8.Remove Cheat.gathering from Levels.js for testing
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/GameRule/Resource.js
+Added : /StarCraft/bgm/Magic.Load.Protoss.wav
+Added : /StarCraft/bgm/Magic.Load.Terran.wav
+Added : /StarCraft/bgm/Magic.Load.Zerg.wav
+Added : /StarCraft/bgm/Magic.Unload.Protoss.wav
+Added : /StarCraft/bgm/Magic.Unload.Terran.wav
+Added : /StarCraft/bgm/Magic.Unload.Zerg.wav
+
+Revision: 123
+Author: gloomyson
+Date: 17:55:45, 2015-12-25
+Message:
+1.Adjust Game.win and Game.lose to use fadeout callback
+2.Rearrange button callback code
+3.Fix resource message show in one line regression issue
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/GameRule/Resource.js
+
+Revision: 122
+Author: gloomyson
+Date: 0:39:22, 2015-12-25
+Message:
+1.Finish multiplayer sync and testing for upgrade/unit/evolve/building
+2.PurpleEffect/RedEffect/GreenEffect can make enemy visible to all teams
+3.Fix train other team units when Game.team is not 0 issue
+4.Fix magic SpawnBroodlings/Hallucination always summon team 0 units issue
+5.Remove remaining _$.hitch from farmer build buildings
+6.Optimize Unit.randomDirection generate random by *5+3
+7.Update level 3,4,5,6,8 to support multiplayer testing
+8.Make mapping uids to units later to the time when taking effect
+9.Fix cannot train new units issue by correct typo
+10.Make function getUnitsByUIDs to filter out dead units
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Burst.js
+
+Revision: 121
+Author: gloomyson
+Date: 18:00:06, 2015-12-23
+Message:
+1.Multiplayer sync basic finished for magic/upgrade/unit/evolve/build
+/*Only tested 2 magics, all other multiplayer types and singleplayer regression need to test*/
+2.Revert magic callback from _$.hitch style to .owner style
+----
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+
+Revision: 120
+Author: gloomyson
+Date: 23:37:29, 2015-12-22
+Message:
+1.Optimize algorithm for multiplayer chat
+2.Auto assign colorful name for each socket
+3.Fix cheat 'liuda is god' cannot work issue
+----
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/GameRule/SC_server.js
+Modified : /StarCraft/GameRule/Cheat.js
+
+Revision: 119
+Author: gloomyson
+Date: 18:35:17, 2015-12-22
+Message:
+1.Player can chat with others in multiplayer mode
+2.Fix server broken when close connection before room generated issue
+----
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/GameRule/SC_server.js
+Modified : /StarCraft/GameRule/Cheat.js
+
+Revision: 118
+Author: gloomyson
+Date: 22:24:37, 2015-12-20
+Message:
+1.Sync stop/hold and patrol for multi-player mode
+2.Support multiple cmds for send to server
+3.Fix throw error when resize before init level issue
+4.Fix play selected voice from other team when multiplayer
+5.Fix cannot draw mini-map after black sheep wall issue
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/SC_server.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 117
+Author: gloomyson
+Date: 12:26:35, 2015-12-20
+Message:
+1.Optimize draw fog algorithm again, draw inside screen units fog is the key
+2.Set magic parasite and scanner sweep to effect for owner team
+3.Fix 'black sheep wall' cannot work issue, need clean fog
+4.Add Map.refreshFogsImmediate for window resize and move
+5.Fix resize window should resize all $('#GamePlay>canvas') issue
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 116
+Author: gloomyson
+Date: 17:18:40, 2015-12-18
+Message:
+1.Optimize draw fog algorithm, speed up by N/10 average calculation: average insideScreen or enlarge refresh fog interval?
+2.Remove redundant Map.fogType
+3.Adjust draw fog functions name: refreshFogs,drawFogAndMinimap, drawMinimap
+4.Add fogCanvas and fogCxt, replace mouseController trigger from frontCxt to fogCxt
+5.Remove Referee.monitorMiniMap
+
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 115
+Author: gloomyson
+Date: 18:08:08, 2015-12-17
+Message:
+1.Finish basic network frame: Support move/attack/rightclick
+2.Fix Irradiate animation frame incorrect issue
+3.Add Multiplayer.js and SC_server.js into GameRule
+4.Enhance Game.showMessage function, can show multiple lines now
+5.Adjust generate random code, delete redundant rem lines
+6.Enhance level1 and level2 to support multiplayer mode
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Added : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Added : /StarCraft/GameRule/SC_server.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+
+Revision: 114
+Author: gloomyson
+Date: 18:30:54, 2015-12-16
+Message:
+1.Add Unit.randomDirection function, can keep random in all clients same
+2.Keep charas change direction by id, not in same time
+3.Add _$.toArray in gFrame
+4.Delete redundant isInvisible after expansion
+5.Optimize array function selections by Array.prototype.reduce
+6.Remove redundant timers in Magic.js
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Building.js
+
+Revision: 113
+Author: gloomyson
+Date: 0:13:51, 2015-12-15
+Message:
+1.Fix cannot open some levels by wrong initial timing
+2.Fix incorrect delete upgrade button condition in Upgrade.js
+3.Fix 'show me the money'
+4.Fix Referee.judgeMan behavior for multiple players
+5.Correct initial totalMan
+6.Remove Unit.ourFlyingUnits/ourGroundUnits/ enemyFlyingUnits/enemyGroundUnits
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 112
+Author: gloomyson
+Date: 22:53:34, 2015-12-14
+Message:
+1.Enhance Referee.judgeArbiter and Referee.judgeDetect to behave evenly, new detectorBuffer and arbiter buffer
+2.Add property obj.isInvisible0~N, replace all chara.isInvisible
+3.Fix unburrow animation incorrect issue
+4.Fix upgrade level undefined issue and initial them later
+5.Fix getPropArray(object) use same reference issue
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 111
+Author: gloomyson
+Date: 23:38:52, 2015-12-13
+Message:
+1.Remove remaining setTimeout in Magic.js
+2.Fix some units cannot play attack animation by animateFrame
+3.Fix some bullets show above owner at beginning
+4.Add expandProps to expand props for multiple teams after load level
+5.Fix drawSourceBox cannot draw other team's resource issue
+6.Fix cannot pay other team's resource issue
+7.Fix somethingForNothing cannot apply correctly issue
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Hero.js
+
+Revision: 110
+Author: gloomyson
+Date: 18:09:35, 2015-12-11
+Message:
+1.Fix AOE cannot cause damage issue
+2.Replace some setTimeout in magic with Game.commandTimeout, remove setInterval in heal
+3.Update button when burrowed
+4.Enrich Game.getSelectedOne and Game.getInRangeOnes to filter by team number
+5.Correct Game.team in magic to myself.team
+6.Don't show invisible enemy on minimap
+7.Forbid Cheat.execute when multiplayer mode
+8.Remove redundant Game.getNearbyOnes and Game.getNearestOne
+
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 109
+Author: gloomyson
+Date: 1:07:20, 2015-12-11
+Message:
+1.Merge types of timer: moving/dock/attack/routing/burst into allFrames, and call playFrame in main loop (operation part)
+2.Replace setTimeout with Game.commandTimeout
+3.And process Game.commands[frame] part in main loop
+4.Adjust dock types and their interval
+5.Fix regression issues due to update as below:
+Black flash and cannot refresh miniFog at beginning,  slow drawing in main loop, process commands and mainTick++ and playFrames order decision in main loop, burst redundant frame, cannot create unit/building/evolve, percentage calculation method update, cannot show burrow animation
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/Characters/Hero.js
+
+Revision: 108
+Author: gloomyson
+Date: 0:42:56, 2015-12-9
+Message:
+1.Use chara.team to replace chara.isEnemy
+2.Add chara.isEnemy()
+3.Remove Building.enemyBuildings and Building.ourBuildings, replace them by function
+4.Remove Unit.ourFlyingUnits/Unit.ourGroundUnits/Unit.enemyFlyingUnits/Unit.enemyGroundUnits, replace them by function
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/Characters/Hero.js
+
+Revision: 107
+Author: gloomyson
+Date: 0:12:11, 2015-11-19
+Message:
+1.Adjust TowerDefense win condition
+2.Adjust fire DragoonBall direction for fire delay
+3.Add RPG lock for some upgrades
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/Characters/Building.js
+
+Revision: 106
+Author: gloomyson
+Date: 18:05:08, 2015-11-18
+Message:
+Enrich RPG level "TowerDefense": Add new upgrades and magic, and get mines when kill enemy units
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Hero.js
+
+Revision: 105
+Author: gloomyson
+Date: 1:47:54, 2015-11-18
+Message:
+1.Finish RPG level: TowerDefense
+2.Add new hero: Tassadar and HeroCruiser
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Hero.js
+Added : /StarCraft/bgm/Tassadar.death.wav
+Added : /StarCraft/bgm/Tassadar.moving.wav
+Added : /StarCraft/bgm/Tassadar.selected.wav
+Modified : /StarCraft/css/portraitStyle.css
+Modified : /StarCraft/img/Charas/HeroCruiser.png
+Added : /StarCraft/img/Charas/Tassadar.png
+
+Revision: 104
+Author: gloomyson
+Date: 18:43:18, 2015-11-16
+Message:
+New RPG level draft: Tower Defense
+----
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/css/mapStyle.css
+
+Revision: 103
+Author: gloomyson
+Date: 10:22:32, 2015-11-2
+Message:
+Add TowerDefense level (PART A)
+----
+Modified : /StarCraft/GameRule/Game.js
+Added : /StarCraft/img/Maps/(4)TowerDefense.jpg
+Modified : /StarCraft/img/Maps/Snapshot.jpg
+
+Revision: 102
+Author: gloomyson
+Date: 22:14:22, 2015-10-18
+Message:
+1.Make refreshFog as async to avoid latency
+2.Map moving trigger adjustment
+3.Add InfestTerranCommandCenter magic
+4.Fix dead lurker can still attack issue
+5.Fix strange melee attack tracing and highest priority algorithm
+6.Fix always evolveTo our units issue
+7.Adjust Tank.png
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/img/Charas/Tank.png
+
+Revision: 101
+Author: gloomyson
+Date: 19:58:26, 2015-10-5
+Message:
+1.Change Terran units to red
+2.Change Protoss units to green
+3.Update level units
+----
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/img/Charas/Tank.png
+Modified : /StarCraft/img/Charas/Arbiter.png
+Modified : /StarCraft/img/Charas/Burst.png
+Modified : /StarCraft/img/Charas/Carrier.png
+Modified : /StarCraft/img/Charas/Civilian.png
+Modified : /StarCraft/img/Charas/Corsair.png
+Modified : /StarCraft/img/Charas/DarkTemplar.png
+Modified : /StarCraft/img/Charas/Dragoon.png
+Modified : /StarCraft/img/Charas/Dropship.png
+Modified : /StarCraft/img/Charas/Firebat.png
+Modified : /StarCraft/img/Charas/Ghost.png
+Modified : /StarCraft/img/Charas/Goliath.png
+Modified : /StarCraft/img/Charas/Kerrigan.png
+Modified : /StarCraft/img/Charas/Marine.png
+Modified : /StarCraft/img/Charas/Medic.png
+Modified : /StarCraft/img/Charas/Observer.png
+Modified : /StarCraft/img/Charas/Probe.png
+Modified : /StarCraft/img/Charas/Reaver.png
+Modified : /StarCraft/img/Charas/SCV.png
+Modified : /StarCraft/img/Charas/Scout.png
+Modified : /StarCraft/img/Charas/Shuttle.png
+Modified : /StarCraft/img/Charas/Templar.png
+Modified : /StarCraft/img/Charas/Valkyrie.png
+Modified : /StarCraft/img/Charas/Vessel.png
+Modified : /StarCraft/img/Charas/Vulture.png
+Modified : /StarCraft/img/Charas/Zealot.png
+
+Revision: 100
+Author: gloomyson
+Date: 20:45:18, 2015-9-20
+Message:
+1.OnFire and Bleed effect (PART B)
+2.Adjust Terran Refinery construction sprites
+3.Can train InfestedTerran and create nuclear bomb now
+4.Adjust Drone location when start mutation
+5.Enemy units don't have confirmation sound
+6.Adjust onfire opacity
+----
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/img/Charas/ProtossBuilding.png
+Modified : /StarCraft/img/Charas/TerranBuilding.png
+
+Revision: 99
+Author: gloomyson
+Date: 18:03:19, 2015-9-18
+Message:
+1.Support build buildings (PART B)
+2.Support all kinds of evolve, like ZergBuilding/ TerranAttachment/ProtossUnitEvolve
+3.Adjust condition for enable 'unit training'/'add appendix' by building.attach attribute
+4.Prevent vibration for level selector
+5.Adjust props for Gobj.evolveTo
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/GameRule/Resource.js
+
+Revision: 98
+Author: gloomyson
+Date: 17:41:57, 2015-9-16
+Message:
+1.OnFire and Bleed (PART A)
+2.Build buildings (PART A)
+3.Add TerranBuilding.ConstructionF
+4.Join all referee tasks into Referee.tasks in main loop
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Animation.js
+
+Revision: 97
+Author: gloomyson
+Date: 18:37:15, 2015-9-12
+Message:
+Modify Gon's speech
+##### HunterXHunter #####
+Once upon a time there was a young hunter lost in strange jungle, and was warmly welcome by forest friends.
+# About 200 units in the map.
+# You have 6 random kinds of magic(Nen power), and will refresh when you killed each 50 units
+# You can use magic freely without MP consumption
+# Kill 10 units will upgrade, enemies will upgrade every 1 minute
+# Infinite enemy number and unlimited upgrade level
+# Two different mode: easy and nightmare
+# This level is designed for stress test, please report to my Github if browser crash or serious memory leak, along with your browser version and memory size
+----
+Modified : /StarCraft/GameRule/Levels.js
+
+Revision: 96
+Author: gloomyson
+Date: 17:31:23, 2015-9-12
+Message:
+1.Finish new RPG level 'HunterXHunter' for stress test
+2.Add sprite/portrait/bullet/burst/upgrade/audio for new unit DevilHunter
+3.New AI for enemy lurker
+4.Delete all portraitOffset
+5.Fix cannot recover when cloaking
+6.Stop attacking when locked down
+7.Fix enemy burrowed unit opacity issue
+8.Add new cheat "food for thought"
+9.Fix onkeyup event issue
+10.Adjust level selector opacity
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Hero.js
+Modified : /StarCraft/css/portraitStyle.css
+Modified : /StarCraft/Characters/Neutral.js
+Added : /StarCraft/bgm/DevilHunter.attack.wav
+Added : /StarCraft/bgm/DevilHunter.death.wav
+Added : /StarCraft/bgm/DevilHunter.moving.wav
+Added : /StarCraft/bgm/DevilHunter.selected.wav
+Modified : /StarCraft/img/Bg/GameStart.jpg
+Added : /StarCraft/img/Charas/DevilHunter.png
+Modified : /StarCraft/img/Charas/Mutalisk.png
+Modified : /StarCraft/img/Charas/Portrait.png
+
+Revision: 95
+Author: gloomyson
+Date: 18:19:52, 2015-9-11
+Message:
+Add new RPG level: "DemonHunter", continue...
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Controller/keyController.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Hero.js
+Modified : /StarCraft/css/portraitStyle.css
+Modified : /StarCraft/img/Bg/GameStart.jpg
+
+Revision: 94
+Author: gloomyson
+Date: 12:39:48, 2015-9-11
+Message:
+1.Merge pull requests from Github
+2.Fix '#5 Two zerglings cost 25 minerals'
+3.Fix '#20 Fog disappeared as soon as characters outside screen'
+4.Fix nuclear strike cannot burst issue
+5.Give you money and magic for playing
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 93
+Author: gloomyson
+Date: 21:33:18, 2015-9-5
+Message:
+1.Add construction building and complete animation for Zerg/Terran/Protoss
+2.Add onFire or Bleed animation for Zerg/Terran/Protoss
+3.Zerg base can produce larvas every 20 seconds
+4.Change selectLarva to select its own larvas
+5.Fix refresh mud after ZergBuilding born or die
+6.Fix minor SunkenColony align issue
+7.Fix ZergBuilding portrait error issue
+8.Add building onfire audio for later use
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/css/portraitStyle.css
+Modified : /StarCraft/img/Charas/ProtossBuilding.png
+Modified : /StarCraft/img/Charas/TerranBuilding.png
+Modified : /StarCraft/Characters/Animation.js
+Added : /StarCraft/bgm/Building.onfire.wav
+Modified : /StarCraft/img/Charas/Magic.png
+Modified : /StarCraft/img/Charas/ZergBuilding.png
+
+Revision: 92
+Author: gloomyson
+Date: 0:39:15, 2015-9-2
+Message:
+1.Add Archon and DarkArchon evolve animation
+2.Change DefensiveMatrix, DisruptionWeb, MaelStorm and Feedback animation
+3.Fix Button.wav bug
+4.Delete redundant bgm and images
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Animation.js
+Modified : /StarCraft/img/Charas/Magic.png
+Deleted : /StarCraft/bgm/Devourer.hit.wav
+Deleted : /StarCraft/bgm/Dragoon.wav
+Deleted : /StarCraft/bgm/Drone.hit.wav
+Deleted : /StarCraft/bgm/Tank.hit.wav
+Deleted : /StarCraft/bgm/Tank.hit2.wav
+Deleted : /StarCraft/bgm/ZergDefense.attack.wav
+Modified : /StarCraft/img/Charas/Archon.png
+Modified : /StarCraft/img/Charas/DarkArchon.png
+Deleted : /StarCraft/img/Charas/ZergBuilding.death.png
+
+Revision: 91
+Author: gloomyson
+Date: 17:15:59, 2015-8-25
+Message:
+1.Fix onclick handler still exist when select larva issue
+2.Fix not select egg when larva evolve issue
+3.Support unsubscribe topic in gFrame
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Button.js
+
+Revision: 90
+Author: gloomyson
+Date: 22:49:33, 2015-8-24
+Message:
+1.Add _$.hitch function
+2.Update all magic callback to use _$.hitch
+3.Fix minor magic sound issue
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+
+Revision: 89
+Author: gloomyson
+Date: 1:35:53, 2015-8-24
+Message:
+1.Support Zerg egg and cocoon evolve
+2.Add Larva, can walkaround but cannot be controlled, Larva produce and SelectLarva not complete
+3.Fix no border-image issue on Firefox and IE11
+4.Fix red border color issue on IE11
+5.Building and Unit support multi hidden frames
+6.Support noMud,birthCount,source,portrait
+7.Support Gobj initial position by props.target
+8.Delete old born hidden frames
+9.Add Gobj.prototype.evolveTo
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/css/portraitStyle.css
+Added : /StarCraft/bgm/Cocoon.selected.wav
+Added : /StarCraft/bgm/Egg.death.wav
+Added : /StarCraft/bgm/Egg.selected.wav
+Added : /StarCraft/bgm/Larva.death.wav
+Added : /StarCraft/bgm/Larva.moving.wav
+Added : /StarCraft/bgm/Larva.selected.wav
+Added : /StarCraft/img/Charas/Larva.png
+
+Revision: 88
+Author: gloomyson
+Date: 18:45:56, 2015-8-21
+Message:
+1.Finish multi-inherit in gFrame
+2.Add _$.delegate into gFrame, can use for add buffer and multi-inherit
+3.Change ArchonBurst to attackEffect, adjust Archon attack frames
+4.Add Cheat.execute to execute cheat code directly
+5.Add cheat code "power overwhelming"
+6.Apply cheat "something for nothing" in some levels for testing
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Burst.js
+
+Revision: 87
+Author: gloomyson
+Date: 5:32:42, 2015-8-17
+Message:
+1.Magic burrow and unburrow complete
+2.Evolve animation when born
+3.Support building AOE attack
+4.All units having same magic can spell in same time
+5.Support hidden frames in unit
+6.Support attackable building attack chosen target
+7.Change to alpha 0 for invisible enemy
+8.Change all instaceofAttackableUnit to .attack
+9.Add evolve and burrow frames into some unit png
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/img/Charas/Archon.png
+Modified : /StarCraft/img/Charas/DarkArchon.png
+Added : /StarCraft/bgm/Lurker.burrow.wav
+Added : /StarCraft/bgm/Zerg.burrow.wav
+Added : /StarCraft/bgm/Zerg.unburrow.wav
+Modified : /StarCraft/img/Charas/Devourer.png
+Modified : /StarCraft/img/Charas/Drone.png
+Modified : /StarCraft/img/Charas/Guardian.png
+Modified : /StarCraft/img/Charas/Hydralisk.png
+Modified : /StarCraft/img/Charas/InfestedTerran.png
+Modified : /StarCraft/img/Charas/Lurker.png
+Modified : /StarCraft/img/Charas/Zergling.png
+
+Revision: 86
+Author: gloomyson
+Date: 17:59:36, 2015-8-13
+Message:
+1.Add fire bullet delay for dragoon and photon cannon
+2.Fix multiple bursts issue when killed
+3.Enhance _$() to support [filter] in selector
+4.Fix cancel button cannot work
+5.Adjust frames for dragoon and photon cannon
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Protoss.js
+
+Revision: 85
+Author: gloomyson
+Date: 21:34:42, 2015-8-12
+Message:
+1.Clean inherit method complete
+2.Change _$.extends and _$.declare to support multiple inherit (temp)
+3.Add publish and subscribe topic in gFrame
+4.Adjust some magic effect and levels
+5.Format index.html
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Magic.js
+
+Revision: 84
+Author: gloomyson
+Date: 14:52:21, 2015-8-7
+Message:
+1.Add loop reference warning into my Dojo algorithms
+2.Adjust attack frames and bullet frames setting for Marine and Firebat
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Terran.js
+
+Revision: 83
+Author: gloomyson
+Date: 0:16:47, 2015-8-7
+Message:
+Adjust my Dojo algorithm:
+1.Resolve loop reference
+2.Resolve duplicate script file loading
+3.Correct factory OR instance recognize method
+4.Support declare arguments length==2
+----
+Modified : /StarCraft/Utils/gFrame.js
+
+Revision: 82
+Author: gloomyson
+Date: 12:21:53, 2015-8-6
+Message:
+Add my algorithm for Dojo into gFrame (define/require/declare)
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Utils/sourceLoader.js
+
+Revision: 81
+Author: gloomyson
+Date: 18:24:56, 2015-8-5
+Message:
+1.Arbiter making units invisible buffer
+2.Detector making units visible buffer
+3.Magic ScannerSweep complete
+4.Basic _$() selector function complete
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/Characters/Animation.js
+
+Revision: 80
+Author: gloomyson
+Date: 1:28:49, 2015-8-5
+Message:
+1.Pay bill postpone by creditCard mode
+2.Add ScannerSweep animation
+3.Add NuclearBomb bullet
+----
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/img/Charas/Burst.png
+Modified : /StarCraft/Characters/Animation.js
+Modified : /StarCraft/img/Charas/Magic.png
+
+Revision: 79
+Author: gloomyson
+Date: 14:30:00, 2015-8-2
+Message:
+1.Add Gobj.addBuffer and Gobj.removeBuffer for buffer override (moveTo/moveToward/attack)
+2.Add Burst.PurpleCloudSpread multiple levels buffer
+3.Fix unit holding behavior like building, use red border as mark
+4.Change Halluation instance created by temp constructor
+5.Add bullet fire in-range magic
+6.Nuclear sound and scale adjustment
+7.Fix forEach->splice bug
+8.Adjust hero magic,recover and MP
+9.Use 0.5 damage when defense larger than damage
+10.Recycle leak for routingTimer
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Hero.js
+Modified : /StarCraft/Characters/Animation.js
+Added : /StarCraft/bgm/Magic.NuclearStrike.wav
+
+Revision: 78
+Author: gloomyson
+Date: 17:18:41, 2015-7-30
+Message:
+1.Forbid shortcut key when input cheat code
+2.Complete cloak consumes magic
+3.Fix no lockdown sound issue
+4.Fix Irradiate cannot infect issue
+5.Speed up hover actions
+6.Adjust mini-map position
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/keyController.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/css/mapStyle.css
+
+Revision: 77
+Author: gloomyson
+Date: 18:28:44, 2015-7-29
+Message:
+1.Add magic sound effects
+2.Forbid magic sound outside screen
+----
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Burst.js
+Added : /StarCraft/bgm/Magic.Consume.wav
+Added : /StarCraft/bgm/Magic.DefensiveMatrix.wav
+Added : /StarCraft/bgm/Magic.DisruptionWeb.wav
+Added : /StarCraft/bgm/Magic.EMPShockwave.wav
+Added : /StarCraft/bgm/Magic.Ensnare.wav
+Added : /StarCraft/bgm/Magic.Feedback.wav
+Added : /StarCraft/bgm/Magic.Hallucination.wav
+Added : /StarCraft/bgm/Magic.Heal.wav
+Added : /StarCraft/bgm/Magic.Irradiate.wav
+Added : /StarCraft/bgm/Magic.Lockdown.wav
+Added : /StarCraft/bgm/Magic.MaelStorm.wav
+Added : /StarCraft/bgm/Magic.MindControl.wav
+Added : /StarCraft/bgm/Magic.OpticalFlare.wav
+Added : /StarCraft/bgm/Magic.Parasite.wav
+Added : /StarCraft/bgm/Magic.PsionicStorm.wav
+Added : /StarCraft/bgm/Magic.Recall.wav
+Added : /StarCraft/bgm/Magic.RechargeShields.wav
+Added : /StarCraft/bgm/Magic.Restoration.wav
+Added : /StarCraft/bgm/Magic.ScannerSweep.wav
+Added : /StarCraft/bgm/Magic.StasisField.wav
+Added : /StarCraft/bgm/Magic.StimPacks.wav
+Added : /StarCraft/bgm/Magic.Yamato.wav
+
+Revision: 76
+Author: gloomyson
+Date: 23:59:01, 2015-7-28
+Message:
+1.Remove noise for Hydralisk death
+2.Change alpha for StasisField
+3.Remove noise from Lockdown
+4.Add opacity for Recall
+----
+Modified : /StarCraft/img/Charas/Magic.png
+Modified : /StarCraft/img/Charas/Hydralisk.png
+
+Revision: 75
+Author: gloomyson
+Date: 18:29:10, 2015-7-28
+Message:
+1.Improve Gobj.insideSquare, magic can take effect on rect
+2.Add buffer object to store all buffers
+3.Purple cloud buffer has 9 levels
+4.Callback typed buffer end
+5.Only one time for one type buffer
+6.Improve Restoration: can stop buffer animation
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 74
+Author: gloomyson
+Date: 0:36:36, 2015-7-28
+Message:
+1.Complete all basic magics
+2.Finish purple cloud effect
+3.Finish irradiate spread
+4.Slow down disruption web animation
+5.Recover every 1 second, infoBox show integer
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Animation.js
+
+Revision: 73
+Author: gloomyson
+Date: 2:08:19, 2015-7-27
+Message:
+1.Add all animations for Magic, add Animation.js
+2.Finish part of magic
+3.Add callback to moveTo,add above,duration,autoSize,scale for burst constructor, add drawEffect function
+4.Multi select in range ones function
+5.Redraw mud after build new ZergBuildings
+6.Add cheat 'the gathering'
+7.Fix unit cannot escape from attackable building
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Map.js
+Added : /StarCraft/Characters/Animation.js
+Modified : /StarCraft/img/Charas/Magic.png
+
+Revision: 72
+Author: gloomyson
+Date: 17:27:34, 2015-7-23
+Message:
+1.Correct all cost time
+2.Optimize all for() to array.func
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+
+Revision: 71
+Author: gloomyson
+Date: 0:22:34, 2015-7-23
+Message:
+1.Complete attackableBuilding feature
+2.Add all magic into png
+3.Fix sound play outside screen issue
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/img/Charas/Burst.png
+Modified : /StarCraft/img/Charas/Magic.png
+Added : /StarCraft/bgm/Colony.attack.wav
+Added : /StarCraft/bgm/Sunken.burst.wav
+
+Revision: 70
+Author: gloomyson
+Date: 23:48:58, 2015-7-19
+Message:
+1.Add timing for build scarab and interceptor
+2.Disable attack button after bullets full\
+3.Add basic Magic.png
+----
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Protoss.js
+Added : /StarCraft/img/Charas/Magic.png
+
+Revision: 69
+Author: gloomyson
+Date: 13:53:00, 2015-7-16
+Message:
+1.Redraw multiSelection box immediately after call team and double click
+2.Sync timer of training unit or upgrading
+3.Add cheat: operation cwal
+4.Fix issue: select unit always add into team
+5.Remove tooltip timer
+6.Select sound after call team
+
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Cheat.js
+
+Revision: 68
+Author: gloomyson
+Date: 23:40:30, 2015-7-14
+Message:
+1.Finish multiSelection feature, refresh in different frequency: minor refresh and redraw
+2.Add _$.arrayEqual in gFrame
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Referee.js
+
+Revision: 67
+Author: gloomyson
+Date: 18:13:05, 2015-7-14
+Message:
+1.Add new feature: multiSelection
+2.Add array: Game.allSelected
+3.Add div.override for further use
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/css/portraitStyle.css
+
+Revision: 66
+Author: gloomyson
+Date: 17:36:50, 2015-7-13
+Message:
+1.Add magic:Heal,ActivateDefensiveMatrix,Irradiate,Hallucination,MindControl,RechargeShields
+2.Add bullet burst callback
+3.Add Bullets.SingleMissile
+4.Change Unit.isInSight to Gobj.canSee
+5.Fix 4 hallucinations issue
+6.Speed up recover
+7.Resource.paypal.call(chara,cost)
+----
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/GameRule/Resource.js
+
+Revision: 65
+Author: gloomyson
+Date: 13:29:38, 2015-7-13
+Message:
+1.Add new fog feature into map: main fog and mini-map fog
+2.Add click button callback frame
+3.Add magic: Parasite,SpawnBroodlings,Consume,Lockdown, Restoration,OpticalFlare,Yamato with no animation effect
+4.Set timer for button tooltip
+5.Add bullet with fixed damage
+6.Add callback on reach destination in navigation
+7.Adjust drawImage performance for removing float position
+8.Enrich getSelectedOne function with different types filter
+9.Fix neutral creature has no sight issue
+10.Cheat: 'black sheep wall', disable and enable fog
+11.Need refresh after cheat enabled
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/Characters/Neutral.js
+
+Revision: 64
+Author: gloomyson
+Date: 2:04:11, 2015-7-10
+Message:
+1.Add upgraded box
+2.Fix new building position bug
+3.Add cost time for Corsair
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+
+Revision: 63
+Author: gloomyson
+Date: 18:12:52, 2015-7-9
+Message:
+1.Add feature:processing box
+2.Add building time for all charas
+3.Add upgrade sound effect
+4.Move all sound effect to Referee
+5.Set favicon.ico as shortcut icon
+6.Remove sound.js
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/GameRule/Resource.js
+Deleted : /StarCraft/Utils/sound.js
+Added : /StarCraft/bgm/upgrade.Protoss.wav
+Added : /StarCraft/bgm/upgrade.Terran.wav
+Added : /StarCraft/bgm/upgrade.Zerg.wav
+Modified : /StarCraft/favicon.ico
+Modified : /StarCraft/img/Menu/Thingy.png
+
+Revision: 62
+Author: gloomyson
+Date: 19:13:34, 2015-7-5
+Message:
+1.Optimize shape for ZergBuilding's mud
+2.Can create Building
+3.Add cost and tooltip
+4.Create resource payment system
+5.Optimize attack priority
+6.Click button sound, advisor mine/gas/man/magic sound
+7.Initial magic as 50
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Added : /StarCraft/GameRule/Resource.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/img/Menu/Thingy.png
+Added : /StarCraft/bgm/Button.wav
+Added : /StarCraft/bgm/gas.Protoss.wav
+Added : /StarCraft/bgm/gas.Terran.wav
+Added : /StarCraft/bgm/gas.Zerg.wav
+Added : /StarCraft/bgm/magic.Protoss.wav
+Added : /StarCraft/bgm/magic.Terran.wav
+Added : /StarCraft/bgm/magic.Zerg.wav
+Added : /StarCraft/bgm/man.Protoss.wav
+Added : /StarCraft/bgm/man.Terran.wav
+Added : /StarCraft/bgm/man.Zerg.wav
+Added : /StarCraft/bgm/mine.Protoss.wav
+Added : /StarCraft/bgm/mine.Terran.wav
+Added : /StarCraft/bgm/mine.Zerg.wav
+Modified : /StarCraft/img/Charas/Mud.png
+
+Revision: 61
+Author: gloomyson
+Date: 17:42:23, 2015-7-3
+Message:
+Add mud drawing for ZergBuilding on backCxt
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Map.js
+Added : /StarCraft/img/Charas/Mud.png
+
+Revision: 60
+Author: gloomyson
+Date: 13:16:03, 2015-7-3
+Message:
+1.Add Thingy.png to show mine,gas and man info
+2.Add cost info for unit,manPlus info for building
+3.Add cursor icos
+4.Add cheat 'Show me the money'
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Hero.js
+Added : /StarCraft/img/Menu/Thingy.png
+Modified : /StarCraft/img/Menu/cursor.ico
+Deleted : /StarCraft/img/Menu/cursor.jpg
+Added : /StarCraft/img/Menu/cursorLocating.ico
+
+Revision: 59
+Author: gloomyson
+Date: 15:19:17, 2015-7-1
+Message:
+1.Fix memory leak issue for ${}.html
+2.Fix building doesn't have portrait issue
+3.Change cheat box and message box position
+4.Fix HP color not change issue
+5.Fix target doesn't die after cheating issue
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/css/portraitStyle.css
+
+Revision: 58
+Author: gloomyson
+Date: 18:16:02, 2015-6-29
+Message:
+1.Fix hover issue
+2.Fix syntax errors: yellow warning
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/css/mapStyle.css
+
+Revision: 57
+Author: gloomyson
+Date: 1:47:33, 2015-6-29
+Message:
+1.Change panel_Info to html+css mode
+2.Fix BuildingBurst override issue
+3.Change map refresh to global event handler
+4.Add portraitStyle.css
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Burst.js
+Added : /StarCraft/css/portraitStyle.css
+Modified : /StarCraft/img/Charas/BuildingBurst.png
+Modified : /StarCraft/img/Menu/ControlPanel.png
+
+Revision: 56
+Author: gloomyson
+Date: 1:15:33, 2015-6-26
+Message:
+Remove noise from BuildingBurst.png
+----
+Modified : /StarCraft/img/Charas/BuildingBurst.png
+
+Revision: 55
+Author: gloomyson
+Date: 1:07:20, 2015-6-26
+Message:
+1.New HD animation for redExplode and blueExplode
+2.Add Game.getSelected for testing
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/img/Charas/BuildingBurst.png
+
+Revision: 54
+Author: gloomyson
+Date: 18:05:21, 2015-6-25
+Message:
+1.Adjust attack priority: Unit->Building,Near->Far,Attacked attract hatred
+2.Stop following target when miss it, won't miss if attack locked
+3.Restore 5 px margin for bottom panel
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 53
+Author: gloomyson
+Date: 1:30:29, 2015-6-25
+Message:
+1.Finish mini map monitor canvas: show unit,building and white stroke
+2.Fix map/screen convert mistake
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/css/mapStyle.css
+
+Revision: 52
+Author: gloomyson
+Date: 18:04:23, 2015-6-24
+Message:
+Fix canvas onresize handler: need bind it earlier
+----
+Modified : /StarCraft/GameRule/Game.js
+
+Revision: 51
+Author: gloomyson
+Date: 17:53:52, 2015-6-24
+Message:
+1.Canvas onresize handler
+2.Enhance extends for constructor in gFrame
+3.Fix 5 pixer border in Map.js
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Map.js
+
+Revision: 50
+Author: gloomyson
+Date: 21:52:43, 2015-6-22
+Message:
+Fullfill bullets for enemy Reaver and Carrier
+----
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Protoss.js
+
+Revision: 49
+Author: gloomyson
+Date: 21:03:27, 2015-6-22
+Message:
+1.Rewrite css for basic frame: center align, 100% screen
+2.Fix call attack when inputting
+3.Add message box
+4.Add new cheat code
+5.Remove tank png noise
+6.ChangeSeletectedTo function will select that unit
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Controller/keyController.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/img/Charas/Tank.png
+
+Revision: 48
+Author: gloomyson
+Date: 16:20:02, 2015-6-19
+Message:
+1.Add cheat code inputting
+2.Fix building cannot detect bug
+3.Test basic image processing for change color by AlloyImage
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Controller/keyController.js
+Modified : /StarCraft/css/style.css
+Added : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/Characters/Building.js
+
+Revision: 47
+Author: gloomyson
+Date: 15:52:01, 2015-6-15
+Message:
+1.Evolve unit application for click some unit buttons
+2.Remaining number display for Scarab,Interceptor and SpiderMines
+----
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/Characters/Terran.js
+
+Revision: 46
+Author: gloomyson
+Date: 19:18:34, 2015-6-14
+Message:
+1.Enrich upgrade.js by delete after click
+2.Add game clock, use it for recover
+3.Referee check collision to separate distance zero ones
+4.Can build units
+5.Referee will help kill die survivor
+6.Finish whole melee attack action then cause damage
+7.No sound from outside screen
+8.Build scarab and interceptor, then can attack
+9.Remove noise for ControlPanel and Archon
+10.Control panel style for Zerg and Protoss
+11.Fix shaking when reach attack target
+12.Basic fix for hold handler
+----
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Hero.js
+Modified : /StarCraft/Characters/Neutral.js
+Modified : /StarCraft/img/Charas/Archon.png
+Modified : /StarCraft/img/Charas/Hydralisk.png
+Modified : /StarCraft/img/Menu/ControlPanel.png
+
+Revision: 45
+Author: gloomyson
+Date: 18:14:12, 2015-6-12
+Message:
+1.Add all of basic upgrade effects
+2.Add plasma, apply and show it
+3.Add sight property and update isInSight function
+4.Adjust all moving speed
+5.Adjust detector property to true, use sight as detect radius
+6.Add magic: StimPacks
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Hero.js
+
+Revision: 44
+Author: gloomyson
+Date: 23:23:49, 2015-6-11
+Message:
+1.Prepare for upgrade: property share array
+2.Fix bug overrun by adding moveToward
+----
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/index.html
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Hero.js
+
+Revision: 43
+Author: gloomyson
+Date: 21:21:08, 2015-6-7
+Message:
+1.Add icons into menu for unit/building/magic/upgrade
+2.Add reference conditions for these icons
+3.Move equipButtonsFor into Button.js
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/css/buttonStyle.css
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Hero.js
+
+Revision: 42
+Author: gloomyson
+Date: 22:28:04, 2015-6-3
+Message:
+Completely fix bottom white line issue
+----
+Modified : /StarCraft/GameRule/Game.js
+
+Revision: 41
+Author: gloomyson
+Date: 17:52:23, 2015-6-2
+Message:
+1.Update critters name (js, png and wav)
+2.Fully fix bottom white line issue
+3.Zerg building burst changed to 18 frames
+----
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/css/style.css
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Neutral.js
+Deleted : /StarCraft/bgm/Acritter.death.wav
+Deleted : /StarCraft/bgm/Acritter.moving.wav
+Deleted : /StarCraft/bgm/Acritter.selected.wav
+Deleted : /StarCraft/bgm/Bcritter.death.wav
+Deleted : /StarCraft/bgm/Bcritter.moving.wav
+Deleted : /StarCraft/bgm/Bcritter.selected.wav
+Added : /StarCraft/bgm/Bengalaas.death.wav (Copy from path: /StarCraft/bgm/Jcritter.death.wav, Revision, 27)
+Deleted : /StarCraft/bgm/Jcritter.death.wav
+Added : /StarCraft/bgm/Bengalaas.moving.wav (Copy from path: /StarCraft/bgm/Jcritter.moving.wav, Revision, 27)
+Deleted : /StarCraft/bgm/Jcritter.moving.wav
+Added : /StarCraft/bgm/Bengalaas.selected.wav (Copy from path: /StarCraft/bgm/Jcritter.selected.wav, Revision, 27)
+Deleted : /StarCraft/bgm/Jcritter.selected.wav
+Deleted : /StarCraft/bgm/Icritter.death.wav
+Deleted : /StarCraft/bgm/Icritter.moving.wav
+Deleted : /StarCraft/bgm/Icritter.selected.wav
+Added : /StarCraft/bgm/Kakaru.death.wav (Copy from path: /StarCraft/bgm/Scritter.death.wav, Revision, 27)
+Deleted : /StarCraft/bgm/Scritter.death.wav
+Added : /StarCraft/bgm/Kakaru.moving.wav (Copy from path: /StarCraft/bgm/Scritter.moving.wav, Revision, 27)
+Deleted : /StarCraft/bgm/Scritter.moving.wav
+Added : /StarCraft/bgm/Kakaru.selected.wav (Copy from path: /StarCraft/bgm/Scritter.selected.wav, Revision, 27)
+Deleted : /StarCraft/bgm/Scritter.selected.wav
+Deleted : /StarCraft/bgm/Kcritter.death.wav
+Deleted : /StarCraft/bgm/Kcritter.moving.wav
+Deleted : /StarCraft/bgm/Kcritter.selected.wav
+Added : /StarCraft/bgm/Ragnasaur.death.wav (Copy from path: /StarCraft/bgm/Acritter.death.wav, Revision, 27)
+Added : /StarCraft/bgm/Ragnasaur.moving.wav (Copy from path: /StarCraft/bgm/Acritter.moving.wav, Revision, 27)
+Added : /StarCraft/bgm/Ragnasaur.selected.wav (Copy from path: /StarCraft/bgm/Acritter.selected.wav, Revision, 27)
+Added : /StarCraft/bgm/Rhynsdon.death.wav (Copy from path: /StarCraft/bgm/Bcritter.death.wav, Revision, 27)
+Added : /StarCraft/bgm/Rhynsdon.moving.wav (Copy from path: /StarCraft/bgm/Bcritter.moving.wav, Revision, 27)
+Added : /StarCraft/bgm/Rhynsdon.selected.wav (Copy from path: /StarCraft/bgm/Bcritter.selected.wav, Revision, 27)
+Added : /StarCraft/bgm/Scantid.death.wav (Copy from path: /StarCraft/bgm/Kcritter.death.wav, Revision, 27)
+Added : /StarCraft/bgm/Scantid.moving.wav (Copy from path: /StarCraft/bgm/Kcritter.moving.wav, Revision, 27)
+Added : /StarCraft/bgm/Scantid.selected.wav (Copy from path: /StarCraft/bgm/Kcritter.selected.wav, Revision, 27)
+Added : /StarCraft/bgm/Ursadon.death.wav (Copy from path: /StarCraft/bgm/Icritter.death.wav, Revision, 27)
+Added : /StarCraft/bgm/Ursadon.moving.wav (Copy from path: /StarCraft/bgm/Icritter.moving.wav, Revision, 27)
+Added : /StarCraft/bgm/Ursadon.selected.wav (Copy from path: /StarCraft/bgm/Icritter.selected.wav, Revision, 27)
+Deleted : /StarCraft/img/Charas/Acritter.png
+Deleted : /StarCraft/img/Charas/Bcritter.png
+Added : /StarCraft/img/Charas/Bengalaas.png (Copy from path: /StarCraft/img/Charas/Jcritter.png, Revision, 27)
+Deleted : /StarCraft/img/Charas/Jcritter.png
+Deleted : /StarCraft/img/Charas/Icritter.png
+Added : /StarCraft/img/Charas/Kakaru.png (Copy from path: /StarCraft/img/Charas/Scritter.png, Revision, 27)
+Deleted : /StarCraft/img/Charas/Scritter.png
+Deleted : /StarCraft/img/Charas/Kcritter.png
+Added : /StarCraft/img/Charas/Ragnasaur.png (Copy from path: /StarCraft/img/Charas/Acritter.png, Revision, 27)
+Added : /StarCraft/img/Charas/Rhynsdon.png (Copy from path: /StarCraft/img/Charas/Bcritter.png, Revision, 27)
+Added : /StarCraft/img/Charas/Scantid.png (Copy from path: /StarCraft/img/Charas/Kcritter.png, Revision, 27)
+Added : /StarCraft/img/Charas/Ursadon.png (Copy from path: /StarCraft/img/Charas/Icritter.png, Revision, 27)
+
+Revision: 40
+Author: gloomyson
+Date: 0:37:50, 2015-6-1
+Message:
+1.Add building burst animation
+2.Fix control panel buttom line
+3.Support building detector
+4.Fix AOE attack building
+5.Fix melee cannot attack
+6.Move can cancel holding
+7.Adjust level design
+
+----
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Burst.js
+Added : /StarCraft/img/Charas/BuildingBurst.png
+Modified : /StarCraft/img/Menu/ControlPanel.png
+
