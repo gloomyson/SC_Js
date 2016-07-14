@@ -1,10 +1,10 @@
-# Starcraft-Js
+# SC-Js
 Classic RTS game at html5 canvas and javascript, only js codes, copyright materials removed
 
 ## Getting started
 * Download the latest version from github: https://github.com/gloomyson/SC_Js/archive/master.zip
 * Unzip the folder
-* Extract original resources from starcraft and add into bgm&img folder
+* Extract original resources from starcraft and add into bgm & img folder
 * Double click `index.html` in the folder (this should open the game with your browser)
 * Press the radio button (circle next to the level name) to select a level and play
 
