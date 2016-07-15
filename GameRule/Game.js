@@ -26,7 +26,7 @@ var Game={
     selectedUnit:{},
     allSelected:[],
     _oldAllSelected:[],
-    hackMode:true,
+    hackMode:false,
     isApp:false,
     addIntoAllSelected:function(chara,override){
         if (chara instanceof Gobj){
