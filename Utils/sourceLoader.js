@@ -44,8 +44,7 @@ var sourceLoader={
         }
         else {
             //Show Load Process
-            var LoadedBlock=document.getElementsByClassName('LoadedBlock')[0];
-            if (LoadedBlock) LoadedBlock.style.width=(100*this.loadedNum/this.sourceNum)>>0+"%";//Math.round
+            $('div.LoadedBlock').css('width',(Math.round(100*sourceLoader.loadedNum/sourceLoader.sourceNum)+"%"));
             //Recursion
             setTimeout(function(){
                 sourceLoader.allOnLoad(callback);
