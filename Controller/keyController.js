@@ -21,7 +21,7 @@ var keyController={
                 //Press number
                 case 48:case 49:case 50:case 51:case 52:
                 case 53:case 54:case 55:case 56:case 57:
-                    var teamNum=String.fromCharCode(event.keyCode);
+                    let teamNum=String.fromCharCode(event.keyCode);
                     //Building team
                     if (keyController.ctrl) {
                         Game.addSelectedIntoTeam(teamNum);
@@ -58,31 +58,31 @@ var keyController={
                 //Shortcut keys:
                 //Press M
                 case 77:
-                    if ($.makeArray($('div.panel_Control button')).some(function(btn){
+                    if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='move'
                     })) Button.moveHandler();
                     break;
                 //Press S
                 case 83:
-                    if ($.makeArray($('div.panel_Control button')).some(function(btn){
+                    if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='stop'
                     })) Button.stopHandler();
                     break;
                 //Press A
                 case 65:
-                    if ($.makeArray($('div.panel_Control button')).some(function(btn){
+                    if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='attack'
                     })) Button.attackHandler();
                     break;
                 //Press P
                 case 80:
-                    if ($.makeArray($('div.panel_Control button')).some(function(btn){
+                    if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='patrol'
                     })) Button.patrolHandler();
                     break;
                 //Press H
                 case 72:
-                    if ($.makeArray($('div.panel_Control button')).some(function(btn){
+                    if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='hold'
                     })) Button.holdHandler();
                     break;

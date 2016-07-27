@@ -40,27 +40,27 @@ var Button={
         }
         //Add items
         if (chara.items){
-            for (var N in chara.items){
+            for (let N in chara.items){
                 if (chara.items[N]!=null) {
-                    $('button[num="'+N+'"]').off('click').attr('class',chara.items[N].name).show();
+                    $(`button[num="${N}"]`).off('click').attr('class',chara.items[N].name).show();
                     if (chara.items[N].condition && !(chara.items[N].condition()))
-                        $('button[num="'+N+'"]').attr('disabled',true);
-                    else $('button[num="'+N+'"]').removeAttr('disabled');
+                        $(`button[num="${N}"]`).attr('disabled',true);
+                    else $(`button[num="${N}"]`).removeAttr('disabled');
                     //Exceptions: need mark numbers on button
                     switch (chara.items[N].name){
                         case 'SpiderMines':
-                            $('button[num="'+N+'"]')[0].innerHTML=chara.spiderMines;
+                            $(`button[num="${N}"]`)[0].innerHTML=chara.spiderMines;
                             break;
                         case 'Scarab':
-                            $('button[num="'+N+'"]')[0].innerHTML=chara.scarabNum;
+                            $(`button[num="${N}"]`)[0].innerHTML=chara.scarabNum;
                             break;
                         case 'Interceptor':
-                            $('button[num="'+N+'"]')[0].innerHTML=chara.continuousAttack.count;
+                            $(`button[num="${N}"]`)[0].innerHTML=chara.continuousAttack.count;
                             break;
                     }
                 }
                 else {
-                    $('button[num="'+N+'"]').removeAttr('class').hide();
+                    $(`button[num="${N}"]`).removeAttr('class').hide();
                 }
             }
             //Bind basic callbacks
@@ -69,11 +69,9 @@ var Button={
                 Button.refreshButtons();
             });
             $('button.SelectLarva').on('click',function(){
-                var larvas=Game.selectedUnit.larvas;
+                let larvas=Game.selectedUnit.larvas;
                 if (larvas){
-                    larvas=larvas.filter(function(chara){
-                        return chara.status!='dead';
-                    });
+                    larvas=larvas.filter(chara=>(chara.status!='dead'));
                     //If found alive larva
                     if (larvas.length){
                         Game.unselectAll();
@@ -104,19 +102,15 @@ var Button={
             $('button.AdvancedStructure').on('click',function(){
                 Button.equipButtonsFor(Button.advancedProtossStructures);
             });
+
             //Upgrade callbacks
-            var upgrades=[];
-            for (var grade in Upgrade){
-                upgrades.push(grade);
-            }//Cannot use for-in bind together
-            upgrades.forEach(function(grade){
-                $('button.'+grade).on('click',function(){
+            for (let grade in Upgrade){
+                $(`button.${grade}`).on('click',function(){
                     //Filter out when occupied
                     if (Game.selectedUnit.processing) return;
                     //Need time
                     if (Resource.getCost(grade) && Resource.getCost(grade).time){
-                        var owner=Game.selectedUnit;
-                        var duration=Resource.getCost(grade).time;
+                        let [owner,duration]=[Game.selectedUnit,Resource.getCost(grade).time];
                         //User move record
                         Multiplayer.cmds.push(JSON.stringify({
                             uids:[owner.id],
@@ -135,15 +129,12 @@ var Button={
                         }));
                     }
                 });
-            });
+            }
+
             //Magic callbacks
-            var magics=[];
-            for (var magic in Magic){
-                magics.push(magic);
-            }//Cannot use for-in bind together
-            var hasMagic=function(chara,magic){
+            let hasMagic=function(chara,magic){
                 if (chara.items){
-                    for (var attr in chara.items){
+                    for (let attr in chara.items){
                         if (chara.items[attr] && chara.items[attr].name==magic){
                             if (chara.items[attr].condition){
                                 if (chara.items[attr].condition()) return true;
@@ -154,12 +145,12 @@ var Button={
                 }
                 return false;
             };
-            magics.forEach(function(magic){
-                $('button.'+magic).on('click',function(){
-                    var duration=Resource.getCost(magic)?(Resource.getCost(magic).time):0;
-                    Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
+            for (let magic in Magic){
+                $(`button.${magic}`).on('click',function(){
+                    let duration=Resource.getCost(magic)?(Resource.getCost(magic).time):0;
+                    [...Unit.allUnits,...Building.allBuildings].filter(chara=>{
                         return (chara.team==Game.team && chara.selected && hasMagic(chara,magic));
-                    }).forEach(function(chara){
+                    }).forEach(chara=>{
                         //For Scarab and Interceptor
                         if (duration){
                             //Filter out when occupied
@@ -191,21 +182,18 @@ var Button={
                         }
                     });
                 });
-            });
+            }
+
             //Unit callbacks:
             //For Zerg units
-            var unitTypes=[];
-            for (var unitType in Zerg){
-                unitTypes.push(unitType);
-            }
-            var exceptions=['Guardian','Devourer'];
-            unitTypes.forEach(function(unitType){
-                $('button.'+unitType).on('click',function(){
+            let exceptions=['Guardian','Devourer'];
+            for (let unitType in Zerg){
+                $(`button.${unitType}`).on('click',function(){
                     //Calculate duration
-                    var duration=Resource.getCost(unitType).time;
-                    Unit.allUnits.filter(function(chara){
+                    let duration=Resource.getCost(unitType).time;
+                    Unit.allUnits.filter(chara=>{
                         return (chara.team==Game.team && chara.selected && chara.name==Game.selectedUnit.name);
-                    }).forEach(function(chara){
+                    }).forEach(chara=>{
                         Multiplayer.cmds.push(JSON.stringify({
                             uids:[chara.id],
                             type:'unit',
@@ -215,24 +203,19 @@ var Button={
                         }));
                     });
                 });
-            });
+            }
             //For Terran and Protoss units, add InfestedTerran
             [Terran,Protoss,{InfestedTerran:Zerg.InfestedTerran}].forEach(function(Race){
-                var unitTypes=[];
-                for (var unitType in Race){
-                    unitTypes.push(unitType);
-                }//Cannot use for-in bind together
-                var exceptions=['Archon','DarkArchon'];
-                unitTypes.forEach(function(unitType){
+                let exceptions=['Archon','DarkArchon'];
+                for (let unitType in Race){
                     //Unit type isn't in exceptions
                     if (exceptions.indexOf(unitType)==-1) {
-                        $('button.'+unitType).on('click',function(){
+                        $(`button.${unitType}`).on('click',function(){
                             //Filter out when occupied
                             if (Game.selectedUnit.processing) return;
                             //Need time
                             if (Resource.getCost(unitType) && Resource.getCost(unitType).time){
-                                var owner=Game.selectedUnit;
-                                var duration=Resource.getCost(unitType).time;
+                                let [owner,duration]=[Game.selectedUnit,Resource.getCost(unitType).time];
                                 Multiplayer.cmds.push(JSON.stringify({
                                     uids:[owner.id],
                                     type:'unit',
@@ -244,12 +227,12 @@ var Button={
                     }
                     //Exception units
                     else {
-                        $('button.'+unitType).on('click',function(){
+                        $(`button.${unitType}`).on('click',function(){
                             //Calculate duration
-                            var duration=Resource.getCost(unitType).time;
-                            Unit.allUnits.filter(function(chara){
+                            let duration=Resource.getCost(unitType).time;
+                            Unit.allUnits.filter(chara=>{
                                 return (chara.team==Game.team && chara.selected && chara.name==Game.selectedUnit.name);
-                            }).forEach(function(chara){
+                            }).forEach(chara=>{
                                 //Filter out when occupied
                                 if (chara.processing) return;
                                 Multiplayer.cmds.push(JSON.stringify({
@@ -262,30 +245,23 @@ var Button={
                             });
                         });
                     }
-                });
+                }
             });
 
             //Building callbacks
-            var evolvedBuildings=['Lair','Hive','SunkenColony','SporeColony','GreaterSpire',
+            let evolvedBuildings=['Lair','Hive','SunkenColony','SporeColony','GreaterSpire',
                 'ComstatStation','NuclearSilo','MachineShop','ControlTower','PhysicsLab','ConvertOps'];
             ['ZergBuilding','TerranBuilding','ProtossBuilding'].forEach(function(BuildType){
-                var Build=Building[BuildType];
-                var buildNames=[];
-                for (var buildName in Build){
-                    //Filter out noise
-                    if (buildName!='inherited' && buildName!='super' && buildName!='extends'){
-                        buildNames.push(buildName);
-                    }
-                }
-                buildNames.forEach(function(buildName){
-                    $('button.'+buildName).on('click',function(){
+                let Build=Building[BuildType];
+                for (let buildName in Build){
+                    $(`button.${buildName}`).on('click',function(){
                         //Pay by credit card if not evolved building
                         if (evolvedBuildings.indexOf(buildName)==-1) {
                             Game.selectedUnit.creditBill=Resource.getCost(buildName);
                             //Payment: chara paypal cost
                             if (Resource.paypal.call(Game.selectedUnit,Resource.getCost(buildName))){
                                 Game.selectedUnit.buildName=buildName;
-                                Game.selectedUnit['build'+BuildType]();
+                                Game.selectedUnit[`build${BuildType}`]();
                             }
                         }
                         else {
@@ -297,23 +273,23 @@ var Button={
                             }));
                         }
                     });
-                });
+                }
             });
         }
         //Bind tooltip callbacks
         $('div.panel_Control button').on('mouseover',function(event){
-            var _name=this.className;
+            let _name=this.className;
             $('div.tooltip_Box').css('right',innerWidth-event.clientX).css('bottom',innerHeight-event.clientY).show();
             $('div.tooltip_Box div.itemName')[0].innerHTML=_name;
-            var cost=Resource.getCost(_name);
+            let cost=Resource.getCost(_name);
             if (cost) {
                 $('div.cost').show();
                 ['mine','gas','man','magic'].forEach(function(res){
                     if(cost[res]) {
-                        $('div.cost *[class*='+res+']').show();
-                        $('div.cost span.'+res+'Num')[0].innerHTML=cost[res];
+                        $(`div.cost *[class*=${res}]`).show();
+                        $(`div.cost span.${res}Num`)[0].innerHTML=cost[res];
                     }
-                    else $('div.cost *[class*='+res+']').hide();
+                    else $(`div.cost *[class*=${res}]`).hide();
                 });
             }
         });
@@ -322,7 +298,7 @@ var Button={
             $('div.tooltip_Box div.cost').hide();
             $('div.tooltip_Box div.itemName')[0].innerHTML='';
             ['mine','gas','man','magic'].forEach(function(res){
-                $('div.cost span.'+res+'Num')[0].innerHTML='';
+                $(`div.cost span.${res}Num`)[0].innerHTML='';
             });
         });
     },
@@ -352,27 +328,27 @@ var Button={
         items:{
             '1':{name:'Hatchery'},
             '2':{name:'CreepColony',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && (chara.name=='Hatchery' || chara.name=='Lair' || chara.name=='Hive');
                 })
             }},
             '3':{name:'Extractor',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && (chara.name=='Hatchery' || chara.name=='Lair' || chara.name=='Hive');
                 })
             }},
             '4':{name:'SpawningPool',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && (chara.name=='Hatchery' || chara.name=='Lair' || chara.name=='Hive');
                 })
             }},
             '5':{name:'EvolutionChamber',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && (chara.name=='Hatchery' || chara.name=='Lair' || chara.name=='Hive');
                 })
             }},
             '7':{name:'HydraliskDen',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='SpawningPool';
                 })
             }},
@@ -382,27 +358,27 @@ var Button={
     advancedZergMutations:{
         items:{
             '1':{name:'Spire',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && (chara.name=='Lair' || chara.name=='Hive');
                 })
             }},
             '2':{name:'QueenNest',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && (chara.name=='Lair' || chara.name=='Hive');
                 })
             }},
             '3':{name:'NydusCanal',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && (chara.name=='Hive');
                 })
             }},
             '4':{name:'UltraliskCavern',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Hive';
                 })
             }},
             '5':{name:'DefilerMound',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Hive';
                 })
             }},
@@ -413,37 +389,37 @@ var Button={
         items:{
             '1':{name:'CommandCenter'},
             '2':{name:'SupplyDepot',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CommandCenter';
                 })
             }},
             '3':{name:'Refinery',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CommandCenter';
                 })
             }},
             '4':{name:'Barracks',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CommandCenter';
                 })
             }},
             '5':{name:'EngineeringBay',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CommandCenter';
                 })
             }},
             '6':{name:'MissileTurret',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='EngineeringBay';
                 })
             }},
             '7':{name:'Academy',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Barracks';
                 })
             }},
             '8':{name:'Bunker',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Barracks';
                 })
             }},
@@ -453,22 +429,22 @@ var Button={
     advancedTerranBuildings:{
         items:{
             '1':{name:'Factory',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Barracks';
                 })
             }},
             '2':{name:'Starport',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Factory';
                 })
             }},
             '3':{name:'ScienceFacility',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Starport';
                 })
             }},
             '4':{name:'Armory',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Factory';
                 })
             }},
@@ -479,37 +455,37 @@ var Button={
         items:{
             '1':{name:'Nexus'},
             '2':{name:'Pylon',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Nexus';
                 })
             }},
             '3':{name:'Assimilator',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Nexus';
                 })
             }},
             '4':{name:'Gateway',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Nexus';
                 })
             }},
             '5':{name:'Forge',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Nexus';
                 })
             }},
             '6':{name:'PhotonCannon',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Forge';
                 })
             }},
             '7':{name:'CyberneticsCore',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Gateway';
                 })
             }},
             '8':{name:'ShieldBattery',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='Gateway';
                 })
             }},
@@ -519,44 +495,44 @@ var Button={
     advancedProtossStructures:{
         items:{
             '1':{name:'RoboticsFacility',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CyberneticsCore';
                 })
             }},
             '2':{name:'StarGate',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CyberneticsCore';
                 })
             }},
             '3':{name:'CitadelOfAdun',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CyberneticsCore';
                 })
             }},
             '4':{name:'RoboticsSupportBay',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='RoboticsFacility';
                 })
             }},
             '5':{name:'FleetBeacon',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='StarGate';
                 })
             }},
             '6':{name:'TemplarArchives',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='CitadelOfAdun';
                 })
             }},
             '7':{name:'Observatory',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='RoboticsFacility';
                 })
             }},
             '8':{name:'ArbiterTribunal',condition:function(){
-                return Building.allBuildings.some(function(chara){
+                return Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='StarGate';
-                }) && Building.allBuildings.some(function(chara){
+                }) && Building.allBuildings.some(chara=>{
                     return chara.team==Game.team && chara.name=='TemplarArchives';
                 })
             }},
@@ -580,7 +556,7 @@ var Button={
     //Stop button
     stopHandler:function(charas){
         if (charas==null){
-            var charas=Unit.allUnits.filter(function(chara){
+            let charas=Unit.allUnits.filter(chara=>{
                 return chara.selected && chara.team==Game.team;
             });
             //Buffer pool
@@ -590,7 +566,7 @@ var Button={
             }));
         }
         else {
-            charas.forEach(function(chara){
+            charas.forEach(chara=>{
                 if (chara.attack) chara.stopAttack();
                 chara.dock();
                 //Interrupt old destination routing
@@ -630,7 +606,7 @@ var Button={
     holdHandler:function(charas){
         //Part A: Before get charas
         if (charas==null){
-            var charas=Unit.allUnits.filter(function(chara){
+            let charas=Unit.allUnits.filter(chara=>{
                 return chara.selected && chara.team==Game.team;
             });
             //Buffer pool
@@ -643,7 +619,7 @@ var Button={
         else {
             Button.stopHandler(charas);
             //Freeze all units
-            charas.forEach(function(chara){
+            charas.forEach(chara=>{
                 if (chara.hold){
                     delete chara.AI;
                     delete chara.findNearbyTargets;
@@ -721,10 +697,9 @@ var Button={
             default:
                 if (typeof(Button.callback)=='function'){
                     //Mouse at (clickX,clickY)
-                    var offset=$('#fogCanvas').offset();
-                    var clickX=event.pageX-offset.left;
-                    var clickY=event.pageY-offset.top;
-                    var location={x:clickX+Map.offsetX,y:clickY+Map.offsetY};
+                    let offset=$('#fogCanvas').offset();
+                    let [clickX,clickY]=[event.pageX-offset.left,event.pageY-offset.top];
+                    let location={x:clickX+Map.offsetX,y:clickY+Map.offsetY};
                     //Show right click cursor
                     new Burst.RightClickCursor(location);
                     //Call back with location info
@@ -740,8 +715,8 @@ var Button={
                     }
                     //Spell magic
                     else {
-                        var magicName='';
-                        for (var magic in Magic){
+                        let magicName='';
+                        for (let magic in Magic){
                             if (Magic[magic].spell==Button.callback) magicName=magic;
                         }
                         Multiplayer.cmds.push(JSON.stringify({

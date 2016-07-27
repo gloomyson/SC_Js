@@ -45,14 +45,14 @@ var Referee={
         //Every 0.4 sec
         if (Game.mainTick%4==0){
             //Special skill: make nearby units invisible
-            var arbiterBuffer=Protoss.Arbiter.prototype.bufferObj;
-            var allArbiters=Game.getPropArray([]);
-            Unit.allUnits.forEach(function(chara){
+            let arbiterBuffer=Protoss.Arbiter.prototype.bufferObj;
+            let allArbiters=Game.getPropArray([]);
+            Unit.allUnits.forEach(chara=>{
                 if (chara.name=='Arbiter') allArbiters[chara.team].push(chara);
             });
             //Clear old units' Arbiter buffer
             Referee.underArbiterUnits.forEach(function(charas){
-                charas.forEach(function(chara){
+                charas.forEach(chara=>{
                     chara.removeBuffer(arbiterBuffer);
                 });
             });
@@ -61,16 +61,15 @@ var Referee={
                 //Find new under arbiter units
                 arbiters.forEach(function(arbiter){
                     //Find targets: same team units inside Arbiter sight, exclude Arbiter
-                    var targets=Game.getInRangeOnes(arbiter.posX(),arbiter.posY(),arbiter.get('sight'),N,true,null,function(chara){
-                        return arbiters.indexOf(chara)==-1;
-                    });
+                    let targets=Game.getInRangeOnes(arbiter.posX(),arbiter.posY(),arbiter.get('sight'),N,
+                        true,null,chara=>(arbiters.indexOf(chara)==-1));
                     Referee.underArbiterUnits[N]=Referee.underArbiterUnits[N].concat(targets);
                 });
                 $.unique(Referee.underArbiterUnits[N]);
             });
             //Arbiter buffer effect on these units
             Referee.underArbiterUnits.forEach(function(charas){
-                charas.forEach(function(chara){
+                charas.forEach(chara=>{
                     chara.addBuffer(arbiterBuffer);
                 });
             });
@@ -81,15 +80,15 @@ var Referee={
         //Every 0.4 sec
         if (Game.mainTick%4==0){
             //Same detector buffer reference
-            var detectorBuffer=Gobj.detectorBuffer;
-            var allDetectors=Game.getPropArray([]);
-            Unit.allUnits.forEach(function(chara){
+            let detectorBuffer=Gobj.detectorBuffer;
+            let allDetectors=Game.getPropArray([]);
+            Unit.allUnits.forEach(chara=>{
                 if (chara.detector) allDetectors[chara.team].push(chara);
             });
             //Clear old units detected buffer
             Referee.detectedUnits.forEach(function(charas,team){
                 //For each team
-                charas.forEach(function(chara){
+                charas.forEach(chara=>{
                     chara.removeBuffer(detectorBuffer[team]);
                 });
             });
@@ -98,9 +97,8 @@ var Referee={
                 //Find new under detector units
                 detectors.forEach(function(detector){
                     //Find targets: enemy invisible units inside detector sight
-                    var targets=Game.getInRangeOnes(detector.posX(),detector.posY(),detector.get('sight'),N+'',true,null,function(chara){
-                        return chara['isInvisible'+Game.team];
-                    });
+                    let targets=Game.getInRangeOnes(detector.posX(),detector.posY(),detector.get('sight'),
+                        N+'',true,null,chara=>(chara[`isInvisible${Game.team}`]));
                     Referee.detectedUnits[N]=Referee.detectedUnits[N].concat(targets);
                 });
                 $.unique(Referee.detectedUnits[N]);
@@ -108,7 +106,7 @@ var Referee={
             //Detector buffer effect on these units
             Referee.detectedUnits.forEach(function(charas,team){
                 //For each team
-                charas.forEach(function(chara){
+                charas.forEach(chara=>{
                     chara.addBuffer(detectorBuffer[team]);
                 });
             });
@@ -118,10 +116,10 @@ var Referee={
                     (effect instanceof Animation.RedEffect) ||
                     (effect instanceof Animation.GreenEffect)
             }).forEach(function(effect){
-                var target=effect.target;
-                for (var team=0;team<Game.playerNum;team++){
+                let target=effect.target;
+                for (let team=0;team<Game.playerNum;team++){
                     //Make already invisible units to visible by all teams
-                    if (target['isInvisible'+team]) target['isInvisible'+team]=false;
+                    if (target[`isInvisible${team}`]) target[`isInvisible${team}`]=false;
                 }
             });
         }
@@ -152,7 +150,7 @@ var Referee={
     judgeRecover:function(){
         //Every 1 sec
         if (Game.mainTick%10==0){
-            Unit.allUnits.concat(Building.allBuildings).forEach(function(chara){
+            [...Unit.allUnits,...Building.allBuildings].forEach(chara=>{
                 if (chara.recover) chara.recover();
             });
         }
@@ -160,9 +158,9 @@ var Referee={
     judgeDying:function(){
         //Kill die survivor every 1 sec
         if (Game.mainTick%10==0){
-            Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
+            [...Unit.allUnits,...Building.allBuildings].filter(chara=>{
                 return chara.life<=0 && chara.status!='dead';
-            }).forEach(function(chara){
+            }).forEach(chara=>{
                 chara.die();
             });
         }
@@ -170,14 +168,14 @@ var Referee={
     //Avoid collision
     judgeCollision:function(){
         //N*N->N
-        var units=Unit.allGroundUnits().concat(Building.allBuildings);
-        for(var N=0;N<units.length;N++) {
-            var chara1 = units[N];
-            for(var M=N+1;M<units.length;M++) {
-                var chara2 = units[M];
-                var dist=chara1.distanceFrom(chara2);
+        let units=[...Unit.allGroundUnits(),...Building.allBuildings];
+        for(let N=0;N<units.length;N++) {
+            let chara1 = units[N];
+            for(let M=N+1;M<units.length;M++) {
+                let chara2 = units[M];
+                let dist=chara1.distanceFrom(chara2);
                 //Ground unit collision limit
-                var distLimit;
+                let distLimit;
                 if (chara2 instanceof Unit){
                     distLimit=(chara1.radius()+chara2.radius())*0.5;
                     if (distLimit<Unit.meleeRange) distLimit=Unit.meleeRange;//Math.max
@@ -188,7 +186,7 @@ var Referee={
                 }
                 //Separate override ones
                 if (dist==0) {
-                    var colPos=Referee._pos[Game.getNextRandom()*4>>0];
+                    let colPos=Referee._pos[Game.getNextRandom()*4>>0];
                     if (chara1 instanceof Unit){
                         chara1.x+=colPos[0];
                         chara1.y+=colPos[1];
@@ -207,12 +205,11 @@ var Referee={
                     chara1.collision=chara2;
                     chara2.collision=chara1;
                     //Adjust ratio
-                    var K=(distLimit-dist)/dist/2;
-                    var adjustX=K*(chara1.x-chara2.x)>>0;
-                    var adjustY=K*(chara1.y-chara2.y)>>0;
+                    let K=(distLimit-dist)/dist/2;
+                    let adjustX=K*(chara1.x-chara2.x)>>0;
+                    let adjustY=K*(chara1.y-chara2.y)>>0;
                     //Adjust location
-                    var interactRatio1=0;
-                    var interactRatio2=0;
+                    let [interactRatio1,interactRatio2]=[0,0];
                     if (chara1 instanceof Building){
                         interactRatio1=0;
                         //Building VS Unit
@@ -262,25 +259,25 @@ var Referee={
             }
         }
         units=Unit.allFlyingUnits();
-        for(var N=0;N<units.length;N++) {
-            var chara1 = units[N];
-            for(var M=N+1;M<units.length;M++) {
-                var chara2 = units[M];
-                var dist=chara1.distanceFrom(chara2);
+        for(let N=0;N<units.length;N++) {
+            let chara1 = units[N];
+            for(let M=N+1;M<units.length;M++) {
+                let chara2 = units[M];
+                let dist=chara1.distanceFrom(chara2);
                 //Flying unit collision limit
-                var distLimit=Unit.meleeRange;
+                let distLimit=Unit.meleeRange;
                 //Separate override ones
                 if (dist==0) {
-                    var colPos=Referee._pos[Game.getNextRandom()*4>>0];
+                    let colPos=Referee._pos[Game.getNextRandom()*4>>0];
                     chara1.x+=colPos[0];
                     chara1.y+=colPos[1];
                     dist=1;
                 }
                 if (dist<distLimit) {
                     //Adjust ratio
-                    var K=(distLimit-dist)/dist/2;
-                    var adjustX=K*(chara1.x-chara2.x)>>0;
-                    var adjustY=K*(chara1.y-chara2.y)>>0;
+                    let K=(distLimit-dist)/dist/2;
+                    let adjustX=K*(chara1.x-chara2.x)>>0;
+                    let adjustY=K*(chara1.y-chara2.y)>>0;
                     //Adjust location
                     chara1.x+=adjustX;
                     chara1.y+=adjustY;
@@ -295,8 +292,8 @@ var Referee={
     },
     alterSelectionMode:function(){
         //GC after some user changes
-        $.extend([],Game.allSelected).forEach(function(chara){
-            if (chara.status=='dead' || (chara['isInvisible'+Game.team] && chara.isEnemy()))
+        $.extend([],Game.allSelected).forEach(chara=>{
+            if (chara.status=='dead' || (chara[`isInvisible${Game.team}`] && chara.isEnemy()))
                 Game.allSelected.splice(Game.allSelected.indexOf(chara),1);
         });
         //Alter info UI: Multi selection mode
@@ -329,7 +326,7 @@ var Referee={
                 return build.produceLarva;
             }).forEach(function(build){
                 //Can give birth to 3 larvas
-                for(var N=0;N<3;N++){
+                for(let N=0;N<3;N++){
                     if (build.larvas[N]==null || build.larvas[N].status=="dead"){
                         build.larvas[N]=new Zerg.Larva({x:(build.x+N*48),y:(build.y+build.height),team:build.team});
                         //Which base larva belongs to
@@ -346,13 +343,13 @@ var Referee={
             Building.allBuildings.filter(function(build){
                 return build.injuryOffsets;
             }).forEach(function(build){
-                var injuryLevel=(1-build.life/build.HP)/0.25>>0;
+                let injuryLevel=(1-build.life/build.HP)/0.25>>0;
                 if (injuryLevel>3) injuryLevel=3;
-                var curLevel=build.injuryAnimations.length;
+                let curLevel=build.injuryAnimations.length;
                 if (injuryLevel>curLevel){
-                    var offsets=build.injuryOffsets;
-                    var scale=build.injuryScale?build.injuryScale:1;
-                    for (var N=curLevel;N<injuryLevel;N++){
+                    let offsets=build.injuryOffsets;
+                    let scale=build.injuryScale?build.injuryScale:1;
+                    for (let N=curLevel;N<injuryLevel;N++){
                         //Add injury animations
                         build.injuryAnimations.push(new Animation[build.injuryNames[N]]({target:build,offset:offsets[N],scale:scale}));
                     }
@@ -361,7 +358,7 @@ var Referee={
                     }
                 }
                 if (injuryLevel<curLevel){
-                    for (var N=curLevel;N>injuryLevel;N--){
+                    for (let N=curLevel;N>injuryLevel;N--){
                         //Clear injury animations
                         build.injuryAnimations.pop().die();
                     }
@@ -375,8 +372,8 @@ var Referee={
     judgeMan:function(){
         //Update current man and total man for all teams
         //?We may only need to judge our team's man for client consume use
-        var curMan=Game.getPropArray(0),totalMan=Game.getPropArray(0);
-        Unit.allUnits.concat(Building.allBuildings).forEach(function(chara){
+        let curMan=Game.getPropArray(0),totalMan=Game.getPropArray(0);
+        [...Unit.allUnits,...Building.allBuildings].forEach(chara=>{
             if (chara.cost && chara.cost.man) (curMan[chara.team])+=chara.cost.man;
             if (chara.manPlus) (totalMan[chara.team])+=chara.manPlus;
             //Transport
@@ -386,7 +383,7 @@ var Referee={
                 });
             }
         });
-        for (var N=0;N<Game.playerNum;N++){
+        for (let N=0;N<Game.playerNum;N++){
             Resource[N].curMan=curMan[N];
             Resource[N].totalMan=totalMan[N];
         }

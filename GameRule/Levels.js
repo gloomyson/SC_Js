@@ -5,8 +5,8 @@ var Levels=[
             //Load map
             Map.setCurrentMap('Switchback');
             //Choose side and apply race style
-            var races=['Terran','Zerg'];
-            var startPoint=[{x:50,y:50},{x:200,y:50}];
+            let races=['Terran','Zerg'];
+            let startPoint=[{x:50,y:50},{x:200,y:50}];
             if (!Game.replayFlag) Game.team=Math.random()*2>>0;
             Game.race.choose(races[Game.team]);
             Map.offsetX=startPoint[Game.team].x;
@@ -110,7 +110,7 @@ var Levels=[
                 Multiplayer.enable();
                 Game.commandTimeout(function(){
                     //Upgrade all grades
-                    for (var grade in Upgrade){
+                    for (let grade in Upgrade){
                         Upgrade[grade].effect(0);
                         Upgrade[grade].effect(1);
                     }
@@ -123,8 +123,8 @@ var Levels=[
             //Load map
             Map.setCurrentMap('BloodBath');
             //Choose side and apply race style
-            var races=['Zerg','Terran'];
-            var startPoint=[{x:0,y:50},{x:200,y:50}];
+            let races=['Zerg','Terran'];
+            let startPoint=[{x:0,y:50},{x:200,y:50}];
             if (!Game.replayFlag) Game.team=Math.random()*2>>0;
             Game.race.choose(races[Game.team]);
             Map.offsetX=startPoint[Game.team].x;
@@ -173,8 +173,8 @@ var Levels=[
             //Load map
             Map.setCurrentMap('OrbitalRelay');
             //Choose side and apply race style
-            var races=['Terran','Protoss'];
-            var startPoint=[{x:0,y:50},{x:200,y:50}];
+            let races=['Terran','Protoss'];
+            let startPoint=[{x:0,y:50},{x:200,y:50}];
             if (!Game.replayFlag) Game.team=Math.random()*2>>0;
             Game.race.choose(races[Game.team]);
             Map.offsetX=startPoint[Game.team].x;
@@ -224,8 +224,8 @@ var Levels=[
             //Load map
             Map.setCurrentMap('ThinIce');
             //Choose side and apply race style
-            var races=['Protoss','Zerg'];
-            var startPoint=[{x:0,y:50},{x:200,y:50}];
+            let races=['Protoss','Zerg'];
+            let startPoint=[{x:0,y:50},{x:200,y:50}];
             if (!Game.replayFlag) Game.team=Math.random()*2>>0;
             Game.race.choose(races[Game.team]);
             Map.offsetX=startPoint[Game.team].x;
@@ -355,8 +355,8 @@ var Levels=[
             //Multiplayer
             Game.playerNum=4;
             //Choose side and apply race style
-            var races=['Terran','Zerg','Terran','Protoss'];
-            var startPoint=[{x:100,y:4000-innerHeight},{x:4000-innerWidth,y:4000-innerHeight},{x:100,y:100},{x:4000-innerWidth,y:100}];
+            let races=['Terran','Zerg','Terran','Protoss'];
+            let startPoint=[{x:100,y:4000-innerHeight},{x:4000-innerWidth,y:4000-innerHeight},{x:100,y:100},{x:4000-innerWidth,y:100}];
             if (!Game.replayFlag) Game.team=Math.random()*4>>0;
             Game.race.choose(races[Game.team]);
             Map.offsetX=startPoint[Game.team].x;
@@ -545,8 +545,8 @@ var Levels=[
             //Patch: Larva can move
             Zerg.Larva.prototype.moveTo=Unit.prototype.moveTo;
             Zerg.Larva.prototype.moveToward=Unit.prototype.moveToward;
-            var Pyramid=new Building.ProtossBuilding.Pyramid({x:1450,y:1480});
-            for (var N=0;N<6;N++){
+            let Pyramid=new Building.ProtossBuilding.Pyramid({x:1450,y:1480});
+            for (let N=0;N<6;N++){
                 new Hero.HeroCruiser({x:1470,y:1500});
             }
             //Override win and lose condition
@@ -557,17 +557,18 @@ var Levels=[
                 return Pyramid.status=='dead';//Closure
             };
             //Enemy coming
-            var offsets=[{x:1536,y:36},{x:1536,y:3036},{x:36,y:1536},{x:3036,y:1536},
+            let offsets=[{x:1536,y:36},{x:1536,y:3036},{x:36,y:1536},{x:3036,y:1536},
                 {x:486,y:486},{x:486,y:2586},{x:2586,y:486},{x:2586,y:2586}];
-            var num=0, wave=1;
-            var interval=20000;//20 seconds per wave
+            let [num,wave]=[0,1];
+            let interval=20000;//20 seconds per wave
             _$.traverse([Neutral,Zerg,Terran,Protoss],function(enemyType){
                 Game.commandTimeout(function(){
                     offsets.forEach(function(offset){
                         offset.team=1;
                         new enemyType(offset).attackGround({x:1536,y:1536});
                     });
-                    Game.showWarning('Wave '+ wave++ +': '+enemyType.prototype.name);
+                    Game.showWarning(`Wave ${wave}: ${enemyType.prototype.name}`);
+                    wave++;
                 },interval*num++);
             });
             //Game win when time reach
@@ -587,7 +588,7 @@ var Levels=[
         # Infinite enemy number and unlimited upgrade level
         # Two different modes: easy and nightmare*/
         load:function(){
-            /*var isNightmare=confirm('Want challenge nightmare mode?');
+            /*let isNightmare=confirm('Want challenge nightmare mode?');
             if (!isNightmare){
                 //Make it easy
                 Hero.DevilHunter.prototype.HP=9999;
@@ -596,10 +597,10 @@ var Levels=[
                 Hero.DevilHunter.prototype.damage=50;
                 Hero.DevilHunter.prototype.isInvisible=true;
             }*/
-            var isNightmare=true;
+            let isNightmare=true;
             //Load map
             Map.setCurrentMap('Grass');
-            var mapSize=Map.getCurrentMap();
+            let mapSize=Map.getCurrentMap();
             Map.offsetX=(mapSize.width-Game.HBOUND)/2>>0;
             Map.offsetY=(mapSize.height-Game.VBOUND)/2>>0;
             //Apply race style
@@ -630,9 +631,9 @@ var Levels=[
                     Levels.refreshMagic();
                 }
                 //Upgrade your hunter
-                var curLevel=Levels.DevilHunter.kill/10>>0;
+                let curLevel=Levels.DevilHunter.kill/10>>0;
                 if (curLevel>Levels.DevilHunter.level){
-                    for (var N=0;N<curLevel-Levels.DevilHunter.level;N++){
+                    for (let N=0;N<curLevel-Levels.DevilHunter.level;N++){
                         //Upgraded
                         if (isNightmare){
                             Hero.DevilHunter.prototype.HP[0]+=100;
@@ -651,13 +652,13 @@ var Levels=[
             };
             //Random magics for hunter
             Levels.refreshMagic=function(){
-                var magics=["Parasite","SpawnBroodlings","Ensnare","DarkSwarm","Plague","StimPacks","Lockdown","NuclearStrike",
+                let magics=["Parasite","SpawnBroodlings","Ensnare","DarkSwarm","Plague","StimPacks","Lockdown","NuclearStrike",
                     "Restoration","OpticalFlare","DefensiveMatrix","EMPShockwave","Irradiate","Yamato","ScannerSweep","PsionicStorm",
                     "Hallucination","Feedback","MindControl","MaelStorm","Recall","StasisField","DisruptionWeb","RechargeShields"];
-                var items={};
-                for (var N=4;N<=9;N++){
+                let items={};
+                for (let N=4;N<=9;N++){
                     //Doesn't affect replay here
-                    var index=Math.random()*magics.length>>0;
+                    let index=Math.random()*magics.length>>0;
                     items[N]={name:magics[index]};
                     magics.splice(index,1);
                 }
@@ -673,29 +674,29 @@ var Levels=[
             },0);
             //Enemy coming
             Levels.enemyWave=function(){
-                var pos={team:1};
+                let pos={team:1};
                 _$.traverse([Neutral,Zerg,Terran,Protoss],function(enemyType){
                     pos.x=(Game.getNextRandom()*mapSize.width)>>0;
                     pos.y=(Game.getNextRandom()*mapSize.height)>>0;
-                    var enemy=new enemyType(pos);
+                    let enemy=new enemyType(pos);
                     if (enemy.attack){
                         enemy.attackLimit=null;
                     }
                 });
             };
-            for(var N=0;N<4;N++){
+            for(let N=0;N<4;N++){
                 Levels.enemyWave();
             }
             //Enemies will becomes stronger and stronger
             Game.commandInterval(function(){
                 Game.showWarning('Enemies become stronger!');
                 //Upgrade all grades for enemy
-                for (var grade in Upgrade){
+                for (let grade in Upgrade){
                     Upgrade[grade].effect(1);
                 }
             },isNightmare?90000:60000);
             //Baby hunter will talk every 30s
-            var speech=[
+            let speech=[
                 "What the hell is going on? Where am I?",
                 "This world is weird! There must be some mistake!",
                 "Hey, gloomyson, you sent me to the wrong game!",
@@ -709,12 +710,10 @@ var Levels=[
                 "Help me, Killua, Kurapika!",
                 "(T_T) cry~~~"
             ];
-            for (var N=0;N<speech.length;N++){
-                (function(n){
-                    Game.commandTimeout(function(){
-                        Game.showMessage('HunterBoy: '+speech[n],5000);
-                    },n*30000+10000);
-                })(N);
+            for (let N=0;N<speech.length;N++){
+                Game.commandTimeout(function(){
+                    Game.showMessage('HunterBoy: '+speech[N],5000);
+                },N*30000+10000);
             }
         }
     },
@@ -843,9 +842,9 @@ var Levels=[
             //Add our unit
             new Hero.Tassadar({x:3200,y:3072-Game.VBOUND/2}).magic=999;
             //Override win and lose condition
-            var killCount=0;//Closure
+            let killCount=0;//Closure
             Referee.winCondition=function(){
-                var kills=0;
+                let kills=0;
                 Building.ourBuildings().forEach(function(build){
                     if (build.kill) kills+=build.kill;
                 });
@@ -855,44 +854,43 @@ var Levels=[
                 }
                 return (wave>num && Unit.allEnemyUnits().length==0);
             };
-            var LIFE=20;
+            let LIFE=20;
             Referee.loseCondition=function(){
                 //Closure LIFE
-                Unit.allEnemyUnits().forEach(function(chara){
+                Unit.allEnemyUnits().forEach(chara=>{
                     if (chara.inside({centerX:2048,centerY:1536,radius:200})){
                         LIFE--;
-                        Game.showMessage('Remaining life: '+LIFE);
+                        Game.showMessage(`Remaining life: ${LIFE}`);
                         chara.die();
                     }
                 });
                 return (LIFE<=0);
             };
             //Enemy coming
-            var num=0, wave=1;
-            var interval=30000;//30 seconds per wave
+            let [num,wave]=[0,1];
+            let interval=30000;//30 seconds per wave
             _$.traverse([Neutral,Zerg,Terran,Protoss],function(enemyType){
                 Game.commandTimeout(function(){
-                    for (var N=0;N<15;N++){
-                        (function(n){
+                    for (let N=0;N<15;N++){
+                        Game.commandTimeout(function(){
+                            let enemy=new enemyType({x:3622,y:2916,team:1});
+                            //Focus on routing
+                            if (enemy.attack) enemy.attack=function(){
+                                this.targetLock=true;
+                            };
+                            //Enemies route
                             Game.commandTimeout(function(){
-                                var enemy=new enemyType({x:3622,y:2916,team:1});
-                                //Focus on routing
-                                if (enemy.attack) enemy.attack=function(){
-                                    this.targetLock=true;
-                                };
-                                //Enemies route
-                                Game.commandTimeout(function(){
-                                    enemy.targetLock=true;
-                                    enemy.destination={x:3622,y:280};
-                                    enemy.destination.next={x:422,y:280};
-                                    enemy.destination.next.next={x:422,y:2800};
-                                    enemy.destination.next.next.next={x:2100,y:2800};
-                                    enemy.destination.next.next.next.next={x:2100,y:1500};
-                                },0);
-                            },n*1000);
-                        })(N);
+                                enemy.targetLock=true;
+                                enemy.destination={x:3622,y:280};
+                                enemy.destination.next={x:422,y:280};
+                                enemy.destination.next.next={x:422,y:2800};
+                                enemy.destination.next.next.next={x:2100,y:2800};
+                                enemy.destination.next.next.next.next={x:2100,y:1500};
+                            },0);
+                        },N*1000);
                     }
-                    Game.showWarning('Wave '+ wave++ +': '+enemyType.prototype.name);
+                    Game.showWarning(`Wave ${wave}: ${enemyType.prototype.name}`);
+                    wave++;
                 },interval*num++);
             });
             //Game win when time reach
@@ -906,7 +904,7 @@ var Levels=[
         label:'Replay',
         load:function(){
             //Load replay
-            var lastReplay=localStorage.getItem('lastReplay');
+            let lastReplay=localStorage.getItem('lastReplay');
             if (lastReplay!=null){
                 Game.replayFlag=true;
                 //Map.fogFlag=false;
@@ -921,9 +919,9 @@ var Levels=[
                 Levels[lastReplay.level-1].load();
                 Game.replayLevel=lastReplay.level;
                 //Parse user moves
-                var recordCmds=lastReplay.cmds;
-                for (var tick in recordCmds){
-                    Multiplayer.parseTickCmd({tick:parseInt(tick),cmds:recordCmds[tick]});
+                let recordCmds=lastReplay.cmds;
+                for (let tick in recordCmds){
+                    Multiplayer.parseTickCmd({tick:Number.parseInt(tick),cmds:recordCmds[tick]});
                 }
                 //Replay ends
                 Game.endTick=lastReplay.end;

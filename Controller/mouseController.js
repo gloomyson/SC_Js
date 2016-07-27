@@ -11,17 +11,16 @@ var mouseController={
     },
     leftClick:function(event){
         //Mouse at (clickX,clickY)
-        var offset=$('#fogCanvas').offset();
-        var clickX=event.pageX-offset.left;
-        var clickY=event.pageY-offset.top;
+        let offset=$('#fogCanvas').offset();
+        let [clickX,clickY]=[event.pageX-offset.left,event.pageY-offset.top];
         //Intercept event inside infoBox
         if (clickY>Game.infoBox.y) return;
         //Selection mode
         if (Button.callback==null) {
             //Find selected one, convert position
-            var selectedOne=Game.getSelectedOne(clickX+Map.offsetX,clickY+Map.offsetY);
+            let selectedOne=Game.getSelectedOne(clickX+Map.offsetX,clickY+Map.offsetY);
             //Cannot select enemy invisible unit
-            if ((selectedOne instanceof Gobj) && selectedOne['isInvisible'+Game.team] && selectedOne.isEnemy()) return;
+            if ((selectedOne instanceof Gobj) && selectedOne[`isInvisible${Game.team}`] && selectedOne.isEnemy()) return;
             //Single select will unselect all units and only choose selected one
             //Multi select will keep selected status and do nothing
             if (!mouseController.isMultiSelect())
@@ -56,15 +55,14 @@ var mouseController={
     },
     rightClick:function(event,unlock,btn){
         //Mouse at (clickX,clickY)
-        var offset=$('#fogCanvas').offset();
-        var clickX=event.pageX-offset.left;
-        var clickY=event.pageY-offset.top;
+        let offset=$('#fogCanvas').offset();
+        let [clickX,clickY]=[event.pageX-offset.left,event.pageY-offset.top];
         //Intercept event inside infoBox
         if (clickY>Game.infoBox.y) return;
         //Show right click cursor
-        var pos={x:(clickX+Map.offsetX),y:(clickY+Map.offsetY)};
+        let pos={x:(clickX+Map.offsetX),y:(clickY+Map.offsetY)};
         new Burst.RightClickCursor(pos);
-        var charas=Game.allSelected.filter(function(chara){
+        let charas=Game.allSelected.filter(chara=>{
             //Can only control our alive unit
             return chara.team==Game.team && chara.status!="dead";
         });
@@ -81,8 +79,8 @@ var mouseController={
     },
     rightClickHandler:function(charas,pos,unlock,btn){
         //Find selected one or nothing
-        var selectedEnemy=(charas.length>0)?Game.getSelectedOne(pos.x,pos.y,charas[0].team.toString()):null;
-        charas.forEach(function(chara){
+        let selectedEnemy=(charas.length>0)?Game.getSelectedOne(pos.x,pos.y,charas[0].team.toString()):null;
+        charas.forEach(chara=>{
             //Sound effect
             if (!chara.isEnemy() && chara.sound.moving) chara.sound.moving.play();
             //Interrupt old destination routing
@@ -99,12 +97,12 @@ var mouseController={
                 Button.refreshButtons();
             }
             //Unit cannot attack will always choose move mode
-            var attackOrMove=(chara.attack)?(selectedEnemy instanceof Gobj):false;
+            let attackOrMove=(chara.attack)?(selectedEnemy instanceof Gobj):false;
             //Attack mode
             if (attackOrMove) {
                 if (chara.cannotMove() && !(chara.isInAttackRange(selectedEnemy))) return;
                 //Intercept invisible enemy
-                if (selectedEnemy['isInvisible'+Game.team]) {
+                if (selectedEnemy[`isInvisible${Game.team}`]) {
                     if (!chara.isEnemy()) Referee.voice.pError.play();
                     return;
                 }
@@ -134,7 +132,7 @@ var mouseController={
     dblClick:function(){
         //Multi select same type units
         if (!(Game.selectedUnit.isEnemy && Game.selectedUnit.isEnemy())) {
-            var charas=Unit.allUnits.filter(function(chara){
+            let charas=Unit.allUnits.filter(chara=>{
                 return !(chara.isEnemy()) && chara.insideScreen() && (chara.name==Game.selectedUnit.name);
             });
             Game.addIntoAllSelected(charas);
@@ -182,8 +180,8 @@ var mouseController={
                 }
                 if (!mouseController.down) {
                     //Mouse at (clickX,clickY)
-                    var clickX=event.pageX-$('#fogCanvas').offset().left;
-                    var clickY=event.pageY-$('#fogCanvas').offset().top;
+                    let clickX=event.pageX-$('#fogCanvas').offset().left;
+                    let clickY=event.pageY-$('#fogCanvas').offset().top;
                     mouseController.startPoint={x:clickX,y:clickY};
                     mouseController.down=true;
                 }
@@ -193,8 +191,8 @@ var mouseController={
                 event.preventDefault();
                 if (mouseController.down) {
                     //Mouse at (clickX,clickY)
-                    var clickX=event.pageX-$('#fogCanvas').offset().left;
-                    var clickY=event.pageY-$('#fogCanvas').offset().top;
+                    let clickX=event.pageX-$('#fogCanvas').offset().left;
+                    let clickY=event.pageY-$('#fogCanvas').offset().top;
                     mouseController.endPoint={x:clickX,y:clickY};
                     if (Math.abs(clickX-mouseController.startPoint.x)>5 &&
                         Math.abs(clickY-mouseController.startPoint.y)>5) {
@@ -225,8 +223,8 @@ var mouseController={
                 event.preventDefault();
                 //Drag rectangle
                 if (event.touches.length==2){
-                    var offsetX=$('#fogCanvas').offset().left;
-                    var offsetY=$('#fogCanvas').offset().top;
+                    let [offsetX,offsetY]=
+                        [$('#fogCanvas').offset().left,$('#fogCanvas').offset().top];
                     mouseController.drag=true;
                     mouseController.startPoint={x:event.touches[0].pageX-offsetX,y:event.touches[0].pageY-offsetY};
                     mouseController.endPoint={x:event.touches[1].pageX-offsetX,y:event.touches[1].pageY-offsetY};

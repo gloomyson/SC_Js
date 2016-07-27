@@ -1,6 +1,6 @@
 var Resource={
     init:function(){
-        for (var N=0;N<Game.playerNum;N++){
+        for (let N=0;N<Game.playerNum;N++){
             Resource[N]={
                 mine:50,
                 gas:0,
@@ -10,14 +10,12 @@ var Resource={
         }
     },
     getCost:function(name,team){
-        var cost,count;
+        let cost,count;
         if (!team) team=Game.team;
         [Zerg,Terran,Protoss,Building.ZergBuilding,Building.TerranBuilding,Building.ProtossBuilding,Magic,Upgrade].forEach(function(Type){
             //Not found yet
             if (!cost) {
-                for (var item in Type){
-                    //Filter out noise
-                    if (item=='inherited' || item=='super' || item=='extends') continue;
+                for (let item in Type){
                     if (item==name){
                         if (typeof(Type[item])=='function'){
                             cost=Type[item].prototype.cost;
@@ -49,9 +47,9 @@ var Resource={
     //Check if paid successfully
     paypal:function(cost){
         if (cost){
-            var oweFlag=false;
+            let oweFlag=false;
             if (Cheat.gathering) cost.magic=0;
-            var team=(this.team!=null)?this.team:Game.team;
+            let team=(this.team!=null)?this.team:Game.team;
             if(cost['mine'] && cost['mine']>Resource[team].mine){
                 oweFlag=true;
                 Game.showMessage('Not enough minerals...mine more minerals');
@@ -112,7 +110,7 @@ var Resource={
     },
     //Pay credit card bill
     payCreditBill:function(){
-        var cost=this.creditBill;
+        let cost=this.creditBill;
         //Paid credit bill, no longer owe money this time
         delete this.creditBill;
         return Resource.paypal.call(this,cost);

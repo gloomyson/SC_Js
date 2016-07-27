@@ -11,7 +11,7 @@ var Map={
     fogUnits:[],//Units need to draw fog on screen
     allUnits:[],//Units need to draw fog on minimap
     batchSize:0,//Draw fog by each batch
-    miniCxt:$('canvas[name="mini_map"]')[0].getContext('2d'),
+    miniCxt:document.querySelector('canvas[name="mini_map"]').getContext('2d'),
     fogCanvas:document.createElement('canvas'),
     miniFogCanvas:document.createElement('canvas'),
     shadowCanvas:document.createElement('canvas'),//Pre-render for fog shadow
@@ -33,7 +33,7 @@ var Map={
         Map.shadowCanvas.width=Map.shadowCanvas.height=100;
         Map.shadowCxt=Map.shadowCanvas.getContext('2d');
         //Prepared fog shadow for quick render
-        var radial=Map.shadowCxt.createRadialGradient(50,50,25,50,50,50);
+        let radial=Map.shadowCxt.createRadialGradient(50,50,25,50,50,50);
         radial.addColorStop(0,'rgba(0,0,0,1)');
         radial.addColorStop(1,'rgba(0,0,0,0)');
         Map.shadowCxt.fillStyle=radial;
@@ -44,10 +44,10 @@ var Map={
         Map.ready=true;
     },
     getCurrentMap:function(){
-        return sourceLoader.sources['Map_'+Map.currentMap];
+        return sourceLoader.sources[`Map_${Map.currentMap}`];
     },
     refreshFogs:function(immediate){
-        var N=immediate?1:10;
+        let N=immediate?1:10;
         //Initial if needed
         if (Map.refreshFogs.step==null){
             //Reset composite operation
@@ -57,25 +57,21 @@ var Map={
             Map.fogCxt.fillRect(0,0,Map.fogCanvas.width,Map.fogCanvas.height);
             Map.miniFogCxt.fillRect(0,0,130,130);
             //Other things have sight
-            var parasitedEnemies=Unit.allEnemyUnits().filter(function(chara){
-                return chara.buffer.Parasite==Game.team;
+            let parasitedEnemies=Unit.allEnemyUnits().filter(chara=>(chara.buffer.Parasite==Game.team));
+            let scannerSweeps=Burst.allEffects.filter(function(anime){
+                return anime.constructor.name=="ScannerSweep" && anime.team==Game.team;
             });
-            var scannerSweeps=Burst.allEffects.filter(function(anime){
-                return Animation.getName(anime)=="ScannerSweep" && anime.team==Game.team;
-            });
-            var addInObjs=parasitedEnemies.concat(scannerSweeps);
+            let addInObjs=parasitedEnemies.concat(scannerSweeps);
             //Clear fog
             Map.fogCxt.globalCompositeOperation=Map.miniFogCxt.globalCompositeOperation='destination-out';
             //Initial
-            Map.allUnits=Unit.allOurUnits().concat(Building.ourBuildings()).concat(addInObjs);
-            Map.fogUnits=Map.allUnits.filter(function(chara){
-                return chara.sightInsideScreen();
-            });
+            Map.allUnits=[...Unit.allOurUnits(),...Building.ourBuildings(),...addInObjs];
+            Map.fogUnits=Map.allUnits.filter(chara=>(chara.sightInsideScreen()));
             Map.batchSize=Math.ceil(Map.fogUnits.length/N);
             Map.refreshFogs.step=0;//Initial step
             Map.fogReady=false;
         }
-        var batchUnits=[];
+        let batchUnits=[];
         if (Map.fogUnits.length>Map.batchSize) {
             batchUnits=Map.fogUnits.slice(0,Map.batchSize);
             Map.fogUnits=Map.fogUnits.slice(Map.batchSize);
@@ -89,9 +85,8 @@ var Map={
         Map.fogCxt.fillStyle='rgba(0,0,0,1)';
         batchUnits.forEach(function(chara){
             //Clear fog on screen for our units inside screen
-            var centerX=chara.posX()-Map.offsetX;
-            var centerY=chara.posY()-Map.offsetY;
-            var radius=chara.get('sight')<<1;//*2
+            let [centerX,centerY,radius]=[(chara.posX()-Map.offsetX),
+                (chara.posY()-Map.offsetY),(chara.get('sight')<<1)];
             Map.fogCxt.drawImage(Map.shadowCanvas,0,0,100,100,centerX-radius,centerY-radius,radius<<1,radius<<1);
         });
         Map.refreshFogs.step++;
@@ -103,9 +98,9 @@ var Map={
         if (Map.fogReady){
             Map.allUnits.forEach(function(chara){
                 //Clear fog on mini-map for all our units
-                var offsetX=(chara.posX()*130/Map.getCurrentMap().width)>>0;
-                var offsetY=(chara.posY()*130/Map.getCurrentMap().height)>>0;
-                var sight=(chara.get('sight')*130/Map.getCurrentMap().height)>>0;
+                let offsetX=(chara.posX()*130/Map.getCurrentMap().width)>>0;
+                let offsetY=(chara.posY()*130/Map.getCurrentMap().height)>>0;
+                let sight=(chara.get('sight')*130/Map.getCurrentMap().height)>>0;
                 Map.miniFogCxt.beginPath();
                 Map.miniFogCxt.drawImage(Map.shadowCanvas,0,0,100,100,offsetX-(sight<<1),offsetY-(sight<<1),sight<<2,sight<<2);
             });
@@ -140,15 +135,14 @@ var Map={
     //Red-Green block and white stroke
     drawMiniMap:function(){
         //Selected map size
-        var mapWidth=Map.getCurrentMap().width;
-        var mapHeight=Map.getCurrentMap().height;
+        let [mapWidth,mapHeight]=[Map.getCurrentMap().width,Map.getCurrentMap().height];
         //Clear mini-map
         Map.miniCxt.clearRect(0,0,130,130);
         //Re-draw mini-map points
-        var miniX,miniY,rectSize;
-        Building.allBuildings.concat(Unit.allUnits).forEach(function(chara){
+        let miniX,miniY,rectSize;
+        [...Building.allBuildings,...Unit.allUnits].forEach(function(chara){
             //Filter out invisible enemy
-            if (chara['isInvisible'+Game.team] && chara.isEnemy()) return;
+            if (chara[`isInvisible${Game.team}`] && chara.isEnemy()) return;
             miniX=(130*chara.x/mapWidth)>>0;
             miniY=(130*chara.y/mapHeight)>>0;
             Map.miniCxt.fillStyle=(chara.isEnemy())?'red':'lime';
@@ -166,25 +160,22 @@ var Map={
         Map.miniCxt.strokeRect((130*Map.offsetX/mapWidth)>>0,(130*Map.offsetY/mapHeight)>>0,Map.insideStroke.width,Map.insideStroke.height);
     },
     drawMud:function(){
-        var _increments=[[0,1],[-1,0],[0,-1],[1,0]];
-        var mudRadius=120;
-        var mudIncrements=_$.mapTraverse(_increments,function(x){
-            return x*mudRadius/2;
-        });
+        let _increments=[[0,1],[-1,0],[0,-1],[1,0]];
+        let mudRadius=120;
+        let mudIncrements=_$.mapTraverse(_increments,x=>(x*mudRadius/2));
         Game.backCxt.save();
         Game.backCxt.beginPath();
         //Create fill style for mud
-        var mudPattern=Game.backCxt.createPattern(sourceLoader.sources['Mud'],"repeat");
+        let mudPattern=Game.backCxt.createPattern(sourceLoader.sources['Mud'],"repeat");
         Game.backCxt.fillStyle=mudPattern;
         Building.allBuildings.filter(function(chara){
             return (chara instanceof Building.ZergBuilding) && !chara.noMud && chara.insideScreen();
         }).forEach(function(chara){
-            var centerX=chara.posX()-Map.offsetX;
-            var centerY=chara.posY()-Map.offsetY;
-            var pos=[centerX+mudRadius,centerY-mudRadius];
+            let [centerX,centerY]=[(chara.posX()-Map.offsetX),(chara.posY()-Map.offsetY)];
+            let pos=[centerX+mudRadius,centerY-mudRadius];
             Game.backCxt.moveTo(pos[0],pos[1]);
-            for(var M=0,angle=-Math.PI/4;M<4;M++,angle+=Math.PI/2){
-                for(var N=0;N<5;N++){
+            for(let M=0,angle=-Math.PI/4;M<4;M++,angle+=Math.PI/2){
+                for(let N=0;N<5;N++){
                     Game.backCxt.arc(pos[0],pos[1],mudRadius/4,angle,angle+Math.PI/2);
                     if (N<4) {
                         pos[0]+=mudIncrements[M][0];
@@ -211,9 +202,9 @@ var Map={
         Map.drawMud();
     },
     refresh:function(direction){
-        var edgeX=Map.getCurrentMap().width-Game.HBOUND;
-        var edgeY=Map.getCurrentMap().height-Game.VBOUND+Game.infoBox.height-5;
-        var onlyMap;
+        let edgeX=Map.getCurrentMap().width-Game.HBOUND;
+        let edgeY=Map.getCurrentMap().height-Game.VBOUND+Game.infoBox.height-5;
+        let onlyMap;
         switch (direction){
             case "LEFT":
                 Map.offsetX-=Map.speed;
@@ -241,18 +232,17 @@ var Map={
     },
     clickHandler:function(event){
         //Mouse at (clickX,clickY)
-        var clickX=event.pageX-$('canvas[name="mini_map"]').offset().left;
-        var clickY=event.pageY-$('canvas[name="mini_map"]').offset().top;
+        let clickX=event.pageX-$('canvas[name="mini_map"]').offset().left;
+        let clickY=event.pageY-$('canvas[name="mini_map"]').offset().top;
         //Relocate map center
         Map.relocateAt(Map.getCurrentMap().width*clickX/130,Map.getCurrentMap().height*clickY/130);
     },
     dblClickHandler:function(event){
         //Mouse at (clickX,clickY)
-        var clickX=event.pageX-$('canvas[name="mini_map"]').offset().left;
-        var clickY=event.pageY-$('canvas[name="mini_map"]').offset().top;
+        let clickX=event.pageX-$('canvas[name="mini_map"]').offset().left;
+        let clickY=event.pageY-$('canvas[name="mini_map"]').offset().top;
         //Map (clickX,clickY) to position (mapX,mapY) on map
-        var mapX=Map.getCurrentMap().width*clickX/130;
-        var mapY=Map.getCurrentMap().height*clickY/130;
+        let [mapX,mapY]=[Map.getCurrentMap().width*clickX/130,Map.getCurrentMap().height*clickY/130];
         //Move selected units to (mapX,mapY)
         Unit.allUnits.filter(function(chara){
             return (chara.team==Game.team) && chara.selected;
@@ -264,13 +254,13 @@ var Map={
     },
     relocateAt:function(centerX,centerY){
         //Get map edge
-        var edgeX=Map.getCurrentMap().width-Game.HBOUND;
-        var edgeY=Map.getCurrentMap().height-Game.VBOUND+Game.infoBox.height-5;
+        let edgeX=Map.getCurrentMap().width-Game.HBOUND;
+        let edgeY=Map.getCurrentMap().height-Game.VBOUND+Game.infoBox.height-5;
         //Map (centerX,centerY) to position (offsetX,offsetY) on top-left in map
-        var offsetX=(centerX-Game.HBOUND/2)>>0;
+        let offsetX=(centerX-Game.HBOUND/2)>>0;
         if (offsetX<0) offsetX=0;
         if (offsetX>edgeX) offsetX=edgeX;
-        var offsetY=(centerY-(Game.VBOUND-Game.infoBox.height+5)/2)>>0;
+        let offsetY=(centerY-(Game.VBOUND-Game.infoBox.height+5)/2)>>0;
         if (offsetY<0) offsetY=0;
         if (offsetY>edgeY) offsetY=edgeY;
         //Relocate map

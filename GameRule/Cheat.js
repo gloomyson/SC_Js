@@ -15,7 +15,7 @@ var Cheat={
             else {
                 //Forbid cheating during replay
                 if (!Game.replayFlag){
-                    var cheatFlag=Cheat.execute($('input#cheatInput').val().toLowerCase());
+                    let cheatFlag=Cheat.execute($('input#cheatInput').val().toLowerCase());
                     if (cheatFlag) {
                         //Refresh control panel
                         Game.changeSelectedTo(Game.selectedUnit);
@@ -38,7 +38,7 @@ var Cheat={
     execute:function(cheatCode){
         //Forbid cheating when multiplayer mode
         if (Multiplayer.ON) return;
-        var cheatFlag=true;
+        let cheatFlag=true;
         switch (cheatCode){
             case "show me the money":
                 Resource[Game.team].mine+=10000;
@@ -56,12 +56,12 @@ var Cheat={
                 break;
             case "something for nothing":
                 //Upgrade all grades
-                for (var grade in Upgrade){
+                for (let grade in Upgrade){
                     Upgrade[grade].effect(Game.team);
                 }
                 break;
             case "full recovery":
-                Unit.allOurUnits().concat(Building.ourBuildings()).forEach(function(chara){
+                [...Unit.allOurUnits(),...Building.ourBuildings()].forEach(chara=>{
                     chara.life=chara.get('HP');
                     if (chara.SP) chara.shield=chara.get('SP');
                     if (chara.MP) chara.magic=chara.get('MP');
@@ -83,7 +83,7 @@ var Cheat={
                 break;
             case "power overwhelming":
                 if (Cheat.oldCalculateDamageBy){
-                    var tempCalculateDamageBy= $.extend([],Cheat.oldCalculateDamageBy);
+                    let tempCalculateDamageBy= $.extend([],Cheat.oldCalculateDamageBy);
                     Cheat.oldCalculateDamageBy=[Unit.prototype.calculateDamageBy,Building.prototype.calculateDamageBy];
                     Unit.prototype.calculateDamageBy=tempCalculateDamageBy[0];
                     Building.prototype.calculateDamageBy=tempCalculateDamageBy[1];
@@ -101,11 +101,11 @@ var Cheat={
                 }
                 break;
             case "big daddy":
-                var daddy=new Hero.HeroCruiser({x:Map.offsetX+Game.HBOUND/2,y:Map.offsetY+Game.VBOUND/2});
+                let daddy=new Hero.HeroCruiser({x:Map.offsetX+Game.HBOUND/2,y:Map.offsetY+Game.VBOUND/2});
                 Game.changeSelectedTo(daddy);
                 break;
             case "big mommy":
-                var mommy=new Hero.Sarah({x:Map.offsetX+Game.HBOUND/2,y:Map.offsetY+Game.VBOUND/2});
+                let mommy=new Hero.Sarah({x:Map.offsetX+Game.HBOUND/2,y:Map.offsetY+Game.VBOUND/2});
                 Game.changeSelectedTo(mommy);
                 break;
             case "game over man":
@@ -117,12 +117,12 @@ var Cheat={
                 Game.win();
                 break;
             case "fuck your mother":
-                Unit.allEnemyUnits().concat(Building.enemyBuildings()).forEach(function(chara){
+                [...Unit.allEnemyUnits(),...Building.enemyBuildings()].forEach(chara=>{
                     chara.die();
                 });
                 break;
             case "fuck my asshole":
-                Unit.allOurUnits().concat(Building.ourBuildings()).forEach(function(chara){
+                [...Unit.allOurUnits(),...Building.ourBuildings()].forEach(chara=>{
                     chara.die();
                 });
                 break;
@@ -131,7 +131,7 @@ var Cheat={
                 Referee.winCondition=Referee.loseCondition=function(){
                     return false;
                 };
-                Unit.allUnits.concat(Building.allBuildings).forEach(function(chara){
+                [...Unit.allUnits,...Building.allBuildings].forEach(chara=>{
                     chara.die();
                 });
                 break;

@@ -699,7 +699,7 @@ var Upgrade={
         },
         level:0,
         effect:function(team){
-            for (var unitType in Protoss){
+            for (let unitType in Protoss){
                 Protoss[unitType].prototype.plasma[team]+=1;
             }
             //New RPG level

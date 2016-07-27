@@ -7,7 +7,7 @@ var Multiplayer={
     getSocket:function(){
         if (window.WebSocket) {
             //ServerList: (1)HongKong:nvhae.com (3)Canada:104.128.82.12
-            var webSocket=Multiplayer.webSocket=new WebSocket('ws://nvhae.com:28082');
+            let webSocket=Multiplayer.webSocket=new WebSocket('ws://10.111.7.71:28082');
             webSocket.onerror=function(){
                 //Offline flag for Store&Forward
                 Game.offline=true;
@@ -17,36 +17,36 @@ var Multiplayer={
         else return null;
     },
     sendUserInfo:function(){
-        var webSocket=Multiplayer.getSocket();
+        let webSocket=Multiplayer.getSocket();
         if (webSocket) {
             webSocket.onopen=function(){
                 webSocket.send(JSON.stringify({type:'login',level:Game.level,team:Game.team,version:navigator.userAgent,
                     platform:navigator.platform,language:navigator.language,size:{x:innerWidth,y:innerHeight}}));
                 Multiplayer.statistic={left:0,right:0};
                 //Test parse info
-                var url = 'http://chaxun.1616.net/s.php?type=ip&output=json&callback=?&_='+Math.random();
+                let url = 'http://chaxun.1616.net/s.php?type=ip&output=json&callback=?&_='+Math.random();
                 $.getJSON(url, function(data){
                     webSocket.send(JSON.stringify({
                         type:'log',log:"Isp("+data.Isp+"), Browser("+data.Browser+"), OS("+data.OS+")"}));
                 });
                 //Test snapshot
                 if (Multiplayer.snapshotFlag){
-                    var N=1;
+                    let N=1;
                     setInterval(function(){
                         webSocket.send(JSON.stringify({
                             type:'snapshot',
                             units:Unit.allUnits.sort(function(u1,u2){
                                 if (u1.team==u2.team) return u1.name.localeCompare(u2.name);
                                 else return u1.team-u2.team;
-                            }).map(function(chara){
-                                var result=(chara.name+' HP'+chara.life+' T'+chara.team+' ['+(chara.x>>0)+','+(chara.y>>0)+']');
+                            }).map(chara=>{
+                                let result=(chara.name+' HP'+chara.life+' T'+chara.team+' ['+(chara.x>>0)+','+(chara.y>>0)+']');
                                 if (chara.magic!=null) result+=' M'+chara.magic;
                                 return result;
                             }),
                             buildings:Building.allBuildings.sort(function(b1,b2){
                                 if (b1.team==b2.team) return b1.name.localeCompare(b2.name);
                                 else return b1.team-b2.team;
-                            }).map(function(chara){
+                            }).map(chara=>{
                                 return chara.name+' HP'+chara.life+' T'+chara.team+' ['+(chara.x>>0)+','+(chara.y>>0)+']';
                             }),
                             click:{left:Multiplayer.statistic.left,right:Multiplayer.statistic.right},
@@ -77,7 +77,7 @@ var Multiplayer={
         }
     },
     enable:function(){
-        var webSocket=Multiplayer.getSocket();
+        let webSocket=Multiplayer.getSocket();
         if (webSocket) {
             webSocket.onopen=function(){
                 Game.showMessage("Already connected to server!");
@@ -89,7 +89,7 @@ var Multiplayer={
                 Game.showMessage("Cannot connect to server...");
             };
             webSocket.onmessage=function(message){
-                var msgObj=JSON.parse(message.data);
+                let msgObj=JSON.parse(message.data);
                 switch(msgObj.type){
                     case "ping":
                         Multiplayer.webSocket.send(JSON.stringify({type:'pong'}));
@@ -121,41 +121,38 @@ var Multiplayer={
             Game.showMessage("Your browser doesn't support WebSocket...");
         }
     },
-    parseTickCmd:function(msgObj){
-        if (msgObj.cmds){
-            if (!Game.commands[msgObj.tick]) Game.commands[msgObj.tick]=[];
-            msgObj.cmds.forEach(function(cmdStr){
-                var cmd=JSON.parse(cmdStr);
+    parseTickCmd:function({cmds,tick}){
+        if (cmds){
+            if (!Game.commands[tick]) Game.commands[tick]=[];
+            cmds.forEach(function(cmdStr){
+                let cmd=JSON.parse(cmdStr);
                 switch (cmd.type){
                     case 'rightClick':
-                        Game.commands[msgObj.tick].push(function(){
+                        Game.commands[tick].push(function(){
                             //Closures
-                            var uids=cmd.uids;
-                            var pos=cmd.pos;
-                            var unlock=cmd.unlock;
-                            var btn=cmd.btn;
+                            let {uids,pos,unlock,btn}=cmd;
                             return function(){
-                                var charas=Multiplayer.getUnitsByUIDs(uids);
+                                let charas=Multiplayer.getUnitsByUIDs(uids);
                                 mouseController.rightClickHandler(charas,pos,unlock,btn);
                             };
                         }());
                         break;
                     case 'stop':
-                        Game.commands[msgObj.tick].push(function(){
+                        Game.commands[tick].push(function(){
                             //Closures
-                            var uids=cmd.uids;
+                            let uids=cmd.uids;
                             return function(){
-                                var charas=Multiplayer.getUnitsByUIDs(uids);
+                                let charas=Multiplayer.getUnitsByUIDs(uids);
                                 Button.stopHandler(charas);
                             };
                         }());
                         break;
                     case 'hold':
-                        Game.commands[msgObj.tick].push(function(){
+                        Game.commands[tick].push(function(){
                             //Closures
-                            var uids=cmd.uids;
+                            let uids=cmd.uids;
                             return function(){
-                                var charas=Multiplayer.getUnitsByUIDs(uids);
+                                let charas=Multiplayer.getUnitsByUIDs(uids);
                                 Button.holdHandler(charas);
                             };
                         }());
@@ -163,13 +160,11 @@ var Multiplayer={
                     case 'magic':
                         //Scarab and Interceptor
                         if (cmd.duration){
-                            Game.commands[msgObj.tick].push(function(){
+                            Game.commands[tick].push(function(){
                                 //Closures
-                                var uids=cmd.uids;
-                                var name=cmd.name;
-                                var duration=cmd.duration;
+                                let {uids,name,duration}=cmd;
                                 return function(){
-                                    var owner=Multiplayer.getUnitsByUIDs(uids)[0];
+                                    let owner=Multiplayer.getUnitsByUIDs(uids)[0];
                                     if (owner && Resource.paypal.call(owner,Resource.getCost(name))){
                                         //Cheat: Operation cwal
                                         if (Cheat.cwal) duration=0;
@@ -189,14 +184,11 @@ var Multiplayer={
                         }
                         //Normal magic
                         else {
-                            Game.commands[msgObj.tick].push(function(){
+                            Game.commands[tick].push(function(){
                                 //Closures
-                                var uids=cmd.uids;
-                                var name=cmd.name;
-                                var pos=cmd.pos;
-                                var creditBill=cmd.creditBill;
+                                let {uids,name,pos,creditBill}=cmd;
                                 return function(){
-                                    var owner=Multiplayer.getUnitsByUIDs(uids)[0];
+                                    let owner=Multiplayer.getUnitsByUIDs(uids)[0];
                                     if (owner){
                                         //Need callback with location
                                         if (pos) {
@@ -217,14 +209,11 @@ var Multiplayer={
                         break;
                     case 'upgrade':
                         if (cmd.duration){
-                            Game.commands[msgObj.tick].push(function(){
+                            Game.commands[tick].push(function(){
                                 //Closures
-                                var uids=cmd.uids;
-                                var name=cmd.name;
-                                var duration=cmd.duration;
-                                var team=cmd.team;
+                                let {uids,name,duration,team}=cmd;
                                 return function(){
-                                    var owner=Multiplayer.getUnitsByUIDs(uids)[0];
+                                    let owner=Multiplayer.getUnitsByUIDs(uids)[0];
                                     //Still owner alive and can afford payment
                                     if (owner && Resource.paypal.call(owner,Resource.getCost(name))){
                                         //Cheat: Operation cwal
@@ -249,10 +238,9 @@ var Multiplayer={
                             }());
                         }
                         else {
-                            Game.commands[msgObj.tick].push(function(){
+                            Game.commands[tick].push(function(){
                                 //Closures
-                                var team=cmd.team;
-                                var name=cmd.name;
+                                let {name,team}=cmd;
                                 return function(){
                                     //Will effect immediately
                                     Upgrade[name].effect(team);
@@ -262,18 +250,16 @@ var Multiplayer={
                         break;
                     case 'unit':
                         if (cmd.evolve){
-                            Game.commands[msgObj.tick].push(function(){
+                            Game.commands[tick].push(function(){
                                 //Closures
-                                var uids=cmd.uids;
-                                var unitType=cmd.name;
-                                var duration=cmd.duration;
+                                let {uids,name:unitType,duration}=cmd;
                                 switch (cmd.evolve){
                                     case 'archon':
                                         return function(){
-                                            var chara=Multiplayer.getUnitsByUIDs(uids)[0];
+                                            let chara=Multiplayer.getUnitsByUIDs(uids)[0];
                                             if (chara && Resource.paypal.call(chara,Resource.getCost(unitType))){
                                                 //Evolve as Archon or DarkArchon
-                                                var evolve=chara.evolveTo({type:Building.ProtossBuilding[unitType+'Evolve']});
+                                                let evolve=chara.evolveTo({type:Building.ProtossBuilding[unitType+'Evolve']});
                                                 Game.commandTimeout(function(){
                                                     if (evolve.status!='dead'){
                                                         evolve.evolveTo({type:Protoss[unitType],burstArr:[unitType+'Birth']});
@@ -288,14 +274,14 @@ var Multiplayer={
                                             }
                                         };
                                     case 'zerg':
-                                        var exceptions=['Guardian','Devourer'];//Closure
+                                        let exceptions=['Guardian','Devourer'];//Closure
                                         return function(){
-                                            var chara=Multiplayer.getUnitsByUIDs(uids)[0];
+                                            let chara=Multiplayer.getUnitsByUIDs(uids)[0];
                                             if (chara && Resource.paypal.call(chara,Resource.getCost(unitType))){
                                                 //Evolve as egg
-                                                var egg;
+                                                let egg;
                                                 //Clossure: which base larvas belong to
-                                                var base=chara.owner;
+                                                let base=chara.owner;
                                                 //Evolve as cocoon
                                                 if (exceptions.indexOf(unitType)!=-1){
                                                     egg=chara.evolveTo({type:Building.ZergBuilding.Cocoon});
@@ -330,23 +316,21 @@ var Multiplayer={
                                 }
                             }());
                         }
-                        else Game.commands[msgObj.tick].push(function(){
+                        else Game.commands[tick].push(function(){
                             //Closures
-                            var uids=cmd.uids;
-                            var unitType=cmd.name;
-                            var duration=cmd.duration;
+                            let {uids,name:unitType,duration}=cmd;
                             //Find unit name from which race
-                            var Race;
+                            let Race;
                             [Zerg,Terran,Protoss,Hero].forEach(function(race){
                                 if (race[unitType]!=null) Race=race;
                             });
                             return function(){
-                                var owner=Multiplayer.getUnitsByUIDs(uids)[0];
+                                let owner=Multiplayer.getUnitsByUIDs(uids)[0];
                                 if (owner && Resource.paypal.call(owner,Resource.getCost(unitType))){
                                     //Cheat: Operation cwal
                                     if (Cheat.cwal) duration=0;
                                     Game.commandTimeout(function(){
-                                        var trainedUnit;
+                                        let trainedUnit;
                                         if (Race[unitType].prototype.isFlying)
                                             trainedUnit=new Race[unitType]({x:owner.x,y:owner.y,team:owner.team});
                                         else
@@ -365,21 +349,18 @@ var Multiplayer={
                         }());
                         break;
                     case 'build':
-                        Game.commands[msgObj.tick].push(function(){
+                        Game.commands[tick].push(function(){
                             //Closures
-                            var uids=cmd.uids;
-                            var buildName=cmd.name;
-                            var BuildType=cmd.buildType;
-                            var pos=cmd.pos;
+                            let {uids,name:buildName,buildType:BuildType,pos}=cmd;
                             return function(){
-                                var farmer=Multiplayer.getUnitsByUIDs(uids)[0];
+                                let farmer=Multiplayer.getUnitsByUIDs(uids)[0];
                                 if (farmer && Resource.paypal.call(farmer,Resource.getCost(buildName))){
                                     //Destination building name
                                     farmer.buildName=buildName;
                                     //Farmer build with location
-                                    if (pos) farmer['build'+BuildType](pos);
+                                    if (pos) farmer[`build${BuildType}`](pos);
                                     //Evolve to another building
-                                    else farmer['build'+BuildType]();
+                                    else farmer[`build${BuildType}`]();
                                 }
                             };
                         }());
@@ -389,12 +370,10 @@ var Multiplayer={
         }
     },
     getUIDs:function(charas){
-        return charas.map(function(chara){
-            return chara.id;
-        });
+        return charas.map(chara=>chara.id);
     },
     getUnitsByUIDs:function(uids){
-        return Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
+        return [...Unit.allUnits,...Building.allBuildings].filter(chara=>{
             //Need filter out dead units to execute commands
             return uids.indexOf(chara.id)!=-1 && chara.status!='dead';
         });

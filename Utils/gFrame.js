@@ -1,19 +1,19 @@
 //gFrame namespace: DOM selector function
 var _$=function(selector){
-    var selectors=selector.trim().split(' ');
-    var result=document;//Overall
-    for (var N=0;N<selectors.length;N++){
-        var curSelector=selectors[N];
-        var filter,filterIndex=curSelector.indexOf('[');
+    let selectors=selector.trim().split(' ');
+    let result=document;//Overall
+    for (let N=0;N<selectors.length;N++){
+        let curSelector=selectors[N];
+        let filter,filterIndex=curSelector.indexOf('[');
         if (filterIndex!=-1) {
             filter=curSelector.substring(filterIndex+1,curSelector.indexOf(']')).trim();
             curSelector=curSelector.substring(0,filterIndex);
         }
         if (curSelector.contains('#')) {
-            var id=curSelector.split('#')[1];
+            let id=curSelector.split('#')[1];
             if (result.length) {
-                var _result=[];
-                for (var M=0;M<result.length;M++){
+                let _result=[];
+                for (let M=0;M<result.length;M++){
                     _result.push(result[M].getElementById(id));
                 }
                 result=_result;
@@ -21,13 +21,12 @@ var _$=function(selector){
             else result=result.getElementById(id);
         }
         else {
-            var TagName=curSelector.contains('.')?curSelector.split('.')[0]:curSelector;
-            var className=curSelector.split('.')[1];
-            var tagResult, classResult;
+            let TagName=curSelector.contains('.')?curSelector.split('.')[0]:curSelector;
+            let [className,tagResult,classResult]=[curSelector.split('.')[1]];
             if (TagName){
                 if (result.length) {
-                    var _result=[];
-                    for (var M=0;M<result.length;M++){
+                    let _result=[];
+                    for (let M=0;M<result.length;M++){
                         _result=_result.concat(_$.toArray(result[M].getElementsByTagName(TagName)));
                     }
                     tagResult=_result;
@@ -36,8 +35,8 @@ var _$=function(selector){
             }
             if (className){
                 if (result.length) {
-                    var _result=[];
-                    for (var M=0;M<result.length;M++){
+                    let _result=[];
+                    for (let M=0;M<result.length;M++){
                         _result=_result.concat(_$.toArray(result[M].getElementsByClassName(className)));
                     }
                     classResult=_result;
@@ -57,15 +56,15 @@ var _$=function(selector){
         if (filter){
             //Attribute value filter
             if (filter.indexOf('=')!=-1){
-                var attr=filter.split('=')[0];
-                var val=eval(filter.split('=')[1]);
+                let attr=filter.split('=')[0];
+                let val=eval(filter.split('=')[1]);
                 result=result.filter(function(item){
                     return item.getAttribute(attr)==val;
                 });
             }
             //Has attribute filter
             else {
-                var attr=filter;
+                let attr=filter;
                 result=result.filter(function(item){
                     return item.getAttribute(attr)!=null;
                 });
@@ -76,9 +75,9 @@ var _$=function(selector){
 };
 
 String.prototype.contains=function(str){
-    //return this.search(str)!=-1;
     return this.indexOf(str)!=-1;
 };
+Object.defineProperty(String.prototype,'contains',{enumerable:false});
 
 window.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||
     mozRequestAnimationFrame || msRequestAnimationFrame || oRequestAnimationFrame;
@@ -88,9 +87,9 @@ window.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFram
 //Gobj is game object,initial by only one parameter props
 Function.prototype.extends=function(addInObject){
     //father call extends to produce child
-    var father=this;
+    let father=this;
     //Create child self as constructor function
-    var child=function(props){
+    let child=function(props){
         //If props==null, will throw errors during construction
         if (props){
             //Execute old constructor
@@ -100,28 +99,28 @@ Function.prototype.extends=function(addInObject){
         }
     };
     //Inherit prototype from father, clear redundant properties inside father constructor
-    var fatherClean=function(){};
-    fatherClean.prototype=father.prototype;
-    child.prototype=new fatherClean();
-    child.prototype.constructor=child;
     /*//We don't need properties constructed by {}, constructor not changed;
     child.prototype.__proto__=father.prototype;//__proto__ isn't supported by IE9 and IE10, IE11 supports*/
+    Object.setPrototypeOf(child.prototype,father.prototype);
     //Add new functions into child.prototype
-    for (var attr in addInObject.prototypePlus){
-        child.prototype[attr]=addInObject.prototypePlus[attr];
-    }
+    Object.assign(child.prototype,addInObject.prototypePlus);
+
     /*****Add super&inherited pointer for instance*****/
     //The upper constructor is super
     child.prototype.super=father;
+    Object.defineProperty(child.prototype,'super',{enumerable:false});
     //Behaviors including constructor are inherited by child, can find depreciated
     child.prototype.inherited=father.prototype;//Behavior always in prototype
+    Object.defineProperty(child.prototype,'inherited',{enumerable:false});
     /*****Generate super&inherited pointer link*****/
     child.super=father;
+    Object.defineProperty(child,'super',{enumerable:false});
     child.inherited=father.prototype;
-    //Below is constructor link:
-    //Mutalisk.constructor.(prototype.constructor).(prototype.constructor)
+    Object.defineProperty(child,'inherited',{enumerable:false});
+
     return child;
 };
+Object.defineProperty(Function.prototype,'extends',{enumerable:false});
 
 //Extend Audio
 Audio.prototype.playFromStart=function(){
@@ -129,6 +128,7 @@ Audio.prototype.playFromStart=function(){
     this.currentTime=0;
     this.play();
 };
+Object.defineProperty(Audio.prototype,'playFromStart',{enumerable:false});
 
 /**************** Add to _$ namespace *******************/
 
@@ -137,9 +137,9 @@ _$.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||
 
 _$.extends=function(fathers,addInObject){
     //Create child self as constructor function
-    var child=function(props){
+    let child=function(props){
         if (fathers instanceof Array){
-            var myself=this;
+            const myself=this;
             fathers.forEach(function(father){
                 father.call(myself,props);
             });
@@ -149,7 +149,7 @@ _$.extends=function(fathers,addInObject){
         else throw('_$.extends need array type parameter fathers!');
     };
     if (fathers.length>0){
-        var mixinProto=fathers[0].prototype;
+        let mixinProto=fathers[0].prototype;
         for (N=1;N<fathers.length;N++){
             //Mixin interfaces
             mixinProto=_$.delegate(mixinProto,fathers[N].prototype);
@@ -161,7 +161,7 @@ _$.extends=function(fathers,addInObject){
     }
     else {
         //Original method
-        for (var attr in addInObject.prototypePlus){
+        for (let attr in addInObject.prototypePlus){
             child.prototype[attr]=addInObject.prototypePlus[attr];
         }
     }
@@ -169,18 +169,15 @@ _$.extends=function(fathers,addInObject){
 };
 
 //_$.mixin == $.extend
-_$.mixin=function(){
-    switch (arguments.length){
+_$.mixin=function(...args){
+    switch (args.length){
         case 0:
             return {};
         default:
-            var dist=arguments[0];
-            for (var N=1;N<arguments.length;N++){
-                var addIn=arguments[N];
-                for (var attr in addIn){
-                    dist[attr]=addIn[attr];
-                }
-            }
+            let [dist,...addIns]=args;
+            addIns.forEach(addIn=>{
+                Object.assign(dist,addIn);
+            });
             return dist;
     }
 };
@@ -192,8 +189,8 @@ _$.copy=function(obj){
 //Full traverse copy, copy one level when ref=true
 _$.clone=function(obj,ref){
     //Auto detect obj/array
-    var dist=new obj.constructor();
-    for (var attr in obj){
+    let dist=new obj.constructor();
+    for (let attr in obj){
         //Cannot just assign pointer if it's object type
         if (typeof(obj[attr])=="object" && !ref) {
             dist[attr]=_$.clone(obj[attr]);
@@ -210,18 +207,18 @@ _$.templates={
     src:{},
     //register ?id as ?tempStr
     register:function(id,tempStr){
-        var tempObj={};
+        let tempObj={};
         tempObj.tempStr=tempStr;
         //Auto search for params
         tempObj.params=tempStr.match(/\${2}\w{1,}\${2}/g);// /RegExp/go,NoStop
         _$.templates.src[id]=tempObj;
     },
     //apply template ?id with ?values
-    applyOn: function(id,values) {
-        var valueArray=[].concat(values);//Convert to array
-        var src=_$.templates.src[id];//Get src template object
-        var result=src.tempStr;//Get original template
-        for (var N=0;N<Math.min(valueArray.length,src.params.length);N++){
+    applyOn:function(id,values) {
+        let valueArray=[].concat(values);//Convert to array
+        let src=_$.templates.src[id];//Get src template object
+        let result=src.tempStr;//Get original template
+        for (let N=0;N<Math.min(valueArray.length,src.params.length);N++){
             result=result.replace(src.params[N],valueArray[N]);
         }
         return result;
@@ -229,7 +226,7 @@ _$.templates={
 };
 
 _$.traverse=function(obj,func){
-    for (var attr in obj){
+    for (let attr in obj){
         if (typeof(obj[attr])=="object"){
             _$.traverse(obj[attr],func);
         }
@@ -241,7 +238,7 @@ _$.traverse=function(obj,func){
 };
 
 _$.matrixOperation=function(matrix,operation){
-    for (var attr in matrix){
+    for (let attr in matrix){
         if (typeof(matrix[attr])=="object"){//array or object
             _$.matrixOperation(matrix[attr],operation);
         }
@@ -253,7 +250,7 @@ _$.matrixOperation=function(matrix,operation){
 
 //Map traverse for array
 _$.mapTraverse=function(array,operation){
-    var operationTraverse=function(n){
+    let operationTraverse=function(n){
         if (n instanceof Array) return n.map(operationTraverse);
         else return operation(n);
     };
@@ -263,7 +260,7 @@ _$.mapTraverse=function(array,operation){
 //Array equals array
 _$.arrayEqual=function(arr1,arr2){
     if (arr1.length==arr2.length){
-        for (var n=0;n<arr1.length;n++){
+        for (let n=0;n<arr1.length;n++){
             //Content not same
             if (arr1[n]!=arr2[n]) return false;
         }
@@ -285,7 +282,7 @@ _$.sourceLoader={
         _$.sourceLoader.sourceNum++;
         _$.sourceLoader.allLoaded=false;
         //Type=="script"
-        var node=document.createElement('script');
+        let node=document.createElement('script');
         node.onload=function(){
             //Load builder
             _$.modules[pathName]=_$.define.loadedBuilders.shift();
@@ -302,7 +299,7 @@ _$.sourceLoader={
             _$.sourceLoader.allLoaded=true;
         }
     },
-    allOnLoad:function(callback){
+    allOnLoad:function(callback=function(){}){
         if (_$.sourceLoader.allLoaded) {
             callback();
         }
@@ -318,16 +315,16 @@ _$.instModule=function(name){
     //Add module instantiate stack
     _$.instModule.refStack.push(name);
     //Instantiate module constructor
-    var module=_$.modules[name];
+    let module=_$.modules[name];
     //Now instantiate builder function
     if (module._$isBuilder){
-        var refObjs=[];
+        let refObjs=[];
         if (module.refArr) {
             module.refArr.forEach(function(ref){
                 //Recursion instantiate
                 if (ref[0]=='=') {
                     //Closure
-                    var loc=ref.substr(1);
+                    let loc=ref.substr(1);
                     refObjs.push(function(){
                         return _$.modules[loc];
                     });
@@ -335,7 +332,7 @@ _$.instModule=function(name){
                 else {
                     if (_$.instModule.refStack.indexOf(ref)!=-1) {
                         //Auto detect loop reference
-                        throw 'Loop reference found: '+name+' --> '+ref;
+                        throw `Loop reference found: ${name} --> ${ref}`;
                     }
                     refObjs.push(_$.instModule(ref));
                 }
@@ -363,14 +360,14 @@ _$.define=function(refArr,builderFunc){
 };
 _$.define.loadedBuilders=[];
 //Run callback functions with module references
-_$.require=function(refArr,callback){
+_$.require=function(refArr,callback=()=>{}){
     refArr.forEach(function(ref){
         if (ref[0]=='=') return;
         //Recursion loading if that module not loaded
         if (!_$.modules[ref]) _$.sourceLoader.load(ref);
     });
     _$.sourceLoader.allOnLoad(function(){
-        var refObjs=[];
+        let refObjs=[];
         refArr.forEach(function(ref){
             //Recursion instantiate
             refObjs.push(_$.instModule(ref));
@@ -386,10 +383,10 @@ _$.declare=function(globalName,fathers,plusObj){
         globalName=null;
     }
     if (!fathers) fathers=[];
-    var constructPlus=plusObj.constructor;
+    let constructPlus=plusObj.constructor;
     delete plusObj.constructor;
-    var protoPlus=plusObj;
-    var child=_$.extends(fathers,{constructorPlus:constructPlus,prototypePlus:protoPlus});
+    let protoPlus=plusObj;
+    let child=_$.extends(fathers,{constructorPlus:constructPlus,prototypePlus:protoPlus});
     if (globalName) window[globalName]=child;
     return child;
 };
@@ -403,7 +400,7 @@ _$.subscribe=function(topic,callback){
 //Need add .owner on callback to identify who is subscriber
 _$.unSubscribe=function(topic,callback){
     if (_$.topic[topic] && _$.topic[topic].callbacks){
-        var index=_$.topic[topic].callbacks.indexOf(callback);
+        let index=_$.topic[topic].callbacks.indexOf(callback);
         _$.topic[topic].callbacks.splice(index,1);
     }
 };
@@ -417,7 +414,7 @@ _$.publish=function(topic,msgObj){
 
 //lang.delegate:cover with one proto layer
 _$.delegate=function(chara,bufferObj){
-    var func=function(){};
+    let func=function(){};
     func.prototype=chara;
     return _$.mixin(new func(),bufferObj);
 };
@@ -432,9 +429,22 @@ _$.hitch=function(func,thisP){
 
 //Convert array-like to real array
 _$.toArray=function(arr){
-    var result=[];
-    for (var N=0;N<arr.length;N++){
+    let result=[];
+    for (let N=0;N<arr.length;N++){
         result.push(arr[N]);
     }
     return result;
+};
+
+//Extension for ES6 class extends
+_$.protoProps=Symbol('protoProps');
+//Apply all protoProps onto target class prototype
+_$.classPatch=function(targetClass){
+    Object.assign(targetClass.prototype,targetClass[_$.protoProps]());
+    delete targetClass[_$.protoProps];
+};
+_$.classPackagePatch=function(targetObj){
+    for (let charaType of Object.keys(targetObj)){
+        _$.classPatch(targetObj[charaType]);
+    }
 };

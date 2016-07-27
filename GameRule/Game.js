@@ -12,10 +12,10 @@ var Game={
     playerNum:2,//By default
     teams:{},
     multiplayer:false,//By default
-    cxt:$('#middleCanvas')[0].getContext('2d'),
-    frontCxt:$('#frontCanvas')[0].getContext('2d'),
-    backCxt:$('#backCanvas')[0].getContext('2d'),
-    fogCxt:$('#fogCanvas')[0].getContext('2d'),
+    cxt:document.querySelector('#middleCanvas').getContext('2d'),
+    frontCxt:document.querySelector('#frontCanvas').getContext('2d'),
+    backCxt:document.querySelector('#backCanvas').getContext('2d'),
+    fogCxt:document.querySelector('#fogCanvas').getContext('2d'),
     _timer:-1,
     _frameInterval:100,
     mainTick:0,
@@ -51,8 +51,8 @@ var Game={
         //Sort allSelected by its name order
         Game.allSelected.sort(function(chara1,chara2){
             //Need sort building icon together
-            var name1=(chara1 instanceof Building)?(chara1.inherited.name+'.'+chara1.name):chara1.name;
-            var name2=(chara2 instanceof Building)?(chara2.inherited.name+'.'+chara2.name):chara2.name;
+            let name1=(chara1 instanceof Building)?`${chara1.portrait}.${chara1.name}`:chara1.name;
+            let name2=(chara2 instanceof Building)?`${chara2.portrait}.${chara2.name}`:chara2.name;
             return ([name1,name2].sort()[0]!=name1)?1:-1;
         });
         //Notify referee to redraw
@@ -60,13 +60,13 @@ var Game={
     },
     //To replace setTimeout
     commandTimeout:function(func,delay){
-        var dueTick=Game.mainTick+(delay/100>>0);
+        let dueTick=Game.mainTick+(delay/100>>0);
         if (!Game.commands[dueTick]) Game.commands[dueTick]=[];
         Game.commands[dueTick].push(func);
     },
     //To replace setInterval
     commandInterval:function(func,interval){
-        var funcAdjust=function(){
+        let funcAdjust=function(){
             func();
             Game.commandTimeout(funcAdjust,interval);
         };
@@ -81,7 +81,7 @@ var Game={
     },
     layerSwitchTo:function(layerName){
         $('div.GameLayer').hide();
-        $('#'+layerName).show(); //show('slow')
+        $(`#${layerName}`).show(); //show('slow')
     },
     init:function(){
         //Prevent full select
@@ -187,12 +187,9 @@ var Game={
             $('#GameLose').prepend(sourceLoader.sources['GameLose']);
             $('#GamePlay>canvas').attr('width',Game.HBOUND);//Canvas width adjust
             $('#GamePlay>canvas').attr('height',Game.VBOUND-Game.infoBox.height+5);//Canvas height adjust
-            for (var N=1;N<=9;N++){
-                $('div.panel_Control').append("<button num='"+N+"'></button>");
+            for (let N=1;N<=9;N++){
+                $('div.panel_Control').append(`<button num="${N}"></button>`);
             }
-            /*//Test image effect
-            AlloyImage(sourceLoader.sources['Wraith']).act("setHSI",100,0,0,false).replace(sourceLoader.sources['Wraith']);
-            AlloyImage(sourceLoader.sources['BattleCruiser']).act("setHSI",100,0,0,false).replace(sourceLoader.sources['BattleCruiser']);*/
             Game.start();
         })
     },
@@ -200,7 +197,7 @@ var Game={
         //Game start
         Game.layerSwitchTo("GameStart");
         //Init level selector
-        for (var level=1; level<=Levels.length; level++){
+        for (let level=1; level<=Levels.length; level++){
             $('.levelSelectionBg').append("<div class='levelItem'>" +
                 "<input type='radio' value='"+level+"' name='levelSelect'>"+
                 (Levels[level-1].label?(Levels[level-1].label):("Level "+level))
@@ -210,7 +207,7 @@ var Game={
         $('input[name="levelSelect"]').click(function(){
             //Prevent vibration
             if (Game.level!=null) return;
-            Game.level=parseInt(this.value);
+            Game.level=Number.parseInt(this.value);
             Game.play();
         });
     },
@@ -234,8 +231,8 @@ var Game={
         }
     },
     getPropArray:function(prop){
-        var result=[];
-        for (var N=0;N<Game.playerNum;N++){
+        let result=[];
+        for (let N=0;N<Game.playerNum;N++){
             result.push(typeof(prop)=='object'?(_$.clone(prop)):prop);
         }
         return result;
@@ -252,8 +249,8 @@ var Game={
                 }
             });
             if (unitType.prototype.isInvisible){
-                for (var N=0;N<Game.playerNum;N++){
-                    unitType.prototype['isInvisible'+N]=unitType.prototype.isInvisible;
+                for (let N=0;N<Game.playerNum;N++){
+                    unitType.prototype[`isInvisible${N}`]=unitType.prototype.isInvisible;
                 }
             }
             delete unitType.prototype.isInvisible;//No need anymore
@@ -269,7 +266,7 @@ var Game={
             unitType.upgrade=function(prop,value,team){
                 switch (team){
                     case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:
-                    eval('unitType.prototype.'+prop)[team]=value;
+                    eval(`unitType.prototype.${prop}`)[team]=value;
                     break;
                     default:
                         unitType.prototype[prop]=value;
@@ -283,15 +280,15 @@ var Game={
         Protoss.Reaver.prototype.scarabCapacity.shareFlag=true;
         Referee.underArbiterUnits=Game.getPropArray([]);
         Referee.detectedUnits=Game.getPropArray([]);
-        for (var N=0;N<Game.playerNum;N++){
+        for (let N=0;N<Game.playerNum;N++){
             //Initial detector buffer
-            var buffer={};
-            buffer['isInvisible'+N]=false;
+            let buffer={};
+            buffer[`isInvisible${N}`]=false;
             Gobj.detectorBuffer.push(buffer);
             //Initial arbiter buffer
-            Protoss.Arbiter.prototype.bufferObj['isInvisible'+N]=true;
+            Protoss.Arbiter.prototype.bufferObj[`isInvisible${N}`]=true;
         }
-        for (var grade in Upgrade){
+        for (let grade in Upgrade){
             if (Upgrade[grade].level!=null) {
                 Upgrade[grade].level=Game.getPropArray(Upgrade[grade].level);
             }
@@ -302,12 +299,12 @@ var Game={
         Game.teams[teamNum]=_$.mixin([],Game.allSelected);
     },
     callTeam:function(teamNum){
-        var team=_$.mixin([],Game.teams[teamNum]);
+        let team=_$.mixin([],Game.teams[teamNum]);
         //When team already exist
         if (team instanceof Array){
             Game.unselectAll();
             //GC
-            $.extend([],team).forEach(function(chara){
+            $.extend([],team).forEach(chara=>{
                 if (chara.status=='dead') team.splice(team.indexOf(chara),1);
             });
             Game.addIntoAllSelected(team,true);
@@ -322,18 +319,19 @@ var Game={
     },
     unselectAll:function(){
         //Unselect all
-        var units=Unit.allUnits.concat(Building.allBuildings);
-        units.forEach(function(chara){chara.selected=false});
+        [...Unit.allUnits,...Building.allBuildings].forEach(chara=>{
+            chara.selected=false
+        });
         Game.addIntoAllSelected([],true);
     },
     multiSelectInRect:function(){
         Game.unselectAll();
         //Multi select in rect
-        var startPoint={x:Map.offsetX+Math.min(mouseController.startPoint.x,mouseController.endPoint.x),
+        let startPoint={x:Map.offsetX+Math.min(mouseController.startPoint.x,mouseController.endPoint.x),
             y:Map.offsetY+Math.min(mouseController.startPoint.y,mouseController.endPoint.y)};
-        var endPoint={x:Map.offsetX+Math.max(mouseController.startPoint.x,mouseController.endPoint.x),
+        let endPoint={x:Map.offsetX+Math.max(mouseController.startPoint.x,mouseController.endPoint.x),
             y:Map.offsetY+Math.max(mouseController.startPoint.y,mouseController.endPoint.y)};
-        var inRectUnits=Unit.allOurUnits().filter(function(chara){
+        let inRectUnits=Unit.allOurUnits().filter(chara=>{
             return chara.insideRect({start:(startPoint),end:(endPoint)})
         });
         if (inRectUnits.length>0) Game.changeSelectedTo(inRectUnits[0]);
@@ -341,11 +339,11 @@ var Game={
         Game.addIntoAllSelected(inRectUnits,true);
     },
     getSelectedOne:function(clickX,clickY,isEnemyFilter,unitBuildingFilter,isFlyingFilter,customFilter){
-        var distance=function(chara){
+        let distance=function(chara){
             return (clickX-chara.posX())*(clickX-chara.posX())+(clickY-chara.posY())*(clickY-chara.posY());//Math.pow2
         };
         //Initial
-        var selectedOne={},charas=[];
+        let selectedOne={},charas=[];
         switch (unitBuildingFilter){
             case true:
                 charas=Unit.allUnits;
@@ -354,35 +352,27 @@ var Game={
                 charas=Building.allBuildings;
                 break;
             default:
-                charas=Unit.allUnits.concat(Building.allBuildings);
+                charas=[...Unit.allUnits,...Building.allBuildings];
         }
         switch (isEnemyFilter){
             case true:case false:
-                charas=charas.filter(function(chara){
-                    return chara.isEnemy()==isEnemyFilter;
-                });
+                charas=charas.filter(chara=>(chara.isEnemy()==isEnemyFilter));
                 break;
             case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:
-                charas=charas.filter(function(chara){
-                    return chara.team==isEnemyFilter;
-                });
+                charas=charas.filter(chara=>(chara.team==isEnemyFilter));
                 break;
             case '0':case '1':case '2':case '3':case '4':case '5':case '6':case '7':
-                charas=charas.filter(function(chara){
-                    return chara.team!=isEnemyFilter;
-                });
+                charas=charas.filter(chara=>(chara.team!=isEnemyFilter));
         }
         if (isFlyingFilter!=null) {
-            charas=charas.filter(function(chara){
-                return chara.isFlying==isFlyingFilter;
-            });
+            charas=charas.filter(chara=>(chara.isFlying==isFlyingFilter));
         }
         //customFilter is filter function
         if (customFilter!=null){
             charas=charas.filter(customFilter);
         }
         //Find nearest one
-        selectedOne=charas.filter(function(chara){
+        selectedOne=charas.filter(chara=>{
             return chara.status!='dead' && chara.includePoint(clickX,clickY);
         }).sort(function(chara1,chara2){
             return distance(chara1)-distance(chara2);
@@ -392,7 +382,7 @@ var Game={
     },
     getInRangeOnes:function(clickX,clickY,range,isEnemyFilter,unitBuildingFilter,isFlyingFilter,customFilter){
         //Initial
-        var selectedOnes=[],charas=[];
+        let selectedOnes=[],charas=[];
         switch (unitBuildingFilter){
             case true:
                 charas=Unit.allUnits;
@@ -401,44 +391,34 @@ var Game={
                 charas=Building.allBuildings;
                 break;
             default:
-                charas=Unit.allUnits.concat(Building.allBuildings);
+                charas=[...Unit.allUnits,...Building.allBuildings];
         }
         switch (isEnemyFilter){
             case true:case false:
-                charas=charas.filter(function(chara){
-                    return chara.isEnemy()==isEnemyFilter;
-                });
+                charas=charas.filter(chara=>(chara.isEnemy()==isEnemyFilter));
                 break;
             case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:
-                charas=charas.filter(function(chara){
-                    return chara.team==isEnemyFilter;
-                });
+                charas=charas.filter(chara=>(chara.team==isEnemyFilter));
                 break;
             case '0':case '1':case '2':case '3':case '4':case '5':case '6':case '7':
-                charas=charas.filter(function(chara){
-                    return chara.team!=isEnemyFilter;
-                });
+                charas=charas.filter(chara=>(chara.team!=isEnemyFilter));
         }
         if (isFlyingFilter!=null) {
-            charas=charas.filter(function(chara){
-                return chara.isFlying==isFlyingFilter;
-            });
+            charas=charas.filter(chara=>(chara.isFlying==isFlyingFilter));
         }
         //customFilter is filter function
         if (customFilter!=null){
             charas=charas.filter(customFilter);
         }
         //Find in range ones
-        selectedOnes=charas.filter(function(chara){
+        selectedOnes=charas.filter(chara=>{
             return chara.status!='dead' && chara.insideSquare({centerX:clickX,centerY:clickY,radius:range});
         });
         return selectedOnes;
     },
     //For test use
     getSelected:function(){
-        return Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
-            return chara.selected;
-        });
+        return [...Unit.allUnits,...Building.allBuildings].filter(chara=>chara.selected);
     },
     showInfoFor:function(chara){
         //Show selected living unit info
@@ -446,14 +426,7 @@ var Game={
             //Display info
             $('div.panel_Info>div[class*="info"]').show();
             //Draw selected unit portrait
-            if (chara.portrait) $('div.infoLeft div[name="portrait"]')[0].className=chara.portrait;//Override portrait
-            else {
-                if (Game.selectedUnit instanceof Unit)
-                    $('div.infoLeft div[name="portrait"]')[0].className=Game.selectedUnit.name;
-                if (Game.selectedUnit instanceof Building)
-                    $('div.infoLeft div[name="portrait"]')[0].className=
-                        Game.selectedUnit.attack?Game.selectedUnit.inherited.inherited.name:Game.selectedUnit.inherited.name;
-            }
+            $('div.infoLeft div[name="portrait"]')[0].className=(chara.portrait)?chara.portrait:chara.name;
             //Show selected unit HP,SP and MP
             $('div.infoLeft span._Health')[0].style.color=Game.selectedUnit.lifeStatus();
             $('div.infoLeft span.life')[0].innerHTML=Game.selectedUnit.life>>0;
@@ -525,11 +498,10 @@ var Game={
                 $('div.infoCenter p.icons').hide();
             }
             //Draw upgraded
-            var upgraded=Game.selectedUnit.upgrade;
-            var team=Game.selectedUnit.team;
+            let {upgrade:upgraded,team}=Game.selectedUnit;
             if (upgraded){
-                for (var N=0;N<3;N++){
-                    var upgradeIcon=$('div.upgraded div[name="icon"]')[N];
+                for (let N=0;N<3;N++){
+                    let upgradeIcon=$('div.upgraded div[name="icon"]')[N];
                     upgradeIcon.innerHTML='';
                     upgradeIcon.style.display='none';
                     if (N<upgraded.length){
@@ -576,7 +548,7 @@ var Game={
         //Won't draw units outside screen
         if (!chara.insideScreen()) return;
         //Choose context
-        var cxt=((chara instanceof Unit) || (chara instanceof Building))?Game.cxt:Game.frontCxt;
+        let cxt=((chara instanceof Unit) || (chara instanceof Building))?Game.cxt:Game.frontCxt;
         //Draw shadow
         cxt.save();
         //cxt.shadowBlur=50;//Different blur level on Firefox and Chrome, bad performance
@@ -586,32 +558,25 @@ var Game={
         //Close shadow for burrowed
         if (chara.buffer.Burrow) cxt.shadowOffsetX=cxt.shadowOffsetY=0;
         //Draw invisible
-        if (chara['isInvisible'+Game.team]!=null){
-            cxt.globalAlpha=(chara.isEnemy() && chara['isInvisible'+Game.team])?0:0.5;
+        if (chara[`isInvisible${Game.team}`]!=null){
+            cxt.globalAlpha=(chara.isEnemy() && chara[`isInvisible${Game.team}`])?0:0.5;
             if (chara.burrowBuffer){
                 if (chara.isEnemy()){
-                    if (!chara['isInvisible'+Game.team]) cxt.globalAlpha=1;
+                    if (!chara[`isInvisible${Game.team}`]) cxt.globalAlpha=1;
                 }
                 else cxt.globalAlpha=1;
             }
         }
         //Draw unit or building
-        var imgSrc;
-        if (chara instanceof Building){
-            if (chara.source) imgSrc=sourceLoader.sources[chara.source];
-            else {
-                imgSrc=sourceLoader.sources[chara.attack?chara.inherited.inherited.name:chara.inherited.name];
-            }
-        }
+        let imgSrc;
+        if (chara instanceof Building) imgSrc=sourceLoader.sources[chara.source];
         //Unit, not building
         else imgSrc=sourceLoader.sources[chara.source?chara.source:chara.name];
         //Convert position
-        var charaX=(chara.x-Map.offsetX)>>0;
-        var charaY=(chara.y-Map.offsetY)>>0;
+        let [charaX,charaY]=[((chara.x-Map.offsetX)>>0),((chara.y-Map.offsetY)>>0)];
         //Same image in different directions
         if (chara.direction==undefined){
-            var _left=chara.imgPos[chara.status].left;
-            var _top=chara.imgPos[chara.status].top;
+            let {left:_left,top:_top}=chara.imgPos[chara.status];
             //Multiple actions status
             if (_left instanceof Array || _top instanceof Array){
                 cxt.drawImage(imgSrc,
@@ -627,8 +592,8 @@ var Game={
         }
         //Different image in different directions
         else{
-            var _left=chara.imgPos[chara.status].left[chara.direction];
-            var _top=chara.imgPos[chara.status].top[chara.direction];
+            let _left=chara.imgPos[chara.status].left[chara.direction];
+            let _top=chara.imgPos[chara.status].top[chara.direction];
             //Multiple actions status
             if (_left instanceof Array || _top instanceof Array){
                 cxt.drawImage(imgSrc,
@@ -656,8 +621,8 @@ var Game={
             //Draw HP bar and SP bar and magic bar
             cxt.globalAlpha=1;
             cxt.lineWidth=1;
-            var offsetY=-6-(chara.MP?5:0)-(chara.SP?5:0);
-            var lifeRatio=chara.life/chara.get('HP');
+            let offsetY=-6-(chara.MP?5:0)-(chara.SP?5:0);
+            let lifeRatio=chara.life/chara.get('HP');
             cxt.strokeStyle="black";
             if (chara.SP) {
                 //Draw HP and SP
@@ -689,21 +654,19 @@ var Game={
         //Won't draw units outside screen
         if (!chara.insideScreen()) return;
         //Choose context
-        var cxt=Game.frontCxt;
+        let cxt=Game.frontCxt;
         //Draw shadow
         cxt.save();
         //cxt.shadowBlur=50;//Different blur level on Firefox and Chrome, bad performance
         cxt.shadowOffsetX=(chara.isFlying)?5:3;
         cxt.shadowOffsetY=(chara.isFlying)?20:8;
         cxt.shadowColor="rgba(0,0,0,0.4)";
-        var imgSrc=sourceLoader.sources[chara.name];
+        let imgSrc=sourceLoader.sources[chara.name];
         //Convert position
-        var charaX=(chara.x-Map.offsetX)>>0;
-        var charaY=(chara.y-Map.offsetY)>>0;
-        var _left=chara.imgPos[chara.status].left;
-        var _top=chara.imgPos[chara.status].top;
+        let [charaX,charaY]=[((chara.x-Map.offsetX)>>0),((chara.y-Map.offsetY)>>0)];
+        let {left:_left,top:_top}=chara.imgPos[chara.status];
         //Will stretch effect if scale
-        var times=chara.scale?chara.scale:1;
+        let times=chara.scale?chara.scale:1;
         //Multiple actions status
         if (_left instanceof Array || _top instanceof Array){
             cxt.drawImage(imgSrc,
@@ -726,12 +689,10 @@ var Game={
         //Won't draw bullets outside screen
         if (!chara.insideScreen()) return;
         //Draw unit
-        var imgSrc=sourceLoader.sources[chara.name];
-        var _left=chara.imgPos[chara.status].left;
-        var _top=chara.imgPos[chara.status].top;
+        let imgSrc=sourceLoader.sources[chara.name];
+        let {left:_left,top:_top}=chara.imgPos[chara.status];
         //Convert position
-        var centerX=(chara.posX()-Map.offsetX)>>0;
-        var centerY=(chara.posY()-Map.offsetY)>>0;
+        let [centerX,centerY]=[((chara.posX()-Map.offsetX)>>0),((chara.posY()-Map.offsetY)>>0)];
         //Rotate canvas
         Game.frontCxt.save();
         //Rotate to draw bullet
@@ -765,7 +726,7 @@ var Game={
         //Update selected unit active info which need refresh
         if (Game.selectedUnit instanceof Gobj && Game.selectedUnit.status!="dead") {
             //Update selected unit life,shield and magic
-            var lifeRatio=Game.selectedUnit.life/Game.selectedUnit.get('HP');
+            let lifeRatio=Game.selectedUnit.life/Game.selectedUnit.get('HP');
             $('div.infoLeft span._Health')[0].style.color=((lifeRatio>0.7)?"green":(lifeRatio>0.3)?"yellow":"red");
             $('div.infoLeft span.life')[0].innerHTML=Game.selectedUnit.life>>0;
             if (Game.selectedUnit.SP) {
@@ -791,12 +752,12 @@ var Game={
     },
     drawProcessingBox:function(){
         //Show processing box if it's processing
-        var processing=Game.selectedUnit.processing;
+        let processing=Game.selectedUnit.processing;
         //Can disable this filter for testing
         if (processing && Game.selectedUnit.team==Game.team){
             $('div.upgrading div[name="icon"]')[0].className=processing.name;
-            //var percent=((new Date().getTime()-processing.startTime)/(processing.time)+0.5)>>0;
-            var percent=((Game.mainTick-processing.startTime)*100/(processing.time)+0.5)>>0;
+            //let percent=((new Date().getTime()-processing.startTime)/(processing.time)+0.5)>>0;
+            let percent=((Game.mainTick-processing.startTime)*100/(processing.time)+0.5)>>0;
             $('div.upgrading div[name="processing"] span')[0].innerHTML=percent;
             $('div.upgrading div[name="processing"] div.processedBar')[0].style.width=percent+'%';
             $('div.upgrading').attr('title',processing.name).show();
@@ -805,7 +766,7 @@ var Game={
             //Select nothing, show replay progress
             if (Game.replayFlag && Game.endTick>0){
                 $('div.upgrading div[name="icon"]')[0].className='Replay';
-                var percent=(Game.mainTick*100/(Game.endTick)+0.5)>>0;
+                let percent=(Game.mainTick*100/(Game.endTick)+0.5)>>0;
                 $('div.upgrading div[name="processing"] span')[0].innerHTML=percent;
                 $('div.upgrading div[name="processing"] div.processedBar')[0].style.width=percent+'%';
                 $('div.upgrading').attr('title','Replay Progress').show();
@@ -818,9 +779,9 @@ var Game={
         }
     },
     refreshMultiSelectBox:function(){
-        var divs=$('div.override div.multiSelection div');
+        let divs=$('div.override div.multiSelection div');
         //Only refresh border color on current multiSelect box
-        for (var n=0;n<divs.length;n++){
+        for (let n=0;n<divs.length;n++){
             divs[n].style.borderColor=Game.allSelected[n].lifeStatus();
         }
     },
@@ -829,11 +790,10 @@ var Game={
         $('div.override div.multiSelection')[0].innerHTML='';
         //Redraw all icons
         Game.allSelected.forEach(function(chara,N){
-            var node=document.createElement('div');
+            let node=document.createElement('div');
             node.setAttribute('name','portrait');
             //Override portrait
-            if (chara.portrait) node.className=chara.portrait;
-            else node.className=(chara instanceof Building)?(chara.attack?chara.inherited.inherited.name:chara.inherited.name):chara.name;
+            node.className=(chara.portrait)?chara.portrait:chara.name;
             node.title=chara.name;
             node.style.borderColor=chara.lifeStatus();
             node.onclick=function(){
@@ -846,25 +806,25 @@ var Game={
             };
             $('div.override div.multiSelection')[0].appendChild(node);
         });
-        var iconNum=$('div.override div.multiSelection div').length;
+        let iconNum=$('div.override div.multiSelection div').length;
         //Adjust width if unit icon space overflow
         $('div.override div.multiSelection').css('width',(iconNum>12?Math.ceil(iconNum/2)*55:330)+'px');
         //Adjust background position after added into DOM, nth starts from 1st(no 0th)
-        for (var n=1;n<=iconNum;n++){
-            var bgPosition=$('div.override div.multiSelection div:nth-child('+n+')').css('background-position');
+        for (let n=1;n<=iconNum;n++){
+            let bgPosition=$(`div.override div.multiSelection div:nth-child(${n})`).css('background-position');
             bgPosition=bgPosition.split(' ').map(function(pos){
-                return parseInt(pos)*0.75+'px';
+                return Number.parseInt(pos)*0.75+'px';
             }).join(' ');
-            $('div.override div.multiSelection div:nth-child('+n+')').css('background-position',bgPosition);
+            $(`div.override div.multiSelection div:nth-child(${n})`).css('background-position',bgPosition);
         }
     },
     animation:function(){
         Game.animation.loop=function(){
             //console.log('BeforeCommand:'+(new Date().getTime()));//test
             //Process due commands for current frame before drawing
-            var commands=Game.commands[Game.mainTick];
+            let commands=Game.commands[Game.mainTick];
             if (commands instanceof Array){
-                for (var N=0;N<commands.length;N++){
+                for (let N=0;N<commands.length;N++){
                     commands[N]();
                 }
                 delete Game.commands[Game.mainTick];
@@ -884,8 +844,8 @@ var Game={
                 Map.needRefresh=false;
             }
             //DrawLayer1: Show all buildings
-            for (var N=0;N<Building.allBuildings.length;N++){
-                var build=Building.allBuildings[N];
+            for (let N=0;N<Building.allBuildings.length;N++){
+                let build=Building.allBuildings[N];
                 //GC
                 if (build.status=="dead") {
                     Building.allBuildings.splice(N,1);
@@ -896,8 +856,8 @@ var Game={
                 Game.draw(build);
             }
             //DrawLayer2: Show all existed units
-            for (var N=0;N<Unit.allUnits.length;N++){
-                var chara=Unit.allUnits[N];
+            for (let N=0;N<Unit.allUnits.length;N++){
+                let chara=Unit.allUnits[N];
                 //GC
                 if (chara.status=="dead") {
                     Unit.allUnits.splice(N,1);
@@ -908,8 +868,8 @@ var Game={
                 Game.draw(chara);
             }
             //DrawLayer3: Draw all bullets
-            for (var N=0;N<Bullets.allBullets.length;N++){
-                var bullet=Bullets.allBullets[N];
+            for (let N=0;N<Bullets.allBullets.length;N++){
+                let bullet=Bullets.allBullets[N];
                 //GC
                 if (bullet.status=="dead" && bullet.used) {
                     Bullets.allBullets.splice(N,1);
@@ -919,8 +879,8 @@ var Game={
                 Game.drawBullet(bullet);
             }
             //DrawLayer4: Draw effects above units
-            for (var N=0;N<Burst.allEffects.length;N++){
-                var effect=Burst.allEffects[N];
+            for (let N=0;N<Burst.allEffects.length;N++){
+                let effect=Burst.allEffects[N];
                 //GC
                 if (effect.status=="dead" || (effect.target && effect.target.status=="dead")) {
                     Burst.allEffects.splice(N,1);
@@ -971,7 +931,7 @@ var Game={
                 Multiplayer.cmds=[];
             }
             //Postpone play frames and AI after drawing (consume time)
-            Building.allBuildings.concat(Unit.allUnits).concat(Bullets.allBullets).concat(Burst.allEffects).forEach(function(chara){
+            [...Building.allBuildings,...Unit.allUnits,...Bullets.allBullets,...Burst.allEffects].forEach(chara=>{
                 //Add this makes chara intelligent for attack
                 if (chara.AI) chara.AI();
                 //Judge reach destination
@@ -980,12 +940,12 @@ var Game={
                 chara.playFrames();
             });
             //Will invite Mr.Referee to make some judgments
-            Referee.tasks.forEach(function(task){
+            for (let task of Referee.tasks){
                 Referee[task]();
-            });
+            }
             //Release selected unit when unit died or is invisible enemy
             if (Game.selectedUnit instanceof Gobj){
-                if (Game.selectedUnit.status=="dead" || (Game.selectedUnit['isInvisible'+Game.team] && Game.selectedUnit.isEnemy())) {
+                if (Game.selectedUnit.status=="dead" || (Game.selectedUnit[`isInvisible${Game.team}`] && Game.selectedUnit.isEnemy())) {
                     Game.selectedUnit.selected=false;
                     Game.changeSelectedTo({});
                 }
@@ -1007,7 +967,7 @@ var Game={
         if (Game._timer==-1) Game._timer=setInterval(Game.animation.loop,Game._frameInterval);
     },
     stop:function(charas){
-        charas.forEach(function(chara){
+        charas.forEach(chara=>{
             chara.stop();
         });
         Game.stopAnimation();
@@ -1073,12 +1033,12 @@ var Game={
     },
     showMessage:function(){
         //Clossure timer
-        var _timer=0;
+        let _timer=0;
         return function(msg,interval){
             //Default interval
             if (!interval) interval=3000;
             //Show message for a period
-            $('div.message_Box').append('<p>'+msg+'</p>').show();
+            $('div.message_Box').append(`<p>${msg}</p>`).show();
             //Can show multiple lines together
             if (_timer) clearTimeout(_timer);
             //Hide message after a period
@@ -1090,12 +1050,12 @@ var Game={
     //Return from 0 to 0.99
     getNextRandom:(function(){
         //Clossure variable and function
-        var rands=[];
-        var getRands=function(){
+        let rands=[];
+        let getRands=function(){
             //Use current tick as seed
-            var seed=Game.mainTick+Game.randomSeed;
-            var rands=[];
-            for (var N=0;N<100;N++){
+            let seed=Game.mainTick+Game.randomSeed;
+            let rands=[];
+            for (let N=0;N<100;N++){
                 //Seed grows up in range 100
                 seed=(seed*21+3)%100;
                 rands.push(seed);
@@ -1132,12 +1092,12 @@ var Game={
         }
     },
     getCurrentTs:function(){
-        var now=new Date();
-        var formatNum=function(num){
-            if (num<10) return ('0'+num);
+        let now=new Date();
+        let formatNum=function(num){
+            if (num<10) return `0${num}`;
             else return num.toString();
         };
-        var timestamp=now.getFullYear()+'-'+formatNum(now.getMonth()+1)+'-'+formatNum(now.getDate())+' '
+        let timestamp=now.getFullYear()+'-'+formatNum(now.getMonth()+1)+'-'+formatNum(now.getDate())+' '
             +formatNum(now.getHours())+':'+formatNum(now.getMinutes())+':'+formatNum(now.getSeconds());
         return timestamp;
     },
@@ -1159,10 +1119,10 @@ var Game={
     },
     initIndexDB:function(){
         window.indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
-        var connect=indexedDB.open('StarCraftHTML5',1);
+        let connect=indexedDB.open('StarCraftHTML5',1);
         connect.onupgradeneeded=function(evt){
-            var db=evt.target.result;
-            var objStore=db.createObjectStore('Replays',{keyPath:'id',autoIncrement:true});
+            let db=evt.target.result;
+            let objStore=db.createObjectStore('Replays',{keyPath:'id',autoIncrement:true});
             objStore.createIndex('levelIndex','level',{unique:false});
             objStore.createIndex('teamIndex','team',{unique:false});
             objStore.createIndex('endIndex','end',{unique:false});
@@ -1173,10 +1133,10 @@ var Game={
         }
     },
     saveReplayIntoDB:function(){
-        var connect=indexedDB.open('StarCraftHTML5',1);
+        let connect=indexedDB.open('StarCraftHTML5',1);
         connect.onsuccess=function(evt){
-            var db=evt.target.result;
-            var objStore=db.transaction(['Replays'],'readwrite').objectStore('Replays');
+            let db=evt.target.result;
+            let objStore=db.transaction(['Replays'],'readwrite').objectStore('Replays');
             objStore.add({
                 level:Game.level,
                 team:Game.team,

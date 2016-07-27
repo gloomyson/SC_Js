@@ -6,8 +6,8 @@ var sourceLoader={
     load:function(type,src,id){
         sourceLoader.sourceNum++;
         sourceLoader.allLoaded=false;
-        var source;
-        var loaded=function(){
+        let source;
+        let loaded=function(){
             sourceLoader.loadedNum++;
             if(sourceLoader.loadedNum==sourceLoader.sourceNum){
                 sourceLoader.allLoaded=true;
@@ -28,7 +28,7 @@ var sourceLoader={
         }
         //For my Dojo: src==pathName
         if (type=='js'){
-            var node=document.createElement('script');
+            let node=document.createElement('script');
             node.onload=function(){
                 //Load builder
                 _$.modules[src]=_$.define.loadedBuilders.shift();
@@ -38,16 +38,16 @@ var sourceLoader={
             document.getElementsByTagName('head')[0].appendChild(node);
         }
     },
-    allOnLoad:function(callback){
-        if (sourceLoader.allLoaded) {
+    allOnLoad:function(callback=function(){}){
+        if (this.allLoaded) {
             callback();
         }
         else {
             //Show Load Process
             $('div.LoadedBlock').css('width',(Math.round(100*sourceLoader.loadedNum/sourceLoader.sourceNum)+"%"));
             //Recursion
-            setTimeout(function(){
-                sourceLoader.allOnLoad(callback);
+            setTimeout(()=>{
+                this.allOnLoad(callback);
             },100);
         }
     }
