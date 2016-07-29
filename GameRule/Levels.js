@@ -588,15 +588,6 @@ var Levels=[
         # Infinite enemy number and unlimited upgrade level
         # Two different modes: easy and nightmare*/
         load:function(){
-            /*let isNightmare=confirm('Want challenge nightmare mode?');
-            if (!isNightmare){
-                //Make it easy
-                Hero.DevilHunter.prototype.HP=9999;
-                Hero.DevilHunter.prototype.SP=9999;
-                Hero.DevilHunter.prototype.MP=999;
-                Hero.DevilHunter.prototype.damage=50;
-                Hero.DevilHunter.prototype.isInvisible=true;
-            }*/
             let isNightmare=true;
             //Load map
             Map.setCurrentMap('Grass');
@@ -696,25 +687,25 @@ var Levels=[
                 }
             },isNightmare?90000:60000);
             //Baby hunter will talk every 30s
-            let speech=[
-                "What the hell is going on? Where am I?",
-                "This world is weird! There must be some mistake!",
-                "Hey, gloomyson, you sent me to the wrong game!",
-                "I'm so scared! I want my mummy!",
-                "Let me out! I wanna go home! Plz!",
-                "You dare fool me? I'm blind not deaf!",
-                "Do you know who I am? My papa is GinBliz!",
-                "Let me out of here! Or I'll tell papa to sue you!",
-                "At least let me pass hunter exam and get license first!",
-                "Nen power, release!",
-                "Help me, Killua, Kurapika!",
-                "(T_T) cry~~~"
-            ];
-            for (let N=0;N<speech.length;N++){
-                Game.commandTimeout(function(){
-                    Game.showMessage('HunterBoy: '+speech[N],5000);
-                },N*30000+10000);
-            }
+            let saySomething=(function* (){
+                yield "What the hell is going on? Where am I?";
+                yield "This world is weird! There must be some mistake!";
+                yield "Hey, gloomyson, you sent me to the wrong game!";
+                yield "I'm so scared! I want my mummy!";
+                yield "Let me out! I wanna go home! Plz!";
+                yield "You dare fool me? I'm blind not deaf!";
+                yield "Do you know who I am? My papa is GinBliz!";
+                yield "Let me out of here! Or I'll tell papa to sue you!";
+                yield "At least let me pass hunter exam and get license first!";
+                yield "Nen power, release!";
+                yield "Help me, Killua, Kurapika!";
+                yield "(T_T) cry~~~";
+            })();
+            let speechTimer=setInterval(function(){
+                let {value:speech,done}=saySomething.next();
+                if (done) clearInterval(speechTimer);
+                else Game.showMessage(`HunterBoy: ${speech}`,5000);
+            },20000);
         }
     },
     {

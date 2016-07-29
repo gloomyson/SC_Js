@@ -278,8 +278,8 @@ var Game={
         Protoss.Carrier.prototype.interceptorCapacity.shareFlag=true;
         Protoss.Reaver.prototype.scarabCapacity=Game.getPropArray(Protoss.Reaver.prototype.scarabCapacity);
         Protoss.Reaver.prototype.scarabCapacity.shareFlag=true;
-        Referee.underArbiterUnits=Game.getPropArray([]);
-        Referee.detectedUnits=Game.getPropArray([]);
+        Referee.underArbiterUnits=Game.getPropArray(new Set());
+        Referee.detectedUnits=Game.getPropArray(new Set());
         for (let N=0;N<Game.playerNum;N++){
             //Initial detector buffer
             let buffer={};

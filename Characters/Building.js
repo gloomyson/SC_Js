@@ -641,10 +641,6 @@ Building.ZergBuilding.Hive=class Hive extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.CreepColony=class CreepColony extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     buildZergBuilding(){
         Building.ZergBuilding.Hatchery.prototype.buildZergBuilding.call(this);
     };
@@ -777,10 +773,6 @@ Building.ZergBuilding.SporeColony=class SporeColony extends Building.ZergBuildin
     };
 };
 Building.ZergBuilding.Extractor=class Extractor extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -809,10 +801,6 @@ Building.ZergBuilding.Extractor=class Extractor extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.SpawningPool=class SpawningPool extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -846,10 +834,6 @@ Building.ZergBuilding.SpawningPool=class SpawningPool extends Building.ZergBuild
     };
 };
 Building.ZergBuilding.EvolutionChamber=class EvolutionChamber extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -884,10 +868,6 @@ Building.ZergBuilding.EvolutionChamber=class EvolutionChamber extends Building.Z
     };
 };
 Building.ZergBuilding.HydraliskDen=class HydraliskDen extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -923,10 +903,6 @@ Building.ZergBuilding.HydraliskDen=class HydraliskDen extends Building.ZergBuild
     };
 };
 Building.ZergBuilding.Spire=class Spire extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     buildZergBuilding(){
         Building.ZergBuilding.Hatchery.prototype.buildZergBuilding.call(this);
     };
@@ -969,10 +945,6 @@ Building.ZergBuilding.Spire=class Spire extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.GreaterSpire=class GreaterSpire extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1006,10 +978,6 @@ Building.ZergBuilding.GreaterSpire=class GreaterSpire extends Building.ZergBuild
     };
 };
 Building.ZergBuilding.QueenNest=class QueenNest extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1045,10 +1013,6 @@ Building.ZergBuilding.QueenNest=class QueenNest extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.NydusCanal=class NydusCanal extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1081,10 +1045,6 @@ Building.ZergBuilding.NydusCanal=class NydusCanal extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.UltraliskCavern=class UltraliskCavern extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1119,10 +1079,6 @@ Building.ZergBuilding.UltraliskCavern=class UltraliskCavern extends Building.Zer
     };
 };
 Building.ZergBuilding.DefilerMound=class DefilerMound extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1158,10 +1114,6 @@ Building.ZergBuilding.DefilerMound=class DefilerMound extends Building.ZergBuild
     };
 };
 Building.ZergBuilding.InfestedBase=class InfestedBase extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1188,10 +1140,6 @@ Building.ZergBuilding.InfestedBase=class InfestedBase extends Building.ZergBuild
     };
 };
 Building.ZergBuilding.OvermindI=class OvermindI extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1213,10 +1161,6 @@ Building.ZergBuilding.OvermindI=class OvermindI extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.OvermindII=class OvermindII extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1239,10 +1183,6 @@ Building.ZergBuilding.OvermindII=class OvermindII extends Building.ZergBuilding{
 };
 
 Building.TerranBuilding.CommandCenter=class CommandCenter extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     buildTerranBuilding(){
         let target=Building.TerranBuilding[this.buildName];
         let construction=new (eval('Building.'+target.prototype.evolves[0].step))
@@ -1344,10 +1284,6 @@ Building.TerranBuilding.CommandCenter=class CommandCenter extends Building.Terra
     };
 };
 Building.TerranBuilding.SupplyDepot=class SupplyDepot extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1381,10 +1317,6 @@ Building.TerranBuilding.SupplyDepot=class SupplyDepot extends Building.TerranBui
     };
 };
 Building.TerranBuilding.Refinery=class Refinery extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1415,10 +1347,6 @@ Building.TerranBuilding.Refinery=class Refinery extends Building.TerranBuilding{
     };
 };
 Building.TerranBuilding.Barracks=class Hatchery extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1472,10 +1400,6 @@ Building.TerranBuilding.Barracks=class Hatchery extends Building.TerranBuilding{
     };
 };
 Building.TerranBuilding.EngineeringBay=class EngineeringBay extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1558,10 +1482,6 @@ Building.TerranBuilding.MissileTurret=class MissileTurret extends Building.Terra
     };
 };
 Building.TerranBuilding.Academy=class Academy extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1600,10 +1520,6 @@ Building.TerranBuilding.Academy=class Academy extends Building.TerranBuilding{
     };
 };
 Building.TerranBuilding.Bunker=class Bunker extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1639,10 +1555,6 @@ Building.TerranBuilding.Bunker=class Bunker extends Building.TerranBuilding{
     };
 };
 Building.TerranBuilding.Factory=class Factory extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     buildTerranBuilding(){
         Building.TerranBuilding.CommandCenter.prototype.buildTerranBuilding.call(this);
     };
@@ -1695,10 +1607,6 @@ Building.TerranBuilding.Factory=class Factory extends Building.TerranBuilding{
     };
 };
 Building.TerranBuilding.Starport=class Starport extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     buildTerranBuilding(){
         Building.TerranBuilding.CommandCenter.prototype.buildTerranBuilding.call(this);
     };
@@ -1771,10 +1679,6 @@ Building.TerranBuilding.Starport=class Starport extends Building.TerranBuilding{
     };
 };
 Building.TerranBuilding.ScienceFacility=class ScienceFacility extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     buildTerranBuilding(){
         Building.TerranBuilding.CommandCenter.prototype.buildTerranBuilding.call(this);
     };
@@ -1822,10 +1726,6 @@ Building.TerranBuilding.ScienceFacility=class ScienceFacility extends Building.T
     };
 };
 Building.TerranBuilding.Armory=class Armory extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1864,10 +1764,6 @@ Building.TerranBuilding.Armory=class Armory extends Building.TerranBuilding{
     };
 };
 Building.TerranBuilding.ComstatStation=class ComstatStation extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1905,10 +1801,6 @@ Building.TerranBuilding.ComstatStation=class ComstatStation extends Building.Ter
     };
 };
 Building.TerranBuilding.NuclearSilo=class NuclearSilo extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1945,10 +1837,6 @@ Building.TerranBuilding.NuclearSilo=class NuclearSilo extends Building.TerranBui
     };
 };
 Building.TerranBuilding.MachineShop=class MachineShop extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1988,10 +1876,6 @@ Building.TerranBuilding.MachineShop=class MachineShop extends Building.TerranBui
     };
 };
 Building.TerranBuilding.ControlTower=class ControlTower extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2029,10 +1913,6 @@ Building.TerranBuilding.ControlTower=class ControlTower extends Building.TerranB
     };
 };
 Building.TerranBuilding.PhysicsLab=class PhysicsLab extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2070,10 +1950,6 @@ Building.TerranBuilding.PhysicsLab=class PhysicsLab extends Building.TerranBuild
     };
 };
 Building.TerranBuilding.ConvertOps=class ConvertOps extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2113,10 +1989,6 @@ Building.TerranBuilding.ConvertOps=class ConvertOps extends Building.TerranBuild
     };
 };
 Building.TerranBuilding.CrashCruiser=class CrashCruiser extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2138,10 +2010,6 @@ Building.TerranBuilding.CrashCruiser=class CrashCruiser extends Building.TerranB
     };
 };
 Building.TerranBuilding.BigCannon=class BigCannon extends Building.TerranBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2164,10 +2032,6 @@ Building.TerranBuilding.BigCannon=class BigCannon extends Building.TerranBuildin
 };
 
 Building.ProtossBuilding.Nexus=class Nexus extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2199,10 +2063,6 @@ Building.ProtossBuilding.Nexus=class Nexus extends Building.ProtossBuilding{
     };
 };
 Building.ProtossBuilding.Pylon=class Pylon extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2231,10 +2091,6 @@ Building.ProtossBuilding.Pylon=class Pylon extends Building.ProtossBuilding{
     };
 };
 Building.ProtossBuilding.Assimilator=class Assimilator extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2261,10 +2117,6 @@ Building.ProtossBuilding.Assimilator=class Assimilator extends Building.ProtossB
     };
 };
 Building.ProtossBuilding.Gateway=class Gateway extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2310,10 +2162,6 @@ Building.ProtossBuilding.Gateway=class Gateway extends Building.ProtossBuilding{
     };
 };
 Building.ProtossBuilding.Forge=class Forge extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2387,10 +2235,6 @@ Building.ProtossBuilding.PhotonCannon=class PhotonCannon extends Building.Protos
     };
 };
 Building.ProtossBuilding.CyberneticsCore=class CyberneticsCore extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2422,10 +2266,6 @@ Building.ProtossBuilding.CyberneticsCore=class CyberneticsCore extends Building.
     };
 };
 Building.ProtossBuilding.ShieldBattery=class ShieldBattery extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2457,10 +2297,6 @@ Building.ProtossBuilding.ShieldBattery=class ShieldBattery extends Building.Prot
     };
 };
 Building.ProtossBuilding.RoboticsFacility=class RoboticsFacility extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2502,10 +2338,6 @@ Building.ProtossBuilding.RoboticsFacility=class RoboticsFacility extends Buildin
     };
 };
 Building.ProtossBuilding.StarGate=class StarGate extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2548,10 +2380,6 @@ Building.ProtossBuilding.StarGate=class StarGate extends Building.ProtossBuildin
     };
 };
 Building.ProtossBuilding.CitadelOfAdun=class CitadelOfAdun extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2582,10 +2410,6 @@ Building.ProtossBuilding.CitadelOfAdun=class CitadelOfAdun extends Building.Prot
     };
 };
 Building.ProtossBuilding.RoboticsSupportBay=class RoboticsSupportBay extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2619,10 +2443,6 @@ Building.ProtossBuilding.RoboticsSupportBay=class RoboticsSupportBay extends Bui
     };
 };
 Building.ProtossBuilding.FleetBeacon=class FleetBeacon extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2657,10 +2477,6 @@ Building.ProtossBuilding.FleetBeacon=class FleetBeacon extends Building.ProtossB
     };
 };
 Building.ProtossBuilding.TemplarArchives=class TemplarArchives extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2696,10 +2512,6 @@ Building.ProtossBuilding.TemplarArchives=class TemplarArchives extends Building.
     };
 };
 Building.ProtossBuilding.Observatory=class Observatory extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2731,10 +2543,6 @@ Building.ProtossBuilding.Observatory=class Observatory extends Building.ProtossB
     };
 };
 Building.ProtossBuilding.ArbiterTribunal=class ArbiterTribunal extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2768,10 +2576,6 @@ Building.ProtossBuilding.ArbiterTribunal=class ArbiterTribunal extends Building.
     };
 };
 Building.ProtossBuilding.TeleportGate=class TeleportGate extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2794,10 +2598,6 @@ Building.ProtossBuilding.TeleportGate=class TeleportGate extends Building.Protos
     };
 };
 Building.ProtossBuilding.Pyramid=class Pyramid extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2820,10 +2620,6 @@ Building.ProtossBuilding.Pyramid=class Pyramid extends Building.ProtossBuilding{
     };
 };
 Building.ProtossBuilding.TeleportPoint=class TeleportPoint extends Building.ProtossBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2948,10 +2744,6 @@ Building.ZergBuilding.MutationS=class MutationS extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.MutationM=class MutationM extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -2975,10 +2767,6 @@ Building.ZergBuilding.MutationM=class MutationM extends Building.ZergBuilding{
     };
 };
 Building.ZergBuilding.MutationL=class MutationL extends Building.ZergBuilding{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info

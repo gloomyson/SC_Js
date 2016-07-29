@@ -1153,10 +1153,6 @@ Zerg.Queen=class Queen extends Unit{
     };
 };
 Zerg.Broodling=class Broodling extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info

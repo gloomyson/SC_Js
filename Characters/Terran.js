@@ -125,10 +125,6 @@ Terran.SCV=class SCV extends AttackableUnit{
     };
 };
 Terran.Marine=class Marine extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     //Override
     dock(){
         //Use the same behavior
@@ -224,10 +220,6 @@ Terran.Marine=class Marine extends AttackableUnit{
     };
 };
 Terran.Firebat=class Firebat extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     //Override
     dock(){
         //Use the same behavior
@@ -329,10 +321,6 @@ Terran.Firebat=class Firebat extends AttackableUnit{
     };
 };
 Terran.Ghost=class Ghost extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     //Override
     dock(){
         //Use the same behavior
@@ -436,10 +424,6 @@ Terran.Ghost=class Ghost extends AttackableUnit{
     };
 };
 Terran.Medic=class Medic extends Unit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     //Override
     dock(){
         //Use the same behavior

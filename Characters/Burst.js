@@ -299,10 +299,6 @@ Burst.SmallFireSpark=class SmallFireSpark extends Burst{
     };
 };
 Burst.FireSpark=class FireSpark extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -327,17 +323,8 @@ Burst.FireSparkSound=class FireSparkSound extends Burst.FireSpark{
         //Has burst sound effect
         if (this.insideScreen()) new Audio('bgm/FireSpark.burst.wav').play();
     };
-    static [_$.protoProps](){
-        return {
-            //Nothing
-        }
-    };
 };
 Burst.LaserSpark=class LaserSpark extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -362,17 +349,8 @@ Burst.VultureSpark=class VultureSpark extends Burst.LaserSpark{
         //Has burst sound effect
         if (this.insideScreen()) new Audio('bgm/VultureSpark.burst.wav').play();
     };
-    static [_$.protoProps](){
-        return {
-            //Nothing
-        }
-    };
 };
 Burst.HydraSpark=class HydraSpark extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -392,10 +370,6 @@ Burst.HydraSpark=class HydraSpark extends Burst{
     };
 };
 Burst.CorsairCloud=class CorsairCloud extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -415,10 +389,6 @@ Burst.CorsairCloud=class CorsairCloud extends Burst{
     };
 };
 Burst.ArchonBurst=class ArchonBurst extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -462,10 +432,6 @@ Burst.DragoonBallBroken=class DragoonBallBroken extends Burst{
     };
 };
 Burst.ShootSpark=class ShootSpark extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -485,10 +451,6 @@ Burst.ShootSpark=class ShootSpark extends Burst{
     };
 };
 Burst.BlueShootSpark=class BlueShootSpark extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -508,10 +470,6 @@ Burst.BlueShootSpark=class BlueShootSpark extends Burst{
     };
 };
 Burst.SCVSpark=class SCVSpark extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -531,10 +489,6 @@ Burst.SCVSpark=class SCVSpark extends Burst{
     };
 };
 Burst.ProbeSpark=class ProbeSpark extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -627,10 +581,6 @@ Burst.InfestedBomb=class InfestedBomb extends Burst{
     };
 };
 Burst.ScourgeBomb=class ScourgeBomb extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -651,10 +601,6 @@ Burst.ScourgeBomb=class ScourgeBomb extends Burst{
 };
 
 Burst.SmallExplode=class SmallExplode extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -674,10 +620,6 @@ Burst.SmallExplode=class SmallExplode extends Burst{
     };
 };
 Burst.MiddleExplode=class MiddleExplode extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -697,10 +639,6 @@ Burst.MiddleExplode=class MiddleExplode extends Burst{
     };
 };
 Burst.BigExplode=class BigExplode extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -720,10 +658,6 @@ Burst.BigExplode=class BigExplode extends Burst{
     };
 };
 Burst.SmallBlueExplode=class SmallBlueExplode extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -743,10 +677,6 @@ Burst.SmallBlueExplode=class SmallBlueExplode extends Burst{
     };
 };
 Burst.MiddleBlueExplode=class MiddleBlueExplode extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -766,10 +696,6 @@ Burst.MiddleBlueExplode=class MiddleBlueExplode extends Burst{
     };
 };
 Burst.BigBlueExplode=class BigBlueExplode extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -815,10 +741,6 @@ Burst.ZergBuildingBurst=class ZergBuildingBurst extends Burst{
     };
 };
 Burst.TerranBuildingBurst=class TerranBuildingBurst extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -838,10 +760,6 @@ Burst.TerranBuildingBurst=class TerranBuildingBurst extends Burst{
     };
 };
 Burst.ProtossBuildingBurst=class ProtossBuildingBurst extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -861,10 +779,6 @@ Burst.ProtossBuildingBurst=class ProtossBuildingBurst extends Burst{
     };
 };
 Burst.HumanDeath=class HumanDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -884,10 +798,6 @@ Burst.HumanDeath=class HumanDeath extends Burst{
     };
 };
 Burst.MedicDeath=class MedicDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -907,10 +817,6 @@ Burst.MedicDeath=class MedicDeath extends Burst{
     };
 };
 Burst.SmallZergFlyingDeath=class SmallZergFlyingDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -930,10 +836,6 @@ Burst.SmallZergFlyingDeath=class SmallZergFlyingDeath extends Burst{
     };
 };
 Burst.BigZergFlyingDeath=class BigZergFlyingDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -953,10 +855,6 @@ Burst.BigZergFlyingDeath=class BigZergFlyingDeath extends Burst{
     };
 };
 Burst.DroneDeath=class DroneDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -976,10 +874,6 @@ Burst.DroneDeath=class DroneDeath extends Burst{
     };
 };
 Burst.ZerglingDeath=class ZerglingDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -999,10 +893,6 @@ Burst.ZerglingDeath=class ZerglingDeath extends Burst{
     };
 };
 Burst.HydraliskDeath=class HydraliskDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1022,10 +912,6 @@ Burst.HydraliskDeath=class HydraliskDeath extends Burst{
     };
 };
 Burst.LurkerDeath=class LurkerDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1045,10 +931,6 @@ Burst.LurkerDeath=class LurkerDeath extends Burst{
     };
 };
 Burst.UltraliskDeath=class UltraliskDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1068,10 +950,6 @@ Burst.UltraliskDeath=class UltraliskDeath extends Burst{
     };
 };
 Burst.DefilerDeath=class DefilerDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1091,10 +969,6 @@ Burst.DefilerDeath=class DefilerDeath extends Burst{
     };
 };
 Burst.BroodlingDeath=class BroodlingDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1114,10 +988,6 @@ Burst.BroodlingDeath=class BroodlingDeath extends Burst{
     };
 };
 Burst.LarvaDeath=class LarvaDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1137,10 +1007,6 @@ Burst.LarvaDeath=class LarvaDeath extends Burst{
     };
 };
 Burst.EggDeath=class EggDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1459,10 +1325,6 @@ Burst.DevourerBirth=class DevourerBirth extends Burst{
     };
 };
 Burst.SmallProtossDeath=class SmallProtossDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1482,10 +1344,6 @@ Burst.SmallProtossDeath=class SmallProtossDeath extends Burst{
     };
 };
 Burst.DragoonDeath=class DragoonDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1505,10 +1363,6 @@ Burst.DragoonDeath=class DragoonDeath extends Burst{
     };
 };
 Burst.TemplarDeath=class TemplarDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1528,10 +1382,6 @@ Burst.TemplarDeath=class TemplarDeath extends Burst{
     };
 };
 Burst.HallucinationDeath=class HallucinationDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1598,10 +1448,6 @@ Burst.DarkArchonBirth=class DarkArchonBirth extends Burst{
 };
 
 Burst.RagnasaurDeath=class RagnasaurDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1621,10 +1467,6 @@ Burst.RagnasaurDeath=class RagnasaurDeath extends Burst{
     };
 };
 Burst.RhynsdonDeath=class RhynsdonDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1644,10 +1486,6 @@ Burst.RhynsdonDeath=class RhynsdonDeath extends Burst{
     };
 };
 Burst.UrsadonDeath=class UrsadonDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1667,10 +1505,6 @@ Burst.UrsadonDeath=class UrsadonDeath extends Burst{
     };
 };
 Burst.BengalaasDeath=class BengalaasDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1690,10 +1524,6 @@ Burst.BengalaasDeath=class BengalaasDeath extends Burst{
     };
 };
 Burst.ScantidDeath=class ScantidDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1713,10 +1543,6 @@ Burst.ScantidDeath=class ScantidDeath extends Burst{
     };
 };
 Burst.KakaruDeath=class KakaruDeath extends Burst{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info

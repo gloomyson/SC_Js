@@ -444,7 +444,7 @@ var Magic={
                         //DarkSwarm animation, play hidden frames at first
                         new Animation.DarkSwarm({x:location.x,y:location.y}).action=6;
                         //Dynamic update targets every 1 second
-                        let targets=[];
+                        let targets=new Set();
                         //Full guard from distance
                         let bufferObj={
                             //Full guard from distance
@@ -463,10 +463,10 @@ var Magic={
                         //Dark swarm wave
                         let darkSwarm=function(){
                             //Clear old units buffer
-                            targets.forEach(chara=>{
+                            [...targets].forEach(chara=>{
                                 chara.removeBuffer(bufferObj);
                             });
-                            targets=[];
+                            targets.clear();
                             let darkSwarms=Burst.allEffects.filter(function(effect){
                                 return effect instanceof Animation.DarkSwarm;
                             });
@@ -475,11 +475,13 @@ var Magic={
                                 //Get targets inside all of swarms
                                 darkSwarms.forEach(function(swarm){
                                     //Update buffer on our ground units inside swarm
-                                    targets=targets.concat(Game.getInRangeOnes(swarm.posX(),swarm.posY(),[126*1.2>>0,94*1.2>>0],null,true,false));
+                                    let charas=Game.getInRangeOnes(swarm.posX(),swarm.posY(),[126*1.2>>0,94*1.2>>0],null,true,false);
+                                    charas.forEach(function(chara){
+                                        targets.add(chara);
+                                    });
                                 });
-                                $.unique(targets);
                                 //Effect
-                                targets.forEach(chara=>{
+                                [...targets].forEach(chara=>{
                                     //Guard from range-attack enemy
                                     chara.addBuffer(bufferObj);
                                 });
@@ -1192,11 +1194,11 @@ var Magic={
                         //PsionicStorm sound
                         if (anime.insideScreen()) new Audio('bgm/Magic.PsionicStorm.wav').play();
                         //PsionicStorm effect
-                        let targets=[];
+                        let targets=new Set();
                         Magic.PsionicStorm.speller=this;
                         //Psionic storm wave
                         let stormWave=function(){
-                            targets=[];
+                            targets.clear();
                             //Check if any psionic storm exist
                             let psionicStorms=Burst.allEffects.filter(function(effect){
                                 return effect instanceof Animation.PsionicStorm;
@@ -1205,11 +1207,13 @@ var Magic={
                                 //Get targets inside all of swarms
                                 psionicStorms.forEach(function(storm){
                                     //Update buffer on enemy units inside storm
-                                    targets=targets.concat(Game.getInRangeOnes(storm.posX(),storm.posY(),[94*1.2>>0,76*1.2>>0],null,true));
+                                    let charas=Game.getInRangeOnes(storm.posX(),storm.posY(),[94*1.2>>0,76*1.2>>0],null,true);
+                                    charas.forEach(function(chara){
+                                        targets.add(chara);
+                                    });
                                 });
-                                $.unique(targets);
                                 //Effect
-                                targets.forEach(chara=>{
+                                [...targets].forEach(chara=>{
                                     //Deal damage
                                     chara.getDamageBy(16);
                                     //Don't move, but will die if no life
@@ -1587,7 +1591,7 @@ var Magic={
                         //DisruptionWeb sound
                         if (anime.insideScreen()) new Audio('bgm/Magic.DisruptionWeb.wav').play();
                         //Dynamic update targets every 1 second
-                        let targets=[];
+                        let targets=new Set();
                         //Effect:Disable target attack
                         let bufferObj={
                             attack:function(){}
@@ -1595,10 +1599,10 @@ var Magic={
                         //Disruption web wave
                         let disruptionWeb=function(){
                             //Clear old units buffer
-                            targets.forEach(chara=>{
+                            [...targets].forEach(chara=>{
                                 chara.removeBuffer(bufferObj);
                             });
-                            targets=[];
+                            targets.clear();
                             let disruptionWebs=Burst.allEffects.filter(function(effect){
                                 return effect instanceof Animation.DisruptionWeb;
                             });
@@ -1607,11 +1611,13 @@ var Magic={
                                 //Get targets inside all of webs
                                 disruptionWebs.forEach(function(web){
                                     //Update buffer on enemy ground units inside web
-                                    targets=targets.concat(Game.getInRangeOnes(web.posX(),web.posY(),[76*1.2>>0,56*1.2>>0],null,true,false));
+                                    let charas=Game.getInRangeOnes(web.posX(),web.posY(),[76*1.2>>0,56*1.2>>0],null,true,false);
+                                    charas.forEach(function(chara){
+                                        targets.add(chara);
+                                    });
                                 });
-                                $.unique(targets);
                                 //Effect
-                                targets.forEach(chara=>{
+                                [...targets].forEach(chara=>{
                                     //Cannot attack
                                     if (chara.attack) {
                                         chara.stopAttack();

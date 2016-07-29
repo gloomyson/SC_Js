@@ -98,10 +98,6 @@ Protoss.Probe=class Probe extends AttackableUnit{
     };
 };
 Protoss.Zealot=class Zealot extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -189,10 +185,6 @@ Protoss.Zealot=class Zealot extends AttackableUnit{
     };
 };
 Protoss.Dragoon=class Dragoon extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -299,10 +291,6 @@ Protoss.Dragoon=class Dragoon extends AttackableUnit{
     };
 };
 Protoss.Templar=class Templar extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -419,10 +407,6 @@ Protoss.Templar=class Templar extends AttackableUnit{
     };
 };
 Protoss.DarkTemplar=class DarkTemplar extends AttackableUnit{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info

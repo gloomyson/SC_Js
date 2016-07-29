@@ -1,3 +1,24 @@
+Revision: 147
+Author: gloomyson
+Date: 16:42:32, 2016-7-29
+Message:
+1.Remove all constructor and protoProps with nothing added
+2.Use set to replace array at in-magic-area unit finding and arbiter/detector in-area unit finding
+3.Use generator function for hunter speech
+4.Mark classPatch and classPackagePatch as decorator
+----
+Modified : /StarCraftES6/Characters/Animation.js
+Modified : /StarCraftES6/Characters/Building.js
+Modified : /StarCraftES6/Characters/Burst.js
+Modified : /StarCraftES6/Characters/Magic.js
+Modified : /StarCraftES6/Characters/Protoss.js
+Modified : /StarCraftES6/Characters/Terran.js
+Modified : /StarCraftES6/Characters/Zerg.js
+Modified : /StarCraftES6/GameRule/Game.js
+Modified : /StarCraftES6/GameRule/Levels.js
+Modified : /StarCraftES6/GameRule/Referee.js
+Modified : /StarCraftES6/Utils/gFrame.js
+
 Revision: 146
 Author: gloomyson
 Date: 17:01:41, 2016-7-26

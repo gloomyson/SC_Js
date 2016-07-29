@@ -438,11 +438,15 @@ _$.toArray=function(arr){
 
 //Extension for ES6 class extends
 _$.protoProps=Symbol('protoProps');
-//Apply all protoProps onto target class prototype
+_$.levelUpProps=Symbol('levelUpProps');
+//Decorator: @classPatch
 _$.classPatch=function(targetClass){
-    Object.assign(targetClass.prototype,targetClass[_$.protoProps]());
-    delete targetClass[_$.protoProps];
+    if (targetClass[_$.protoProps]){
+        Object.assign(targetClass.prototype,targetClass[_$.protoProps]());
+        //delete targetClass[_$.protoProps];
+    }
 };
+//Decorator: @classPackagePatch
 _$.classPackagePatch=function(targetObj){
     for (let charaType of Object.keys(targetObj)){
         _$.classPatch(targetObj[charaType]);

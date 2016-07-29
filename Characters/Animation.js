@@ -1,10 +1,6 @@
 //Alias
 var Animation=Burst;
 Animation.RightClickCursor=class RightClickCursor extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -24,10 +20,6 @@ Animation.RightClickCursor=class RightClickCursor extends Animation{
     };
 };
 Animation.PsionicStorm=class PsionicStorm extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -49,10 +41,6 @@ Animation.PsionicStorm=class PsionicStorm extends Animation{
     };
 };
 Animation.Hallucination=class Hallucination extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -73,10 +61,6 @@ Animation.Hallucination=class Hallucination extends Animation{
     };
 };
 Animation.Consume=class Consume extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -98,10 +82,6 @@ Animation.Consume=class Consume extends Animation{
     };
 };
 Animation.StasisField=class StasisField extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -125,10 +105,6 @@ Animation.StasisField=class StasisField extends Animation{
     };
 };
 Animation.Lockdown=class Lockdown extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -151,10 +127,6 @@ Animation.Lockdown=class Lockdown extends Animation{
     };
 };
 Animation.DarkSwarm=class DarkSwarm extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -176,10 +148,6 @@ Animation.DarkSwarm=class DarkSwarm extends Animation{
     };
 };
 Animation.Plague=class Plague extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -200,10 +168,6 @@ Animation.Plague=class Plague extends Animation{
     };
 };
 Animation.PurpleEffect=class PurpleEffect extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -226,10 +190,6 @@ Animation.PurpleEffect=class PurpleEffect extends Animation{
     };
 };
 Animation.RedEffect=class RedEffect extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -252,10 +212,6 @@ Animation.RedEffect=class RedEffect extends Animation{
     };
 };
 Animation.GreenEffect=class GreenEffect extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -278,10 +234,6 @@ Animation.GreenEffect=class GreenEffect extends Animation{
     };
 };
 Animation.Ensnare=class Ensnare extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -302,10 +254,6 @@ Animation.Ensnare=class Ensnare extends Animation{
     };
 };
 Animation.ScannerSweep=class ScannerSweep extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -328,10 +276,6 @@ Animation.ScannerSweep=class ScannerSweep extends Animation{
     };
 };
 Animation.Feedback=class Feedback extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -353,10 +297,6 @@ Animation.Feedback=class Feedback extends Animation{
     };
 };
 Animation.HellFire=class HellFire extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -378,10 +318,6 @@ Animation.HellFire=class HellFire extends Animation{
     };
 };
 Animation.MindControl=class MindControl extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -403,10 +339,6 @@ Animation.MindControl=class MindControl extends Animation{
     };
 };
 Animation.RechargeShields=class RechargeShields extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -428,10 +360,6 @@ Animation.RechargeShields=class RechargeShields extends Animation{
     };
 };
 Animation.DisruptionWeb=class DisruptionWeb extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -453,10 +381,6 @@ Animation.DisruptionWeb=class DisruptionWeb extends Animation{
     };
 };
 Animation.DefensiveMatrix=class DefensiveMatrix extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -479,10 +403,6 @@ Animation.DefensiveMatrix=class DefensiveMatrix extends Animation{
     };
 };
 Animation.BlueShield=class BlueShield extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -505,10 +425,6 @@ Animation.BlueShield=class BlueShield extends Animation{
     };
 };
 Animation.MaelStorm=class MaelStorm extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -531,10 +447,6 @@ Animation.MaelStorm=class MaelStorm extends Animation{
     };
 };
 Animation.RedShield=class RedShield extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -557,10 +469,6 @@ Animation.RedShield=class RedShield extends Animation{
     };
 };
 Animation.BurningCircle=class BurningCircle extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -583,10 +491,6 @@ Animation.BurningCircle=class BurningCircle extends Animation{
     };
 };
 Animation.Irradiate=class Irradiate extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -609,10 +513,6 @@ Animation.Irradiate=class Irradiate extends Animation{
     };
 };
 Animation.Recall=class Recall extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -632,10 +532,6 @@ Animation.Recall=class Recall extends Animation{
     };
 };
 Animation.Ice=class Ice extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -658,10 +554,6 @@ Animation.Ice=class Ice extends Animation{
     };
 };
 Animation.EMPShockwave=class EMPShockwave extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -682,10 +574,6 @@ Animation.EMPShockwave=class EMPShockwave extends Animation{
     };
 };
 Animation.StasisFieldSpell=class StasisFieldSpell extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -705,10 +593,6 @@ Animation.StasisFieldSpell=class StasisFieldSpell extends Animation{
     };
 };
 Animation.MaelStormSpell=class MaelStormSpell extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -728,10 +612,6 @@ Animation.MaelStormSpell=class MaelStormSpell extends Animation{
     };
 };
 Animation.Restoration=class Restoration extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -753,10 +633,6 @@ Animation.Restoration=class Restoration extends Animation{
     };
 };
 Animation.Shockwave=class Shockwave extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -776,10 +652,6 @@ Animation.Shockwave=class Shockwave extends Animation{
     };
 };
 Animation.NuclearStrike=class NuclearStrike extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -801,10 +673,6 @@ Animation.NuclearStrike=class NuclearStrike extends Animation{
 };
 //Evolve related
 Animation.EvolveGroundUnit=class EvolveGroundUnit extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -824,10 +692,6 @@ Animation.EvolveGroundUnit=class EvolveGroundUnit extends Animation{
     };
 };
 Animation.EvolveFlyingUnit=class EvolveFlyingUnit extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -847,10 +711,6 @@ Animation.EvolveFlyingUnit=class EvolveFlyingUnit extends Animation{
     };
 };
 Animation.SmallMutationComplete=class SmallMutationComplete extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -870,10 +730,6 @@ Animation.SmallMutationComplete=class SmallMutationComplete extends Animation{
     };
 };
 Animation.MiddleMutationComplete=class MiddleMutationComplete extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -893,10 +749,6 @@ Animation.MiddleMutationComplete=class MiddleMutationComplete extends Animation{
     };
 };
 Animation.LargeMutationComplete=class LargeMutationComplete extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -916,10 +768,6 @@ Animation.LargeMutationComplete=class LargeMutationComplete extends Animation{
     };
 };
 Animation.ProtossBuildingComplete=class ProtossBuildingComplete extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -940,10 +788,6 @@ Animation.ProtossBuildingComplete=class ProtossBuildingComplete extends Animatio
 };
 //Damaged related
 Animation.RedFireL=class RedFireL extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -966,10 +810,6 @@ Animation.RedFireL=class RedFireL extends Animation{
     };
 };
 Animation.RedFireM=class RedFireM extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -991,10 +831,6 @@ Animation.RedFireM=class RedFireM extends Animation{
     };
 };
 Animation.RedFireR=class RedFireR extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1016,10 +852,6 @@ Animation.RedFireR=class RedFireR extends Animation{
     };
 };
 Animation.BlueFireL=class BlueFireL extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1041,10 +873,6 @@ Animation.BlueFireL=class BlueFireL extends Animation{
     };
 };
 Animation.BlueFireM=class BlueFireM extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1066,10 +894,6 @@ Animation.BlueFireM=class BlueFireM extends Animation{
     };
 };
 Animation.BlueFireR=class BlueFireR extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1091,10 +915,6 @@ Animation.BlueFireR=class BlueFireR extends Animation{
     };
 };
 Animation.BloodA=class BloodA extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1116,10 +936,6 @@ Animation.BloodA=class BloodA extends Animation{
     };
 };
 Animation.BloodB=class BloodB extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1141,10 +957,6 @@ Animation.BloodB=class BloodB extends Animation{
     };
 };
 Animation.BloodC=class BloodC extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info
@@ -1166,10 +978,6 @@ Animation.BloodC=class BloodC extends Animation{
     };
 };
 Animation.BloodD=class BloodD extends Animation{
-    constructor(props){
-        super(props);
-        //Nothing
-    };
     static [_$.protoProps](){
         return {
             //Add basic unit info

@@ -50,28 +50,29 @@ var Referee={
             Unit.allUnits.forEach(chara=>{
                 if (chara.name=='Arbiter') allArbiters[chara.team].push(chara);
             });
-            //Clear old units' Arbiter buffer
-            Referee.underArbiterUnits.forEach(function(charas){
-                charas.forEach(chara=>{
+            //Clear old units' Arbiter buffer and clear sets
+            Referee.underArbiterUnits.forEach(function(charaSets){
+                for (let chara of charaSets){
                     chara.removeBuffer(arbiterBuffer);
-                });
+                }
+                charaSets.clear();
             });
-            Referee.underArbiterUnits=Game.getPropArray([]);
             allArbiters.forEach(function(arbiters,N){
                 //Find new under arbiter units
                 arbiters.forEach(function(arbiter){
                     //Find targets: same team units inside Arbiter sight, exclude Arbiter
                     let targets=Game.getInRangeOnes(arbiter.posX(),arbiter.posY(),arbiter.get('sight'),N,
                         true,null,chara=>(arbiters.indexOf(chara)==-1));
-                    Referee.underArbiterUnits[N]=Referee.underArbiterUnits[N].concat(targets);
+                    targets.forEach(function(target){
+                        Referee.underArbiterUnits[N].add(target);
+                    });
                 });
-                $.unique(Referee.underArbiterUnits[N]);
             });
             //Arbiter buffer effect on these units
-            Referee.underArbiterUnits.forEach(function(charas){
-                charas.forEach(chara=>{
+            Referee.underArbiterUnits.forEach(function(charaSets){
+                for (let chara of charaSets){
                     chara.addBuffer(arbiterBuffer);
-                });
+                }
             });
         }
     },
@@ -85,30 +86,31 @@ var Referee={
             Unit.allUnits.forEach(chara=>{
                 if (chara.detector) allDetectors[chara.team].push(chara);
             });
-            //Clear old units detected buffer
-            Referee.detectedUnits.forEach(function(charas,team){
+            //Clear old units detected buffer and clear old sets
+            Referee.detectedUnits.forEach(function(charaSets,team){
                 //For each team
-                charas.forEach(chara=>{
+                for (let chara of charaSets){
                     chara.removeBuffer(detectorBuffer[team]);
-                });
+                }
+                charaSets.clear();
             });
-            Referee.detectedUnits=Game.getPropArray([]);
             allDetectors.forEach(function(detectors,N){
                 //Find new under detector units
                 detectors.forEach(function(detector){
                     //Find targets: enemy invisible units inside detector sight
                     let targets=Game.getInRangeOnes(detector.posX(),detector.posY(),detector.get('sight'),
                         N+'',true,null,chara=>(chara[`isInvisible${Game.team}`]));
-                    Referee.detectedUnits[N]=Referee.detectedUnits[N].concat(targets);
+                    targets.forEach(function(target){
+                        Referee.detectedUnits[N].add(target);
+                    });
                 });
-                $.unique(Referee.detectedUnits[N]);
             });
             //Detector buffer effect on these units
-            Referee.detectedUnits.forEach(function(charas,team){
+            Referee.detectedUnits.forEach(function(charaSets,team){
                 //For each team
-                charas.forEach(chara=>{
+                for (let chara of charaSets){
                     chara.addBuffer(detectorBuffer[team]);
-                });
+                }
             });
             //PurpleEffect, RedEffect and GreenEffect are also detector, override invisible
             Animation.allEffects.filter(function(effect){
