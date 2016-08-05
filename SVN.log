@@ -1,3 +1,15 @@
+Revision: 151
+Author: gloomyson
+Date: 17:19:42, 2016-8-5
+Message:
+Double check in to main branch from ES6 for #150:
+Change logic to improve fog drawing performance
+----
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/GameRule/Cheat.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Referee.js
+
 Revision: 142
 Author: gloomyson
 Date: 9:49:09, 2016-7-16

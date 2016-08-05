@@ -1117,8 +1117,6 @@ var Game={
         //Resize canvas
         $('#GamePlay>canvas').attr('width',Game.HBOUND);//Canvas width adjust
         $('#GamePlay>canvas').attr('height',Game.VBOUND-Game.infoBox.height+5);//Canvas height adjust
-        Map.fogCanvas.width=Game.HBOUND;
-        Map.fogCanvas.height=Game.VBOUND-Game.infoBox.height+5;
         //Resize panel_Info
         $('div.panel_Info')[0].style.width=((Game.HBOUND-295)+'px');
         if (Map.ready){
@@ -1128,7 +1126,7 @@ var Game={
             //Redraw background
             Map.drawBg();
             //Need re-calculate fog immediately
-            Map.drawFogsImmediate();
+            Map.drawFogAndMinimap();
         }
     },
     getCurrentTs:function(){

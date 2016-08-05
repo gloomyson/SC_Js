@@ -51,7 +51,7 @@ var Cheat={
                     //Clear old fog on screen
                     Game.fogCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
                     //Redraw mini-map
-                    Map.drawFogsImmediate();
+                    Map.drawFogAndMinimap();
                 }
                 break;
             case "something for nothing":

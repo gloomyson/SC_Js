@@ -291,7 +291,8 @@ var Referee={
         }
     },
     coverFog:function(){
-        Map.drawFogAndMinimap();
+        //No need to set interval as 1sec
+        if (Game.mainTick%10==0) Map.drawFogAndMinimap();
     },
     alterSelectionMode:function(){
         //GC after some user changes
