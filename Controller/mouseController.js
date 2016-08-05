@@ -1,13 +1,13 @@
-var mouseController={
+var MouseController={
     down:false,
     drag:false,
     startPoint:{x:0,y:0},
     endPoint:{x:0,y:0},
     isMultiSelect:function(){
-      return keyController.shift;
+      return KeyController.shift;
     },
     isJoinTeam:function(){
-        return keyController.ctrl;
+        return KeyController.ctrl;
     },
     leftClick:function(event){
         //Mouse at (clickX,clickY)
@@ -23,7 +23,7 @@ var mouseController={
             if ((selectedOne instanceof Gobj) && selectedOne[`isInvisible${Game.team}`] && selectedOne.isEnemy()) return;
             //Single select will unselect all units and only choose selected one
             //Multi select will keep selected status and do nothing
-            if (!mouseController.isMultiSelect())
+            if (!MouseController.isMultiSelect())
                 Game.unselectAll();
             //If has selected one
             if (selectedOne instanceof Gobj) {
@@ -145,12 +145,12 @@ var mouseController={
             //Mouse left click
             $('#fogCanvas')[0].onclick=function(event){
                 event.preventDefault();
-                if (mouseController.drag) {
+                if (MouseController.drag) {
                     //End drag, onclick triggered after onmouseup, don't do default left click action
-                    mouseController.drag=false;
+                    MouseController.drag=false;
                 }
                 else {
-                    mouseController.leftClick(event);
+                    MouseController.leftClick(event);
                 }
             };
             //Mouse right click
@@ -159,7 +159,7 @@ var mouseController={
                 event.preventDefault();
                 //Should not control units during replay
                 if (Game.replayFlag) return;
-                mouseController.rightClick(event);
+                MouseController.rightClick(event);
                 //Cancel pointer
                 $('div.GameLayer').removeAttr('status');
                 //Cancel callback
@@ -169,7 +169,7 @@ var mouseController={
             $('#fogCanvas')[0].ondblclick=function(event){
                 //Prevent screen select
                 event.preventDefault();
-                mouseController.dblClick();
+                MouseController.dblClick();
             };
             //Mouse click start
             $('#fogCanvas')[0].onmousedown=function(event){
@@ -178,25 +178,25 @@ var mouseController={
                 if (event.which === 3){
                     return;
                 }
-                if (!mouseController.down) {
+                if (!MouseController.down) {
                     //Mouse at (clickX,clickY)
                     let clickX=event.pageX-$('#fogCanvas').offset().left;
                     let clickY=event.pageY-$('#fogCanvas').offset().top;
-                    mouseController.startPoint={x:clickX,y:clickY};
-                    mouseController.down=true;
+                    MouseController.startPoint={x:clickX,y:clickY};
+                    MouseController.down=true;
                 }
             };
             //Mouse drag
             $('#fogCanvas')[0].onmousemove=function(event){
                 event.preventDefault();
-                if (mouseController.down) {
+                if (MouseController.down) {
                     //Mouse at (clickX,clickY)
                     let clickX=event.pageX-$('#fogCanvas').offset().left;
                     let clickY=event.pageY-$('#fogCanvas').offset().top;
-                    mouseController.endPoint={x:clickX,y:clickY};
-                    if (Math.abs(clickX-mouseController.startPoint.x)>5 &&
-                        Math.abs(clickY-mouseController.startPoint.y)>5) {
-                        mouseController.drag=true;
+                    MouseController.endPoint={x:clickX,y:clickY};
+                    if (Math.abs(clickX-MouseController.startPoint.x)>5 &&
+                        Math.abs(clickY-MouseController.startPoint.y)>5) {
+                        MouseController.drag=true;
                     }
                 }
             };
@@ -204,14 +204,14 @@ var mouseController={
             window.onmousemove=function(event){
                 event.preventDefault();
                 //Mouse at (clickX,clickY)
-                mouseController.mouseX=event.clientX;
-                mouseController.mouseY=event.clientY;
+                MouseController.mouseX=event.clientX;
+                MouseController.mouseY=event.clientY;
             };
             //Mouse click end
             $('#fogCanvas')[0].onmouseup=function(event){
                 event.preventDefault();
-                mouseController.down=false;
-                if (mouseController.drag) {
+                MouseController.down=false;
+                if (MouseController.drag) {
                     //Multi select inside rect
                     Game.multiSelectInRect();
                 }
@@ -225,51 +225,51 @@ var mouseController={
                 if (event.touches.length==2){
                     let [offsetX,offsetY]=
                         [$('#fogCanvas').offset().left,$('#fogCanvas').offset().top];
-                    mouseController.drag=true;
-                    mouseController.startPoint={x:event.touches[0].pageX-offsetX,y:event.touches[0].pageY-offsetY};
-                    mouseController.endPoint={x:event.touches[1].pageX-offsetX,y:event.touches[1].pageY-offsetY};
+                    MouseController.drag=true;
+                    MouseController.startPoint={x:event.touches[0].pageX-offsetX,y:event.touches[0].pageY-offsetY};
+                    MouseController.endPoint={x:event.touches[1].pageX-offsetX,y:event.touches[1].pageY-offsetY};
                 }
             };
             $('#fogCanvas')[0].ontouchend=function(event){
                 event.preventDefault();
-                if (mouseController.drag) {
+                if (MouseController.drag) {
                     //Multi select inside rect
                     Game.multiSelectInRect();
                     //End drag
-                    mouseController.drag=false;
+                    MouseController.drag=false;
                 }
             };
-            mouseController.mobileScreen=new Hammer(window);
-            mouseController.canvasScreen=new Hammer($('#fogCanvas')[0]);
-            mouseController.canvasScreen.on('tap',function(event){
+            MouseController.mobileScreen=new Hammer(window);
+            MouseController.canvasScreen=new Hammer($('#fogCanvas')[0]);
+            MouseController.canvasScreen.on('tap',function(event){
                 event.preventDefault();
                 //Callback
-                mouseController.leftClick(event.pointers[0]);
+                MouseController.leftClick(event.pointers[0]);
             });
-            mouseController.canvasScreen.on('doubletap',function(event){
+            MouseController.canvasScreen.on('doubletap',function(event){
                 event.preventDefault();
-                mouseController.dblClick();
+                MouseController.dblClick();
             });
-            mouseController.canvasScreen.on('press',function(event){
+            MouseController.canvasScreen.on('press',function(event){
                 //Prevent context menu show
                 event.preventDefault();
                 //Should not control units during replay
                 if (Game.replayFlag) return;
-                mouseController.rightClick(event.changedPointers[0]);
+                MouseController.rightClick(event.changedPointers[0]);
                 //Cancel handler
                 $('div.GameLayer').removeAttr('status');
                 Button.callback=null;
             });
-            mouseController.canvasScreen.on('panleft',function(event){
+            MouseController.canvasScreen.on('panleft',function(event){
                 Map.needRefresh="RIGHT";
             });
-            mouseController.canvasScreen.on('panright',function(event){
+            MouseController.canvasScreen.on('panright',function(event){
                 Map.needRefresh="LEFT";
             });
-            mouseController.mobileScreen.on('panup',function(event){
+            MouseController.mobileScreen.on('panup',function(event){
                 Map.needRefresh="BOTTOM";
             });
-            mouseController.mobileScreen.on('pandown',function(event){
+            MouseController.mobileScreen.on('pandown',function(event){
                 Map.needRefresh="TOP";
             });
         }

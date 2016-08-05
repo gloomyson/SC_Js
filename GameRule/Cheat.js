@@ -26,13 +26,13 @@ var Cheat={
             $('#cheat_Box').hide();
             $('input#cheatInput').val('');
             Cheat.isShown=false;
-            keyController.disable=false;
+            KeyController.disable=false;
         }
         else {
             $('#cheat_Box').show();
             $('input#cheatInput').focus();
             Cheat.isShown=true;
-            keyController.disable=true;
+            KeyController.disable=true;
         }
     },
     execute:function(cheatCode){
@@ -51,7 +51,7 @@ var Cheat={
                     //Clear old fog on screen
                     Game.fogCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
                     //Redraw mini-map
-                    Map.drawFogsImmediate();
+                    Map.drawFogAndMinimap();
                 }
                 break;
             case "something for nothing":

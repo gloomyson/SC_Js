@@ -1,4 +1,4 @@
-var keyController={
+var KeyController={
 	shift:false,
     ctrl:false,
     disable:false,
@@ -8,22 +8,22 @@ var keyController={
             //Will not switch page by Ctrl+N,cannot debug
             //event.preventDefault();
             //Sometimes need to disable shortcut key
-            if (keyController.disable && event.keyCode!=13) return;
+            if (KeyController.disable && event.keyCode!=13) return;
             switch (event.keyCode){
                 //Press SHIFT down
                 case 16:
-                    keyController.shift=true;
+                    KeyController.shift=true;
                     break;
                 //Press CTRL down
                 case 17:
-                    keyController.ctrl=true;
+                    KeyController.ctrl=true;
                     break;
                 //Press number
                 case 48:case 49:case 50:case 51:case 52:
                 case 53:case 54:case 55:case 56:case 57:
                     let teamNum=String.fromCharCode(event.keyCode);
                     //Building team
-                    if (keyController.ctrl) {
+                    if (KeyController.ctrl) {
                         Game.addSelectedIntoTeam(teamNum);
                     }
                     //Call team
@@ -96,11 +96,11 @@ var keyController={
             switch (event.keyCode){
                 //Press SHIFT up
                 case 16:
-                    keyController.shift=false;
+                    KeyController.shift=false;
                     break;
                 //Press CTRL up
                 case 17:
-                    keyController.ctrl=false;
+                    KeyController.ctrl=false;
                     break;
             }
         };

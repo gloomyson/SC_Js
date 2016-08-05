@@ -1,30 +1,30 @@
-var sourceLoader={
-    sources:{},
+var SourceLoader={
+    sources:new _$.Map(),
     sourceNum:0,
     loadedNum:0,
     allLoaded:true,
     load:function(type,src,id){
-        sourceLoader.sourceNum++;
-        sourceLoader.allLoaded=false;
+        SourceLoader.sourceNum++;
+        SourceLoader.allLoaded=false;
         let source;
         let loaded=function(){
-            sourceLoader.loadedNum++;
-            if(sourceLoader.loadedNum==sourceLoader.sourceNum){
-                sourceLoader.allLoaded=true;
+            SourceLoader.loadedNum++;
+            if(SourceLoader.loadedNum==SourceLoader.sourceNum){
+                SourceLoader.allLoaded=true;
             }
         };//Code copy
         if (type=='img'){
             source=new Image();
             source.src=src;
             source.onload=loaded;
-            sourceLoader.sources[id]=source;
+            SourceLoader.sources.set(id,source);
         }
         if (type=='audio'){
             source=new Audio();
             source.addEventListener('canplaythrough',loaded,false);
             //source.oncanplaythrough=loaded;
             source.src=src;//Pose after listener to prevent fired early
-            sourceLoader.sources[id]=source;
+            SourceLoader.sources.set(id,source);
         }
         //For my Dojo: src==pathName
         if (type=='js'){
@@ -44,7 +44,7 @@ var sourceLoader={
         }
         else {
             //Show Load Process
-            $('div.LoadedBlock').css('width',(Math.round(100*sourceLoader.loadedNum/sourceLoader.sourceNum)+"%"));
+            $('div.LoadedBlock').css('width',(Math.round(100*SourceLoader.loadedNum/SourceLoader.sourceNum)+"%"));
             //Recursion
             setTimeout(()=>{
                 this.allOnLoad(callback);

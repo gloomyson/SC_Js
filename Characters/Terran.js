@@ -64,7 +64,7 @@ Terran.SCV=class SCV extends AttackableUnit{
                 }
             });
         }
-        //If missing location info, mark Button.callback, mouseController will call back with location
+        //If missing location info, mark Button.callback, MouseController will call back with location
         else {
             Button.callback=arguments.callee;
             Button.callback.farmer=this;
@@ -95,7 +95,7 @@ Terran.SCV=class SCV extends AttackableUnit{
                 attack:5
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 60,
             damage: 5,
             armor:0,
@@ -192,7 +192,7 @@ Terran.Marine=class Marine extends AttackableUnit{
                 attack: 7
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 40,
             damage: 6,
             armor:0,
@@ -287,7 +287,7 @@ Terran.Firebat=class Firebat extends AttackableUnit{
                 attack:6
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 50,
             damage: 16,
             armor:1,
@@ -388,7 +388,7 @@ Terran.Ghost=class Ghost extends AttackableUnit{
                 attack:4
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 45,
             damage: 10,
             armor:0,
@@ -491,7 +491,7 @@ Terran.Medic=class Medic extends Unit{
                 attack: 6 //Reserved
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 60,
             armor:1,
             MP: 200,
@@ -543,7 +543,7 @@ Terran.Vulture=class Vulture extends AttackableUnit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(16),
+            speed:16,
             HP: 80,
             damage: 20,
             armor:0,
@@ -615,7 +615,7 @@ Terran.Tank=class Tank extends AttackableUnit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 150,
             damage: 30,
             armor:1,
@@ -713,7 +713,7 @@ Terran.Goliath=class Goliath extends AttackableUnit{
                 attack:2
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(11),
+            speed:11,
             HP: 125,
             attackMode:{
                 flying:{
@@ -781,7 +781,7 @@ Terran.Wraith=class Wraith extends AttackableUnit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(16),
+            speed:16,
             HP: 120,
             armor:0,
             MP: 200,
@@ -853,7 +853,7 @@ Terran.Dropship=class Dropship extends Unit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(13),
+            speed:13,
             HP: 150,
             armor:1,
             sight:280,
@@ -899,7 +899,7 @@ Terran.Vessel=class Vessel extends Unit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 200,
             armor:1,
             MP: 200,
@@ -961,7 +961,7 @@ Terran.BattleCruiser=class BattleCruiser extends AttackableUnit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 500,
             damage: 25,
             armor:3,
@@ -1017,7 +1017,7 @@ Terran.Valkyrie=class Valkyrie extends AttackableUnit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(16),
+            speed:16,
             HP: 200,
             damage: 6,//6*3
             armor:2,
@@ -1091,7 +1091,7 @@ Terran.Civilian=class Civilian extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 60,
             armor:0,
             sight:245,

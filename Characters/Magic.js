@@ -147,7 +147,7 @@ var Magic={
                     }
                 }
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -200,7 +200,7 @@ var Magic={
                 //Record rally point for buildings
                 this.rallyPoint=location;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -249,7 +249,7 @@ var Magic={
                     });
                 }
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -288,7 +288,7 @@ var Magic={
                 }
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -330,7 +330,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -365,7 +365,7 @@ var Magic={
                             let targets=Game.getInRangeOnes(location.x,location.y,[76*1.2>>0,62*1.2>>0],myself.team.toString(),true);
                             //Slow moving speed
                             let bufferObj={
-                                speed:Unit.getSpeedMatrixBy(2)
+                                speed:2
                             };
                             //Effect
                             targets.forEach(chara=>{
@@ -385,7 +385,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -419,7 +419,7 @@ var Magic={
                     });
                 }
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -495,7 +495,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -545,7 +545,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -568,7 +568,7 @@ var Magic={
                 //Effect
                 let bufferObj={
                     attackInterval:800,
-                    speed:Unit.getSpeedMatrixBy(14)
+                    speed:14
                 };
                 this.addBuffer(bufferObj);
                 this.buffer.Stim=true;
@@ -704,7 +704,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -750,7 +750,7 @@ var Magic={
                     });
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -789,7 +789,7 @@ var Magic={
                 }
                 delete this.creditBill;//else
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -839,7 +839,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -884,7 +884,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -971,7 +971,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1015,7 +1015,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1080,7 +1080,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1118,7 +1118,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1141,7 +1141,7 @@ var Magic={
                     if (anime.insideScreen()) new Audio('bgm/Magic.ScannerSweep.wav').play();
                 }
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1229,7 +1229,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1299,7 +1299,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1339,7 +1339,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1382,7 +1382,7 @@ var Magic={
                 //Empty object {}, cannot spell
                 else delete this.creditBill;
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1438,7 +1438,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1502,7 +1502,7 @@ var Magic={
                     if (anime.insideScreen()) new Audio('bgm/Magic.Recall.wav').play();
                 }
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1564,7 +1564,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1634,7 +1634,7 @@ var Magic={
                     }
                 });
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;
@@ -1678,7 +1678,7 @@ var Magic={
                     //Cannot reach target, pError
                 }
             }
-            //If missing location info, mark Button.callback, mouseController will call back with location
+            //If missing location info, mark Button.callback, MouseController will call back with location
             else {
                 Button.callback=arguments.callee;
                 Button.callback.owner=this;

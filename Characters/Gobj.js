@@ -31,8 +31,6 @@ class Gobj{
     //Only for moving
     updateLocation(){
         //Override here
-        this.x+=this.speed.x;
-        this.y+=this.speed.y;
     };
     animeFrame(){
         //Animation play
@@ -136,6 +134,10 @@ class Gobj{
         return !((this.x>(chara.x+chara.width)) || (chara.x>(this.x+this.width))
         || (this.y>(chara.y+chara.height)) || (chara.y>(this.y+this.height)));
     };
+    softCollideWith(chara,N=1){
+        //Twice radius of hard collision
+        return chara.insideSquare({centerX:this.posX(),centerY:this.posY(),radius:[this.width*N,this.height*N]});
+    };
     isIdle(){
         return this.status=="dock";
     };
@@ -146,7 +148,7 @@ class Gobj{
         //Currently only support upgrade for unit properties, no buildings
         let result=eval(`this.${prop}`);//Can get A.B.C
         //ShareFlag is symbol for team sharing array, not speed matrix array
-        if ((result instanceof Array) && result.shareFlag) return result[this.team];
+        if (result instanceof Array) return result[this.team];
         else return result;
     };
     addBuffer(bufferObj,onAll){

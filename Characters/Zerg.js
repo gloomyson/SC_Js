@@ -71,7 +71,7 @@ Zerg.Drone=class Drone extends AttackableUnit{
                 }
             });
         }
-        //If missing location info, mark Button.callback, mouseController will call back with location
+        //If missing location info, mark Button.callback, MouseController will call back with location
         else {
             Button.callback=arguments.callee;
             Button.callback.farmer=this;
@@ -187,7 +187,7 @@ Zerg.Drone=class Drone extends AttackableUnit{
                 unburrow: 6
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 40,
             damage: 5,
             armor:0,
@@ -331,7 +331,7 @@ Zerg.Zergling=class Zergling extends AttackableUnit{
                 unburrow: 6
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(13),
+            speed:13,
             HP: 35,
             damage: 5,
             armor:0,
@@ -419,7 +419,7 @@ Zerg.Overlord=class Overlord extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(2),
+            speed:2,
             HP: 200,
             armor:0,
             sight:315,
@@ -565,7 +565,7 @@ Zerg.Hydralisk=class Hydralisk extends AttackableUnit{
                 unburrow: 6
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(9),
+            speed:9,
             HP: 80,
             damage: 10,
             armor:0,
@@ -708,7 +708,7 @@ Zerg.Lurker=class Lurker extends Unit{
                 unburrow: 8
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(14),
+            speed:14,
             HP: 125,
             damage: 20,
             armor:0,
@@ -796,7 +796,7 @@ Zerg.Mutalisk=class Mutalisk extends AttackableUnit{
                 moving: 5
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(16),
+            speed:16,
             HP: 120,
             damage: 9,
             armor:0,
@@ -877,7 +877,7 @@ Zerg.Guardian=class Guardian extends AttackableUnit{
                 moving: 7
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 150,
             damage: 20,
             armor:2,
@@ -970,7 +970,7 @@ Zerg.Devourer=class Devourer extends AttackableUnit{
                 attack: 8
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 250,
             damage: 25,
             armor:2,
@@ -1046,7 +1046,7 @@ Zerg.Scourge=class Scourge extends AttackableUnit{
                 moving: 5
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(16),
+            speed:16,
             HP: 25,
             damage: 110,//Suicide
             armor:0,
@@ -1123,7 +1123,7 @@ Zerg.Queen=class Queen extends Unit{
                 //attack: 6//Reserved
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(16),
+            speed:16,
             HP: 120,
             armor:0,
             MP: 200,
@@ -1215,7 +1215,7 @@ Zerg.Broodling=class Broodling extends AttackableUnit{
                 attack: 5
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 30,
             damage: 4,
             armor:0,
@@ -1304,7 +1304,7 @@ Zerg.Ultralisk=class Ultralisk extends AttackableUnit{
                 attack: 6
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 400,
             damage: 20,
             armor:1,
@@ -1417,7 +1417,7 @@ Zerg.Defiler=class Defiler extends Unit{
                 unburrow: 6
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 80,
             armor:1,
             MP: 200,
@@ -1544,7 +1544,7 @@ Zerg.InfestedTerran=class InfestedTerran extends AttackableUnit{
                 unburrow: 7
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 60,
             damage: 500,//Suicide
             armor:0,
@@ -1627,7 +1627,7 @@ Zerg.Larva=class Larva extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(4),
+            speed:4,
             HP: 25,
             armor:10,
             sight:70,

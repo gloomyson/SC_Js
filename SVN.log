@@ -1,3 +1,62 @@
+Revision: 150
+Author: gloomyson
+Date: 15:09:18, 2016-8-4
+Message:
+Fog drawing improvement: Change logic to improve fog drawing performance
+----
+Modified : /StarCraftES6/Characters/Map.js
+Modified : /StarCraftES6/GameRule/Cheat.js
+Modified : /StarCraftES6/GameRule/Game.js
+Modified : /StarCraftES6/GameRule/Referee.js
+
+Revision: 149
+Author: gloomyson
+Date: 17:34:39, 2016-8-3
+Message:
+1.New navigator logic: force vectors addition
+2.Adjust updateLocation by newly added property angle,draw by wrapped direction
+3.Don't use speed matrix for speed and remove shareFlag
+4.Change logic for walkAround
+5.Change logic for escaping
+6.Disable Referee.judgeCollision for testing
+7.Add Gobj.prototype.softCollideWith
+----
+Modified : /StarCraftES6/Characters/Gobj.js
+Modified : /StarCraftES6/Characters/Hero.js
+Modified : /StarCraftES6/Characters/Magic.js
+Modified : /StarCraftES6/Characters/Map.js
+Modified : /StarCraftES6/Characters/Neutral.js
+Modified : /StarCraftES6/Characters/Protoss.js
+Modified : /StarCraftES6/Characters/Terran.js
+Modified : /StarCraftES6/Characters/Units.js
+Modified : /StarCraftES6/Characters/Upgrade.js
+Modified : /StarCraftES6/Characters/Zerg.js
+Modified : /StarCraftES6/GameRule/Game.js
+Modified : /StarCraftES6/GameRule/Multiplayer.js
+Modified : /StarCraftES6/GameRule/Referee.js
+
+Revision: 148
+Author: gloomyson
+Date: 14:11:07, 2016-8-2
+Message:
+1.Change SourceLoader.sources to use Map
+2.Backup Map as _$.Map
+3.Rename keyController/mouseController/sourceLoader to upper case
+----
+Modified : /StarCraftES6/Characters/Button.js
+Modified : /StarCraftES6/Characters/Magic.js
+Modified : /StarCraftES6/Characters/Map.js
+Modified : /StarCraftES6/Characters/Protoss.js
+Modified : /StarCraftES6/Characters/Terran.js
+Modified : /StarCraftES6/Characters/Zerg.js
+Modified : /StarCraftES6/Controller/keyController.js
+Modified : /StarCraftES6/Controller/mouseController.js
+Modified : /StarCraftES6/GameRule/Cheat.js
+Modified : /StarCraftES6/GameRule/Game.js
+Modified : /StarCraftES6/GameRule/Multiplayer.js
+Modified : /StarCraftES6/Utils/gFrame.js
+Modified : /StarCraftES6/Utils/sourceLoader.js
+
 Revision: 147
 Author: gloomyson
 Date: 16:42:32, 2016-7-29

@@ -37,7 +37,7 @@ Hero.HeroCruiser=class HeroCruiser extends AttackableUnit{
                 stop: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(9),
+            speed:9,
             HP: 1000,
             damage: 50,
             armor:3,
@@ -106,7 +106,7 @@ Hero.Tassadar=class Tassadar extends Unit{
                 stop: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(15),
+            speed:15,
             HP: 999,
             SP: 999,
             armor:3,
@@ -212,7 +212,7 @@ Hero.Kerrigan=class Kerrigan extends AttackableUnit{
                 attack:4
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 300,
             damage: 20,
             armor:1,
@@ -323,7 +323,7 @@ Hero.Sarah=class Sarah extends AttackableUnit{
                 attack: 8
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 500,
             SP: 500,
             damage: 40,
@@ -437,7 +437,7 @@ Hero.DevilHunter=class DevilHunter extends AttackableUnit{
                 attack: 8
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 2000,
             SP: 2000,
             MP: 200,

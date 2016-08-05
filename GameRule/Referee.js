@@ -2,7 +2,7 @@ var Referee={
     ourDetectedUnits:[],//Detected enemies
     enemyDetectedUnits:[],//Detected ours
     _pos:[[-1,0],[1,0],[0,-1],[0,1]],//Collision avoid
-    tasks:['judgeArbiter','judgeDetect','judgeCollision','judgeRecover','judgeDying','judgeMan',
+    tasks:['judgeArbiter','judgeDetect','judgeRecover','judgeDying','judgeMan',
         'addLarva','coverFog','alterSelectionMode','judgeBuildingInjury','judgeWinLose','saveReplaySnapshot'],
     voice:{
         pError:new Audio('bgm/PointError.wav'),
@@ -290,7 +290,8 @@ var Referee={
         }
     },
     coverFog:function(){
-        Map.drawFogAndMinimap();
+        //No need to set interval as 1sec
+        if (Game.mainTick%10==0) Map.drawFogAndMinimap();
     },
     alterSelectionMode:function(){
         //GC after some user changes

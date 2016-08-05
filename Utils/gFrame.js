@@ -273,20 +273,20 @@ _$.arrayEqual=function(arr1,arr2){
 /**********Dojo relative**********/
 _$.modules={};
 //Script loader
-_$.sourceLoader={
-    sources:{},
+_$.SourceLoader={
+    sources:new Map(),
     sourceNum:0,
     loadedNum:0,
     allLoaded:true,
     load:function(pathName){
-        _$.sourceLoader.sourceNum++;
-        _$.sourceLoader.allLoaded=false;
+        _$.SourceLoader.sourceNum++;
+        _$.SourceLoader.allLoaded=false;
         //Type=="script"
         let node=document.createElement('script');
         node.onload=function(){
             //Load builder
             _$.modules[pathName]=_$.define.loadedBuilders.shift();
-            _$.sourceLoader.loaded();
+            _$.SourceLoader.loaded();
         };
         //Block this module, should not load again
         _$.modules[pathName]=true;
@@ -294,18 +294,18 @@ _$.sourceLoader={
         document.getElementsByTagName('head')[0].appendChild(node);
     },
     loaded:function(){
-        _$.sourceLoader.loadedNum++;
-        if(_$.sourceLoader.loadedNum==_$.sourceLoader.sourceNum){
-            _$.sourceLoader.allLoaded=true;
+        _$.SourceLoader.loadedNum++;
+        if(_$.SourceLoader.loadedNum==_$.SourceLoader.sourceNum){
+            _$.SourceLoader.allLoaded=true;
         }
     },
     allOnLoad:function(callback=function(){}){
-        if (_$.sourceLoader.allLoaded) {
+        if (_$.SourceLoader.allLoaded) {
             callback();
         }
         else {
             setTimeout(function(){
-                _$.sourceLoader.allOnLoad(callback);
+                _$.SourceLoader.allOnLoad(callback);
             },100);
         }
     }
@@ -350,7 +350,7 @@ _$.define=function(refArr,builderFunc){
     refArr.forEach(function(ref){
         if (ref[0]=='=') return;
         //Recursion loading if that module not loaded
-        if (!_$.modules[ref]) _$.sourceLoader.load(ref);
+        if (!_$.modules[ref]) _$.SourceLoader.load(ref);
     });
     //Builder loaded
     builderFunc.refArr=refArr;
@@ -364,9 +364,9 @@ _$.require=function(refArr,callback=()=>{}){
     refArr.forEach(function(ref){
         if (ref[0]=='=') return;
         //Recursion loading if that module not loaded
-        if (!_$.modules[ref]) _$.sourceLoader.load(ref);
+        if (!_$.modules[ref]) _$.SourceLoader.load(ref);
     });
-    _$.sourceLoader.allOnLoad(function(){
+    _$.SourceLoader.allOnLoad(function(){
         let refObjs=[];
         refArr.forEach(function(ref){
             //Recursion instantiate
@@ -435,6 +435,9 @@ _$.toArray=function(arr){
     }
     return result;
 };
+
+//Backup for name collision
+_$.Map=Map;
 
 //Extension for ES6 class extends
 _$.protoProps=Symbol('protoProps');

@@ -39,7 +39,7 @@ Protoss.Probe=class Probe extends AttackableUnit{
                 }
             });
         }
-        //If missing location info, mark Button.callback, mouseController will call back with location
+        //If missing location info, mark Button.callback, MouseController will call back with location
         else {
             Button.callback=arguments.callee;
             Button.callback.farmer=this;
@@ -67,7 +67,7 @@ Protoss.Probe=class Probe extends AttackableUnit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 20,
             SP: 20,
             damage: 5,
@@ -160,7 +160,7 @@ Protoss.Zealot=class Zealot extends AttackableUnit{
                 attack: 5
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(10),
+            speed:10,
             HP: 80,
             SP: 80,
             damage: 16,
@@ -265,7 +265,7 @@ Protoss.Dragoon=class Dragoon extends AttackableUnit{
                 attack: 12
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 100,
             SP: 80,
             damage: 20,
@@ -371,7 +371,7 @@ Protoss.Templar=class Templar extends AttackableUnit{
                 attack: 5
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(8),
+            speed:8,
             HP: 40,
             SP: 40,
             damage: 10,
@@ -469,7 +469,7 @@ Protoss.DarkTemplar=class DarkTemplar extends AttackableUnit{
                 attack: 7
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 80,
             SP: 40,
             damage: 40,
@@ -563,7 +563,7 @@ Protoss.Archon=class Archon extends AttackableUnit{
                 attack: 10
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 10,
             SP: 350,
             damage: 30,
@@ -634,7 +634,7 @@ Protoss.DarkArchon=class DarkArchon extends Unit{
                 moving: 10
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 25,
             SP: 200,
             armor:1,
@@ -694,7 +694,7 @@ Protoss.Shuttle=class Shuttle extends Unit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(11),
+            speed:11,
             HP: 80,
             SP: 60,
             armor:1,
@@ -769,7 +769,7 @@ Protoss.Reaver=class Reaver extends AttackableUnit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(4),
+            speed:4,
             HP: 100,
             SP: 80,
             damage: 100,
@@ -834,7 +834,7 @@ Protoss.Observer=class Observer extends Unit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(8),
+            speed:8,
             HP: 40,
             SP: 20,
             armor:0,
@@ -910,7 +910,7 @@ Protoss.Scout=class Scout extends AttackableUnit{
                 attack: 2
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 150,
             SP: 100,
             attackMode:{
@@ -985,7 +985,7 @@ Protoss.Carrier=class Carrier extends AttackableUnit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(8),
+            speed:8,
             HP: 300,
             SP: 150,
             damage: 6,
@@ -1110,7 +1110,7 @@ Protoss.Arbiter=class Arbiter extends AttackableUnit{
                 moving: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(12),
+            speed:12,
             HP: 200,
             SP: 150,
             damage: 10,
@@ -1196,7 +1196,7 @@ Protoss.Corsair=class Corsair extends AttackableUnit{
                 attack: 5
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(16),
+            speed:16,
             HP: 100,
             SP: 80,
             damage: 5,

@@ -5,6 +5,7 @@ class Unit extends Gobj{
         //Add id for unit
         this.id=Unit.currentID++;
         this.direction=Unit.randomDirection();
+        this.angle=0;
         this.life=this.get('HP');
         if (this.SP) this.shield=this.get('SP');
         if (this.MP) this.magic=50;
@@ -60,16 +61,8 @@ class Unit extends Gobj{
     };
     //Override to use 8 directions speed
     updateLocation(){
-        //8 directions speed
-        if (this.get('speed') instanceof Array){
-            this.x+=this.get('speed')[this.direction].x;
-            this.y+=this.get('speed')[this.direction].y;
-        }
-        //No direction speed
-        else {
-            this.x+=this.get('speed').x;
-            this.y+=this.get('speed').y;
-        }
+        this.x=Math.round(this.x+this.get('speed')*Math.cos(this.angle));
+        this.y=Math.round(this.y+this.get('speed')*Math.sin(this.angle));
     };
     //Add new functions to prototype
     turnTo(direction){
@@ -115,22 +108,50 @@ class Unit extends Gobj{
         }
         //Need move
         else {
-            let direction=0;
-            //Already in same X
-            if (this.insideSquare({centerX:clickX,centerY:charaY,radius:range*0.7>>0})) {
-                direction=(clickY>charaY)?4:0;
+            let vector=[clickX-this.posX(),clickY-this.posY()];
+            vector=vector.map(n=>(n/Math.hypot(...vector)));
+            //Only unit on ground will collide with others
+            const FORCE=0.4;
+            if (!this.isFlying){
+                const myself=this;
+                //Soft collision
+                let softCollisions=Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
+                    if (chara==myself) return false;
+                    else return !(chara.isFlying) && chara.softCollideWith(myself);
+                });
+                softCollisions.forEach(function(chara){
+                    let softResist=[myself.posX()-chara.posX(),myself.posY()-chara.posY()];
+                    softResist=softResist.map(n=>(n*FORCE/Math.hypot(...softResist)));
+                    vector[0]+=softResist[0];
+                    vector[1]+=softResist[1];
+                });
+                //Hard collision
+                softCollisions.filter(function(chara){
+                    return chara.collideWith(myself);
+                }).forEach(function(chara){
+                    let hardResist=[myself.posX()-chara.posX(),myself.posY()-chara.posY()];
+                    hardResist=hardResist.map(n=>(n*FORCE/Math.hypot(...hardResist)));
+                    vector[0]+=hardResist[0];
+                    vector[1]+=hardResist[1];
+                });
             }
-            else {
-                //Already in same Y
-                if (this.insideSquare({centerX:charaX,centerY:clickY,radius:range*0.7>>0})) {
-                    direction=(clickX>charaX)?2:6;
-                }
-                //Need move by oblique path
-                else {
-                    direction=(clickX>charaX)?(clickY>charaY?3:1):(clickY>charaY?5:7);
-                }
-            }
-            this.turnTo(direction);
+            /*const FORCE=0.8;
+            if (!this.isFlying){
+                const myself=this;
+                //Hard collision
+                Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
+                    if (chara==myself) return false;
+                    else return !(chara.isFlying) && chara.collideWith(myself);
+                }).forEach(function(chara){
+                    let hardResist=[myself.posX()-chara.posX(),myself.posY()-chara.posY()];
+                    hardResist=hardResist.map(n=>(n*FORCE/Math.hypot(...hardResist)));
+                    vector[0]+=hardResist[0];
+                    vector[1]+=hardResist[1];
+                });
+            }*/
+            this.turnTo(Unit.wrapDirection(vector));
+            vector.reverse();//y,x
+            this.angle=Math.atan2(...vector);
         }
     };
     faceTo(target,preventAction){
@@ -154,11 +175,12 @@ class Unit extends Gobj{
     escapeFrom(enemy){
         //Add to fix holding issue
         if (this.hold) return;
-        let escapeDirection=Unit.prototype.faceTo.call(enemy,this,true);//Fix escape from attackable building issue
-        let escapeSpeed=this.get('speed')[escapeDirection];
-        let escapeSteps=100/(Math.abs(escapeSpeed.x)+Math.abs(escapeSpeed.y));
-        //Escape by multiple steps
-        this.moveTo(this.posX()+escapeSpeed.x*escapeSteps,this.posY()+escapeSpeed.y*escapeSteps);
+        //From enemy to myself
+        let escapeVector=[this.posX()-enemy.posX(),this.posY()-enemy.posY()];
+        //Move by 100px
+        escapeVector=escapeVector.map(n=>(n*100/Math.hypot(...escapeVector)));
+        //Escape along vector
+        this.moveTo(this.posX()+escapeVector[0],this.posY()+escapeVector[1]);
     };
     moveTo(clickX,clickY,range,callback=function(){}){
         if (!range) range=Unit.moveRange;//Smallest limit by default
@@ -335,9 +357,9 @@ class Unit extends Gobj{
         });
     };
     //Convert from vector to 8 directions
-    static wrapDirection(vector){
+    static wrapDirection([x,y]){
         //Atan2 can distinguish from -PI~PI, Y-axis is reverse
-        let angle=Math.atan2(vector.y,vector.x);
+        let angle=Math.atan2(y,x);
         if (angle>(Math.PI*7/8)) return 6;
         if (angle>(Math.PI*5/8)) return 5;
         if (angle>(Math.PI*3/8)) return 4;
@@ -378,7 +400,8 @@ class Unit extends Gobj{
                 let direction=Unit.randomDirection();
                 //Walk around, for all critters to use
                 if (myself.status=="dock") {
-                    myself.moveTo(myself.posX()+myself.get('speed')[direction].x*6,myself.posY()+myself.get('speed')[direction].y*6);
+                    myself.moveTo(myself.posX()+myself.get('speed')*(Unit.speedMatrix[direction].x)*6,
+                        myself.posY()+myself.get('speed')*(Unit.speedMatrix[direction].y)*6);
                 }
                 else delete myself.allFrames['dock'];
             }
@@ -422,7 +445,8 @@ class Unit extends Gobj{
                 let direction=(myself.direction+1)%8;//Math.floor
                 //Walk around, for all critters to use
                 if (myself.status=="dock") {
-                    Unit.prototype.moveTo.call(myself,myself.posX()+myself.get('speed')[direction].x*6,myself.posY()+myself.get('speed')[direction].y*6);
+                    Unit.prototype.moveTo.call(myself,myself.posX()+myself.get('speed')*(Unit.speedMatrix[direction].x)*6,
+                        myself.posY()+myself.get('speed')*(Unit.speedMatrix[direction].y)*6);
                 }
                 else delete myself.allFrames['dock'];
             }
@@ -905,7 +929,8 @@ class AttackableUnit extends Unit{
                 let direction=Unit.randomDirection();
                 //Walk around, for all critters to use
                 if (myself.isIdle()) {
-                    myself.moveTo(myself.posX()+myself.get('speed')[direction].x*6,myself.posY()+myself.get('speed')[direction].y*6);
+                    myself.moveTo(myself.posX()+myself.get('speed')*(Unit.speedMatrix[direction].x)*6,
+                        myself.posY()+myself.get('speed')*(Unit.speedMatrix[direction].y)*6);
                 }
                 else delete myself.allFrames['dock'];
             }

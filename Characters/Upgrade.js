@@ -103,7 +103,7 @@ var Upgrade={
             time:1000
         },
         effect:function(team){
-            Terran.Vulture.prototype.speed[team]=Unit.getSpeedMatrixBy(20);
+            Terran.Vulture.prototype.speed[team]=20;
             delete Building.TerranBuilding.MachineShop.prototype.items[1];
         }
     },
@@ -392,7 +392,7 @@ var Upgrade={
             time:1330
         },
         effect:function(team){
-            Zerg.Overlord.prototype.speed[team]=Unit.getSpeedMatrixBy(8);
+            Zerg.Overlord.prototype.speed[team]=8;
             delete Building.ZergBuilding.Lair.prototype.items[6];
             delete Building.ZergBuilding.Hive.prototype.items[6];
         }
@@ -405,7 +405,7 @@ var Upgrade={
             time:1000
         },
         effect:function(team){
-            Zerg.Zergling.prototype.speed[team]=Unit.getSpeedMatrixBy(18);
+            Zerg.Zergling.prototype.speed[team]=18;
             delete Building.ZergBuilding.SpawningPool.prototype.items[1];
         }
     },
@@ -481,7 +481,7 @@ var Upgrade={
             time:1000
         },
         effect:function(team){
-            Zerg.Hydralisk.prototype.speed[team]=Unit.getSpeedMatrixBy(13);
+            Zerg.Hydralisk.prototype.speed[team]=13;
             delete Building.ZergBuilding.HydraliskDen.prototype.items[1];
         }
     },
@@ -594,7 +594,7 @@ var Upgrade={
             time:1330
         },
         effect:function(team){
-            Zerg.Ultralisk.prototype.speed[team]=Unit.getSpeedMatrixBy(18);
+            Zerg.Ultralisk.prototype.speed[team]=18;
             delete Building.ZergBuilding.UltraliskCavern.prototype.items[1];
         }
     },
@@ -763,7 +763,7 @@ var Upgrade={
             time:1330
         },
         effect:function(team){
-            Protoss.Zealot.prototype.speed[team]=Unit.getSpeedMatrixBy(14);
+            Protoss.Zealot.prototype.speed[team]=14;
             delete Building.ProtossBuilding.CitadelOfAdun.prototype.items[1];
         }
     },
@@ -799,7 +799,7 @@ var Upgrade={
             time:1660
         },
         effect:function(team){
-            Protoss.Shuttle.prototype.speed[team]=Unit.getSpeedMatrixBy(16);
+            Protoss.Shuttle.prototype.speed[team]=16;
             delete Building.ProtossBuilding.RoboticsSupportBay.prototype.items[3];
         }
     },
@@ -823,7 +823,7 @@ var Upgrade={
             time:1660
         },
         effect:function(team){
-            Protoss.Scout.prototype.speed[team]=Unit.getSpeedMatrixBy(16);
+            Protoss.Scout.prototype.speed[team]=16;
             delete Building.ProtossBuilding.FleetBeacon.prototype.items[2];
         }
     },
@@ -944,7 +944,7 @@ var Upgrade={
             time:1330
         },
         effect:function(team){
-            Protoss.Observer.prototype.speed[team]=Unit.getSpeedMatrixBy(12);
+            Protoss.Observer.prototype.speed[team]=12;
             delete Building.ProtossBuilding.Observatory.prototype.items[1];
         }
     },

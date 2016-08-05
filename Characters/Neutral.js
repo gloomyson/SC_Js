@@ -46,7 +46,7 @@ Neutral.Ragnasaur=class Ragnasaur extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 60,
             armor:0,
             sight:175,
@@ -103,7 +103,7 @@ Neutral.Rhynsdon=class Rhynsdon extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 60,
             armor:0,
             sight:175,
@@ -160,7 +160,7 @@ Neutral.Ursadon=class Ursadon extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 60,
             armor:0,
             sight:175,
@@ -217,7 +217,7 @@ Neutral.Bengalaas=class Bengalaas extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 60,
             armor:0,
             sight:175,
@@ -274,7 +274,7 @@ Neutral.Scantid=class Scantid extends Unit{
                 dock: 1
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 60,
             armor:0,
             sight:175,
@@ -331,7 +331,7 @@ Neutral.Kakaru=class Kakaru extends Unit{
                 moving: 12
             },
             //Only for moving status, override
-            speed:Unit.getSpeedMatrixBy(6),
+            speed:6,
             HP: 60,
             armor:0,
             sight:210,

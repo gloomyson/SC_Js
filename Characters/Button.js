@@ -686,13 +686,13 @@ var Button={
         //Finish part II
         switch (Button.callback){
             case 'move':
-                mouseController.rightClick(event);
+                MouseController.rightClick(event);
                 break;
             case 'attack':
-                mouseController.rightClick(event,true,'attack');
+                MouseController.rightClick(event,true,'attack');
                 break;
             case 'patrol':
-                mouseController.rightClick(event,true,'patrol');
+                MouseController.rightClick(event,true,'patrol');
                 break;
             default:
                 if (typeof(Button.callback)=='function'){

@@ -7,7 +7,7 @@ var Multiplayer={
     getSocket:function(){
         if (window.WebSocket) {
             //ServerList: (1)HongKong:nvhae.com (3)Canada:104.128.82.12
-            let webSocket=Multiplayer.webSocket=new WebSocket('ws://10.111.7.71:28082');
+            let webSocket=Multiplayer.webSocket=new WebSocket('ws://www.nvhae.com:28082');
             webSocket.onerror=function(){
                 //Offline flag for Store&Forward
                 Game.offline=true;
@@ -102,8 +102,8 @@ var Multiplayer={
                         //Choose team
                         Game.team=msgObj.team;
                         //Bind controller
-                        mouseController.toControlAll();//Can control all units
-                        keyController.start();//Start monitor
+                        MouseController.toControlAll();//Can control all units
+                        KeyController.start();//Start monitor
                         Game.animation();
                         break;
                     case "replay":
@@ -133,7 +133,7 @@ var Multiplayer={
                             let {uids,pos,unlock,btn}=cmd;
                             return function(){
                                 let charas=Multiplayer.getUnitsByUIDs(uids);
-                                mouseController.rightClickHandler(charas,pos,unlock,btn);
+                                MouseController.rightClickHandler(charas,pos,unlock,btn);
                             };
                         }());
                         break;

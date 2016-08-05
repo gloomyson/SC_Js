@@ -95,96 +95,96 @@ var Game={
         //Start loading
         Game.layerSwitchTo("GameLoading");
         //Zerg
-        sourceLoader.load("img","img/Charas/Mutalisk.png","Mutalisk");
-        sourceLoader.load("img","img/Charas/Devourer.png","Devourer");
-        sourceLoader.load("img","img/Charas/Guardian.png","Guardian");
-        sourceLoader.load("img","img/Charas/Overlord.png","Overlord");
-        sourceLoader.load("img","img/Charas/Drone.png","Drone");
-        sourceLoader.load("img","img/Charas/Zergling.png","Zergling");
-        sourceLoader.load("img","img/Charas/Hydralisk.png","Hydralisk");
-        sourceLoader.load("img","img/Charas/Scourge.png","Scourge");
-        sourceLoader.load("img","img/Charas/Lurker.png","Lurker");
-        sourceLoader.load("img","img/Charas/Ultralisk.png","Ultralisk");
-        sourceLoader.load("img","img/Charas/Broodling.png","Broodling");
-        sourceLoader.load("img","img/Charas/InfestedTerran.png","InfestedTerran");
-        sourceLoader.load("img","img/Charas/Queen.png","Queen");
-        sourceLoader.load("img","img/Charas/Defiler.png","Defiler");
-        sourceLoader.load("img","img/Charas/Larva.png","Larva");
+        SourceLoader.load("img","img/Charas/Mutalisk.png","Mutalisk");
+        SourceLoader.load("img","img/Charas/Devourer.png","Devourer");
+        SourceLoader.load("img","img/Charas/Guardian.png","Guardian");
+        SourceLoader.load("img","img/Charas/Overlord.png","Overlord");
+        SourceLoader.load("img","img/Charas/Drone.png","Drone");
+        SourceLoader.load("img","img/Charas/Zergling.png","Zergling");
+        SourceLoader.load("img","img/Charas/Hydralisk.png","Hydralisk");
+        SourceLoader.load("img","img/Charas/Scourge.png","Scourge");
+        SourceLoader.load("img","img/Charas/Lurker.png","Lurker");
+        SourceLoader.load("img","img/Charas/Ultralisk.png","Ultralisk");
+        SourceLoader.load("img","img/Charas/Broodling.png","Broodling");
+        SourceLoader.load("img","img/Charas/InfestedTerran.png","InfestedTerran");
+        SourceLoader.load("img","img/Charas/Queen.png","Queen");
+        SourceLoader.load("img","img/Charas/Defiler.png","Defiler");
+        SourceLoader.load("img","img/Charas/Larva.png","Larva");
         //Terran
-        sourceLoader.load("img","img/Charas/BattleCruiser.png","BattleCruiser");
-        sourceLoader.load("img","img/Charas/Wraith.png","Wraith");
-        sourceLoader.load("img","img/Charas/SCV.png","SCV");
-        sourceLoader.load("img","img/Charas/Civilian.png","Civilian");
-        sourceLoader.load("img","img/Charas/Marine.png","Marine");
-        sourceLoader.load("img","img/Charas/Firebat.png","Firebat");
-        sourceLoader.load("img","img/Charas/Ghost.png","Ghost");
-        sourceLoader.load("img","img/Charas/Vulture.png","Vulture");
-        sourceLoader.load("img","img/Charas/Tank.png","Tank");
-        sourceLoader.load("img","img/Charas/Goliath.png","Goliath");
-        sourceLoader.load("img","img/Charas/Medic.png","Medic");
-        sourceLoader.load("img","img/Charas/Dropship.png","Dropship");
-        sourceLoader.load("img","img/Charas/Vessel.png","Vessel");
-        sourceLoader.load("img","img/Charas/Valkyrie.png","Valkyrie");
+        SourceLoader.load("img","img/Charas/BattleCruiser.png","BattleCruiser");
+        SourceLoader.load("img","img/Charas/Wraith.png","Wraith");
+        SourceLoader.load("img","img/Charas/SCV.png","SCV");
+        SourceLoader.load("img","img/Charas/Civilian.png","Civilian");
+        SourceLoader.load("img","img/Charas/Marine.png","Marine");
+        SourceLoader.load("img","img/Charas/Firebat.png","Firebat");
+        SourceLoader.load("img","img/Charas/Ghost.png","Ghost");
+        SourceLoader.load("img","img/Charas/Vulture.png","Vulture");
+        SourceLoader.load("img","img/Charas/Tank.png","Tank");
+        SourceLoader.load("img","img/Charas/Goliath.png","Goliath");
+        SourceLoader.load("img","img/Charas/Medic.png","Medic");
+        SourceLoader.load("img","img/Charas/Dropship.png","Dropship");
+        SourceLoader.load("img","img/Charas/Vessel.png","Vessel");
+        SourceLoader.load("img","img/Charas/Valkyrie.png","Valkyrie");
         //Protoss
-        sourceLoader.load("img","img/Charas/Probe.png","Probe");
-        sourceLoader.load("img","img/Charas/Zealot.png","Zealot");
-        sourceLoader.load("img","img/Charas/Dragoon.png","Dragoon");
-        sourceLoader.load("img","img/Charas/Templar.png","Templar");
-        sourceLoader.load("img","img/Charas/DarkTemplar.png","DarkTemplar");
-        sourceLoader.load("img","img/Charas/Reaver.png","Reaver");
-        sourceLoader.load("img","img/Charas/Archon.png","Archon");
-        sourceLoader.load("img","img/Charas/DarkArchon.png","DarkArchon");
-        sourceLoader.load("img","img/Charas/Shuttle.png","Shuttle");
-        sourceLoader.load("img","img/Charas/Observer.png","Observer");
-        sourceLoader.load("img","img/Charas/Arbiter.png","Arbiter");
-        sourceLoader.load("img","img/Charas/Scout.png","Scout");
-        sourceLoader.load("img","img/Charas/Carrier.png","Carrier");
-        sourceLoader.load("img","img/Charas/Corsair.png","Corsair");
+        SourceLoader.load("img","img/Charas/Probe.png","Probe");
+        SourceLoader.load("img","img/Charas/Zealot.png","Zealot");
+        SourceLoader.load("img","img/Charas/Dragoon.png","Dragoon");
+        SourceLoader.load("img","img/Charas/Templar.png","Templar");
+        SourceLoader.load("img","img/Charas/DarkTemplar.png","DarkTemplar");
+        SourceLoader.load("img","img/Charas/Reaver.png","Reaver");
+        SourceLoader.load("img","img/Charas/Archon.png","Archon");
+        SourceLoader.load("img","img/Charas/DarkArchon.png","DarkArchon");
+        SourceLoader.load("img","img/Charas/Shuttle.png","Shuttle");
+        SourceLoader.load("img","img/Charas/Observer.png","Observer");
+        SourceLoader.load("img","img/Charas/Arbiter.png","Arbiter");
+        SourceLoader.load("img","img/Charas/Scout.png","Scout");
+        SourceLoader.load("img","img/Charas/Carrier.png","Carrier");
+        SourceLoader.load("img","img/Charas/Corsair.png","Corsair");
         //Neuture
-        sourceLoader.load("img","img/Charas/Ragnasaur.png","Ragnasaur");
-        sourceLoader.load("img","img/Charas/Rhynsdon.png","Rhynsdon");
-        sourceLoader.load("img","img/Charas/Ursadon.png","Ursadon");
-        sourceLoader.load("img","img/Charas/Bengalaas.png","Bengalaas");
-        sourceLoader.load("img","img/Charas/Scantid.png","Scantid");
-        sourceLoader.load("img","img/Charas/Kakaru.png","Kakaru");
+        SourceLoader.load("img","img/Charas/Ragnasaur.png","Ragnasaur");
+        SourceLoader.load("img","img/Charas/Rhynsdon.png","Rhynsdon");
+        SourceLoader.load("img","img/Charas/Ursadon.png","Ursadon");
+        SourceLoader.load("img","img/Charas/Bengalaas.png","Bengalaas");
+        SourceLoader.load("img","img/Charas/Scantid.png","Scantid");
+        SourceLoader.load("img","img/Charas/Kakaru.png","Kakaru");
         //Hero
-        sourceLoader.load("img","img/Charas/HeroCruiser.png","HeroCruiser");
-        sourceLoader.load("img","img/Charas/Sarah.png","Sarah");
-        sourceLoader.load("img","img/Charas/Kerrigan.png","Kerrigan");
-        sourceLoader.load("img","img/Charas/DevilHunter.png","DevilHunter");
-        sourceLoader.load("img","img/Charas/Tassadar.png","Tassadar");
+        SourceLoader.load("img","img/Charas/HeroCruiser.png","HeroCruiser");
+        SourceLoader.load("img","img/Charas/Sarah.png","Sarah");
+        SourceLoader.load("img","img/Charas/Kerrigan.png","Kerrigan");
+        SourceLoader.load("img","img/Charas/DevilHunter.png","DevilHunter");
+        SourceLoader.load("img","img/Charas/Tassadar.png","Tassadar");
         //Building
-        sourceLoader.load("img","img/Charas/ZergBuilding.png","ZergBuilding");
-        sourceLoader.load("img","img/Charas/TerranBuilding.png","TerranBuilding");
-        sourceLoader.load("img","img/Charas/ProtossBuilding.png","ProtossBuilding");
-        /*sourceLoader.load("audio","bgm/PointError.wav","PointError");*/
+        SourceLoader.load("img","img/Charas/ZergBuilding.png","ZergBuilding");
+        SourceLoader.load("img","img/Charas/TerranBuilding.png","TerranBuilding");
+        SourceLoader.load("img","img/Charas/ProtossBuilding.png","ProtossBuilding");
+        /*SourceLoader.load("audio","bgm/PointError.wav","PointError");*/
         //Map
-        sourceLoader.load("img","img/Maps/(2)Switchback.jpg","Map_Switchback");
-        sourceLoader.load("img","img/Maps/(2)Volcanis.jpg","Map_Volcanis");
-        sourceLoader.load("img","img/Maps/(3)Trench wars.jpg","Map_TrenchWars");
-        sourceLoader.load("img","img/Maps/(4)Blood Bath.jpg","Map_BloodBath");
-        sourceLoader.load("img","img/Maps/(4)Orbital Relay.jpg","Map_OrbitalRelay");
-        sourceLoader.load("img","img/Maps/(4)TowerDefense.jpg","Map_TowerDefense");
-        sourceLoader.load("img","img/Maps/(6)Thin Ice.jpg","Map_ThinIce");
-        sourceLoader.load("img","img/Maps/(8)BigGameHunters.jpg","Map_BigGameHunters");
-        sourceLoader.load("img","img/Maps/(8)TheHunters.jpg","Map_TheHunters");
-        sourceLoader.load("img","img/Maps/(8)Turbo.jpg","Map_Turbo");
-        sourceLoader.load("img","img/Maps/Map_Grass.jpg","Map_Grass");
-        sourceLoader.load("img","img/Charas/Mud.png","Mud");
+        SourceLoader.load("img","img/Maps/(2)Switchback.jpg","Map_Switchback");
+        SourceLoader.load("img","img/Maps/(2)Volcanis.jpg","Map_Volcanis");
+        SourceLoader.load("img","img/Maps/(3)Trench wars.jpg","Map_TrenchWars");
+        SourceLoader.load("img","img/Maps/(4)Blood Bath.jpg","Map_BloodBath");
+        SourceLoader.load("img","img/Maps/(4)Orbital Relay.jpg","Map_OrbitalRelay");
+        SourceLoader.load("img","img/Maps/(4)TowerDefense.jpg","Map_TowerDefense");
+        SourceLoader.load("img","img/Maps/(6)Thin Ice.jpg","Map_ThinIce");
+        SourceLoader.load("img","img/Maps/(8)BigGameHunters.jpg","Map_BigGameHunters");
+        SourceLoader.load("img","img/Maps/(8)TheHunters.jpg","Map_TheHunters");
+        SourceLoader.load("img","img/Maps/(8)Turbo.jpg","Map_Turbo");
+        SourceLoader.load("img","img/Maps/Map_Grass.jpg","Map_Grass");
+        SourceLoader.load("img","img/Charas/Mud.png","Mud");
         //Extra
-        sourceLoader.load("img","img/Charas/Burst.png","Burst");
-        sourceLoader.load("img","img/Charas/BuildingBurst.png","BuildingBurst");
-        sourceLoader.load("img","img/Charas/Portrait.png","Portrait");
-        sourceLoader.load("img","img/Charas/Magic.png","Magic");
-        sourceLoader.load("img","img/Menu/ControlPanel.png","ControlPanel");
-        sourceLoader.load("img","img/Bg/GameStart.jpg","GameStart");
-        sourceLoader.load("img","img/Bg/GameWin.jpg","GameWin");
-        sourceLoader.load("img","img/Bg/GameLose.jpg","GameLose");
+        SourceLoader.load("img","img/Charas/Burst.png","Burst");
+        SourceLoader.load("img","img/Charas/BuildingBurst.png","BuildingBurst");
+        SourceLoader.load("img","img/Charas/Portrait.png","Portrait");
+        SourceLoader.load("img","img/Charas/Magic.png","Magic");
+        SourceLoader.load("img","img/Menu/ControlPanel.png","ControlPanel");
+        SourceLoader.load("img","img/Bg/GameStart.jpg","GameStart");
+        SourceLoader.load("img","img/Bg/GameWin.jpg","GameWin");
+        SourceLoader.load("img","img/Bg/GameLose.jpg","GameLose");
 
-        sourceLoader.allOnLoad(function(){
-            $('#GameStart').prepend(sourceLoader.sources['GameStart']);
-            $('#GameWin').prepend(sourceLoader.sources['GameWin']);
-            $('#GameLose').prepend(sourceLoader.sources['GameLose']);
+        SourceLoader.allOnLoad(function(){
+            $('#GameStart').prepend(SourceLoader.sources.get('GameStart'));
+            $('#GameWin').prepend(SourceLoader.sources.get('GameWin'));
+            $('#GameLose').prepend(SourceLoader.sources.get('GameLose'));
             $('#GamePlay>canvas').attr('width',Game.HBOUND);//Canvas width adjust
             $('#GamePlay>canvas').attr('height',Game.VBOUND-Game.infoBox.height+5);//Canvas height adjust
             for (let N=1;N<=9;N++){
@@ -223,8 +223,8 @@ var Game={
             //Collect login user info
             if (Game.hackMode) Multiplayer.sendUserInfo();
             //Bind controller
-            mouseController.toControlAll();//Can control all units
-            keyController.start();//Start monitor
+            MouseController.toControlAll();//Can control all units
+            KeyController.start();//Start monitor
             Game.pauseWhenHide();//Hew H5 feature:Page Visibility
             Game.initIndexDB();//Hew H5 feature:Indexed DB
             Game.animation();
@@ -245,7 +245,6 @@ var Game={
                 //Prop array, first one for us, second for enemy
                 if (unitType.prototype[prop]!=undefined) {
                     unitType.prototype[prop]=Game.getPropArray(unitType.prototype[prop]);
-                    unitType.prototype[prop].shareFlag=true;
                 }
             });
             if (unitType.prototype.isInvisible){
@@ -258,9 +257,7 @@ var Game={
                 ['damage','attackRange','attackInterval'].forEach(function(prop){
                     //Prop array, first one for us, second for enemy
                     unitType.prototype.attackMode.flying[prop]=Game.getPropArray(unitType.prototype.attackMode.flying[prop]);
-                    unitType.prototype.attackMode.flying[prop].shareFlag=true;
                     unitType.prototype.attackMode.ground[prop]=Game.getPropArray(unitType.prototype.attackMode.ground[prop]);
-                    unitType.prototype.attackMode.ground[prop].shareFlag=true;
                 });
             }
             unitType.upgrade=function(prop,value,team){
@@ -275,9 +272,7 @@ var Game={
             };
         });
         Protoss.Carrier.prototype.interceptorCapacity=Game.getPropArray(Protoss.Carrier.prototype.interceptorCapacity);
-        Protoss.Carrier.prototype.interceptorCapacity.shareFlag=true;
         Protoss.Reaver.prototype.scarabCapacity=Game.getPropArray(Protoss.Reaver.prototype.scarabCapacity);
-        Protoss.Reaver.prototype.scarabCapacity.shareFlag=true;
         Referee.underArbiterUnits=Game.getPropArray(new Set());
         Referee.detectedUnits=Game.getPropArray(new Set());
         for (let N=0;N<Game.playerNum;N++){
@@ -327,10 +322,10 @@ var Game={
     multiSelectInRect:function(){
         Game.unselectAll();
         //Multi select in rect
-        let startPoint={x:Map.offsetX+Math.min(mouseController.startPoint.x,mouseController.endPoint.x),
-            y:Map.offsetY+Math.min(mouseController.startPoint.y,mouseController.endPoint.y)};
-        let endPoint={x:Map.offsetX+Math.max(mouseController.startPoint.x,mouseController.endPoint.x),
-            y:Map.offsetY+Math.max(mouseController.startPoint.y,mouseController.endPoint.y)};
+        let startPoint={x:Map.offsetX+Math.min(MouseController.startPoint.x,MouseController.endPoint.x),
+            y:Map.offsetY+Math.min(MouseController.startPoint.y,MouseController.endPoint.y)};
+        let endPoint={x:Map.offsetX+Math.max(MouseController.startPoint.x,MouseController.endPoint.x),
+            y:Map.offsetY+Math.max(MouseController.startPoint.y,MouseController.endPoint.y)};
         let inRectUnits=Unit.allOurUnits().filter(chara=>{
             return chara.insideRect({start:(startPoint),end:(endPoint)})
         });
@@ -569,9 +564,9 @@ var Game={
         }
         //Draw unit or building
         let imgSrc;
-        if (chara instanceof Building) imgSrc=sourceLoader.sources[chara.source];
+        if (chara instanceof Building) imgSrc=SourceLoader.sources.get(chara.source);
         //Unit, not building
-        else imgSrc=sourceLoader.sources[chara.source?chara.source:chara.name];
+        else imgSrc=SourceLoader.sources.get(chara.source?chara.source:chara.name);
         //Convert position
         let [charaX,charaY]=[((chara.x-Map.offsetX)>>0),((chara.y-Map.offsetY)>>0)];
         //Same image in different directions
@@ -661,7 +656,7 @@ var Game={
         cxt.shadowOffsetX=(chara.isFlying)?5:3;
         cxt.shadowOffsetY=(chara.isFlying)?20:8;
         cxt.shadowColor="rgba(0,0,0,0.4)";
-        let imgSrc=sourceLoader.sources[chara.name];
+        let imgSrc=SourceLoader.sources.get(chara.name);
         //Convert position
         let [charaX,charaY]=[((chara.x-Map.offsetX)>>0),((chara.y-Map.offsetY)>>0)];
         let {left:_left,top:_top}=chara.imgPos[chara.status];
@@ -689,7 +684,7 @@ var Game={
         //Won't draw bullets outside screen
         if (!chara.insideScreen()) return;
         //Draw unit
-        let imgSrc=sourceLoader.sources[chara.name];
+        let imgSrc=SourceLoader.sources.get(chara.name);
         let {left:_left,top:_top}=chara.imgPos[chara.status];
         //Convert position
         let [centerX,centerY]=[((chara.posX()-Map.offsetX)>>0),((chara.posY()-Map.offsetY)>>0)];
@@ -830,15 +825,14 @@ var Game={
                 delete Game.commands[Game.mainTick];
             }
             /************ Draw part *************/
-            //console.log('AfterCommand-BeforeDrawFrame:'+(new Date().getTime()));//test
             //Clear all canvas
             Game.cxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
             Game.frontCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
             //DrawLayer0: Refresh map if needed
-            if (mouseController.mouseX<Map.triggerMargin) Map.needRefresh="LEFT";
-            if (mouseController.mouseX>(Game.HBOUND-Map.triggerMargin)) Map.needRefresh="RIGHT";
-            if (mouseController.mouseY<Map.triggerMargin) Map.needRefresh="TOP";
-            if (mouseController.mouseY>(Game.VBOUND-Map.triggerMargin)) Map.needRefresh="BOTTOM";
+            if (MouseController.mouseX<Map.triggerMargin) Map.needRefresh="LEFT";
+            if (MouseController.mouseX>(Game.HBOUND-Map.triggerMargin)) Map.needRefresh="RIGHT";
+            if (MouseController.mouseY<Map.triggerMargin) Map.needRefresh="TOP";
+            if (MouseController.mouseY>(Game.VBOUND-Map.triggerMargin)) Map.needRefresh="BOTTOM";
             if (Map.needRefresh) {
                 Map.refresh(Map.needRefresh);
                 Map.needRefresh=false;
@@ -890,19 +884,18 @@ var Game={
                 Game.drawEffect(effect);
             }
             //DrawLayer5: Draw drag rect
-            if (mouseController.drag) {
+            if (MouseController.drag) {
                 Game.cxt.lineWidth=3;
                 Game.cxt.strokeStyle="green";
-                Game.cxt.strokeRect(mouseController.startPoint.x,mouseController.startPoint.y,
-                    mouseController.endPoint.x-mouseController.startPoint.x,
-                    mouseController.endPoint.y-mouseController.startPoint.y);
+                Game.cxt.strokeRect(MouseController.startPoint.x,MouseController.startPoint.y,
+                    MouseController.endPoint.x-MouseController.startPoint.x,
+                    MouseController.endPoint.y-MouseController.startPoint.y);
             }
             //DrawLayerBottom: Draw info box and resource box
             Game.drawInfoBox();
             Game.drawSourceBox();
             Game.drawProcessingBox();
             /************ Calculate for next frame *************/
-            //console.log('AfterDrawFrame-BeforeCalculateNextFrame:'+(new Date().getTime()));//test
             //Clock ticking
             Game.mainTick++;
             //For network mode
@@ -950,7 +943,6 @@ var Game={
                     Game.changeSelectedTo({});
                 }
             }
-            //console.log('AfterCalculateNextFrame:'+(new Date().getTime()));//test
         };
         if (Multiplayer.ON){
             Game._timer=setInterval(function(){
@@ -1077,8 +1069,6 @@ var Game={
         //Resize canvas
         $('#GamePlay>canvas').attr('width',Game.HBOUND);//Canvas width adjust
         $('#GamePlay>canvas').attr('height',Game.VBOUND-Game.infoBox.height+5);//Canvas height adjust
-        Map.fogCanvas.width=Game.HBOUND;
-        Map.fogCanvas.height=Game.VBOUND-Game.infoBox.height+5;
         //Resize panel_Info
         $('div.panel_Info')[0].style.width=((Game.HBOUND-295)+'px');
         if (Map.ready){
@@ -1088,7 +1078,7 @@ var Game={
             //Redraw background
             Map.drawBg();
             //Need re-calculate fog immediately
-            Map.drawFogsImmediate();
+            Map.drawFogAndMinimap();
         }
     },
     getCurrentTs:function(){

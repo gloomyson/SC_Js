@@ -13,7 +13,6 @@ var Map={
     batchSize:0,//Draw fog by each batch
     miniCxt:document.querySelector('canvas[name="mini_map"]').getContext('2d'),
     fogCanvas:document.createElement('canvas'),
-    miniFogCanvas:document.createElement('canvas'),
     shadowCanvas:document.createElement('canvas'),//Pre-render for fog shadow
     insideStroke:{
         width:0,
@@ -28,8 +27,10 @@ var Map={
         Map.insideStroke.height=(130*Game.VBOUND/Map.getCurrentMap().height)>>0;
         //Init fog relative
         Map.fogCxt=Map.fogCanvas.getContext('2d');
-        Map.miniFogCanvas.width=Map.miniFogCanvas.height=130;
-        Map.miniFogCxt=Map.miniFogCanvas.getContext('2d');
+        Map.fogCanvas.width=130;
+        Map.fogCanvas.height=Math.round(130*Map.getCurrentMap().height/Map.getCurrentMap().width);
+        Map.fogCanvas.ratio=130/Map.getCurrentMap().width;
+
         Map.shadowCanvas.width=Map.shadowCanvas.height=100;
         Map.shadowCxt=Map.shadowCanvas.getContext('2d');
         //Prepared fog shadow for quick render
@@ -44,95 +45,48 @@ var Map={
         Map.ready=true;
     },
     getCurrentMap:function(){
-        return sourceLoader.sources[`Map_${Map.currentMap}`];
+        return SourceLoader.sources.get(`Map_${Map.currentMap}`);
     },
-    refreshFogs:function(immediate){
-        let N=immediate?1:10;
-        //Initial if needed
-        if (Map.refreshFogs.step==null){
-            //Reset composite operation
-            Map.fogCxt.globalCompositeOperation=Map.miniFogCxt.globalCompositeOperation='source-over';
-            //Brush black fog to clean old fog
-            Map.fogCxt.fillStyle=Map.miniFogCxt.fillStyle='rgba(0,0,0,1)';
-            Map.fogCxt.fillRect(0,0,Map.fogCanvas.width,Map.fogCanvas.height);
-            Map.miniFogCxt.fillRect(0,0,130,130);
-            //Other things have sight
-            let parasitedEnemies=Unit.allEnemyUnits().filter(chara=>(chara.buffer.Parasite==Game.team));
-            let scannerSweeps=Burst.allEffects.filter(function(anime){
-                return anime.constructor.name=="ScannerSweep" && anime.team==Game.team;
-            });
-            let addInObjs=parasitedEnemies.concat(scannerSweeps);
-            //Clear fog
-            Map.fogCxt.globalCompositeOperation=Map.miniFogCxt.globalCompositeOperation='destination-out';
-            //Initial
-            Map.allUnits=[...Unit.allOurUnits(),...Building.ourBuildings(),...addInObjs];
-            Map.fogUnits=Map.allUnits.filter(chara=>(chara.sightInsideScreen()));
-            Map.batchSize=Math.ceil(Map.fogUnits.length/N);
-            Map.refreshFogs.step=0;//Initial step
-            Map.fogReady=false;
-        }
-        let batchUnits=[];
-        if (Map.fogUnits.length>Map.batchSize) {
-            batchUnits=Map.fogUnits.slice(0,Map.batchSize);
-            Map.fogUnits=Map.fogUnits.slice(Map.batchSize);
-        }
-        else {
-            batchUnits=Map.fogUnits;
-            Map.fogUnits=[];
-        }
-        //Draw fog
-        //console.log('BeforeInsideScreen:'+(new Date().getTime()));//test
+    //Draw interface call
+    drawFogAndMinimap:function(){
+        Map.refreshFog();
+        //Draw fog on main map
+        let ratio=Map.fogCanvas.ratio;
+        Game.fogCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
+        Game.fogCxt.drawImage(Map.fogCanvas,Math.round(Map.offsetX*ratio),Math.round(Map.offsetY*ratio),
+            Math.round(Game.HBOUND*ratio),Math.round(Game.VBOUND*ratio),0,0,Game.HBOUND,Game.VBOUND);
+        //Draw mini-map
+        Map.drawMiniMap();
+    },
+    //Used by drawFogAndMinimap
+    refreshFog:function(){
+        //Reset composite operation
+        Map.fogCxt.globalCompositeOperation='source-over';
+        //Brush black fog to clean old fog
         Map.fogCxt.fillStyle='rgba(0,0,0,1)';
-        batchUnits.forEach(function(chara){
+        Map.fogCxt.fillRect(0,0,Map.fogCanvas.width,Map.fogCanvas.height);
+        //Other things have sight
+        let parasitedEnemies=Unit.allEnemyUnits().filter(chara=>(chara.buffer.Parasite==Game.team));
+        let scannerSweeps=Burst.allEffects.filter(function(anime){
+            return anime.constructor.name=="ScannerSweep" && anime.team==Game.team;
+        });
+        let addInObjs=parasitedEnemies.concat(scannerSweeps);
+        //Clear fog
+        Map.fogCxt.globalCompositeOperation='destination-out';
+        //Initial
+        Map.allUnits=[...Unit.allOurUnits(),...Building.ourBuildings(),...addInObjs];
+        //Draw fog
+        Map.fogCxt.fillStyle='rgba(0,0,0,1)';
+        let ratio=Map.fogCanvas.ratio;
+        Map.allUnits.forEach(function(chara){
             //Clear fog on screen for our units inside screen
-            let [centerX,centerY,radius]=[(chara.posX()-Map.offsetX),
-                (chara.posY()-Map.offsetY),(chara.get('sight')<<1)];
+            let centerX=Math.round(chara.posX()*ratio);
+            let centerY=Math.round(chara.posY()*ratio);
+            let radius=Math.round(chara.get('sight')*ratio<<1);
             Map.fogCxt.drawImage(Map.shadowCanvas,0,0,100,100,centerX-radius,centerY-radius,radius<<1,radius<<1);
         });
-        Map.refreshFogs.step++;
-        if (Map.refreshFogs.step==N) {
-            delete Map.refreshFogs.step;//Return to initial
-            Map.fogReady=true;
-        }
-        //console.log('AfterInsideScreen-BeforeMinimap:'+(new Date().getTime()));//test
-        if (Map.fogReady){
-            Map.allUnits.forEach(function(chara){
-                //Clear fog on mini-map for all our units
-                let offsetX=(chara.posX()*130/Map.getCurrentMap().width)>>0;
-                let offsetY=(chara.posY()*130/Map.getCurrentMap().height)>>0;
-                let sight=(chara.get('sight')*130/Map.getCurrentMap().height)>>0;
-                Map.miniFogCxt.beginPath();
-                Map.miniFogCxt.drawImage(Map.shadowCanvas,0,0,100,100,offsetX-(sight<<1),offsetY-(sight<<1),sight<<2,sight<<2);
-            });
-            //console.log('AfterMinimap:'+(new Date().getTime()));//test
-        }
     },
-    drawFogAndMinimap:function(immediate){
-        if (Map.fogFlag){
-            //Peformance: Refresh fog by 10 steps
-            Map.refreshFogs(immediate);
-            //Fogs are ready, now draw main fog and mini-map
-            if (Map.fogReady) {
-                //Draw fog on main map
-                Game.fogCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
-                Game.fogCxt.drawImage(Map.fogCanvas,0,0);
-                //Draw mini-map
-                Map.drawMiniMap();
-            }
-        }
-        else {
-            if (immediate) Map.drawMiniMap();
-            else {
-                if (Game.mainTick%10==1) Map.drawMiniMap();
-            }
-        }
-    },
-    //Bad performance, very slow operation
-    drawFogsImmediate:function(){
-        delete Map.refreshFogs.step;
-        Map.drawFogAndMinimap(true);
-    },
-    //Red-Green block and white stroke
+    //Used by drawFogAndMinimap: draw red&green block and white stroke
     drawMiniMap:function(){
         //Selected map size
         let [mapWidth,mapHeight]=[Map.getCurrentMap().width,Map.getCurrentMap().height];
@@ -149,11 +103,8 @@ var Map={
             rectSize=(chara instanceof Building)?4:3;
             Map.miniCxt.fillRect(miniX,miniY,rectSize,rectSize);
         });
-        //Re-draw fog on mini-map
-        if (Map.fogFlag && Map.miniFogCxt){
-            //Draw fog on mini-map
-            Map.miniCxt.drawImage(Map.miniFogCanvas,0,0);
-        }
+        //Draw fog on mini-map
+        Map.miniCxt.drawImage(Map.fogCanvas,0,0,Map.fogCanvas.width,Map.fogCanvas.height,0,0,130,130);
         //Re-draw inside stroke
         Map.miniCxt.strokeStyle='white';
         Map.miniCxt.lineWidth=2;
@@ -166,7 +117,7 @@ var Map={
         Game.backCxt.save();
         Game.backCxt.beginPath();
         //Create fill style for mud
-        let mudPattern=Game.backCxt.createPattern(sourceLoader.sources['Mud'],"repeat");
+        let mudPattern=Game.backCxt.createPattern(SourceLoader.sources.get('Mud'),"repeat");
         Game.backCxt.fillStyle=mudPattern;
         Building.allBuildings.filter(function(chara){
             return (chara instanceof Building.ZergBuilding) && !chara.noMud && chara.insideScreen();
@@ -228,7 +179,7 @@ var Map={
         }
         Map.drawBg();
         //Need re-calculate fog when screen moves
-        if (!onlyMap) Map.drawFogsImmediate();
+        if (!onlyMap) Map.drawFogAndMinimap();
     },
     clickHandler:function(event){
         //Mouse at (clickX,clickY)
