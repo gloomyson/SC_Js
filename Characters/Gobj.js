@@ -253,8 +253,8 @@ class Gobj{
             height:0,
             imgPos:{
                 moving:{
-                    left:[0,0,0,0,0,0,0,0],
-                    top:[0,0,0,0,0,0,0,0]
+                    left:new Array(8).fill(0),
+                    top:new Array(8).fill(0)
                 }
             },
             frame:{

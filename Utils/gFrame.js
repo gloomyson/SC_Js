@@ -130,6 +130,37 @@ Audio.prototype.playFromStart=function(){
 };
 Object.defineProperty(Audio.prototype,'playFromStart',{enumerable:false});
 
+//Extend Array
+Array.gen=function(N,start){
+    if (start==null) start=0;
+    let result=[];
+    for (let n=start;n<(N+1);n++){
+        result.push(n);
+    }
+    return result;
+};
+Object.defineProperty(Array,'gen',{enumerable:false});
+Array.prototype.repeat=function(N,flag){
+    let result=[];
+    if (flag){
+        for (let n=0;n<this.length;n++){
+            result=result.concat(new Array(N).fill(this[n]));
+        }
+    }
+    else {
+        for (let n=0;n<N;n++){
+            result=result.concat(this);
+        }
+    }
+    return result;
+};
+Object.defineProperty(Array.prototype,'repeat',{enumerable:false});
+Array.prototype.del=function(index,N){
+    this.splice(index,N);
+    return this;
+};
+Object.defineProperty(Array.prototype,'del',{enumerable:false});
+
 /**************** Add to _$ namespace *******************/
 
 _$.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||

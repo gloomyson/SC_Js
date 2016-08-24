@@ -21,7 +21,7 @@ Terran.SCV=class SCV extends AttackableUnit{
                     construction.buildName=myself.buildName;
                     //Calculate duration
                     let duration=Resource.getCost(myself.buildName).time;
-                    //Cheat: Operation cwal
+                    //Cheat:Operation cwal
                     if (Cheat.cwal) duration=40;
                     //Processing flag on transfer
                     construction.processing={
@@ -64,7 +64,7 @@ Terran.SCV=class SCV extends AttackableUnit{
                 }
             });
         }
-        //If missing location info, mark Button.callback, MouseController will call back with location
+        //If missing location info,mark Button.callback,MouseController will call back with location
         else {
             Button.callback=arguments.callee;
             Button.callback.farmer=this;
@@ -75,33 +75,31 @@ Terran.SCV=class SCV extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "SCV",
-            imgPos: {
-                moving: {
-                    left: [2, 54, 107, 154, 202, 252, 296, 344],
-                    top: [1, 1, 1, 1, 1, 1, 1, 1]
+            name:"SCV",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*72+5)),
+                    top:new Array(16).fill(5)
                 },
-                attack: {
-                    left: [[2,2,2,2,2], [54,54,54,54,54], [107,107,107,107,107], [154,154,154,154,154],
-                        [202,202,202,202,202], [252,252,252,252,252], [296,296,296,296,296], [344,344,344,344,344]],
-                    top: [[55,55,105,105,105], [55,55,105,105,105], [55,55,105,105,105], [55,55,105,105,105],
-                        [55,55,105,105,105], [55,55,105,105,105], [55,55,105,105,105], [55,55,105,105,105]]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*72+5)).map(n=>new Array(5).fill(n)),
+                    top:new Array(16).fill([77,77,149,149,149])
                 }
             },
-            width: 40,
-            height: 44,
-            frame: {
-                moving: 1,
+            width:62,//72N+5
+            height:62,//72N+5
+            frame:{
+                moving:1,
                 attack:5
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 60,
-            damage: 5,
+            HP:60,
+            damage:5,
             armor:0,
             sight:245,
-            meleeAttack: true,
-            attackInterval: 1500,
+            meleeAttack:true,
+            attackInterval:1500,
             dieEffect:Burst.SmallExplode,
             attackEffect:Burst.SCVSpark,
             isFlying:false,
@@ -133,72 +131,36 @@ Terran.Marine=class Marine extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Marine",
-            imgPos: {
-                moving: {
-                    left: [
-                        [10, 10, 10, 10, 10, 10, 10, 10, 10],
-                        [138, 138, 138, 138, 138, 138, 138, 138, 138],
-                        [266, 266, 266, 266, 266, 266, 266, 266, 266],
-                        [394, 394, 394, 394, 394, 394, 394, 394, 394],
-                        [522, 522, 522, 522, 522, 522, 522, 522, 522],
-                        [714, 714, 714, 714, 714, 714, 714, 714, 714],
-                        [842, 842, 842, 842, 842, 842, 842, 842, 842],
-                        [970, 970, 970, 970, 970, 970, 970, 970, 970]
-                    ],
-                    top: [
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778],
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778],
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778],
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778],
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778],
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778],
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778],
-                        [266, 330, 394, 458, 522, 586, 650, 714, 778]
-                    ]
+            name:"Marine",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*64+10)).map(n=>new Array(9).fill(n)),
+                    top:new Array(16).fill(Array.gen(12,4).map(n=>(n*64+10)))
                 },
-                attack: {
-                    left: [
-                        [10, 10, 10, 10, 10, 10, 10],
-                        [138, 138, 138, 138, 138, 138, 138],
-                        [266, 266, 266, 266, 266, 266, 266],
-                        [394, 394, 394, 394, 394, 394, 394],
-                        [522, 522, 522, 522, 522, 522, 522],
-                        [714, 714, 714, 714, 714, 714, 714],
-                        [842, 842, 842, 842, 842, 842, 842],
-                        [970, 970, 970, 970, 970, 970, 970]
-                    ],
-                    top: [
-                        [74, 138, 202, 138, 202, 138, 202],
-                        [74, 138, 202, 138, 202, 138, 202],
-                        [74, 138, 202, 138, 202, 138, 202],
-                        [74, 138, 202, 138, 202, 138, 202],
-                        [74, 138, 202, 138, 202, 138, 202],
-                        [74, 138, 202, 138, 202, 138, 202],
-                        [74, 138, 202, 138, 202, 138, 202],
-                        [74, 138, 202, 138, 202, 138, 202]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*64+10)).map(n=>new Array(7).fill(n)),
+                    top:new Array(16).fill([1,2,3,2,3,2,3].map(n=>(n*64+10)))
                 },
-                dock: {
-                    left: [10, 138, 266, 394, 522, 714, 842, 970],
-                    top: [10, 10, 10, 10, 10, 10, 10, 10]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*64+10)),
+                    top:new Array(16).fill(10)
                 }
             },
-            width: 44,//64N-54
-            height: 44,
-            frame: {
-                moving: 9,
-                dock: 1,
-                attack: 7
+            width:44,//64N+10
+            height:44,
+            frame:{
+                moving:9,
+                dock:1,
+                attack:7
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 40,
-            damage: 6,
+            HP:40,
+            damage:6,
             armor:0,
             sight:245,
-            attackRange: 140,
-            attackInterval: 1500,
+            attackRange:140,
+            attackInterval:1500,
             dieEffect:Burst.HumanDeath,
             attackEffect:Burst.ShootSpark,
             isFlying:false,
@@ -228,72 +190,36 @@ Terran.Firebat=class Firebat extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Firebat",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0],
-                        [64, 64, 64, 64, 64, 64, 64, 64],
-                        [128, 128, 128, 128, 128, 128, 128, 128],
-                        [192, 192, 192, 192, 192, 192, 192, 192],
-                        [256, 256, 256, 256, 256, 256, 256, 256],
-                        [352, 352, 352, 352, 352, 352, 352, 352],
-                        [416, 416, 416, 416, 416, 416, 416, 416],
-                        [480, 480, 480, 480, 480, 480, 480, 480]
-                    ],
-                    top: [
-                        [64, 96, 128, 160, 192, 224, 256, 288],
-                        [64, 96, 128, 160, 192, 224, 256, 288],
-                        [64, 96, 128, 160, 192, 224, 256, 288],
-                        [64, 96, 128, 160, 192, 224, 256, 288],
-                        [64, 96, 128, 160, 192, 224, 256, 288],
-                        [64, 96, 128, 160, 192, 224, 256, 288],
-                        [64, 96, 128, 160, 192, 224, 256, 288],
-                        [64, 96, 128, 160, 192, 224, 256, 288]
-                    ]
+            name:"Firebat",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*32).map(n=>new Array(8).fill(n)),
+                    top:new Array(16).fill(Array.gen(9,2).map(n=>n*32))
                 },
-                dock: {
-                    left: [0, 64, 128, 192, 256, 352, 416, 480],
-                    top: [64, 64, 64, 64, 64, 64, 64, 64]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*32),
+                    top:new Array(16).fill(64)
                 },
-                attack: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0],
-                        [64, 64, 64, 64, 64, 64],
-                        [128, 128, 128, 128, 128, 128],
-                        [192, 192, 192, 192, 192, 192],
-                        [256, 256, 256, 256, 256, 256],
-                        [352, 352, 352, 352, 352, 352],
-                        [416, 416, 416, 416, 416, 416],
-                        [480, 480, 480, 480, 480, 480]
-                    ],
-                    top: [
-                        [0, 32, 32, 32, 32, 32],
-                        [0, 32, 32, 32, 32, 32],
-                        [0, 32, 32, 32, 32, 32],
-                        [0, 32, 32, 32, 32, 32],
-                        [0, 32, 32, 32, 32, 32],
-                        [0, 32, 32, 32, 32, 32],
-                        [0, 32, 32, 32, 32, 32],
-                        [0, 32, 32, 32, 32, 32]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*32).map(n=>new Array(6).fill(n)),
+                    top:new Array(16).fill([0,...new Array(5).fill(32)])
                 }
             },
-            width: 32,//(N-1)
-            height: 32,//(N-1)
-            frame: {
-                moving: 8,
-                dock: 1,
+            width:32,//32N
+            height:32,//32N
+            frame:{
+                moving:8,
+                dock:1,
                 attack:6
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 50,
-            damage: 16,
+            HP:50,
+            damage:16,
             armor:1,
             sight:245,
-            attackRange: 70,
-            attackInterval: 2200,
+            attackRange:70,
+            attackInterval:2200,
             dieEffect:Burst.SmallExplode,
             isFlying:false,
             attackLimit:"ground",
@@ -329,73 +255,37 @@ Terran.Ghost=class Ghost extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Ghost",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [86, 86, 86, 86, 86, 86, 86, 86, 86],
-                        [172, 172, 172, 172, 172, 172, 172, 172, 172],
-                        [258, 258, 258, 258, 258, 258, 258, 258, 258],
-                        [344, 344, 344, 344, 344, 344, 344, 344, 344],
-                        [473, 473, 473, 473, 473, 473, 473, 473, 473],
-                        [559, 559, 559, 559, 559, 559, 559, 559, 559],
-                        [645, 645, 645, 645, 645, 645, 645, 645, 645]
-                    ],
-                    top: [
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312],
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312],
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312],
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312],
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312],
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312],
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312],
-                        [0, 39, 78, 117, 156, 195, 234, 273, 312]
-                    ]
+            name:"Ghost",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*43).map(n=>new Array(9).fill(n)),
+                    top:new Array(16).fill(Array.gen(8).map(n=>n*39))
                 },
-                attack: {
-                    left: [
-                        [0, 0, 0, 0],
-                        [86, 86, 86, 86],
-                        [172, 172, 172, 172],
-                        [258, 258, 258, 258],
-                        [344, 344, 344, 344],
-                        [473, 473, 473, 473],
-                        [559, 559, 559, 559],
-                        [645, 645, 645, 645]
-                    ],
-                    top: [
-                        [351, 390, 429, 468],
-                        [351, 390, 429, 468],
-                        [351, 390, 429, 468],
-                        [351, 390, 429, 468],
-                        [351, 390, 429, 468],
-                        [351, 390, 429, 468],
-                        [351, 390, 429, 468],
-                        [351, 390, 429, 468]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*43).map(n=>new Array(4).fill(n)),
+                    top:new Array(16).fill(Array.gen(12,9).map(n=>n*39))
                 },
-                dock: {
-                    left: [0, 86, 172, 258, 344, 473, 559, 645],
-                    top: [0, 0, 0, 0, 0, 0, 0, 0]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*43),
+                    top:new Array(16).fill(0)
                 }
             },
-            width: 43,//(N-1)
-            height: 39,//(N-1)
-            frame: {
-                moving: 9,
-                dock: 1,
+            width:43,//43N
+            height:39,//39N
+            frame:{
+                moving:9,
+                dock:1,
                 attack:4
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 45,
-            damage: 10,
+            HP:45,
+            damage:10,
             armor:0,
-            MP: 200,
+            MP:200,
             sight:315,
-            attackRange: 210,
-            attackInterval: 2200,
+            attackRange:210,
+            attackInterval:2200,
             dieEffect:Burst.HumanDeath,
             attackEffect:Burst.FireSpark,
             isFlying:false,
@@ -432,69 +322,33 @@ Terran.Medic=class Medic extends Unit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Medic",
-            imgPos: {
-                moving: {
-                    left: [
-                        [16, 16, 16, 16, 16, 16, 16],
-                        [144, 144, 144, 144, 144, 144, 144],
-                        [272, 272, 272, 272, 272, 272, 272],
-                        [400, 400, 400, 400, 400, 400, 400],
-                        [528, 528, 528, 528, 528, 528, 528],
-                        [720, 720, 720, 720, 720, 720, 720],
-                        [848, 848, 848, 848, 848, 848, 848],
-                        [976, 976, 976, 976, 976, 976, 976]
-                    ],
-                    top: [
-                        [400, 464, 528, 592, 656, 720, 784],
-                        [400, 464, 528, 592, 656, 720, 784],
-                        [400, 464, 528, 592, 656, 720, 784],
-                        [400, 464, 528, 592, 656, 720, 784],
-                        [400, 464, 528, 592, 656, 720, 784],
-                        [400, 464, 528, 592, 656, 720, 784],
-                        [400, 464, 528, 592, 656, 720, 784],
-                        [400, 464, 528, 592, 656, 720, 784]
-                    ]
+            name:"Medic",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*64+16)).map(n=>new Array(7).fill(n)),
+                    top:new Array(16).fill(Array.gen(12,6).map(n=>(n*64+16)))
                 },
-                dock: {
-                    left: [16, 144, 272, 400, 528, 720, 848, 976],
-                    top: [400, 400, 400, 400, 400, 400, 400, 400]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*64+16)),
+                    top:new Array(16).fill(400)
                 },
-                attack: {
-                    left: [
-                        [16, 16, 16, 16, 16, 16],
-                        [144, 144, 144, 144, 144, 144],
-                        [272, 272, 272, 272, 272, 272],
-                        [400, 400, 400, 400, 400, 400],
-                        [528, 528, 528, 528, 528, 528],
-                        [720, 720, 720, 720, 720, 720],
-                        [848, 848, 848, 848, 848, 848],
-                        [976, 976, 976, 976, 976, 976]
-                    ],
-                    top: [
-                        [16, 80, 144, 208, 272, 336],
-                        [16, 80, 144, 208, 272, 336],
-                        [16, 80, 144, 208, 272, 336],
-                        [16, 80, 144, 208, 272, 336],
-                        [16, 80, 144, 208, 272, 336],
-                        [16, 80, 144, 208, 272, 336],
-                        [16, 80, 144, 208, 272, 336],
-                        [16, 80, 144, 208, 272, 336]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>(n*64+16)).map(n=>new Array(6).fill(n)),
+                    top:new Array(16).fill(Array.gen(5).map(n=>(n*64+16)))
                 }
             },
-            width: 32,//64N-48
-            height: 32,//64N-48
-            frame: {
-                moving: 7,
-                dock: 1,
-                attack: 6 //Reserved
+            width:32,//64N+16
+            height:32,//64N+16
+            frame:{
+                moving:7,
+                dock:1,
+                attack:6 //Reserved
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 60,
+            HP:60,
             armor:1,
-            MP: 200,
+            MP:200,
             sight:315,
             dieEffect:Burst.MedicDeath,
             isFlying:false,
@@ -530,26 +384,26 @@ Terran.Vulture=class Vulture extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Vulture",
-            imgPos: {
-                moving: {
-                    left: [10, 210, 410, 610, 810, 210, 410, 610],
-                    top: [10, 10, 10, 10, 10, 110, 110, 110]
+            name:"Vulture",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>(n*100+10)),
+                    top:[...new Array(9).fill(10),...new Array(7).fill(110)]
                 }
             },
-            width: 80,//100N-90
-            height: 80,//100N-90
-            frame: {
-                moving: 1
+            width:80,//100N+10
+            height:80,//100N+10
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:16,
-            HP: 80,
-            damage: 20,
+            HP:80,
+            damage:20,
             armor:0,
             sight:280,
-            attackRange: 175,
-            attackInterval: 3000,
+            attackRange:175,
+            attackInterval:3000,
             dieEffect:Burst.MiddleExplode,
             isFlying:false,
             attackLimit:"ground",
@@ -579,49 +433,31 @@ Terran.Tank=class Tank extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Tank",
-            imgPos: {
-                moving: {
-                    left: [
-                        [24, 24, 24],
-                        [280, 280, 280],
-                        [536, 536, 536],
-                        [792, 792, 792],
-                        [1048, 1048, 1048],
-                        [1432, 1432, 1432],
-                        [1688, 1688, 1688],
-                        [1944, 1944, 1944]
-                    ],
-                    top: [
-                        [24, 152, 280],
-                        [24, 152, 280],
-                        [24, 152, 280],
-                        [24, 152, 280],
-                        [24, 152, 280],
-                        [24, 152, 280],
-                        [24, 152, 280],
-                        [24, 152, 280]
-                    ]
+            name:"Tank",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*128+24).map(n=>new Array(3).fill(n)),
+                    top:new Array(16).fill([24,152,280])
                 },
-                dock: {
-                    left: [24, 280, 536, 792, 1048, 1432, 1688, 1944],
-                    top: [24, 24, 24, 24, 24, 24, 24, 24]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*128+24),
+                    top:new Array(16).fill(24)
                 }
             },
-            width: 80,//128N-104
-            height: 80,//128N-104
-            frame: {
-                moving: 3,
-                dock: 1
+            width:80,//128N+24
+            height:80,//128N+24
+            frame:{
+                moving:3,
+                dock:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 150,
-            damage: 30,
+            HP:150,
+            damage:30,
             armor:1,
             sight:350,
-            attackRange: 210,
-            attackInterval: 3700,
+            attackRange:210,
+            attackInterval:3700,
             dieEffect:Burst.BigExplode,
             attackEffect:Burst.FireSpark,
             isFlying:false,
@@ -654,88 +490,52 @@ Terran.Goliath=class Goliath extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Goliath",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [152, 152, 152, 152, 152, 152, 152, 152, 152, 152],
-                        [304, 304, 304, 304, 304, 304, 304, 304, 304, 304],
-                        [456, 456, 456, 456, 456, 456, 456, 456, 456, 456],
-                        [608, 608, 608, 608, 608, 608, 608, 608, 608, 608],
-                        [836, 836, 836, 836, 836, 836, 836, 836, 836, 836],
-                        [988, 988, 988, 988, 988, 988, 988, 988, 988, 988],
-                        [1140, 1140, 1140, 1140, 1140, 1140, 1140, 1140, 1140, 1140]
-                    ],
-                    top: [
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684],
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684],
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684],
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684],
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684],
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684],
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684],
-                        [0, 76, 152, 228, 304, 380, 456, 532, 608, 684]
-                    ]
+            name:"Goliath",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*76).map(n=>new Array(10).fill(n)),
+                    top:new Array(16).fill(Array.gen(9).map(n=>n*76))
                 },
-                attack: {
-                    left: [
-                        [0, 0],
-                        [152, 152],
-                        [304, 304],
-                        [456, 456],
-                        [608, 608],
-                        [836, 836],
-                        [988, 988],
-                        [1140, 1140]
-                    ],
-                    top: [
-                        [684, 760],
-                        [684, 760],
-                        [684, 760],
-                        [684, 760],
-                        [684, 760],
-                        [684, 760],
-                        [684, 760],
-                        [684, 760]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*76).map(n=>new Array(2).fill(n)),
+                    top:new Array(16).fill([608,760])
                 },
-                dock: {
-                    left: [0, 152, 304, 456, 608, 836, 988, 1140],
-                    top: [228, 228, 228, 228, 228, 228, 228, 228]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*76),
+                    top:new Array(16).fill(608)
                 }
             },
-            width: 76,//N-1
-            height: 76,//N-1
-            frame: {
-                moving: 10,
-                dock: 1,
+            width:76,//76N
+            height:76,//76N
+            frame:{
+                moving:10,
+                dock:1,
                 attack:2
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:11,
-            HP: 125,
+            HP:125,
             attackMode:{
                 flying:{
                     attackRange:175,
-                    attackInterval: 2200,
+                    attackInterval:2200,
                     damage:20,
                     attackType:AttackableUnit.BURST_ATTACK
                 },
                 ground:{
                     attackRange:175,
                     attackEffect:Burst.ShootSpark,
-                    attackInterval: 2200,
+                    attackInterval:2200,
                     damage:12,
                     attackType:AttackableUnit.NORMAL_ATTACK
                 },
                 status:false
             },
             //Default
-            damage: 12,
+            damage:12,
             armor:1,
             sight:280,
-            attackRange: 175,
+            attackRange:175,
             dieEffect:Burst.MiddleExplode,
             isFlying:false,
             unitType:Unit.BIG,
@@ -768,42 +568,42 @@ Terran.Wraith=class Wraith extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Wraith",
-            imgPos: {
-                moving: {
-                    left: [5, 167, 112, 59, 5, 167, 112, 59],
-                    top: [43, 3, 3, 3, 3, 41, 41, 41]
+            name:"Wraith",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*64+5),
+                    top:[...new Array(9).fill(5),...new Array(7).fill(69)]
                 }
             },
-            width: 50,
-            height: 41,
-            frame: {
-                moving: 1
+            width:54,//64N+5
+            height:54,//64N+5
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:16,
-            HP: 120,
+            HP:120,
             armor:0,
-            MP: 200,
+            MP:200,
             sight:245,
             attackMode:{
                 flying:{
                     attackRange:175,
-                    attackInterval: 2200,
+                    attackInterval:2200,
                     damage:20,
                     attackType:AttackableUnit.BURST_ATTACK
                 },
                 ground:{
                     attackRange:105,
-                    attackInterval: 2200,
+                    attackInterval:2200,
                     damage:8,
                     attackType:AttackableUnit.NORMAL_ATTACK
                 },
                 status:false
             },
             //Default
-            damage: 8,
-            attackRange: 105,
+            damage:8,
+            attackRange:105,
             dieEffect:Burst.MiddleExplode,
             isFlying:true,
             unitType:Unit.BIG,
@@ -840,21 +640,21 @@ Terran.Dropship=class Dropship extends Unit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Dropship",
-            imgPos: {
-                moving: {
-                    left: [0, 60, 120, 180, 240, 60, 120, 180],
-                    top: [0, 0, 0, 0, 0, 60, 60, 60]
+            name:"Dropship",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*60),
+                    top:[...new Array(9).fill(0),...new Array(7).fill(60)]
                 }
             },
-            width: 60,//N-1
-            height: 60,//N-1
-            frame: {
-                moving: 1
+            width:60,//N-1
+            height:60,//N-1
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:13,
-            HP: 150,
+            HP:150,
             armor:1,
             sight:280,
             dieEffect:Burst.MiddleExplode,
@@ -886,23 +686,23 @@ Terran.Vessel=class Vessel extends Unit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Vessel",
-            imgPos: {
-                moving: {
-                    left: [14, 14, 14, 14, 14, 14, 14, 14],
-                    top: [24, 24, 24, 24, 24, 24, 24, 24]
+            name:"Vessel",
+            imgPos:{
+                moving:{
+                    left:new Array(16).fill(14),
+                    top:new Array(16).fill(24)
                 }
             },
-            width: 70,
-            height: 55,
-            frame: {
-                moving: 1
+            width:70,
+            height:55,
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 200,
+            HP:200,
             armor:1,
-            MP: 200,
+            MP:200,
             sight:350,
             dieEffect:Burst.BigExplode,
             isFlying:true,
@@ -948,27 +748,27 @@ Terran.BattleCruiser=class BattleCruiser extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "BattleCruiser",
-            imgPos: {
-                moving: {
-                    left: [0, 95, 195, 297, 0, 99, 201, 301],
-                    top: [81, 81, 81, 81, 0, 0, 0, 0]
+            name:"BattleCruiser",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*120+13),
+                    top:[...new Array(9).fill(13),...new Array(7).fill(133)]
                 }
             },
-            width: 94,
-            height: 80,
-            frame: {
-                moving: 1
+            width:94,//120N+13
+            height:94,//120N+13
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:6,
-            HP: 500,
-            damage: 25,
+            HP:500,
+            damage:25,
             armor:3,
-            MP: 200,
+            MP:200,
             sight:385,
-            attackRange: 210,
-            attackInterval: 3000,
+            attackRange:210,
+            attackInterval:3000,
             dieEffect:Burst.BigExplode,
             isFlying:true,
             unitType:Unit.BIG,
@@ -1004,26 +804,26 @@ Terran.Valkyrie=class Valkyrie extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Valkyrie",
-            imgPos: {
-                moving: {
-                    left: [35, 163, 291, 419, 547, 163, 291, 419],
-                    top: [35, 35, 35, 35, 35, 163, 163, 163]
+            name:"Valkyrie",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*128+35),
+                    top:[...new Array(9).fill(35),...new Array(7).fill(163)]
                 }
             },
-            width: 58,//128N-93
-            height: 58,//128N-93
-            frame: {
-                moving: 1
+            width:58,//128N+35
+            height:58,//128N+35
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:16,
-            HP: 200,
-            damage: 6,//6*3
+            HP:200,
+            damage:6,//6*3
             armor:2,
             sight:280,
-            attackRange: 210,
-            attackInterval: 600,
+            attackRange:210,
+            attackInterval:600,
             dieEffect:Burst.MiddleExplode,
             isFlying:true,
             attackLimit:"flying",
@@ -1059,40 +859,22 @@ Terran.Civilian=class Civilian extends Unit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Civilian",
-            imgPos: {
-                moving: {
-                    left: [
-                        [11, 11, 11, 11, 11, 11, 11, 11],
-                        [60, 60, 60, 60, 60, 60, 60, 60],
-                        [108, 108, 108, 108, 108, 108, 108, 108],
-                        [154, 154, 154, 154, 154, 154, 154, 154],
-                        [200, 200, 200, 200, 200, 200, 200, 200],
-                        [248, 248, 248, 248, 248, 248, 248, 248],
-                        [293, 293, 293, 293, 293, 293, 293, 293],
-                        [342, 342, 342, 342, 342, 342, 342, 342]
-                    ],
-                    top: [
-                        [246, 0, 37, 70, 105, 142, 176, 211],
-                        [246, 0, 37, 70, 105, 142, 176, 211],
-                        [246, 0, 37, 70, 105, 142, 176, 211],
-                        [246, 0, 37, 70, 105, 142, 176, 211],
-                        [246, 0, 37, 70, 105, 142, 176, 211],
-                        [246, 0, 37, 70, 105, 142, 176, 211],
-                        [246, 0, 37, 70, 105, 142, 176, 211],
-                        [246, 0, 37, 70, 105, 142, 176, 211]
-                    ]
+            name:"Civilian",
+            imgPos:{
+                moving:{
+                    left:[11,35,60,84,108,131,154,177,200,224,248,272,293,317,342,366].map(n=>new Array(8).fill(n)),
+                    top:new Array(16).fill([246,0,37,70,105,142,176,211])
                 }
             },
-            width: 21,
-            height: 31,
-            frame: {
-                moving: 8,
-                dock: 1
+            width:21,
+            height:31,
+            frame:{
+                moving:8,
+                dock:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:6,
-            HP: 60,
+            HP:60,
             armor:0,
             sight:245,
             dieEffect:Burst.HumanDeath,

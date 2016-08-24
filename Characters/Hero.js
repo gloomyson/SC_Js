@@ -23,28 +23,28 @@ Hero.HeroCruiser=class HeroCruiser extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "HeroCruiser",
-            imgPos: {
-                moving: {
-                    left: [10, 250, 490, 730, 10, 250, 490, 730],
-                    top: [10, 10, 10, 10, 130, 130, 130, 130]
+            name:"HeroCruiser",
+            imgPos:{
+                moving:{
+                    left:Array.gen(7).repeat(2).map(n=>n*120+10),
+                    top:[...new Array(8).fill(10),...new Array(8).fill(130)]
                 }
             },
-            width: 100,
-            height: 100,
-            frame: {
-                moving: 1,
-                stop: 1
+            width:100,//120N+10
+            height:100,
+            frame:{
+                moving:1,
+                stop:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:9,
-            HP: 1000,
-            damage: 50,
+            HP:1000,
+            damage:50,
             armor:3,
-            MP: 500,
+            MP:500,
             sight:385,
-            attackRange: 250,
-            attackInterval: 3000,
+            attackRange:250,
+            attackInterval:3000,
             dieEffect:Burst.BigExplode,
             isFlying:true,
             unitType:Unit.BIG,
@@ -92,27 +92,27 @@ Hero.Tassadar=class Tassadar extends Unit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Tassadar",
-            imgPos: {
-                moving: {
-                    left: [0, 190, 380, 570, 0, 190, 380, 570],
-                    top: [0, 0, 0, 0, 90, 90, 90, 90]
+            name:"Tassadar",
+            imgPos:{
+                moving:{
+                    left:Array.gen(7).repeat(2).map(n=>n*95),
+                    top:[...new Array(8).fill(90),...new Array(8).fill(0)]
                 }
             },
-            width: 95,
-            height: 90,
-            frame: {
-                moving: 1,
-                stop: 1
+            width:95,//95N
+            height:90,
+            frame:{
+                moving:1,
+                stop:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:15,
-            HP: 999,
-            SP: 999,
+            HP:999,
+            SP:999,
             armor:3,
-            MP: 999,
+            MP:999,
             sight:385,
-            detector: Gobj.detectorBuffer,
+            detector:Gobj.detectorBuffer,
             dieEffect:Burst.BigBlueExplode,
             isFlying:true,
             unitType:Unit.BIG,
@@ -153,73 +153,37 @@ Hero.Kerrigan=class Kerrigan extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Kerrigan",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [74, 74, 74, 74, 74, 74, 74, 74, 74],
-                        [148, 148, 148, 148, 148, 148, 148, 148, 148],
-                        [222, 222, 222, 222, 222, 222, 222, 222, 222],
-                        [296, 296, 296, 296, 296, 296, 296, 296, 296],
-                        [407, 407, 407, 407, 407, 407, 407, 407, 407],
-                        [481, 481, 481, 481, 481, 481, 481, 481, 481],
-                        [555, 555, 555, 555, 555, 555, 555, 555, 555]
-                    ],
-                    top: [
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344],
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344],
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344],
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344],
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344],
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344],
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344],
-                        [0, 43, 86, 129, 172, 215, 258, 301, 344]
-                    ]
+            name:"Kerrigan",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*36.5>>0).map(n=>new Array(9).fill(n)),
+                    top:new Array(16).fill(Array.gen(8).map(n=>n*43))
                 },
-                attack: {
-                    left: [
-                        [0, 0, 0, 0],
-                        [74, 74, 74, 74],
-                        [148, 148, 148, 148],
-                        [222, 222, 222, 222],
-                        [296, 296, 296, 296],
-                        [407, 407, 407, 407],
-                        [481, 481, 481, 481],
-                        [555, 555, 555, 555]
-                    ],
-                    top: [
-                        [387, 430, 473, 516],
-                        [387, 430, 473, 516],
-                        [387, 430, 473, 516],
-                        [387, 430, 473, 516],
-                        [387, 430, 473, 516],
-                        [387, 430, 473, 516],
-                        [387, 430, 473, 516],
-                        [387, 430, 473, 516]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*36.5>>0).map(n=>new Array(4).fill(n)),
+                    top:new Array(16).fill(Array.gen(12,9).map(n=>n*43))
                 },
-                dock: {
-                    left: [0, 74, 148, 222, 296, 407, 481, 555],
-                    top: [0, 0, 0, 0, 0, 0, 0, 0]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*36.5>>0),
+                    top:new Array(16).fill(0)
                 }
             },
-            width: 37,//(N-1)
-            height: 43,//(N-1)
-            frame: {
-                moving: 9,
-                dock: 1,
+            width:36,//36.5N>>0
+            height:43,//43N
+            frame:{
+                moving:9,
+                dock:1,
                 attack:4
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 300,
-            damage: 20,
+            HP:300,
+            damage:20,
             armor:1,
-            MP: 300,
+            MP:300,
             sight:315,
-            attackRange: 210,
-            attackInterval: 2200,
+            attackRange:210,
+            attackInterval:2200,
             dieEffect:Burst.HumanDeath,
             attackEffect:Burst.FireSpark,
             isFlying:false,
@@ -264,75 +228,39 @@ Hero.Sarah=class Sarah extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Sarah",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0],
-                        [124, 124, 124, 124, 124, 124, 124, 124],
-                        [248, 248, 248, 248, 248, 248, 248, 248],
-                        [372, 372, 372, 372, 372, 372, 372, 372],
-                        [496, 496, 496, 496, 496, 496, 496, 496],
-                        [682, 682, 682, 682, 682, 682, 682, 682],
-                        [806, 806, 806, 806, 806, 806, 806, 806],
-                        [930, 930, 930, 930, 930, 930, 930, 930]
-                    ],
-                    top: [
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406]
-                    ]
+            name:"Sarah",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*62).map(n=>new Array(8).fill(n)),
+                    top:new Array(16).fill(Array.gen(7).map(n=>n*58))
                 },
-                attack: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0],
-                        [124, 124, 124, 124, 124, 124, 124, 124],
-                        [248, 248, 248, 248, 248, 248, 248, 248],
-                        [372, 372, 372, 372, 372, 372, 372, 372],
-                        [496, 496, 496, 496, 496, 496, 496, 496],
-                        [682, 682, 682, 682, 682, 682, 682, 682],
-                        [806, 806, 806, 806, 806, 806, 806, 806],
-                        [930, 930, 930, 930, 930, 930, 930, 930]
-                    ],
-                    top: [
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*62).map(n=>new Array(8).fill(n)),
+                    top:new Array(16).fill(Array.gen(15,8).map(n=>n*58))
                 },
-                dock: {
-                    left: [0, 124, 248, 372, 496, 682, 806, 930],
-                    top: [0, 0, 0, 0, 0, 0, 0, 0]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*62),
+                    top:new Array(16).fill(0)
                 }
             },
-            width: 62,//(N-1)
-            height: 58,//(N-1)
-            frame: {
-                moving: 8,
-                dock: 1,
-                attack: 8
+            width:62,//(N-1)
+            height:58,//(N-1)
+            frame:{
+                moving:8,
+                dock:1,
+                attack:8
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 500,
-            SP: 500,
-            damage: 40,
+            HP:500,
+            SP:500,
+            damage:40,
             armor:2,
             plasma:0,
-            MP: 500,
+            MP:500,
             sight:315,
-            attackRange: 70,
-            attackInterval: 2000,
+            attackRange:70,
+            attackInterval:2000,
             dieEffect:Burst.HumanDeath,
             attackEffect:Burst.FireSpark,
             isFlying:false,
@@ -378,76 +306,40 @@ Hero.DevilHunter=class DevilHunter extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "DevilHunter",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0],
-                        [124, 124, 124, 124, 124, 124, 124, 124],
-                        [248, 248, 248, 248, 248, 248, 248, 248],
-                        [372, 372, 372, 372, 372, 372, 372, 372],
-                        [496, 496, 496, 496, 496, 496, 496, 496],
-                        [682, 682, 682, 682, 682, 682, 682, 682],
-                        [806, 806, 806, 806, 806, 806, 806, 806],
-                        [930, 930, 930, 930, 930, 930, 930, 930]
-                    ],
-                    top: [
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406],
-                        [0, 58, 116, 174, 232, 290, 348, 406]
-                    ]
+            name:"DevilHunter",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*62).map(n=>new Array(8).fill(n)),
+                    top:new Array(16).fill(Array.gen(7).map(n=>n*58))
                 },
-                attack: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0],
-                        [124, 124, 124, 124, 124, 124, 124, 124],
-                        [248, 248, 248, 248, 248, 248, 248, 248],
-                        [372, 372, 372, 372, 372, 372, 372, 372],
-                        [496, 496, 496, 496, 496, 496, 496, 496],
-                        [682, 682, 682, 682, 682, 682, 682, 682],
-                        [806, 806, 806, 806, 806, 806, 806, 806],
-                        [930, 930, 930, 930, 930, 930, 930, 930]
-                    ],
-                    top: [
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870],
-                        [464, 522, 580, 638, 696, 754, 812, 870]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*62).map(n=>new Array(8).fill(n)),
+                    top:new Array(16).fill(Array.gen(15,8).map(n=>n*58))
                 },
-                dock: {
-                    left: [0, 124, 248, 372, 496, 682, 806, 930],
-                    top: [0, 0, 0, 0, 0, 0, 0, 0]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*62),
+                    top:new Array(16).fill(0)
                 }
             },
-            width: 62,//(N-1)
-            height: 58,//(N-1)
-            frame: {
-                moving: 8,
-                dock: 1,
-                attack: 8
+            width:62,//(N-1)
+            height:58,//(N-1)
+            frame:{
+                moving:8,
+                dock:1,
+                attack:8
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 2000,
-            SP: 2000,
-            MP: 200,
-            damage: 30,
+            HP:2000,
+            SP:2000,
+            MP:200,
+            damage:30,
             armor:0,
             plasma:0,
             sight:315,
             detector:Gobj.detectorBuffer,
-            attackRange: 210,
-            attackInterval: 1500,
+            attackRange:210,
+            attackInterval:1500,
             fireDelay:600,
             dieEffect:Burst.SmallZergFlyingDeath,
             isFlying:false,

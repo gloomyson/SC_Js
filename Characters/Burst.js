@@ -39,7 +39,7 @@ class Burst extends Gobj{
         }
         //Independent burst
         else {
-            //Target location, from centerP to top-left
+            //Target location,from centerP to top-left
             this.x=props.x-this.width*times/2;
             this.y=props.y-this.height*times/2;
         }
@@ -57,7 +57,7 @@ class Burst extends Gobj{
     animeFrame(){
         //Animation play
         this.action++;
-        //Override Gobj here, can have hidden frames
+        //Override Gobj here,can have hidden frames
         let arrLimit=(this.imgPos[this.status].left instanceof Array)?(this.imgPos[this.status].left.length):1;
         if (this.action==this.frame[this.status] || this.action==arrLimit) {
             this.action=0;
@@ -75,7 +75,7 @@ class Burst extends Gobj{
         //Start play burst animation
         const myself=this;
         let animateFrame=function(){
-            //Only play animation, will not move
+            //Only play animation,will not move
             myself.animeFrame();
         };
         this.allFrames['animate']=animateFrame;
@@ -112,7 +112,7 @@ Burst.GreenFog=class GreenFog extends Burst{
             imgPos:{
                 burst:{
                     left:[8,68,134,198,263,8,68,134,198,263],
-                    top:[468,468,468,468,468,532,532,532,532,532]
+                    top:[468,532].repeat(5,true)
                 }
             },
             width:52,
@@ -136,7 +136,7 @@ Burst.Parasite=class Parasite extends Burst{
             imgPos:{
                 burst:{
                     left:[8,68,134,198,263,8,68,134,198,263],
-                    top:[468,468,468,468,468,532,532,532,532,532]
+                    top:[468,532].repeat(5,true)
                 }
             },
             width:52,
@@ -159,7 +159,7 @@ Burst.Spore=class Spore extends Burst{
             imgPos:{
                 burst:{
                     left:[8,68,134,198,263,8,68,134,198,263],
-                    top:[468,468,468,468,468,532,532,532,532,532]
+                    top:[468,532].repeat(5,true)
                 }
             },
             width:52,
@@ -183,7 +183,7 @@ Burst.GreenBallBroken=class GreenBallBroken extends Burst{
             imgPos:{
                 burst:{
                     left:[0,56,119,182,252,322,396,470],
-                    top:[556,556,556,556,556,556,556,556]
+                    top:new Array(8).fill(556)
                 }
             },
             width:60,
@@ -205,7 +205,7 @@ Burst.PurpleCloudSpread=class PurpleCloudSpread extends Burst{
         //Fix all spored issue
         if (chara.status=='dead' || chara.status==null) return;
         //Effect:PurpleBuffer when cloud spread on target chara
-        //Buffer flag, can add up
+        //Buffer flag,can add up
         if (chara.buffer.PurpleCloud==9) return;//9 at max
         if (chara.buffer.PurpleCloud>0) chara.buffer.PurpleCloud++;
         else chara.buffer.PurpleCloud=1;
@@ -221,7 +221,7 @@ Burst.PurpleCloudSpread=class PurpleCloudSpread extends Burst{
         chara.purpleBuffer.push(bufferObj);
         //Purple effect
         new Animation.PurpleEffect({team:this.team,target:chara,callback:function(){
-            //Restore in 30 seconds, Last In First Out
+            //Restore in 30 seconds,Last In First Out
             if (chara.purpleBuffer && chara.removeBuffer(chara.purpleBuffer.pop())) {
                 chara.buffer.PurpleCloud--;
             }
@@ -239,7 +239,7 @@ Burst.PurpleCloudSpread=class PurpleCloudSpread extends Burst{
             imgPos:{
                 burst:{
                     left:[17,70,122,174,230,280,335,390,452],
-                    top:[1022,1022,1022,1022,1022,1022,1022,1022,1022]
+                    top:new Array(9).fill(1022)
                 }
             },
             width:50,
@@ -263,7 +263,7 @@ Burst.Sunken=class Sunken extends Burst{
             imgPos:{
                 burst:{
                     left:[46,174,302,432,560,688],
-                    top:[626,626,626,626,626,626]
+                    top:new Array(6).fill(626)
                 }
             },
             width:28,
@@ -287,11 +287,11 @@ Burst.SmallFireSpark=class SmallFireSpark extends Burst{
             imgPos:{
                 burst:{
                     left:[64,106,64],
-                    top:[91,91,91]
+                    top:new Array(3).fill(132)
                 }
             },
             width:32,
-            height:28,
+            height:30,
             frame:{
                 burst:3
             }
@@ -305,11 +305,11 @@ Burst.FireSpark=class FireSpark extends Burst{
             name:"Ghost",
             imgPos:{
                 burst:{
-                    left:[0, 38, 76, 114, 152, 190, 228, 266, 304, 342],
-                    top:[596,596,596,596,596,596,596,596,596,596]
+                    left:Array.gen(9).map(n=>n*38),
+                    top:new Array(10).fill(596)
                 }
             },
-            width:38,
+            width:38,//38N
             height:36,
             frame:{
                 burst:10
@@ -332,7 +332,7 @@ Burst.LaserSpark=class LaserSpark extends Burst{
             imgPos:{
                 burst:{
                     left:[18,70,128,182],
-                    top:[50,50,50,50]
+                    top:new Array(4).fill(50)
                 }
             },
             width:30,
@@ -357,11 +357,11 @@ Burst.HydraSpark=class HydraSpark extends Burst{
             name:"Hydralisk",
             imgPos:{
                 burst:{
-                    left:[0, 34, 68, 102, 136, 170, 204, 238],
-                    top:[801,801,801,801,801,801,801,801]
+                    left:Array.gen(7).map(n=>n*34),
+                    top:new Array(8).fill(801)
                 }
             },
-            width:34,
+            width:34,//34N
             height:35,
             frame:{
                 burst:8
@@ -376,8 +376,8 @@ Burst.CorsairCloud=class CorsairCloud extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[5,57],//[1, 64, 128]
-                    top:[576,576]
+                    left:[5,57],//[1,64,128]
+                    top:new Array(2).fill(576)
                 }
             },
             width:40,//62
@@ -395,14 +395,14 @@ Burst.ArchonBurst=class ArchonBurst extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[0, 80, 160, 240, 320, 400],
-                    top:[779,779,779,779,779,779]
+                    left:Array.gen(5).map(n=>n*80),
+                    top:new Array(6).fill(779)
                 }
             },
-            width:80,
+            width:80,//80N
             height:80,
             frame:{
-                burst:8
+                burst:6
             }
         }
     };
@@ -419,11 +419,11 @@ Burst.DragoonBallBroken=class DragoonBallBroken extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520],
-                    top:[891,891,891,891,891,891,891,891,891,891,891,891,891,891]
+                    left:Array.gen(13).map(n=>n*40),
+                    top:new Array(14).fill(891)
                 }
             },
-            width:38,
+            width:38,//40N
             height:40,
             frame:{
                 burst:14
@@ -438,11 +438,11 @@ Burst.ShootSpark=class ShootSpark extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[0, 40, 80, 120, 160, 200, 240, 280, 320, 360],
-                    top:[1011,1011,1011,1011,1011,1011,1011,1011,1011,1011]
+                    left:Array.gen(9).map(n=>n*40),
+                    top:new Array(10).fill(1011)
                 }
             },
-            width:40,
+            width:40,//40N
             height:40,
             frame:{
                 burst:10
@@ -457,8 +457,8 @@ Burst.BlueShootSpark=class BlueShootSpark extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[32, 64, 96, 128, 160, 192, 224, 256],
-                    top:[1115,1115,1115,1115,1115,1115,1115,1115]
+                    left:Array.gen(7).map(n=>n*32+32),
+                    top:new Array(8).fill(1115)
                 }
             },
             width:32,
@@ -476,11 +476,11 @@ Burst.SCVSpark=class SCVSpark extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[0, 48, 96, 144, 192, 240, 288, 336, 384, 432],
-                    top:[1147,1147,1147,1147,1147,1147,1147,1147,1147,1147]
+                    left:Array.gen(9).map(n=>n*48),
+                    top:new Array(10).fill(1147)
                 }
             },
-            width:48,
+            width:48,//48N
             height:48,
             frame:{
                 burst:10
@@ -495,8 +495,8 @@ Burst.ProbeSpark=class ProbeSpark extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[0, 48, 96, 144, 192, 240, 288],
-                    top:[672,672,672,672,672,672,672]
+                    left:Array.gen(6).map(n=>n*48),
+                    top:new Array(7).fill(672)
                 }
             },
             width:48,
@@ -519,11 +519,11 @@ Burst.ReaverBurst=class ReaverBurst extends Burst{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[0, 80, 160, 240, 320, 400, 480, 560, 640, 720],
-                    top:[931,931,931,931,931,931,931,931,931,931]
+                    left:Array.gen(9).map(n=>n*80),
+                    top:new Array(10).fill(931)
                 }
             },
-            width:78,
+            width:78,//80N
             height:64,
             frame:{
                 burst:10
@@ -544,7 +544,7 @@ Burst.PurpleFog=class PurpleFog extends Burst{
             imgPos:{
                 burst:{
                     left:[338,398,464,528,593,338,398,464,528,593],
-                    top:[468,468,468,468,468,532,532,532,532,532]
+                    top:[468,532].repeat(5,true)
                 }
             },
             width:52,
@@ -568,11 +568,11 @@ Burst.InfestedBomb=class InfestedBomb extends Burst{
             name:"InfestedTerran",
             imgPos:{
                 burst:{
-                    left:[0, 78, 156, 234, 312, 0, 78, 156, 234, 312],
-                    top:[432,432,432,432,432,496,496,496,496,496]
+                    left:Array.gen(4).repeat(2).map(n=>n*78),
+                    top:[432,496].repeat(5,true)
                 }
             },
-            width:78,
+            width:78,//78N
             height:64,
             frame:{
                 burst:10
@@ -587,11 +587,11 @@ Burst.ScourgeBomb=class ScourgeBomb extends Burst{
             name:"Scourge",
             imgPos:{
                 burst:{
-                    left:[0, 52, 104, 156, 208, 260, 312, 364, 416],
-                    top:[218,218,218,218,218,218,218,218,218]
+                    left:Array.gen(8).map(n=>n*52),
+                    top:new Array(9).fill(218)
                 }
             },
-            width:52,
+            width:52,//52N
             height:46,
             frame:{
                 burst:9
@@ -608,7 +608,7 @@ Burst.SmallExplode=class SmallExplode extends Burst{
             imgPos:{
                 burst:{
                     left:[56,156,256,360],
-                    top:[1686,1686,1686,1686]
+                    top:new Array(4).fill(1686)
                 }
             },
             width:80,
@@ -627,7 +627,7 @@ Burst.MiddleExplode=class MiddleExplode extends Burst{
             imgPos:{
                 burst:{
                     left:[44,192,342,498],
-                    top:[1754,1754,1754,1754]
+                    top:new Array(4).fill(1754)
                 }
             },
             width:120,
@@ -646,7 +646,7 @@ Burst.BigExplode=class BigExplode extends Burst{
             imgPos:{
                 burst:{
                     left:[26,226,424,632],
-                    top:[1846,1846,1846,1846]
+                    top:new Array(4).fill(1846)
                 }
             },
             width:160,
@@ -665,7 +665,7 @@ Burst.SmallBlueExplode=class SmallBlueExplode extends Burst{
             imgPos:{
                 burst:{
                     left:[50,150,250,356],
-                    top:[1424,1424,1424,1424]
+                    top:new Array(4).fill(1424)
                 }
             },
             width:80,
@@ -684,7 +684,7 @@ Burst.MiddleBlueExplode=class MiddleBlueExplode extends Burst{
             imgPos:{
                 burst:{
                     left:[36,184,338,494],
-                    top:[1484,1484,1484,1484]
+                    top:new Array(4).fill(1484)
                 }
             },
             width:120,
@@ -703,7 +703,7 @@ Burst.BigBlueExplode=class BigBlueExplode extends Burst{
             imgPos:{
                 burst:{
                     left:[22,222,420,632],
-                    top:[1566,1566,1566,1566]
+                    top:new Array(4).fill(1566)
                 }
             },
             width:160,
@@ -728,8 +728,8 @@ Burst.ZergBuildingBurst=class ZergBuildingBurst extends Burst{
             name:"BuildingBurst",
             imgPos:{
                 burst:{
-                    left:[0,200,400,600,800,0,200,400,600,800,0,200,400,400,600,600,800,800],
-                    top:[0,0,0,0,0,200,200,200,200,200,400,400,400,400,400,400,400,400]
+                    left:[...Array.gen(4).repeat(2),...Array.gen(4).repeat(2,true).del(1,2)].map(n=>n*200),
+                    top:[...[0,200].repeat(5,true),...new Array(8).fill(400)]
                 }
             },
             width:200,
@@ -747,8 +747,8 @@ Burst.TerranBuildingBurst=class TerranBuildingBurst extends Burst{
             name:"BuildingBurst",
             imgPos:{
                 burst:{
-                    left:[0,0,200,200,400,400,600,600,800,800,0,0,200,200,400,400,600,600],
-                    top:[600,600,600,600,600,600,600,600,600,600,800,800,800,800,800,800,800,800]
+                    left:Array.gen(4).repeat(2,true).repeat(2).del(18,2).map(n=>n*200),
+                    top:[...new Array(10).fill(600),...new Array(8).fill(800)]
                 }
             },
             width:200,
@@ -766,8 +766,8 @@ Burst.ProtossBuildingBurst=class ProtossBuildingBurst extends Burst{
             name:"BuildingBurst",
             imgPos:{
                 burst:{
-                    left:[0,0,200,200,400,400,600,600,800,800,0,0,200,200,400,400,600,600],
-                    top:[1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1200,1200,1200,1200,1200,1200,1200,1200]
+                    left:Array.gen(4).repeat(2,true).repeat(2).del(18,2).map(n=>n*200),
+                    top:[...new Array(10).fill(1000),...new Array(8).fill(1200)]
                 }
             },
             width:200,
@@ -786,7 +786,7 @@ Burst.HumanDeath=class HumanDeath extends Burst{
             imgPos:{
                 burst:{
                     left:[6,58,106,158,6,54,102,152],
-                    top:[286,286,286,286,320,320,320,320]
+                    top:[286,320].repeat(4,true)
                 }
             },
             width:42,
@@ -804,8 +804,8 @@ Burst.MedicDeath=class MedicDeath extends Burst{
             name:"Medic",
             imgPos:{
                 burst:{
-                    left:[0, 64, 128, 192, 256, 320, 384, 448],
-                    top:[832,832,832,832,832,832,832,832]
+                    left:Array.gen(7).map(n=>n*64),
+                    top:new Array(8).fill(832)
                 }
             },
             width:64,
@@ -824,7 +824,7 @@ Burst.SmallZergFlyingDeath=class SmallZergFlyingDeath extends Burst{
             imgPos:{
                 burst:{
                     left:[71,143,215,283,355,432,502],
-                    top:[372,372,372,372,372,372,372]
+                    top:new Array(7).fill(372)
                 }
             },
             width:64,
@@ -842,11 +842,11 @@ Burst.BigZergFlyingDeath=class BigZergFlyingDeath extends Burst{
             name:"Devourer",
             imgPos:{
                 burst:{
-                    left:[0, 114, 228, 342, 456, 570, 684, 798],
-                    top:[860,860,860,860,860,860,860,860]
+                    left:Array.gen(7).map(n=>n*114),
+                    top:new Array(8).fill(860)
                 }
             },
-            width:114,
+            width:114,//114N
             height:102,
             frame:{
                 burst:8
@@ -861,8 +861,8 @@ Burst.DroneDeath=class DroneDeath extends Burst{
             name:"Drone",
             imgPos:{
                 burst:{
-                    left:[0, 128, 256, 384, 512, 640, 768, 896],
-                    top:[1280,1280,1280,1280,1280,1280,1280,1280]
+                    left:Array.gen(7).map(n=>n*128),
+                    top:new Array(8).fill(1280)
                 }
             },
             width:128,
@@ -880,8 +880,8 @@ Burst.ZerglingDeath=class ZerglingDeath extends Burst{
             name:"Zergling",
             imgPos:{
                 burst:{
-                    left:[0, 68, 136, 204, 272, 340, 408],
-                    top:[506,506,506,506,506,506,506]
+                    left:Array.gen(6).map(n=>n*68),
+                    top:new Array(7).fill(506)
                 }
             },
             width:68,
@@ -899,8 +899,8 @@ Burst.HydraliskDeath=class HydraliskDeath extends Burst{
             name:"Hydralisk",
             imgPos:{
                 burst:{
-                    left:[0, 66, 132, 198, 264, 330, 396, 462, 528, 594, 660, 726],
-                    top:[704,704,704,704,704,704,704,704,704,704,704,704]
+                    left:Array.gen(11).map(n=>n*66),
+                    top:new Array(12).fill(704)
                 }
             },
             width:66,
@@ -918,8 +918,8 @@ Burst.LurkerDeath=class LurkerDeath extends Burst{
             name:"Lurker",
             imgPos:{
                 burst:{
-                    left:[85, 170, 255, 340, 0, 85, 170, 255, 340],
-                    top:[582,582,582,582,646,646,646,646,646]
+                    left:[...Array.gen(4,1),...Array.gen(4)].map(n=>n*85),
+                    top:[...new Array(4).fill(582),...new Array(5).fill(646)]
                 }
             },
             width:85,
@@ -937,8 +937,8 @@ Burst.UltraliskDeath=class UltraliskDeath extends Burst{
             name:"Ultralisk",
             imgPos:{
                 burst:{
-                    left:[0, 101, 202, 303, 404, 505, 606, 707, 808, 909],
-                    top:[1620,1620,1620,1620,1620,1620,1620,1620,1620,1620]
+                    left:Array.gen(9).map(n=>n*101),
+                    top:new Array(10).fill(1620)
                 }
             },
             width:101,
@@ -956,8 +956,8 @@ Burst.DefilerDeath=class DefilerDeath extends Burst{
             name:"Defiler",
             imgPos:{
                 burst:{
-                    left:[0, 70, 140, 210, 280, 350, 420, 490, 560, 630],
-                    top:[558,558,558,558,558,558,558,558,558,558]
+                    left:Array.gen(9).map(n=>n*70),
+                    top:new Array(10).fill(558)
                 }
             },
             width:70,
@@ -975,8 +975,8 @@ Burst.BroodlingDeath=class BroodlingDeath extends Burst{
             name:"Queen",
             imgPos:{
                 burst:{
-                    left:[0, 40, 80, 120, 160],
-                    top:[782,782,782,782,782]
+                    left:Array.gen(4).map(n=>n*40),
+                    top:new Array(5).fill(782)
                 }
             },
             width:40,
@@ -994,8 +994,8 @@ Burst.LarvaDeath=class LarvaDeath extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,50,100,150,200,250,300,350,400],
-                    top:[146,146,146,146,146,146,146,146,146]
+                    left:Array.gen(8).map(n=>n*50),
+                    top:new Array(9).fill(146)
                 }
             },
             width:50,
@@ -1013,8 +1013,8 @@ Burst.EggDeath=class EggDeath extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,70,140,210,280,350,0,70,140,210,280,350],
-                    top:[254,254,254,254,254,254,312,312,312,312,312,312]
+                    left:Array.gen(5).map(n=>n*70).repeat(2),
+                    top:[254,312].repeat(6,true)
                 }
             },
             width:70,
@@ -1036,11 +1036,11 @@ Burst.EggBirth=class EggBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[2,38,74,110,146,182,218,254],
-                    top:[372,372,372,372,372,372,372,372]
+                    left:Array.gen(7).map(n=>n*36+2),
+                    top:new Array(8).fill(372)
                 }
             },
-            width:36,
+            width:36,//36N+2
             height:40,
             frame:{
                 burst:8
@@ -1059,11 +1059,11 @@ Burst.DroneBirth=class DroneBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[1,68,135,202,269,336,403],
-                    top:[442,442,442,442,442,442,442]
+                    left:Array.gen(6).map(n=>n*67+1),
+                    top:new Array(7).fill(442)
                 }
             },
-            width:67,
+            width:67,//67N+1
             height:44,
             frame:{
                 burst:7
@@ -1082,8 +1082,8 @@ Burst.OverlordBirth=class OverlordBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,63,126,189,252,315,378],
-                    top:[486,486,486,486,486,486,486]
+                    left:Array.gen(6).map(n=>n*63),
+                    top:new Array(7).fill(486)
                 }
             },
             width:63,
@@ -1105,8 +1105,8 @@ Burst.ZerglingBirth=class ZerglingBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,59,118,177,236,295,354],
-                    top:[582,582,582,582,582,582,582]
+                    left:Array.gen(6).map(n=>n*59),
+                    top:new Array(7).fill(582)
                 }
             },
             width:59,
@@ -1128,8 +1128,8 @@ Burst.HydraliskBirth=class HydraliskBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,63,126,189,252,315,378],
-                    top:[666,666,666,666,666,666,666]
+                    left:Array.gen(6).map(n=>n*63),
+                    top:new Array(7).fill(666)
                 }
             },
             width:63,
@@ -1151,8 +1151,8 @@ Burst.MutaliskBirth=class MutaliskBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,66,132,198,264,330,396],
-                    top:[712,712,712,712,712,712,712]
+                    left:Array.gen(6).map(n=>n*66),
+                    top:new Array(7).fill(712)
                 }
             },
             width:66,
@@ -1174,8 +1174,8 @@ Burst.ScourgeBirth=class ScourgeBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,62,124,186,248,310,372],
-                    top:[798,798,798,798,798,798,798]
+                    left:Array.gen(6).map(n=>n*62),
+                    top:new Array(7).fill(798)
                 }
             },
             width:62,
@@ -1197,8 +1197,8 @@ Burst.QueenBirth=class QueenBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,62,124,186,248,310,372],
-                    top:[867,867,867,867,867,867,867]
+                    left:Array.gen(6).map(n=>n*62),
+                    top:new Array(7).fill(867)
                 }
             },
             width:62,
@@ -1220,8 +1220,8 @@ Burst.UltraliskBirth=class UltraliskBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,72,144,216,288,360,432],
-                    top:[950,950,950,950,950,950,950]
+                    left:Array.gen(6).map(n=>n*72),
+                    top:new Array(7).fill(950)
                 }
             },
             width:72,
@@ -1243,8 +1243,8 @@ Burst.DefilerBirth=class DefilerBirth extends Burst{
             name:"Larva",
             imgPos:{
                 burst:{
-                    left:[0,64,128,192,256,320,384],
-                    top:[1011,1011,1011,1011,1011,1011,1011]
+                    left:Array.gen(6).map(n=>n*64),
+                    top:new Array(7).fill(1011)
                 }
             },
             width:64,
@@ -1266,8 +1266,8 @@ Burst.LurkerBirth=class LurkerBirth extends Burst{
             name:"Lurker",
             imgPos:{
                 burst:{
-                    left:[650, 722, 794, 866, 938, 1010, 1082],
-                    top:[480, 480, 480, 480, 480, 480, 480]
+                    left:Array.gen(6).map(n=>n*72+650),
+                    top:new Array(7).fill(480)
                 }
             },
             width:72,
@@ -1289,8 +1289,8 @@ Burst.GuardianBirth=class GuardianBirth extends Burst{
             name:"Guardian",
             imgPos:{
                 burst:{
-                    left:[656, 737, 818, 899, 980, 1061],
-                    top:[538, 538, 538, 538, 538, 538]
+                    left:Array.gen(5).map(n=>n*81+656),
+                    top:new Array(6).fill(538)
                 }
             },
             width:81,
@@ -1312,8 +1312,8 @@ Burst.DevourerBirth=class DevourerBirth extends Burst{
             name:"Devourer",
             imgPos:{
                 burst:{
-                    left:[666,764,862,960,1058,1156],
-                    top:[998,998,998,998,998,998]
+                    left:Array.gen(5).map(n=>n*98+666),
+                    top:new Array(6).fill(998)
                 }
             },
             width:73,
@@ -1331,8 +1331,8 @@ Burst.SmallProtossDeath=class SmallProtossDeath extends Burst{
             name:"Zealot",
             imgPos:{
                 burst:{
-                    left:[0, 57, 114, 171, 228, 285, 342],
-                    top:[575,575,575,575,575,575,575]
+                    left:Array.gen(6).map(n=>n*57),
+                    top:new Array(7).fill(575)
                 }
             },
             width:57,
@@ -1350,8 +1350,8 @@ Burst.DragoonDeath=class DragoonDeath extends Burst{
             name:"Dragoon",
             imgPos:{
                 burst:{
-                    left:[15, 111, 207, 303, 399, 495, 591],
-                    top:[591,591,591,591,591,591,591]
+                    left:Array.gen(6).map(n=>n*96+15),
+                    top:new Array(7).fill(591)
                 }
             },
             width:57,
@@ -1369,8 +1369,8 @@ Burst.TemplarDeath=class TemplarDeath extends Burst{
             name:"Templar",
             imgPos:{
                 burst:{
-                    left:[30, 158, 286, 414, 542, 670],
-                    top:[2078,2078,2078,2078,2078,2078]
+                    left:Array.gen(5).map(n=>n*128+30),
+                    top:new Array(6).fill(2078)
                 }
             },
             width:57,
@@ -1388,8 +1388,8 @@ Burst.HallucinationDeath=class HallucinationDeath extends Burst{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[514, 593, 672, 514, 593, 672, 514, 593, 672, 514, 593, 672],
-                    top:[460,460,460,526,526,526,592,592,592,658,658,658]
+                    left:Array.gen(2).map(n=>n*79+514).repeat(4),
+                    top:Array.gen(3).repeat(3,true).map(n=>n*66+460)
                 }
             },
             width:79,
@@ -1411,8 +1411,8 @@ Burst.ArchonBirth=class ArchonBirth extends Burst{
             name:"Archon",
             imgPos:{
                 burst:{
-                    left:[20,140,260,380,500,620,740,860,980],
-                    top:[1700,1700,1700,1700,1700,1700,1700,1700,1700]
+                    left:Array.gen(8).map(n=>n*120+20),
+                    top:new Array(9).fill(1700)
                 }
             },
             width:80,
@@ -1434,8 +1434,8 @@ Burst.DarkArchonBirth=class DarkArchonBirth extends Burst{
             name:"DarkArchon",
             imgPos:{
                 burst:{
-                    left:[20,140,260,380,500,620,740,860,980],
-                    top:[1220,1220,1220,1220,1220,1220,1220,1220,1220]
+                    left:Array.gen(8).map(n=>n*120+20),
+                    top:new Array(9).fill(1220)
                 }
             },
             width:80,
@@ -1454,8 +1454,8 @@ Burst.RagnasaurDeath=class RagnasaurDeath extends Burst{
             name:"Ragnasaur",
             imgPos:{
                 burst:{
-                    left:[0, 104, 208, 312, 416, 520, 624, 728],
-                    top:[936,936,936,936,936,936,936,936]
+                    left:Array.gen(7).map(n=>n*104),
+                    top:new Array(8).fill(936)
                 }
             },
             width:128,
@@ -1473,8 +1473,8 @@ Burst.RhynsdonDeath=class RhynsdonDeath extends Burst{
             name:"Rhynsdon",
             imgPos:{
                 burst:{
-                    left:[0, 104, 208, 312, 416, 520, 624, 728],
-                    top:[1144,1144,1144,1144,1144,1144,1144,1144]
+                    left:Array.gen(7).map(n=>n*104),
+                    top:new Array(8).fill(1144)
                 }
             },
             width:104,
@@ -1492,8 +1492,8 @@ Burst.UrsadonDeath=class UrsadonDeath extends Burst{
             name:"Ursadon",
             imgPos:{
                 burst:{
-                    left:[0, 92, 184, 276, 368, 460, 552, 644],
-                    top:[736,736,736,736,736,736,736,736]
+                    left:Array.gen(7).map(n=>n*92),
+                    top:new Array(8).fill(736)
                 }
             },
             width:92,
@@ -1511,8 +1511,8 @@ Burst.BengalaasDeath=class BengalaasDeath extends Burst{
             name:"Bengalaas",
             imgPos:{
                 burst:{
-                    left:[0, 128, 256, 384, 512, 640, 768, 896],
-                    top:[1536,1536,1536,1536,1536,1536,1536,1536]
+                    left:Array.gen(7).map(n=>n*128),
+                    top:new Array(8).fill(1536)
                 }
             },
             width:128,
@@ -1530,8 +1530,8 @@ Burst.ScantidDeath=class ScantidDeath extends Burst{
             name:"Scantid",
             imgPos:{
                 burst:{
-                    left:[0, 92, 184, 276, 368, 460, 552, 644],
-                    top:[1104,1104,1104,1104,1104,1104,1104,1104]
+                    left:Array.gen(7).map(n=>n*92),
+                    top:new Array(8).fill(1104)
                 }
             },
             width:92,
@@ -1549,8 +1549,8 @@ Burst.KakaruDeath=class KakaruDeath extends Burst{
             name:"Kakaru",
             imgPos:{
                 burst:{
-                    left:[0, 92, 184, 276, 368, 460, 552, 644],
-                    top:[1104,1104,1104,1104,1104,1104,1104,1104]
+                    left:Array.gen(7).map(n=>n*92),
+                    top:new Array(8).fill(1104)
                 }
             },
             width:92,

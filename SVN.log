@@ -1,3 +1,68 @@
+Revision: 154
+Author: gloomyson
+Date: 16:59:07, 2016-8-24
+Message:
+1.Change all imgPos from raw array to function
+2.Change walkAroundLarva behavior
+3.Adjust larva born position
+4.Add Array.gen/Array.prototype.repeat/del
+5.Adjust sprite images for Archon/Goliath/Tank
+----
+Modified : /StarCraftES6/Characters/Animation.js
+Modified : /StarCraftES6/Characters/Building.js
+Modified : /StarCraftES6/Characters/Burst.js
+Modified : /StarCraftES6/Characters/Gobj.js
+Modified : /StarCraftES6/Characters/Hero.js
+Modified : /StarCraftES6/Characters/Neutral.js
+Modified : /StarCraftES6/Characters/Protoss.js
+Modified : /StarCraftES6/Characters/Terran.js
+Modified : /StarCraftES6/Characters/Units.js
+Modified : /StarCraftES6/Characters/Zerg.js
+Modified : /StarCraftES6/GameRule/Referee.js
+Modified : /StarCraftES6/Utils/gFrame.js
+Modified : /StarCraftES6/img/Charas/Archon.png
+Modified : /StarCraftES6/img/Charas/Goliath.png
+Modified : /StarCraftES6/img/Charas/Tank.png
+
+Revision: 152
+Author: gloomyson
+Date: 16:48:34, 2016-8-18
+Message:
+1.Change all units' frame to 16 directions
+2.Add new sprite images
+3.Adjust some bullets and bursts
+4.Adjust some units' born direction
+5.Fix "black sheep wall" cannot work issue
+6.Adjust faceTo/wrapDirection/dockAction/speedMatrix/ randomDirection for 16 directions
+----
+Modified : /StarCraftES6/Characters/Map.js
+Modified : /StarCraftES6/GameRule/Referee.js
+Modified : /StarCraftES6/Characters/Hero.js
+Modified : /StarCraftES6/Characters/Magic.js
+Modified : /StarCraftES6/Characters/Neutral.js
+Modified : /StarCraftES6/Characters/Protoss.js
+Modified : /StarCraftES6/Characters/Terran.js
+Modified : /StarCraftES6/Characters/Units.js
+Modified : /StarCraftES6/Characters/Zerg.js
+Modified : /StarCraftES6/Characters/Burst.js
+Modified : /StarCraftES6/Characters/Bullets.js
+Modified : /StarCraftES6/img/Charas/Archon.png
+Modified : /StarCraftES6/img/Charas/BattleCruiser.png
+Modified : /StarCraftES6/img/Charas/Broodling.png
+Modified : /StarCraftES6/img/Charas/Carrier.png
+Modified : /StarCraftES6/img/Charas/Civilian.png
+Modified : /StarCraftES6/img/Charas/Corsair.png
+Modified : /StarCraftES6/img/Charas/Dropship.png
+Modified : /StarCraftES6/img/Charas/Goliath.png
+Modified : /StarCraftES6/img/Charas/Mutalisk.png
+Modified : /StarCraftES6/img/Charas/Overlord.png
+Modified : /StarCraftES6/img/Charas/SCV.png
+Modified : /StarCraftES6/img/Charas/Shuttle.png
+Modified : /StarCraftES6/img/Charas/Tank.png
+Modified : /StarCraftES6/img/Charas/Tassadar.png
+Modified : /StarCraftES6/img/Charas/Valkyrie.png
+Modified : /StarCraftES6/img/Charas/Wraith.png
+
 Revision: 150
 Author: gloomyson
 Date: 15:09:18, 2016-8-4

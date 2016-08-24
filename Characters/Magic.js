@@ -79,7 +79,7 @@ var Magic={
                     }
                 }
                 myself.dock();
-                myself.direction=(myself.name=="Hydralisk" || myself.name=="Lurker")?2:3;
+                myself.direction=(myself.name=="Hydralisk" || myself.name=="Lurker")?5:6;
             },this.frame.unburrow*100-200);//margin
         }
     },

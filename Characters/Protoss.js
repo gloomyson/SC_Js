@@ -19,7 +19,7 @@ Protoss.Probe=class Probe extends AttackableUnit{
                     transfer.buildName=myself.buildName;
                     //Calculate duration
                     let duration=Resource.getCost(myself.buildName).time;
-                    //Cheat: Operation cwal
+                    //Cheat:Operation cwal
                     if (Cheat.cwal) duration=20;
                     Game.commandTimeout(function(){
                         if (transfer.status!='dead'){
@@ -39,7 +39,7 @@ Protoss.Probe=class Probe extends AttackableUnit{
                 }
             });
         }
-        //If missing location info, mark Button.callback, MouseController will call back with location
+        //If missing location info,mark Button.callback,MouseController will call back with location
         else {
             Button.callback=arguments.callee;
             Button.callback.farmer=this;
@@ -50,32 +50,32 @@ Protoss.Probe=class Probe extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Probe",
-            imgPos: {
-                moving: {
-                    left: [0, 64, 128, 192, 256, 64, 128, 192],
-                    top: [0, 0, 0, 0, 0, 32, 32, 32]
+            name:"Probe",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*32),
+                    top:[...new Array(9).fill(0),...new Array(7).fill(32)]
                 },
-                attack: {
-                    left: [0, 64, 128, 192, 256, 64, 128, 192],
-                    top: [0, 0, 0, 0, 0, 32, 32, 32]
+                attack:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*32),
+                    top:[...new Array(9).fill(0),...new Array(7).fill(32)]
                 }
             },
-            width: 32,//N-1
-            height: 32,//N-1
-            frame: {
-                moving: 1
+            width:32,//32N
+            height:32,//32N
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 20,
-            SP: 20,
-            damage: 5,
+            HP:20,
+            SP:20,
+            damage:5,
             armor:0,
             plasma:0,
             sight:280,
-            meleeAttack: true,
-            attackInterval: 2200,
+            meleeAttack:true,
+            attackInterval:2200,
             dieEffect:Burst.SmallBlueExplode,
             attackEffect:Burst.ProbeSpark,
             isFlying:false,
@@ -101,74 +101,38 @@ Protoss.Zealot=class Zealot extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Zealot",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0],
-                        [84, 84, 84, 84, 84, 84, 84, 84],
-                        [168, 168, 168, 168, 168, 168, 168, 168],
-                        [252, 252, 252, 252, 252, 252, 252, 252],
-                        [336, 336, 336, 336, 336, 336, 336, 336],
-                        [462, 462, 462, 462, 462, 462, 462, 462],
-                        [546, 546, 546, 546, 546, 546, 546, 546],
-                        [630, 630, 630, 630, 630, 630, 630, 630]
-                    ],
-                    top: [
-                        [0, 44, 88, 132, 176, 220, 264, 308],
-                        [0, 44, 88, 132, 176, 220, 264, 308],
-                        [0, 44, 88, 132, 176, 220, 264, 308],
-                        [0, 44, 88, 132, 176, 220, 264, 308],
-                        [0, 44, 88, 132, 176, 220, 264, 308],
-                        [0, 44, 88, 132, 176, 220, 264, 308],
-                        [0, 44, 88, 132, 176, 220, 264, 308],
-                        [0, 44, 88, 132, 176, 220, 264, 308]
-                    ]
+            name:"Zealot",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*42).map(n=>new Array(8).fill(n)),
+                    top:new Array(16).fill(Array.gen(7).map(n=>n*44))
                 },
-                dock: {
-                    left: [0, 84, 168, 252, 336, 462, 546, 630],
-                    top: [0, 0, 0, 0, 0, 0, 0, 0]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*42),
+                    top:new Array(16).fill(0)
                 },
                 attack:{
-                    left: [
-                        [0, 0, 0, 0, 0],
-                        [84, 84, 84, 84, 84],
-                        [168, 168, 168, 168, 168],
-                        [252, 252, 252, 252, 252],
-                        [336, 336, 336, 336, 336],
-                        [462, 462, 462, 462, 462],
-                        [546, 546, 546, 546, 546],
-                        [630, 630, 630, 630, 630]
-                    ],
-                    top: [
-                        [352, 396, 440, 484, 528],
-                        [352, 396, 440, 484, 528],
-                        [352, 396, 440, 484, 528],
-                        [352, 396, 440, 484, 528],
-                        [352, 396, 440, 484, 528],
-                        [352, 396, 440, 484, 528],
-                        [352, 396, 440, 484, 528],
-                        [352, 396, 440, 484, 528]
-                    ]
+                    left:Array.gen(16).del(9,1).map(n=>n*42).map(n=>new Array(5).fill(n)),
+                    top:new Array(16).fill(Array.gen(12,8).map(n=>n*44))
                 }
             },
-            width: 42,//N-1
-            height: 44,//N-1
-            frame: {
-                moving: 8,
-                dock: 1,
-                attack: 5
+            width:42,//42N
+            height:44,//44N
+            frame:{
+                moving:8,
+                dock:1,
+                attack:5
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:10,
-            HP: 80,
-            SP: 80,
-            damage: 16,
+            HP:80,
+            SP:80,
+            damage:16,
             armor:1,
             plasma:0,
             sight:245,
-            meleeAttack: true,
-            attackInterval: 2200,
+            meleeAttack:true,
+            attackInterval:2200,
             dieEffect:Burst.SmallProtossDeath,
             isFlying:false,
             attackLimit:"ground",
@@ -188,92 +152,40 @@ Protoss.Dragoon=class Dragoon extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Dragoon",
-            imgPos: {
-                moving: {
-                    left: [
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [687, 591, 495, 399, 303, 207, 111, 15],
-                        [687, 591, 495, 399, 303, 207, 111, 15],
-                        [687, 591, 495, 399, 303, 207, 111, 15]
-                    ],
-                    top: [
-                        [111, 111, 111, 111, 111, 111, 111, 111],
-                        [207, 207, 207, 207, 207, 207, 207, 207],
-                        [207, 207, 207, 207, 207, 207, 207, 207],
-                        [207, 207, 207, 207, 207, 207, 207, 207],
-                        [399, 399, 399, 399, 399, 399, 399, 399],
-                        [303, 303, 303, 303, 303, 303, 303, 303],
-                        [303, 303, 303, 303, 303, 303, 303, 303],
-                        [303, 303, 303, 303, 303, 303, 303, 303]
-                    ]
+            name:"Dragoon",
+            imgPos:{
+                moving:{
+                    left:[...new Array(9).fill(Array.gen(7).map(n=>n*96+15)),
+                        ...new Array(7).fill(Array.gen(7).map(n=>n*96+15).reverse())],
+                    top:[1,1,...new Array(5).fill(2),...new Array(3).fill(4),...new Array(5).fill(3),1]
+                        .map(n=>n*96+15).map(n=>new Array(8).fill(n))
                 },
-                dock: {
-                    left: [
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687],
-                        [15, 111, 207, 303, 399, 495, 591, 687]
-                    ],
-                    top: [
-                        [15, 15, 15, 15, 15, 15, 15, 15],
-                        [15, 15, 15, 15, 15, 15, 15, 15],
-                        [15, 15, 15, 15, 15, 15, 15, 15],
-                        [15, 15, 15, 15, 15, 15, 15, 15],
-                        [15, 15, 15, 15, 15, 15, 15, 15],
-                        [15, 15, 15, 15, 15, 15, 15, 15],
-                        [15, 15, 15, 15, 15, 15, 15, 15],
-                        [15, 15, 15, 15, 15, 15, 15, 15]
-                    ]
+                dock:{
+                    left:new Array(16).fill(Array.gen(7).map(n=>n*96+15)),
+                    top:new Array(16).fill(new Array(8).fill(15))
                 },
-                attack: {
-                    left: [
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495],
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495],
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495],
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495],
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495],
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495],
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495],
-                        [15, 111, 207, 303, 399, 495, 591, 687, 495, 495, 495, 495]
-                    ],
-                    top: [
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495],
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495],
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495],
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495],
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495],
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495],
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495],
-                        [495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495, 495]
-                    ]
+                attack:{
+                    left:new Array(16).fill(Array.gen(7).concat(new Array(4).fill(5)).map(n=>n*96+15)),
+                    top:new Array(16).fill(new Array(12).fill(495))
                 }
             },
-            width: 66,//96N-81
-            height: 66,//96N-81
-            frame: {
-                moving: 8,
-                dock: 8,
-                attack: 12
+            width:66,//96N+15
+            height:66,//96N+15
+            frame:{
+                moving:8,
+                dock:8,
+                attack:12
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 100,
-            SP: 80,
-            damage: 20,
+            HP:100,
+            SP:80,
+            damage:20,
             armor:1,
             plasma:0,
             sight:280,
-            attackRange: 140,
-            attackInterval: 3000,
+            attackRange:140,
+            attackInterval:3000,
             fireDelay:800,
             dieEffect:Burst.DragoonDeath,
             isFlying:false,
@@ -294,93 +206,39 @@ Protoss.Templar=class Templar extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Templar",
-            imgPos: {
-                moving: {
-                    left: [
-                        [30, 30, 30, 30],
-                        [286, 286, 286, 286],
-                        [542, 542, 542, 542],
-                        [798, 798, 798, 798],
-                        [1054, 1054, 1054, 1054],
-                        [1438, 1438, 1438, 1438],
-                        [1694, 1694, 1694, 1694],
-                        [1950, 1950, 1950, 1950]
-                    ],
-                    top: [
-                        [1694, 1822, 1950, 670],
-                        [1694, 1822, 1950, 670],
-                        [1694, 1822, 1950, 670],
-                        [1694, 1822, 1950, 670],
-                        [1694, 1822, 1950, 670],
-                        [1694, 1822, 1950, 670],
-                        [1694, 1822, 1950, 670],
-                        [1694, 1822, 1950, 670]
-                    ]
+            name:"Templar",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*128+30).map(n=>new Array(4).fill(n)),
+                    top:new Array(16).fill(Array.gen(15,13).concat(5).map(n=>n*128+30))
                 },
-                dock: {
-                    left: [
-                        [30, 30, 30, 30, 30, 30, 30],
-                        [286, 286, 286, 286, 286, 286, 286],
-                        [542, 542, 542, 542, 542, 542, 542],
-                        [798, 798, 798, 798, 798, 798, 798],
-                        [1054, 1054, 1054, 1054, 1054, 1054, 1054],
-                        [1438, 1438, 1438, 1438, 1438, 1438, 1438],
-                        [1694, 1694, 1694, 1694, 1694, 1694, 1694],
-                        [1950, 1950, 1950, 1950, 1950, 1950, 1950]
-                    ],
-                    top: [
-                        [798, 926, 1054, 1182, 1310, 1438, 1566],
-                        [798, 926, 1054, 1182, 1310, 1438, 1566],
-                        [798, 926, 1054, 1182, 1310, 1438, 1566],
-                        [798, 926, 1054, 1182, 1310, 1438, 1566],
-                        [798, 926, 1054, 1182, 1310, 1438, 1566],
-                        [798, 926, 1054, 1182, 1310, 1438, 1566],
-                        [798, 926, 1054, 1182, 1310, 1438, 1566],
-                        [798, 926, 1054, 1182, 1310, 1438, 1566]
-                    ]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*128+30).map(n=>new Array(7).fill(n)),
+                    top:new Array(16).fill(Array.gen(12,6).map(n=>n*128+30))
                 },
-                attack: {
-                    left: [
-                        [30, 30, 30, 30, 30],
-                        [286, 286, 286, 286, 286],
-                        [542, 542, 542, 542, 542],
-                        [798, 798, 798, 798, 798],
-                        [1054, 1054, 1054, 1054, 1054],
-                        [1438, 1438, 1438, 1438, 1438],
-                        [1694, 1694, 1694, 1694, 1694],
-                        [1950, 1950, 1950, 1950, 1950]
-                    ],
-                    top: [
-                        [30, 158, 286, 414, 542],
-                        [30, 158, 286, 414, 542],
-                        [30, 158, 286, 414, 542],
-                        [30, 158, 286, 414, 542],
-                        [30, 158, 286, 414, 542],
-                        [30, 158, 286, 414, 542],
-                        [30, 158, 286, 414, 542],
-                        [30, 158, 286, 414, 542]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*128+30).map(n=>new Array(5).fill(n)),
+                    top:new Array(16).fill(Array.gen(4).map(n=>n*128+30))
                 }
             },
-            width: 68,//128N-98
-            height: 68,//128N-98
-            frame: {
-                moving: 4,//3 or 4
-                dock: 7,//7 or 8
-                attack: 5
+            width:68,//128N+30
+            height:68,//128N+30
+            frame:{
+                moving:4,//3 or 4
+                dock:7,//7 or 8
+                attack:5
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:8,
-            HP: 40,
-            SP: 40,
-            damage: 10,
+            HP:40,
+            SP:40,
+            damage:10,
             armor:0,
             plasma:0,
-            MP: 200,
+            MP:200,
             sight:245,
-            attackRange: 100,
-            attackInterval: 2000,
+            attackRange:100,
+            attackInterval:2000,
             dieEffect:Burst.TemplarDeath,
             attackEffect:Burst.FireSpark,
             isFlying:false,
@@ -410,74 +268,38 @@ Protoss.DarkTemplar=class DarkTemplar extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "DarkTemplar",
-            imgPos: {
-                moving: {
-                    left: [
-                        [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-                        [117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117],
-                        [231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231],
-                        [345, 345, 345, 345, 345, 345, 345, 345, 345, 345, 345],
-                        [459, 459, 459, 459, 459, 459, 459, 459, 459, 459, 459],
-                        [630, 630, 630, 630, 630, 630, 630, 630, 630, 630, 630],
-                        [744, 744, 744, 744, 744, 744, 744, 744, 744, 744, 744],
-                        [858, 858, 858, 858, 858, 858, 858, 858, 858, 858, 858]
-                    ],
-                    top: [
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620],
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620],
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620],
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620],
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620],
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620],
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620],
-                        [0, 62, 124, 186, 248, 310, 372, 434, 496, 558, 620]
-                    ]
+            name:"DarkTemplar",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*57+3).map(n=>new Array(9).fill(n)),
+                    top:new Array(16).fill(Array.gen(8).map(n=>n*62))
                 },
-                dock: {
-                    left: [3, 117, 231, 345, 459, 630, 744, 858],
-                    top: [248, 248, 248, 248, 248, 248, 248, 248]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*57+3),
+                    top:new Array(16).fill(248)
                 },
-                attack: {
-                    left: [
-                        [3, 3, 3, 3, 3, 3, 3],
-                        [117, 117, 117, 117, 117, 117, 117],
-                        [231, 231, 231, 231, 231, 231, 231],
-                        [345, 345, 345, 345, 345, 345, 345],
-                        [459, 459, 459, 459, 459, 459, 459],
-                        [630, 630, 630, 630, 630, 630, 630],
-                        [744, 744, 744, 744, 744, 744, 744],
-                        [858, 858, 858, 858, 858, 858, 858]
-                    ],
-                    top: [
-                        [682, 744, 806, 868, 930, 992, 1054],
-                        [682, 744, 806, 868, 930, 992, 1054],
-                        [682, 744, 806, 868, 930, 992, 1054],
-                        [682, 744, 806, 868, 930, 992, 1054],
-                        [682, 744, 806, 868, 930, 992, 1054],
-                        [682, 744, 806, 868, 930, 992, 1054],
-                        [682, 744, 806, 868, 930, 992, 1054],
-                        [682, 744, 806, 868, 930, 992, 1054]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*57+3).map(n=>new Array(9).fill(n)),
+                    top:new Array(16).fill(Array.gen(8).map(n=>n+9).map(n=>n*62))
                 }
             },
-            width: 57,//57N-54
-            height: 62,//62N-62
-            frame: {
-                moving: 11,
-                dock: 1,
-                attack: 7
+            width:57,//57N+3
+            height:62,//62N
+            frame:{
+                moving:9,
+                dock:1,
+                attack:9
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 80,
-            SP: 40,
-            damage: 40,
+            HP:80,
+            SP:40,
+            damage:40,
             armor:1,
             plasma:0,
             sight:245,
-            meleeAttack: true,
-            attackInterval: 3000,
+            meleeAttack:true,
+            attackInterval:3000,
             dieEffect:Burst.SmallProtossDeath,
             isFlying:false,
             isInvisible:true,
@@ -504,74 +326,38 @@ Protoss.Archon=class Archon extends AttackableUnit{
         //Same action mapping
         this.imgPos.dock=this.imgPos.moving;
         this.frame.dock=this.frame.moving;
-        this.direction=3;
+        this.direction=6;
     };
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Archon",
-            imgPos: {
-                moving: {
-                    left: [
-                        [2060,2060,2060,2060],
-                        [260,260,260,260],
-                        [500,500,500,500],
-                        [740,740,740,740],
-                        [980,980,980,980],
-                        [1340,1340,1340,1340],
-                        [1580,1580,1580,1580],
-                        [1820,1820,1820,1820]
-                    ],
-                    top: [
-                        [1220,1340,1460,1580],
-                        [1220,1340,1460,1580],
-                        [1220,1340,1460,1580],
-                        [1220,1340,1460,1580],
-                        [1220,1340,1460,1580],
-                        [1220,1340,1460,1580],
-                        [1220,1340,1460,1580],
-                        [1220,1340,1460,1580]
-                    ]
+            name:"Archon",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*120+20).map(n=>new Array(4).fill(n)),
+                    top:new Array(16).fill(Array.gen(13,10).map(n=>n*120+20))
                 },
-                attack: {
-                    left: [
-                        [2060, 2060, 2060, 2060, 2060, 2060, 2060, 2060, 2060, 2060],
-                        [260, 260, 260, 260, 260, 260, 260, 260, 260, 260],
-                        [500, 500, 500, 500, 500, 500, 500, 500, 500, 500],
-                        [740, 740, 740, 740, 740, 740, 740, 740, 740, 740],
-                        [980, 980, 980, 980, 980, 980, 980, 980, 980, 980],
-                        [1340, 1340, 1340, 1340, 1340, 1340, 1340, 1340, 1340, 1340],
-                        [1580, 1580, 1580, 1580, 1580, 1580, 1580, 1580, 1580, 1580],
-                        [1820, 1820, 1820, 1820, 1820, 1820, 1820, 1820, 1820, 1820]
-                    ],
-                    top: [
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100],
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100],
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100],
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100],
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100],
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100],
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100],
-                        [20, 140, 260, 380, 500, 620, 740, 860, 980, 1100]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*120+20).map(n=>new Array(10).fill(n)),
+                    top:new Array(16).fill(Array.gen(9).map(n=>n*120+20))
                 }
             },
-            width: 80,//120N-100
-            height: 80,//120N-100
-            frame: {
-                moving: 4,
-                attack: 10
+            width:80,//120N+20
+            height:80,//120N+20
+            frame:{
+                moving:4,
+                attack:10
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 10,
-            SP: 350,
-            damage: 30,
+            HP:10,
+            SP:350,
+            damage:30,
             armor:0,
             plasma:0,
             sight:280,
-            attackRange: 70,
-            attackInterval: 1000,
+            attackRange:70,
+            attackInterval:1000,
             attackEffect:Burst.ArchonBurst,
             dieEffect:Burst.BigBlueExplode,
             isFlying:false,
@@ -598,48 +384,30 @@ Protoss.DarkArchon=class DarkArchon extends Unit{
         //Same action mapping
         this.imgPos.dock=this.imgPos.moving;
         this.frame.dock=this.frame.moving;
-        this.direction=3;
+        this.direction=6;
     };
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "DarkArchon",
-            imgPos: {
-                moving: {
-                    left: [
-                        [20,20,20,20,20,20,20,20,20,20],
-                        [260,260,260,260,260,260,260,260,260,260],
-                        [500,500,500,500,500,500,500,500,500,500],
-                        [740,740,740,740,740,740,740,740,740,740],
-                        [980,980,980,980,980,980,980,980,980,980],
-                        [1340,1340,1340,1340,1340,1340,1340,1340,1340,1340],
-                        [1580,1580,1580,1580,1580,1580,1580,1580,1580,1580],
-                        [1820,1820,1820,1820,1820,1820,1820,1820,1820,1820]
-                    ],
-                    top: [
-                        [20,140,260,380,500,620,740,860,980,1100],
-                        [20,140,260,380,500,620,740,860,980,1100],
-                        [20,140,260,380,500,620,740,860,980,1100],
-                        [20,140,260,380,500,620,740,860,980,1100],
-                        [20,140,260,380,500,620,740,860,980,1100],
-                        [20,140,260,380,500,620,740,860,980,1100],
-                        [20,140,260,380,500,620,740,860,980,1100],
-                        [20,140,260,380,500,620,740,860,980,1100]
-                    ]
+            name:"DarkArchon",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*120+20).map(n=>new Array(10).fill(n)),
+                    top:new Array(16).fill(Array.gen(9).map(n=>n*120+20))
                 }
             },
-            width: 80,//120N-100
-            height: 80,//120N-100
-            frame: {
-                moving: 10
+            width:80,//120N+20
+            height:80,//120N+20
+            frame:{
+                moving:10
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 25,
-            SP: 200,
+            HP:25,
+            SP:200,
             armor:1,
             plasma:0,
-            MP: 200,
+            MP:200,
             sight:350,
             dieEffect:Burst.BigBlueExplode,
             isFlying:false,
@@ -681,22 +449,22 @@ Protoss.Shuttle=class Shuttle extends Unit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Shuttle",
-            imgPos: {
-                moving: {
-                    left: [0, 60, 120, 180, 240, 60, 120, 180],
-                    top: [0, 0, 0, 0, 0, 60, 60, 60]
+            name:"Shuttle",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*60+5),
+                    top:[...new Array(9).fill(5),...new Array(7).fill(65)]
                 }
             },
-            width: 60,//N-1
-            height: 60,//N-1
-            frame: {
-                moving: 1
+            width:50,//60N+5
+            height:50,//60N+5
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:11,
-            HP: 80,
-            SP: 60,
+            HP:80,
+            SP:60,
             armor:1,
             plasma:0,
             sight:280,
@@ -733,51 +501,33 @@ Protoss.Reaver=class Reaver extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Reaver",
-            imgPos: {
-                moving: {
-                    left: [
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [168, 168, 168, 168, 168, 168, 168, 168, 168],
-                        [336, 336, 336, 336, 336, 336, 336, 336, 336],
-                        [504, 504, 504, 504, 504, 504, 504, 504, 504],
-                        [672, 672, 672, 672, 672, 672, 672, 672, 672],
-                        [924, 924, 924, 924, 924, 924, 924, 924, 924],
-                        [1092, 1092, 1092, 1092, 1092, 1092, 1092, 1092, 1092],
-                        [1260, 1260, 1260, 1260, 1260, 1260, 1260, 1260, 1260]
-                    ],
-                    top: [
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672],
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672],
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672],
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672],
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672],
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672],
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672],
-                        [0, 84, 168, 252, 336, 420, 504, 588, 672]
-                    ]
+            name:"Reaver",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*84).map(n=>new Array(9).fill(n)),
+                    top:new Array(16).fill(Array.gen(8).map(n=>n*84))
                 },
-                dock: {
-                    left: [0, 168, 336, 504, 672, 924, 1092, 1260],
-                    top: [0, 0, 0, 0, 0, 0, 0, 0]
+                dock:{
+                    left:Array.gen(16).del(9,1).map(n=>n*84),
+                    top:new Array(16).fill(0)
                 }
             },
-            width: 84,//N-1
-            height: 84,//N-1
-            frame: {
-                moving: 9,
-                dock: 1
+            width:84,//84N
+            height:84,//84N
+            frame:{
+                moving:9,
+                dock:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:4,
-            HP: 100,
-            SP: 80,
-            damage: 100,
+            HP:100,
+            SP:80,
+            damage:100,
             armor:0,
             plasma:0,
             sight:350,
-            attackRange: 280,
-            attackInterval: 6000,
+            attackRange:280,
+            attackInterval:6000,
             dieEffect:Burst.BigBlueExplode,
             isFlying:false,
             attackLimit:"ground",
@@ -821,22 +571,22 @@ Protoss.Observer=class Observer extends Unit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Observer",
-            imgPos: {
-                moving: {
-                    left: [0, 80, 160, 240, 320, 80, 160, 240],
-                    top: [0, 0, 0, 0, 0, 40, 40, 40]
+            name:"Observer",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*40),
+                    top:[...new Array(9).fill(0),...new Array(7).fill(40)]
                 }
             },
-            width: 40,//N-1
-            height: 40,//N-1
-            frame: {
-                moving: 1
+            width:40,//40N
+            height:40,//40N
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:8,
-            HP: 40,
-            SP: 20,
+            HP:40,
+            SP:20,
             armor:0,
             plasma:0,
             sight:315,
@@ -874,67 +624,49 @@ Protoss.Scout=class Scout extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Scout",
-            imgPos: {
-                moving: {
-                    left: [8, 152, 296, 440, 584, 152, 296, 440],
-                    top: [8, 8, 8, 8, 8, 152, 152, 152]
+            name:"Scout",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*72+8),
+                    top:[...new Array(9).fill(8),...new Array(7).fill(152)]
                 },
-                attack: {
-                    left: [
-                        [8, 8],
-                        [152, 152],
-                        [296, 296],
-                        [440, 440],
-                        [584, 584],
-                        [152, 152],
-                        [296, 296],
-                        [440, 440]
-                    ],
-                    top: [
-                        [8, 80],
-                        [8, 80],
-                        [8, 80],
-                        [8, 80],
-                        [8, 80],
-                        [152, 224],
-                        [152, 224],
-                        [152, 224]
-                    ]
+                attack:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*72+8).map(n=>[n,n]),
+                    top:[...new Array(9).fill([8,80]),...new Array(7).fill([152,224])]
                 }
             },
-            width: 56,//72N-64
-            height: 56,//72N-64
-            frame: {
-                moving: 1,
-                attack: 2
+            width:56,//72N+8
+            height:56,//72N+8
+            frame:{
+                moving:1,
+                attack:2
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 150,
-            SP: 100,
+            HP:150,
+            SP:100,
             attackMode:{
                 flying:{
                     attackRange:210,
-                    attackInterval: 2200,
+                    attackInterval:2200,
                     damage:28,
                     attackType:AttackableUnit.BURST_ATTACK
                 },
                 ground:{
                     attackRange:105,
                     attackEffect:Burst.BlueShootSpark,
-                    attackInterval: 2200,
+                    attackInterval:2200,
                     damage:8,
                     attackType:AttackableUnit.NORMAL_ATTACK
                 },
                 status:false
             },
             //Default
-            damage: 8,
+            damage:8,
             armor:0,
             plasma:0,
             sight:280,
-            attackRange: 105,
+            attackRange:105,
             dieEffect:Burst.MiddleBlueExplode,
             isFlying:true,
             unitType:Unit.BIG,
@@ -972,34 +704,34 @@ Protoss.Carrier=class Carrier extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Carrier",
-            imgPos: {
-                moving: {
-                    left: [0, 512, 1024, 1536, 0, 512, 1024, 1536],
-                    top: [0, 0, 0, 0, 128, 128, 128, 128]
+            name:"Carrier",
+            imgPos:{
+                moving:{
+                    left:[0,2,4,6,8,11,13,15,0,2,4,6,8,11,13,15].map(n=>n*128),
+                    top:[...new Array(8).fill(0),...new Array(8).fill(128)]
                 }
             },
-            width: 128,//N-1
-            height: 128,//N-1
-            frame: {
-                moving: 1
+            width:128,//128N(0,2,4,6,8,11,13,15)
+            height:128,//128N
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:8,
-            HP: 300,
-            SP: 150,
-            damage: 6,
+            HP:300,
+            SP:150,
+            damage:6,
             armor:4,
             plasma:0,
             sight:385,
-            attackRange: 280,
-            attackInterval: 1000,
+            attackRange:280,
+            attackInterval:1000,
             recover:Building.ProtossBuilding.prototype.recover,
             interceptorCapacity:4,
             continuousAttack:{
                 count:4,//8
                 layout:function(bullet,num){
-                    //Reassign location, surround target
+                    //Reassign location,surround target
                     let [centerX,centerY,radius]=[bullet.target.posX(),bullet.target.posY(),120];
                     switch (num){
                         //Left
@@ -1097,29 +829,29 @@ Protoss.Arbiter=class Arbiter extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Arbiter",
-            imgPos: {
-                moving: {
-                    left: [0, 152, 304, 456, 608, 152, 304, 456],
-                    top: [0, 0, 0, 0, 0, 76, 76, 76]
+            name:"Arbiter",
+            imgPos:{
+                moving:{
+                    left:Array.gen(15).copyWithin(9,1).map(n=>n*76),
+                    top:[...new Array(9).fill(0),...new Array(7).fill(76)]
                 }
             },
-            width: 76,//N-1
-            height: 76,//N-1
-            frame: {
-                moving: 1
+            width:76,//76N
+            height:76,//76N
+            frame:{
+                moving:1
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:12,
-            HP: 200,
-            SP: 150,
-            damage: 10,
+            HP:200,
+            SP:150,
+            damage:10,
             armor:1,
             plasma:0,
-            MP: 200,
+            MP:200,
             sight:315,
-            attackRange: 175,
-            attackInterval: 4500,
+            attackRange:175,
+            attackInterval:4500,
             dieEffect:Burst.MiddleBlueExplode,
             isFlying:true,
             unitType:Unit.BIG,
@@ -1140,7 +872,7 @@ Protoss.Arbiter=class Arbiter extends AttackableUnit{
                     return Magic.StasisField.enabled
                 }}
             },
-            //Special skill: make nearby units invisible, need initial
+            //Special skill:make nearby units invisible,need initial
             bufferObj:{}
         }
     };
@@ -1160,52 +892,34 @@ Protoss.Corsair=class Corsair extends AttackableUnit{
     static [_$.protoProps](){
         return {
             //Add basic unit info
-            name: "Corsair",
-            imgPos: {
-                moving: {
-                    left: [0, 60, 120, 180, 240, 360, 420, 480],
-                    top: [0, 0, 0, 0, 0, 0, 0, 0]
+            name:"Corsair",
+            imgPos:{
+                moving:{
+                    left:Array.gen(16).del(9,1).map(n=>n*60),
+                    top:new Array(16).fill(0)
                 },
-                attack: {
-                    left: [
-                        [0, 0, 0, 0, 0],
-                        [60, 60, 60, 60, 60],
-                        [120, 120, 120, 120, 120],
-                        [180, 180, 180, 180, 180],
-                        [240, 240, 240, 240, 240],
-                        [360, 360, 360, 360, 360],
-                        [420, 420, 420, 420, 420],
-                        [480, 480, 480, 480, 480]
-                    ],
-                    top: [
-                        [0, 60, 120, 180, 240],
-                        [0, 60, 120, 180, 240],
-                        [0, 60, 120, 180, 240],
-                        [0, 60, 120, 180, 240],
-                        [0, 60, 120, 180, 240],
-                        [0, 60, 120, 180, 240],
-                        [0, 60, 120, 180, 240],
-                        [0, 60, 120, 180, 240]
-                    ]
+                attack:{
+                    left:Array.gen(16).del(9,1).map(n=>n*60).map(n=>new Array(5).fill(n)),
+                    top:new Array(16).fill(Array.gen(4).map(n=>n*60))
                 }
             },
-            width: 60,//N-1
-            height: 60,//N-1
-            frame: {
-                moving: 1,
-                attack: 5
+            width:60,//60N
+            height:60,//60N
+            frame:{
+                moving:1,
+                attack:5
             },
-            //Only for moving status, override
+            //Only for moving status,override
             speed:16,
-            HP: 100,
-            SP: 80,
-            damage: 5,
+            HP:100,
+            SP:80,
+            damage:5,
             armor:1,
             plasma:0,
-            MP: 200,
+            MP:200,
             sight:315,
-            attackRange: 175,
-            attackInterval: 800,
+            attackRange:175,
+            attackInterval:800,
             dieEffect:Burst.MiddleBlueExplode,
             attackEffect:Burst.CorsairCloud,
             isFlying:true,

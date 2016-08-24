@@ -7,8 +7,8 @@ Animation.RightClickCursor=class RightClickCursor extends Animation{
             name:"Burst",
             imgPos:{
                 burst:{
-                    left:[0, 44, 88, 132],
-                    top:[1087,1087,1087,1087]
+                    left:Array.gen(3).map(n=>n*44),
+                    top:new Array(4).fill(1087)
                 }
             },
             width:44,
@@ -26,8 +26,8 @@ Animation.PsionicStorm=class PsionicStorm extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 188, 376, 564, 0, 188, 376, 564, 0, 188, 376, 564, 0, 188],
-                    top:[0, 0, 0, 0, 153, 153, 153, 153, 306, 306, 306, 306, 459, 459]
+                    left:Array.gen(3).map(n=>n*188).repeat(4).del(14,2),
+                    top:Array.gen(3).map(n=>n*153).repeat(4,true).del(14,2)
                 }
             },
             width:188,
@@ -47,8 +47,8 @@ Animation.Hallucination=class Hallucination extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[752, 815, 878, 941, 1004, 1067, 1130, 1193, 1256, 752, 815, 878, 941, 1004, 1067, 1130, 1193, 1256],
-                    top:[0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 63, 63, 63, 63, 63, 63, 63, 63]
+                    left:Array.gen(8).map(n=>n*63+752).repeat(2),
+                    top:[0,63].repeat(9,true)
                 }
             },
             width:63,
@@ -67,8 +67,8 @@ Animation.Consume=class Consume extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[752, 826, 900, 974, 1048, 1122, 1196, 1270, 1344, 752, 826, 900, 974, 1048, 1122, 1196, 1270, 1344],
-                    top:[126, 126, 126, 126, 126, 126, 126, 126, 126, 196, 196, 196, 196, 196, 196, 196, 196, 196]
+                    left:Array.gen(8).map(n=>n*74+752).repeat(2),
+                    top:[126,196].repeat(9,true)
                 }
             },
             width:74,
@@ -111,8 +111,8 @@ Animation.Lockdown=class Lockdown extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[330, 0, 110, 220, 330, 0, 0, 0, 110, 220, 330, 0, 110, 220],
-                    top:[723, 834, 834, 834, 834, 945, 0, 612, 612, 612, 612, 723, 723, 723]
+                    left:[3,0,1,2,3,0,0,0,1,2,3,0,1,2].map(n=>n*110),
+                    top:[723,834,834,834,834,945,0,612,612,612,612,723,723,723]
                 }
             },
             width:110,
@@ -133,8 +133,8 @@ Animation.DarkSwarm=class DarkSwarm extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1260, 752, 1006, 1260, 752, 0, 752, 1006, 1260, 752, 1006],
-                    top:[456, 645, 645, 645, 834, 0, 267, 267, 267, 456, 456]
+                    left:[1260,752,1006,1260,752,0,752,1006,1260,752,1006],
+                    top:[456,645,645,645,834,0,267,267,267,456,456]
                 }
             },
             width:254,
@@ -154,8 +154,8 @@ Animation.Plague=class Plague extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1144, 1274, 1404, 754, 884, 1014, 1144, 1274, 1404, 754, 884, 1014, 1144, 1274],
-                    top:[892, 892, 892, 1022, 1022, 1022, 1022, 1022, 1022, 1152, 1152, 1152, 1152, 1152]
+                    left:Array.gen(5).repeat(3).slice(3,17).map(n=>n*130+754),
+                    top:[...new Array(3).fill(0),...new Array(6).fill(1),...new Array(5).fill(2)].map(n=>n*130+892)
                 }
             },
             width:130,
@@ -174,8 +174,8 @@ Animation.PurpleEffect=class PurpleEffect extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[440, 499, 558, 617],
-                    top:[902,902,902,902]
+                    left:Array.gen(3).map(n=>n*59+440),
+                    top:new Array(4).fill(902)
                 }
             },
             width:59,
@@ -196,8 +196,8 @@ Animation.RedEffect=class RedEffect extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1006, 1068, 1130, 1192],
-                    top:[836,836,836,836]
+                    left:Array.gen(3).map(n=>n*62+1006),
+                    top:new Array(4).fill(836)
                 }
             },
             width:62,
@@ -218,8 +218,8 @@ Animation.GreenEffect=class GreenEffect extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1256, 1313, 1370, 1427],
-                    top:[836,836,836,836]
+                    left:Array.gen(3).map(n=>n*57+1256),
+                    top:new Array(4).fill(836)
                 }
             },
             width:57,
@@ -240,8 +240,8 @@ Animation.Ensnare=class Ensnare extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 131, 262, 393, 524, 0, 131, 262, 393, 524, 0, 131, 262, 393, 524],
-                    top:[1056, 1056, 1056, 1056, 1056, 1181, 1181, 1181, 1181, 1181, 1306, 1306, 1306, 1306, 1306]
+                    left:Array.gen(4).map(n=>n*131).repeat(3),
+                    top:Array.gen(2).map(n=>n*125+1056).repeat(5,true)
                 }
             },
             width:131,
@@ -260,8 +260,8 @@ Animation.ScannerSweep=class ScannerSweep extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1012, 1012, 1167, 1167, 1322, 1322, 1012, 1012, 1167, 1167, 1322, 1322],
-                    top:[2220, 2220, 2220, 2220, 2220, 2220, 2335, 2335, 2335, 2335, 2335, 2335]
+                    left:Array.gen(2).map(n=>n*155+1012).repeat(2).repeat(2,true),
+                    top:[2220,2335].repeat(6,true)
                 }
             },
             width:155,
@@ -282,8 +282,8 @@ Animation.Feedback=class Feedback extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[632, 702, 772, 842, 912, 982, 1052, 1122, 1192, 1262, 1332, 1402],
-                    top:[2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872]
+                    left:Array.gen(11).map(n=>n*70+632),
+                    top:new Array(12).fill(2872)
                 }
             },
             width:70,
@@ -303,8 +303,8 @@ Animation.HellFire=class HellFire extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[655, 730, 805, 880, 955, 1030, 1105, 1180, 1255, 1330],
-                    top:[1284, 1284, 1284, 1284, 1284, 1284, 1284, 1284, 1284, 1284]
+                    left:Array.gen(9).map(n=>n*75+655),
+                    top:new Array(10).fill(1284)
                 }
             },
             width:75,
@@ -324,8 +324,8 @@ Animation.MindControl=class MindControl extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[658, 720, 782, 844, 906, 968, 1030, 1092, 1154, 1216, 1278, 1340],
-                    top:[1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378]
+                    left:Array.gen(11).map(n=>n*62+658),
+                    top:new Array(12).fill(1378)
                 }
             },
             width:62,
@@ -345,8 +345,8 @@ Animation.RechargeShields=class RechargeShields extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 64, 128, 192, 256, 320, 384, 448, 0, 64, 128, 192, 256, 320, 384, 448],
-                    top:[1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1496, 1496, 1496, 1496, 1496, 1496, 1496, 1496]
+                    left:Array.gen(7).map(n=>n*64).repeat(2),
+                    top:[1432,1496].repeat(8,true)
                 }
             },
             width:64,
@@ -366,8 +366,8 @@ Animation.DisruptionWeb=class DisruptionWeb extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1396,1396,1396,1396,1088,1088,1242,1242,1392,1392,1392,1392],
-                    top:[1194,1194,1322,1322,1432,1432,1432,1432,1432,1432,1538,1538]
+                    left:[1396,1396,1088,1242,1392,1392].repeat(2,true),
+                    top:[1194,1322,1432,1432,1432,1538].repeat(2,true)
                 }
             },
             width:154,
@@ -387,8 +387,8 @@ Animation.DefensiveMatrix=class DefensiveMatrix extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1327, 1427, 1327, 1427, 1327],
-                    top:[1664, 1664, 1751, 1751, 1838]
+                    left:[1327,1427].repeat(3).del(5,1),
+                    top:Array.gen(2).map(n=>n*87+1664).repeat(2,true).del(5,1)
                 }
             },
             width:90,
@@ -409,8 +409,8 @@ Animation.BlueShield=class BlueShield extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 130, 260, 390, 520, 0, 130, 260, 390, 520],
-                    top:[1560, 1560, 1560, 1560, 1560, 1690, 1690, 1690, 1690, 1690]
+                    left:Array.gen(4).map(n=>n*130).repeat(2),
+                    top:[1560,1690].repeat(5,true)
                 }
             },
             width:130,
@@ -431,8 +431,8 @@ Animation.MaelStorm=class MaelStorm extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[2, 70, 130, 195, 252, 312, 372, 430, 492, 554],
-                    top:[2870, 2870, 2870, 2870, 2870, 2870, 2870, 2870, 2870, 2870]
+                    left:[2,70,130,195,252,312,372,430,492,554],
+                    top:new Array(10).fill(2870)
                 }
             },
             width:60,
@@ -453,8 +453,8 @@ Animation.RedShield=class RedShield extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[650, 780, 910, 1040, 1170, 650, 780, 910, 1040, 1170],
-                    top:[1560, 1560, 1560, 1560, 1560, 1690, 1690, 1690, 1690, 1690]
+                    left:Array.gen(4).map(n=>n*130+650).repeat(2),
+                    top:[1560,1690].repeat(5,true)
                 }
             },
             width:130,
@@ -475,8 +475,8 @@ Animation.BurningCircle=class BurningCircle extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 112, 224, 336, 448, 560],
-                    top:[1820, 1820, 1820, 1820, 1820, 1820]
+                    left:Array.gen(5).map(n=>n*112),
+                    top:new Array(6).fill(1820)
                 }
             },
             width:112,
@@ -497,8 +497,8 @@ Animation.Irradiate=class Irradiate extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[668, 792, 916, 1042, 1172],
-                    top:[1820,1820,1820,1820,1820]
+                    left:[668,792,916,1042,1172],
+                    top:new Array(5).fill(1820)
                 }
             },
             width:126,
@@ -519,8 +519,8 @@ Animation.Recall=class Recall extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 86, 188, 282, 386, 488, 588, 688, 788, 894],
-                    top:[1938, 1938, 1938, 1938, 1938, 1938, 1938, 1938, 1938, 1938]
+                    left:[0,86,188,282,386,488,588,688,788,894],
+                    top:new Array(10).fill(1938)
                 }
             },
             width:98,
@@ -538,8 +538,8 @@ Animation.Ice=class Ice extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1024, 1164, 1304, 1444],
-                    top:[1942,1942,1942,1942]
+                    left:Array.gen(3).map(n=>n*140+1024),
+                    top:new Array(4).fill(1942)
                 }
             },
             width:78,
@@ -560,8 +560,8 @@ Animation.EMPShockwave=class EMPShockwave extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 180, 356, 534, 708, 886, 1068],
-                    top:[2038, 2038, 2038, 2038, 2038, 2038, 2038]
+                    left:[0,180,356,534,708,886,1068],
+                    top:new Array(7).fill(2038)
                 }
             },
             width:180,
@@ -580,8 +580,8 @@ Animation.StasisFieldSpell=class StasisFieldSpell extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1384, 1250, 1250, 1384],
-                    top:[2044, 2044, 2044, 2044]
+                    left:[1384,1250,1250,1384],
+                    top:new Array(4).fill(2044)
                 }
             },
             width:128,
@@ -599,8 +599,8 @@ Animation.MaelStormSpell=class MaelStormSpell extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1384, 1250, 1250, 1384],
-                    top:[2134, 2134, 2134, 2134]
+                    left:[1384,1250,1250,1384],
+                    top:new Array(4).fill(2134)
                 }
             },
             width:128,
@@ -618,8 +618,8 @@ Animation.Restoration=class Restoration extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 128, 256, 384, 512, 640, 768, 896, 0, 128, 256, 384, 512, 640, 768, 896],
-                    top:[2190, 2190, 2190, 2190, 2190, 2190, 2190, 2190, 2318, 2318, 2318, 2318, 2318, 2318, 2318, 2318]
+                    left:Array.gen(7).map(n=>n*128).repeat(2),
+                    top:[2190,2318].repeat(8,true)
                 }
             },
             width:128,
@@ -639,8 +639,8 @@ Animation.Shockwave=class Shockwave extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 135, 270, 405, 540, 675, 810, 945, 1080, 1215, 1350],
-                    top:[2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446]
+                    left:Array.gen(10).map(n=>n*135),
+                    top:new Array(11).fill(2446)
                 }
             },
             width:135,
@@ -658,8 +658,8 @@ Animation.NuclearStrike=class NuclearStrike extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[0, 154, 308, 462, 616, 770, 924, 1078, 1232, 1386, 0, 154, 308, 462, 616, 770, 924, 1078, 1232, 1386],
-                    top:[2562,2562,2562,2562,2562,2562,2562,2562,2562,2562,2716,2716,2716,2716,2716,2716,2716,2716,2716,2716]
+                    left:Array.gen(9).map(n=>n*154).repeat(2),
+                    top:[2562,2716].repeat(10,true)
                 }
             },
             width:154,
@@ -679,8 +679,8 @@ Animation.EvolveGroundUnit=class EvolveGroundUnit extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left: [524, 562, 600, 638, 676, 714, 524, 562, 600, 638, 676, 714],
-                    top: [724, 724, 724, 724, 724, 724, 766, 766, 766, 766, 766, 766]
+                    left:Array.gen(5).map(n=>n*38+524).repeat(2),
+                    top:[724,766].repeat(6,true)
                 }
             },
             width:38,
@@ -698,8 +698,8 @@ Animation.EvolveFlyingUnit=class EvolveFlyingUnit extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left: [438, 501, 564, 627, 690, 438, 501, 564, 627],
-                    top: [810, 810, 810, 810, 810, 855, 855, 855, 855]
+                    left:Array.gen(4).map(n=>n*63+438).repeat(2).del(9,1),
+                    top:[...new Array(5).fill(810),...new Array(4).fill(855)]
                 }
             },
             width:63,
@@ -717,8 +717,8 @@ Animation.SmallMutationComplete=class SmallMutationComplete extends Animation{
             name:"ZergBuilding",
             imgPos:{
                 burst:{
-                    left: [1316, 1476, 1636, 1796],
-                    top: [962, 962, 962, 962]
+                    left:Array.gen(3).map(n=>n*160+1316),
+                    top:new Array(4).fill(962)
                 }
             },
             width:88,
@@ -736,8 +736,8 @@ Animation.MiddleMutationComplete=class MiddleMutationComplete extends Animation{
             name:"ZergBuilding",
             imgPos:{
                 burst:{
-                    left: [980, 1140, 1300],
-                    top: [1048, 1048, 1048]
+                    left:Array.gen(2).map(n=>n*160+980),
+                    top:new Array(3).fill(1048)
                 }
             },
             width:120,
@@ -755,8 +755,8 @@ Animation.LargeMutationComplete=class LargeMutationComplete extends Animation{
             name:"ZergBuilding",
             imgPos:{
                 burst:{
-                    left: [960, 1120, 1280],
-                    top: [1160, 1160, 1160]
+                    left:Array.gen(2).map(n=>n*160+960),
+                    top:new Array(3).fill(1160)
                 }
             },
             width:160,
@@ -774,8 +774,8 @@ Animation.ProtossBuildingComplete=class ProtossBuildingComplete extends Animatio
             name:"ProtossBuilding",
             imgPos:{
                 burst:{
-                    left: [486, 486, 636, 636],
-                    top: [648, 648, 648, 648]
+                    left:[486,636].repeat(2,true),
+                    top:new Array(4).fill(648)
                 }
             },
             width:152,
@@ -794,8 +794,8 @@ Animation.RedFireL=class RedFireL extends Animation{
             name:"TerranBuilding",
             imgPos:{
                 burst:{
-                    left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
-                    top: [546, 546, 546, 546, 546, 546, 546, 546, 546, 546, 546, 546]
+                    left:Array.gen(11).map(n=>n*64+14),
+                    top:new Array(12).fill(546)
                 }
             },
             width:40,//64N+14
@@ -816,8 +816,8 @@ Animation.RedFireM=class RedFireM extends Animation{
             name:"TerranBuilding",
             imgPos:{
                 burst:{
-                    left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
-                    top: [632, 632, 632, 632, 632, 632, 632, 632, 632, 632, 632, 632]
+                    left:Array.gen(11).map(n=>n*64+14),
+                    top:new Array(12).fill(632)
                 }
             },
             width:40,//64N+14
@@ -837,8 +837,8 @@ Animation.RedFireR=class RedFireR extends Animation{
             name:"TerranBuilding",
             imgPos:{
                 burst:{
-                    left: [10, 74, 138, 202, 266, 330, 394, 458, 522, 586, 650, 714],
-                    top: [722, 722, 722, 722, 722, 722, 722, 722, 722, 722, 722, 722]
+                    left:Array.gen(11).map(n=>n*64+10),
+                    top:new Array(12).fill(722)
                 }
             },
             width:48,//64N+10
@@ -858,8 +858,8 @@ Animation.BlueFireL=class BlueFireL extends Animation{
             name:"ProtossBuilding",
             imgPos:{
                 burst:{
-                    left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
-                    top: [424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 424]
+                    left:Array.gen(11).map(n=>n*64+14),
+                    top:new Array(12).fill(424)
                 }
             },
             width:40,//64N+14
@@ -879,8 +879,8 @@ Animation.BlueFireM=class BlueFireM extends Animation{
             name:"ProtossBuilding",
             imgPos:{
                 burst:{
-                    left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
-                    top: [506, 506, 506, 506, 506, 506, 506, 506, 506, 506, 506, 506]
+                    left:Array.gen(11).map(n=>n*64+14),
+                    top:new Array(12).fill(506)
                 }
             },
             width:40,//64N+14
@@ -900,8 +900,8 @@ Animation.BlueFireR=class BlueFireR extends Animation{
             name:"ProtossBuilding",
             imgPos:{
                 burst:{
-                    left: [10, 74, 138, 202, 266, 330, 394, 458, 522, 586, 650, 714],
-                    top: [588, 588, 588, 588, 588, 588, 588, 588, 588, 588, 588, 588]
+                    left:Array.gen(11).map(n=>n*64+10),
+                    top:new Array(12).fill(588)
                 }
             },
             width:48,//64N+10
@@ -921,8 +921,8 @@ Animation.BloodA=class BloodA extends Animation{
             name:"ZergBuilding",
             imgPos:{
                 burst:{
-                    left: [768, 832, 896, 960, 1024, 1088, 1152, 1216, 1280, 1344, 1408, 1472],
-                    top: [1320,1320,1320,1320,1320,1320,1320,1320,1320,1320,1320,1320]
+                    left:Array.gen(11).map(n=>n*64+768),
+                    top:new Array(12).fill(1320)
                 }
             },
             width:64,
@@ -942,8 +942,8 @@ Animation.BloodB=class BloodB extends Animation{
             name:"ZergBuilding",
             imgPos:{
                 burst:{
-                    left: [768, 832, 896, 960, 1024, 1088, 1152, 1216, 1280, 1344, 1408, 1472],
-                    top: [1376,1376,1376,1376,1376,1376,1376,1376,1376,1376,1376,1376]
+                    left:Array.gen(11).map(n=>n*64+768),
+                    top:new Array(12).fill(1376)
                 }
             },
             width:64,
@@ -963,8 +963,8 @@ Animation.BloodC=class BloodC extends Animation{
             name:"ZergBuilding",
             imgPos:{
                 burst:{
-                    left: [0, 64, 128, 192, 256, 320, 384, 448, 512, 576, 640, 704],
-                    top: [1376,1376,1376,1376,1376,1376,1376,1376,1376,1376,1376,1376]
+                    left:Array.gen(11).map(n=>n*64),
+                    top:new Array(12).fill(1376)
                 }
             },
             width:64,
@@ -984,8 +984,8 @@ Animation.BloodD=class BloodD extends Animation{
             name:"ZergBuilding",
             imgPos:{
                 burst:{
-                    left: [0, 64, 128, 192, 256, 320, 384, 448, 512, 576, 640, 704],
-                    top: [1320,1320,1320,1320,1320,1320,1320,1320,1320,1320,1320,1320]
+                    left:Array.gen(11).map(n=>n*64),
+                    top:new Array(12).fill(1320)
                 }
             },
             width:64,

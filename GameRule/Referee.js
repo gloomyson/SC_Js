@@ -2,7 +2,7 @@ var Referee={
     ourDetectedUnits:[],//Detected enemies
     enemyDetectedUnits:[],//Detected ours
     _pos:[[-1,0],[1,0],[0,-1],[0,1]],//Collision avoid
-    tasks:['judgeArbiter','judgeDetect','judgeRecover','judgeDying','judgeMan',
+    tasks:['judgeArbiter','judgeDetect','judgeCollision','judgeRecover','judgeDying','judgeMan',
         'addLarva','coverFog','alterSelectionMode','judgeBuildingInjury','judgeWinLose','saveReplaySnapshot'],
     voice:{
         pError:new Audio('bgm/PointError.wav'),
@@ -331,7 +331,7 @@ var Referee={
                 //Can give birth to 3 larvas
                 for(let N=0;N<3;N++){
                     if (build.larvas[N]==null || build.larvas[N].status=="dead"){
-                        build.larvas[N]=new Zerg.Larva({x:(build.x+N*48),y:(build.y+build.height),team:build.team});
+                        build.larvas[N]=new Zerg.Larva({x:(build.x+N*48),y:(build.y+build.height+4),team:build.team});
                         //Which base larva belongs to
                         build.larvas[N].owner=build;
                         break;

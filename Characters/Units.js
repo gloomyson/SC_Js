@@ -155,20 +155,15 @@ class Unit extends Gobj{
         }
     };
     faceTo(target,preventAction){
-        //Below angle represents direction toward target
-        let angle;
+        let direction;
         //Unit or Building
         if (target instanceof Gobj){
-            angle=Math.atan((this.posY()-target.posY())/(target.posX()-this.posX()));
+            direction=Unit.wrapDirection([target.posX()-this.posX(),target.posY()-this.posY()]);
         }
         else {
             //Location={x:1,y:2}
-            angle=Math.atan((this.posY()-target.y)/(target.x-this.posX()));
+            direction=Unit.wrapDirection([target.x-this.posX(),target.y-this.posY()]);
         }
-        if (target.posX()<this.posX()) angle+=Math.PI;
-        //Wrap out nearest direction
-        let direction=(angle<-Math.PI*3/8)?4:(angle<-Math.PI/8)?3:(angle<Math.PI/8)?2:(angle<Math.PI*3/8)?1:
-            (angle<Math.PI*5/8)?0:(angle<Math.PI*7/8)?7:(angle<Math.PI*9/8)?6:(angle<Math.PI*11/8)?5:4;
         if (!preventAction) this.turnTo(direction);
         return direction;
     };
@@ -356,19 +351,28 @@ class Unit extends Gobj{
             return (unit1.isFlying?1:0)-(unit2.isFlying?1:0);
         });
     };
-    //Convert from vector to 8 directions
+    //Convert from vector to 16 directions
     static wrapDirection([x,y]){
         //Atan2 can distinguish from -PI~PI, Y-axis is reverse
         let angle=Math.atan2(y,x);
-        if (angle>(Math.PI*7/8)) return 6;
-        if (angle>(Math.PI*5/8)) return 5;
-        if (angle>(Math.PI*3/8)) return 4;
-        if (angle>(Math.PI/8)) return 3;
-        if (angle>(-Math.PI/8)) return 2;
-        if (angle>(-Math.PI*3/8)) return 1;
-        if (angle>(-Math.PI*5/8)) return 0;
-        if (angle>(-Math.PI*7/8)) return 7;
-        else return 6;
+        let piece=Math.PI/16;
+        if (angle>(piece*15)) return 12;
+        if (angle>(piece*13)) return 11;
+        if (angle>(piece*11)) return 10;
+        if (angle>(piece*9)) return 9;
+        if (angle>(piece*7)) return 8;
+        if (angle>(piece*5)) return 7;
+        if (angle>(piece*3)) return 6;
+        if (angle>piece) return 5;
+        if (angle>(-piece)) return 4;
+        if (angle>(-piece*3)) return 3;
+        if (angle>(-piece*5)) return 2;
+        if (angle>(-piece*7)) return 1;
+        if (angle>(-piece*9)) return 0;
+        if (angle>(-piece*11)) return 15;
+        if (angle>(-piece*13)) return 14;
+        if (angle>(-piece*15)) return 13;
+        else return 12;
     };
     //Dock action I
     static turnAround(){
@@ -381,7 +385,7 @@ class Unit extends Gobj{
             if ((Game.mainTick+myself.id)%20==0){
                 //Look around animation
                 if (myself.status=="dock") {
-                    myself.turnTo((myself.direction+1)%8);//For all ground soldier to use
+                    myself.turnTo((myself.direction+1)%16);//For all ground soldier to use
                 }
                 else delete myself.allFrames['dock'];
             }
@@ -442,11 +446,21 @@ class Unit extends Gobj{
         let dockFrame=function(){
             //Every 2 sec
             if (Game.mainTick%20==0){
-                let direction=(myself.direction+1)%8;//Math.floor
-                //Walk around, for all critters to use
+                //Walk around, for larva to use
                 if (myself.status=="dock") {
-                    Unit.prototype.moveTo.call(myself,myself.posX()+myself.get('speed')*(Unit.speedMatrix[direction].x)*6,
-                        myself.posY()+myself.get('speed')*(Unit.speedMatrix[direction].y)*6);
+                    if (myself.moved) {
+                        //Return to original position, range=larva.speed=4
+                        Unit.prototype.moveTo.call(myself,myself.originX,myself.originY,4);
+                        myself.moved=false;
+                    }
+                    else {
+                        //Left from original position, range=larva.speed=4
+                        myself.direction=Unit.randomDirection();
+                        Unit.prototype.moveTo.call(myself,
+                            myself.posX()+myself.get('speed')*(Unit.speedMatrix[myself.direction].x)*2,
+                            myself.posY()+myself.get('speed')*(Unit.speedMatrix[myself.direction].y)*2,4);
+                        myself.moved=true;
+                    }
                 }
                 else delete myself.allFrames['dock'];
             }
@@ -470,14 +484,14 @@ Unit.selectRange=20;
 Unit.meleeRange=25;//50
 //Speed matrix, 2^0.5=>0.7
 Unit.speedMatrix=[
-    {x: 0, y: -1},
-    {x: 0.7, y: -0.7},
-    {x: 1, y: 0},
-    {x: 0.7, y: 0.7},
-    {x: 0, y: 1},
-    {x: -0.7, y: 0.7},
-    {x: -1, y: 0},
-    {x: -0.7, y: -0.7}
+    {x: 0, y: -1},{x: 0.4, y: -0.9},
+    {x: 0.7, y: -0.7},{x: 0.9, y: -0.4},
+    {x: 1, y: 0},{x: 0.9, y: 0.4},
+    {x: 0.7, y: 0.7},{x: 0.4, y: 0.9},
+    {x: 0, y: 1},{x: -0.4, y: 0.9},
+    {x: -0.7, y: 0.7},{x: -0.9, y: 0.4},
+    {x: -1, y: 0},{x: -0.9, y: -0.4},
+    {x: -0.7, y: -0.7},{x: -0.4, y: -0.9}
 ];
 //All units' sight
 Unit.sight=300;
@@ -501,9 +515,9 @@ Unit.randomDirection=function(){
         //Use current tick X randomSeed as seed
         let seed=Game.mainTick+Game.randomSeed;
         let rands=[];
-        for (let N=0;N<8;N++){
+        for (let N=0;N<16;N++){
             //Seed grows up
-            seed=(seed*5+3)%8;//range=8
+            seed=(seed*5+3)%16;//range=16
             rands.push(seed);
         }
         return rands;
@@ -910,7 +924,7 @@ class AttackableUnit extends Unit{
             if ((Game.mainTick+myself.id)%20==0){
                 //Look around animation
                 if (myself.isIdle()) {
-                    myself.turnTo((myself.direction+1)%8);//For all ground soldier to use
+                    myself.turnTo((myself.direction+1)%16);//For all ground soldier to use
                 }
                 else delete myself.allFrames['dock'];
             }
