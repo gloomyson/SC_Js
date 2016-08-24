@@ -1,3 +1,59 @@
+Revision: 155
+Author: gloomyson
+Date: 17:01:55, 2016-8-24
+Message:
+Double check in for #154:
+1.Change walkAroundLarva behavior
+2.Adjust larva born position
+3.Fix Goliath attack imgPos issue
+4.Adjust sprite images for Archon/Goliath/Tank
+----
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/img/Charas/Archon.png
+Modified : /StarCraft/img/Charas/Goliath.png
+Modified : /StarCraft/img/Charas/Tank.png
+
+Revision: 153
+Author: gloomyson
+Date: 16:50:37, 2016-8-18
+Message:
+Double check in #149 and #152 to main branch from ES6 branch
+----
+Modified : /StarCraft/Characters/Bullets.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Gobj.js
+Modified : /StarCraft/Characters/Hero.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Map.js
+Modified : /StarCraft/Characters/Neutral.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/Characters/Upgrade.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/Utils/gFrame.js
+Modified : /StarCraft/img/Charas/Archon.png
+Modified : /StarCraft/img/Charas/BattleCruiser.png
+Modified : /StarCraft/img/Charas/Broodling.png
+Modified : /StarCraft/img/Charas/Carrier.png
+Modified : /StarCraft/img/Charas/Civilian.png
+Modified : /StarCraft/img/Charas/Corsair.png
+Modified : /StarCraft/img/Charas/Dropship.png
+Modified : /StarCraft/img/Charas/Goliath.png
+Modified : /StarCraft/img/Charas/Mutalisk.png
+Modified : /StarCraft/img/Charas/Overlord.png
+Modified : /StarCraft/img/Charas/SCV.png
+Modified : /StarCraft/img/Charas/Shuttle.png
+Modified : /StarCraft/img/Charas/Tank.png
+Modified : /StarCraft/img/Charas/Tassadar.png
+Modified : /StarCraft/img/Charas/Valkyrie.png
+Modified : /StarCraft/img/Charas/Wraith.png
+
 Revision: 151
 Author: gloomyson
 Date: 17:19:42, 2016-8-5

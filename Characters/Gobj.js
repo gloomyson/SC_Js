@@ -48,8 +48,6 @@ Gobj.prototype.detectOutOfBound=function(){
 //Only for moving
 Gobj.prototype.updateLocation=function(){
     //Override here
-    this.x+=this.speed.x;
-    this.y+=this.speed.y;
 };
 Gobj.prototype.animeFrame=function(){
     //Animation play
@@ -146,6 +144,11 @@ Gobj.prototype.sightInsideScreen=function(){
     return ((this.x+this.width)>(Map.offsetX-this.get('sight'))) && (this.x<(Map.offsetX+Game.HBOUND+this.get('sight')))
         && ((this.y+this.height)>(Map.offsetY-this.get('sight'))) && (this.y<(Map.offsetY+Game.VBOUND+this.get('sight')));
 };
+Gobj.prototype.softCollideWith=function(chara,N){
+    if (N==null) N=1;
+    //Twice radius of hard collision
+    return chara.insideSquare({centerX:this.posX(),centerY:this.posY(),radius:[this.width*N,this.height*N]});
+};
 Gobj.prototype.collideWith=function(chara){
     //Bounding box: right-left-down-up
     return !((this.x>(chara.x+chara.width)) || (chara.x>(this.x+this.width))
@@ -161,7 +164,7 @@ Gobj.prototype.get=function(prop){
     //Currently only support upgrade for unit properties, no buildings
     var result=eval('this.'+prop);//Can get A.B.C
     //ShareFlag is symbol for team sharing array, not speed matrix array
-    if ((result instanceof Array) && result.shareFlag) return result[this.team];
+    if (result instanceof Array) return result[this.team];
     else return result;
 };
 Gobj.prototype.addBuffer=function(bufferObj,onAll){

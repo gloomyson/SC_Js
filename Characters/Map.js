@@ -48,12 +48,14 @@ var Map={
     },
     //Draw interface call
     drawFogAndMinimap:function(){
-        Map.refreshFog();
-        //Draw fog on main map
-        var ratio=Map.fogCanvas.ratio;
-        Game.fogCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
-        Game.fogCxt.drawImage(Map.fogCanvas,Math.round(Map.offsetX*ratio),Math.round(Map.offsetY*ratio),
-            Math.round(Game.HBOUND*ratio),Math.round(Game.VBOUND*ratio),0,0,Game.HBOUND,Game.VBOUND);
+        if (Map.fogFlag){
+            Map.refreshFog();
+            //Draw fog on main map
+            var ratio=Map.fogCanvas.ratio;
+            Game.fogCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
+            Game.fogCxt.drawImage(Map.fogCanvas,Math.round(Map.offsetX*ratio),Math.round(Map.offsetY*ratio),
+                Math.round(Game.HBOUND*ratio),Math.round(Game.VBOUND*ratio),0,0,Game.HBOUND,Game.VBOUND);
+        }
         //Draw mini-map
         Map.drawMiniMap();
     },
@@ -106,7 +108,7 @@ var Map={
             Map.miniCxt.fillRect(miniX,miniY,rectSize,rectSize);
         });
         //Draw fog on mini-map
-        Map.miniCxt.drawImage(Map.fogCanvas,0,0,Map.fogCanvas.width,Map.fogCanvas.height,0,0,130,130);
+        if (Map.fogFlag) Map.miniCxt.drawImage(Map.fogCanvas,0,0,Map.fogCanvas.width,Map.fogCanvas.height,0,0,130,130);
         //Re-draw inside stroke
         Map.miniCxt.strokeStyle='white';
         Map.miniCxt.lineWidth=2;

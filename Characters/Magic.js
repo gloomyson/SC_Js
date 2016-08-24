@@ -79,7 +79,7 @@ var Magic={
                     }
                 }
                 myself.dock();
-                myself.direction=(myself.name=="Hydralisk" || myself.name=="Lurker")?2:3;
+                myself.direction=(myself.name=="Hydralisk" || myself.name=="Lurker")?5:6;
             },this.frame.unburrow*100-200);//margin
         }
     },
@@ -365,7 +365,7 @@ var Magic={
                             var targets=Game.getInRangeOnes(location.x,location.y,[76*1.2>>0,62*1.2>>0],myself.team.toString(),true);
                             //Slow moving speed
                             var bufferObj={
-                                speed:Unit.getSpeedMatrixBy(2)
+                                speed:2
                             };
                             //Effect
                             targets.forEach(function(chara){
@@ -566,7 +566,7 @@ var Magic={
                 //Effect
                 var bufferObj={
                     attackInterval:800,
-                    speed:Unit.getSpeedMatrixBy(14)
+                    speed:14
                 };
                 this.addBuffer(bufferObj);
                 this.buffer.Stim=true;

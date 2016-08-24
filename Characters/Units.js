@@ -4,6 +4,7 @@ var Unit=Gobj.extends({
         //Add id for unit
         this.id=Unit.currentID++;
         this.direction=Unit.randomDirection();
+        this.angle=0;
         this.life=this.get('HP');
         if (this.SP) this.shield=this.get('SP');
         if (this.MP) this.magic=50;
@@ -60,18 +61,10 @@ var Unit=Gobj.extends({
                 this.y=0;
             }
         },
-        //Override to use 8 directions speed
+        //Can move in any direction
         updateLocation:function(){
-            //8 directions speed
-            if (this.get('speed') instanceof Array){
-                this.x+=this.get('speed')[this.direction].x;
-                this.y+=this.get('speed')[this.direction].y;
-            }
-            //No direction speed
-            else {
-                this.x+=this.get('speed').x;
-                this.y+=this.get('speed').y;
-            }
+            this.x=Math.round(this.x+this.get('speed')*Math.cos(this.angle));
+            this.y=Math.round(this.y+this.get('speed')*Math.sin(this.angle));
         },
         //Add new functions to prototype
         turnTo:function(direction){
@@ -118,83 +111,68 @@ var Unit=Gobj.extends({
             }
             //Need move
             else {
-                var direction=0;
-                //Already in same X
-                if (this.insideSquare({centerX:clickX,centerY:charaY,radius:range*0.7>>0})) {
-                    direction=(clickY>charaY)?4:0;
-                }
-                else {
-                    //Already in same Y
-                    if (this.insideSquare({centerX:charaX,centerY:clickY,radius:range*0.7>>0})) {
-                        direction=(clickX>charaX)?2:6;
-                    }
-                    //Need move by oblique path
-                    else {
-                        direction=(clickX>charaX)?(clickY>charaY?3:1):(clickY>charaY?5:7);
-                    }
-                }
-                this.turnTo(direction);
-                /*//Flying unit use old navigate
-                if (this.isFlying) this.turnTo(direction);
-                //Avoid collision for ground unit
-                else {
-                    //Assume next place: one instance mode
-                    if (this.nextStep==null) this.nextStep=new Gobj({x:0,y:0});
-                    this.nextStep.x=(this.x+this.get('speed')[direction].x);
-                    this.nextStep.y=(this.y+this.get('speed')[direction].y);
-                    //Init
-                    var vector=_$.clone(this.get('speed')[direction]);
-                    var myself=this;
+                var vector=[clickX-this.posX(),clickY-this.posY()];
+                vector=vector.map(function(n){
+                    return n/_$.hypot(vector);
+                });
+                //Only unit on ground will collide with others
+                const FORCE=0.4;
+                if (!this.isFlying){
+                    const myself=this;
+                    //Soft collision
+                    var softCollisions=Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
+                        if (chara==myself) return false;
+                        else return !(chara.isFlying) && chara.softCollideWith(myself);
+                    });
+                    softCollisions.forEach(function(chara){
+                        var softResist=[myself.posX()-chara.posX(),myself.posY()-chara.posY()];
+                        softResist=softResist.map(function(n){
+                            return n*FORCE/_$.hypot(softResist);
+                        });
+                        vector[0]+=softResist[0];
+                        vector[1]+=softResist[1];
+                    });
                     //Hard collision
-                    this.nextStep.width=this.width;
-                    this.nextStep.height=this.height;
-                    Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
-                        return !(chara.isFlying) && chara.collideWith(myself.nextStep);
+                    softCollisions.filter(function(chara){
+                        return chara.collideWith(myself);
                     }).forEach(function(chara){
-                        var distance=chara.distanceFrom(myself.nextStep);
-                        vector.x+=((myself.nextStep.posX()-chara.posX())*8/distance);
-                        vector.y+=((myself.nextStep.posY()-chara.posY())*8/distance);
+                        var hardResist=[myself.posX()-chara.posX(),myself.posY()-chara.posY()];
+                        hardResist=hardResist.map(function(n){
+                            return n*FORCE/_$.hypot(hardResist);
+                        });
+                        vector[0]+=hardResist[0];
+                        vector[1]+=hardResist[1];
                     });
-                    //Soft collision: 1.5*radius
-                    this.nextStep.width*=2;
-                    this.nextStep.height*=2;
-                    Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
-                        return !(chara.isFlying) && chara.collideWith(myself.nextStep);
-                    }).forEach(function(chara){
-                        var distance=chara.distanceFrom(myself.nextStep);
-                        vector.x+=((myself.nextStep.posX()-chara.posX())*4/distance);
-                        vector.y+=((myself.nextStep.posY()-chara.posY())*4/distance);
-                    });
-                    this.turnTo(Unit.wrapDirection(vector));
-                }*/
+                }
+                this.turnTo(Unit.wrapDirection(vector));
+                vector.reverse();//y,x
+                this.angle=Math.atan2(vector[0],vector[1]);
             }
         },
         faceTo:function(target,preventAction){
-            //Below angle represents direction toward target
-            var angle;
+            var direction;
             //Unit or Building
             if (target instanceof Gobj){
-                angle=Math.atan((this.posY()-target.posY())/(target.posX()-this.posX()));
+                direction=Unit.wrapDirection([target.posX()-this.posX(),target.posY()-this.posY()]);
             }
             else {
                 //Location={x:1,y:2}
-                angle=Math.atan((this.posY()-target.y)/(target.x-this.posX()));
+                direction=Unit.wrapDirection([target.x-this.posX(),target.y-this.posY()]);
             }
-            if (target.posX()<this.posX()) angle+=Math.PI;
-            //Wrap out nearest direction
-            var direction=(angle<-Math.PI*3/8)?4:(angle<-Math.PI/8)?3:(angle<Math.PI/8)?2:(angle<Math.PI*3/8)?1:
-                (angle<Math.PI*5/8)?0:(angle<Math.PI*7/8)?7:(angle<Math.PI*9/8)?6:(angle<Math.PI*11/8)?5:4;
             if (!preventAction) this.turnTo(direction);
             return direction;
         },
         escapeFrom:function(enemy){
             //Add to fix holding issue
             if (this.hold) return;
-            var escapeDirection=Unit.prototype.faceTo.call(enemy,this,true);//Fix escape from attackable building issue
-            var escapeSpeed=this.get('speed')[escapeDirection];
-            var escapeSteps=100/(Math.abs(escapeSpeed.x)+Math.abs(escapeSpeed.y));
-            //Escape by multiple steps
-            this.moveTo(this.posX()+escapeSpeed.x*escapeSteps,this.posY()+escapeSpeed.y*escapeSteps);
+            //From enemy to myself
+            var escapeVector=[this.posX()-enemy.posX(),this.posY()-enemy.posY()];
+            //Move by 100px
+            escapeVector=escapeVector.map(function(n){
+                return n*100/_$.hypot(escapeVector);
+            });
+            //Escape along vector
+            this.moveTo(this.posX()+escapeVector[0],this.posY()+escapeVector[1]);
         },
         moveTo:function(clickX,clickY,range,callback){
             if (!range) range=Unit.moveRange;//Smallest limit by default
@@ -344,14 +322,14 @@ Unit.selectRange=20;
 Unit.meleeRange=25;//50
 //Speed matrix, 2^0.5=>0.7
 Unit.speedMatrix=[
-    {x: 0, y: -1},
-    {x: 0.7, y: -0.7},
-    {x: 1, y: 0},
-    {x: 0.7, y: 0.7},
-    {x: 0, y: 1},
-    {x: -0.7, y: 0.7},
-    {x: -1, y: 0},
-    {x: -0.7, y: -0.7}
+    {x: 0, y: -1},{x: 0.4, y: -0.9},
+    {x: 0.7, y: -0.7},{x: 0.9, y: -0.4},
+    {x: 1, y: 0},{x: 0.9, y: 0.4},
+    {x: 0.7, y: 0.7},{x: 0.4, y: 0.9},
+    {x: 0, y: 1},{x: -0.4, y: 0.9},
+    {x: -0.7, y: 0.7},{x: -0.9, y: 0.4},
+    {x: -1, y: 0},{x: -0.9, y: -0.4},
+    {x: -0.7, y: -0.7},{x: -0.4, y: -0.9}
 ];
 //Get speed matrix by unit speed
 Unit.getSpeedMatrixBy=function(speed){
@@ -422,9 +400,9 @@ Unit.randomDirection=function(){
         //Use current tick X randomSeed as seed
         var seed=Game.mainTick+Game.randomSeed;
         var rands=[];
-        for (var N=0;N<8;N++){
+        for (var N=0;N<16;N++){
             //Seed grows up
-            seed=(seed*5+3)%8;//range=8
+            seed=(seed*5+3)%16;//range=16
             rands.push(seed);
         }
         return rands;
@@ -435,19 +413,28 @@ Unit.randomDirection=function(){
         return rands.shift();
     }
 }();
-//Convert from vector to 8 directions
+//Convert from vector to 16 directions
 Unit.wrapDirection=function(vector){
     //Atan2 can distinguish from -PI~PI, Y-axis is reverse
-    var angle=Math.atan2(vector.y,vector.x);
-    if (angle>(Math.PI*7/8)) return 6;
-    if (angle>(Math.PI*5/8)) return 5;
-    if (angle>(Math.PI*3/8)) return 4;
-    if (angle>(Math.PI/8)) return 3;
-    if (angle>(-Math.PI/8)) return 2;
-    if (angle>(-Math.PI*3/8)) return 1;
-    if (angle>(-Math.PI*5/8)) return 0;
-    if (angle>(-Math.PI*7/8)) return 7;
-    else return 6;
+    var angle=Math.atan2(vector[1],vector[0]);
+    var piece=Math.PI/16;
+    if (angle>(piece*15)) return 12;
+    if (angle>(piece*13)) return 11;
+    if (angle>(piece*11)) return 10;
+    if (angle>(piece*9)) return 9;
+    if (angle>(piece*7)) return 8;
+    if (angle>(piece*5)) return 7;
+    if (angle>(piece*3)) return 6;
+    if (angle>piece) return 5;
+    if (angle>(-piece)) return 4;
+    if (angle>(-piece*3)) return 3;
+    if (angle>(-piece*5)) return 2;
+    if (angle>(-piece*7)) return 1;
+    if (angle>(-piece*9)) return 0;
+    if (angle>(-piece*11)) return 15;
+    if (angle>(-piece*13)) return 14;
+    if (angle>(-piece*15)) return 13;
+    else return 12;
 };
 //Dock action I
 Unit.turnAround=function(){
@@ -460,7 +447,7 @@ Unit.turnAround=function(){
         if ((Game.mainTick+myself.id)%20==0){
             //Look around animation
             if (myself.status=="dock") {
-                myself.turnTo((myself.direction+1)%8);//For all ground soldier to use
+                myself.turnTo((myself.direction+1)%16);//For all ground soldier to use
             }
             else delete myself.allFrames['dock'];
         }
@@ -479,7 +466,8 @@ Unit.walkAround=function(){
             var direction=Unit.randomDirection();
             //Walk around, for all critters to use
             if (myself.status=="dock") {
-                myself.moveTo(myself.posX()+myself.get('speed')[direction].x*6,myself.posY()+myself.get('speed')[direction].y*6);
+                myself.moveTo(myself.posX()+myself.get('speed')*(Unit.speedMatrix[direction].x)*6,
+                    myself.posY()+myself.get('speed')*(Unit.speedMatrix[direction].y)*6);
             }
             else delete myself.allFrames['dock'];
         }
@@ -501,7 +489,7 @@ Unit.hover=function(){
             if (myself.status=="dock") {
                 myself.y+=hoverOffset;
                 if (N%4==0) {
-                    //myself.turnTo((myself.direction+1)%8);//For marine to use
+                    //myself.turnTo((myself.direction+1)%16);//For marine to use
                     hoverOffset=-hoverOffset;//Hover up and down
                 }
             }
@@ -520,10 +508,21 @@ Unit.walkAroundLarva=function(){
     var dockFrame=function(){
         //Every 2 sec
         if (Game.mainTick%20==0){
-            var direction=(myself.direction+1)%8;//Math.floor
-            //Walk around, for all critters to use
+            //Walk around, for larva to use
             if (myself.status=="dock") {
-                Unit.prototype.moveTo.call(myself,myself.posX()+myself.get('speed')[direction].x*6,myself.posY()+myself.get('speed')[direction].y*6);
+                if (myself.moved) {
+                    //Return to original position, range=larva.speed=4
+                    Unit.prototype.moveTo.call(myself,myself.originX,myself.originY,4);
+                    myself.moved=false;
+                }
+                else {
+                    //Left from original position, range=larva.speed=4
+                    myself.direction=Unit.randomDirection();
+                    Unit.prototype.moveTo.call(myself,
+                        myself.posX()+myself.get('speed')*(Unit.speedMatrix[myself.direction].x)*2,
+                        myself.posY()+myself.get('speed')*(Unit.speedMatrix[myself.direction].y)*2,4);
+                    myself.moved=true;
+                }
             }
             else delete myself.allFrames['dock'];
         }
@@ -944,7 +943,7 @@ AttackableUnit.turnAround=function(){
         if ((Game.mainTick+myself.id)%20==0){
             //Look around animation
             if (myself.isIdle()) {
-                myself.turnTo((myself.direction+1)%8);//For all ground soldier to use
+                myself.turnTo((myself.direction+1)%16);//For all ground soldier to use
             }
             else delete myself.allFrames['dock'];
         }
@@ -963,7 +962,8 @@ AttackableUnit.walkAround=function(){
             var direction=Unit.randomDirection();
             //Walk around, for all critters to use
             if (myself.isIdle()) {
-                myself.moveTo(myself.posX()+myself.get('speed')[direction].x*6,myself.posY()+myself.get('speed')[direction].y*6);
+                myself.moveTo(myself.posX()+myself.get('speed')*(Unit.speedMatrix[direction].x)*6,
+                    myself.posY()+myself.get('speed')*(Unit.speedMatrix[direction].y)*6);
             }
             else delete myself.allFrames['dock'];
         }

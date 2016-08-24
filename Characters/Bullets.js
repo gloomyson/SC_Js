@@ -427,7 +427,7 @@ Bullets.Missile=Bullets.extends({
         imgPos:{
             moving:{
                 left:8,
-                top:90
+                top:132
             }
         },
         width:16,
@@ -507,7 +507,7 @@ Bullets.Laser=Bullets.extends({
         imgPos:{
             moving:{
                 left:16,
-                top:170
+                top:248
             }
         },
         width:68,
@@ -527,7 +527,7 @@ Bullets.SmallLaser=Bullets.extends({
         imgPos:{
             moving:{
                 left:20,
-                top:170
+                top:248
             }
         },
         width:22,

@@ -248,7 +248,6 @@ var Game={
                 //Prop array, first one for us, second for enemy
                 if (unitType.prototype[prop]!=undefined) {
                     unitType.prototype[prop]=Game.getPropArray(unitType.prototype[prop]);
-                    unitType.prototype[prop].shareFlag=true;
                 }
             });
             if (unitType.prototype.isInvisible){
@@ -261,9 +260,7 @@ var Game={
                 ['damage','attackRange','attackInterval'].forEach(function(prop){
                     //Prop array, first one for us, second for enemy
                     unitType.prototype.attackMode.flying[prop]=Game.getPropArray(unitType.prototype.attackMode.flying[prop]);
-                    unitType.prototype.attackMode.flying[prop].shareFlag=true;
                     unitType.prototype.attackMode.ground[prop]=Game.getPropArray(unitType.prototype.attackMode.ground[prop]);
-                    unitType.prototype.attackMode.ground[prop].shareFlag=true;
                 });
             }
             unitType.upgrade=function(prop,value,team){
@@ -278,9 +275,7 @@ var Game={
             };
         });
         Protoss.Carrier.prototype.interceptorCapacity=Game.getPropArray(Protoss.Carrier.prototype.interceptorCapacity);
-        Protoss.Carrier.prototype.interceptorCapacity.shareFlag=true;
         Protoss.Reaver.prototype.scarabCapacity=Game.getPropArray(Protoss.Reaver.prototype.scarabCapacity);
-        Protoss.Reaver.prototype.scarabCapacity.shareFlag=true;
         Referee.underArbiterUnits=Game.getPropArray([]);
         Referee.detectedUnits=Game.getPropArray([]);
         for (var N=0;N<Game.playerNum;N++){
@@ -860,7 +855,6 @@ var Game={
     },
     animation:function(){
         Game.animation.loop=function(){
-            //console.log('BeforeCommand:'+(new Date().getTime()));//test
             //Process due commands for current frame before drawing
             var commands=Game.commands[Game.mainTick];
             if (commands instanceof Array){
@@ -870,7 +864,6 @@ var Game={
                 delete Game.commands[Game.mainTick];
             }
             /************ Draw part *************/
-            //console.log('AfterCommand-BeforeDrawFrame:'+(new Date().getTime()));//test
             //Clear all canvas
             Game.cxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
             Game.frontCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
@@ -942,7 +935,6 @@ var Game={
             Game.drawSourceBox();
             Game.drawProcessingBox();
             /************ Calculate for next frame *************/
-            //console.log('AfterDrawFrame-BeforeCalculateNextFrame:'+(new Date().getTime()));//test
             //Clock ticking
             Game.mainTick++;
             //For network mode
@@ -990,7 +982,6 @@ var Game={
                     Game.changeSelectedTo({});
                 }
             }
-            //console.log('AfterCalculateNextFrame:'+(new Date().getTime()));//test
         };
         if (Multiplayer.ON){
             Game._timer=setInterval(function(){

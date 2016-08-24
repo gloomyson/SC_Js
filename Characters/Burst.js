@@ -266,11 +266,11 @@ Burst.SmallFireSpark=Burst.extends({
         imgPos:{
             burst:{
                 left:[64,106,64],
-                top:[91,91,91]
+                top:[132,132,132]
             }
         },
         width:32,
-        height:28,
+        height:30,
         frame:{
             burst:3
         }
@@ -390,7 +390,7 @@ Burst.ArchonBurst=Burst.extends({
         width:80,
         height:80,
         frame:{
-            burst:8
+            burst:6
         }
     }
 });

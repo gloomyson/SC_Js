@@ -438,3 +438,12 @@ _$.toArray=function(arr){
     }
     return result;
 };
+
+//To replace Math.hypot
+_$.hypot=function(vector){
+    var result=0;
+    vector.forEach(function(n){
+        result+=(n*n);
+    });
+    return Math.pow(result,0.5);
+};
