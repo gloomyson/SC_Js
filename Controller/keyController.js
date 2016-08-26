@@ -18,7 +18,7 @@ var KeyController={
                 case 17:
                     KeyController.ctrl=true;
                     break;
-                //Press number
+                //Press number: '0~9'.charCodeAt()
                 case 48:case 49:case 50:case 51:case 52:
                 case 53:case 54:case 55:case 56:case 57:
                     let teamNum=String.fromCharCode(event.keyCode);
@@ -57,37 +57,37 @@ var KeyController={
                     break;
                 //Shortcut keys:
                 //Press M
-                case 77:
+                case 77://'M'.charCodeAt()
                     if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='move'
                     })) Button.moveHandler();
                     break;
                 //Press S
-                case 83:
+                case 83://'S'.charCodeAt()
                     if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='stop'
                     })) Button.stopHandler();
                     break;
                 //Press A
-                case 65:
+                case 65://'A'.charCodeAt()
                     if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='attack'
                     })) Button.attackHandler();
                     break;
                 //Press P
-                case 80:
+                case 80://'P'.charCodeAt()
                     if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='patrol'
                     })) Button.patrolHandler();
                     break;
                 //Press H
-                case 72:
+                case 72://'H'.charCodeAt()
                     if (Array.from($('div.panel_Control button')).some(function(btn){
                         return btn.className=='hold'
                     })) Button.holdHandler();
                     break;
                 //Press ENTER
-                case 13:
+                case 13://'\r'.charCodeAt()
                     Cheat.handler();
                     break;
             }

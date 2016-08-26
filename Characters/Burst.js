@@ -111,7 +111,7 @@ Burst.GreenFog=class GreenFog extends Burst{
             name:"Mutalisk",//Source img inside Mutalisk.png
             imgPos:{
                 burst:{
-                    left:[8,68,134,198,263,8,68,134,198,263],
+                    left:[8,68,134,198,263].repeat(2),
                     top:[468,532].repeat(5,true)
                 }
             },
@@ -135,7 +135,7 @@ Burst.Parasite=class Parasite extends Burst{
             name:"Mutalisk",
             imgPos:{
                 burst:{
-                    left:[8,68,134,198,263,8,68,134,198,263],
+                    left:[8,68,134,198,263].repeat(2),
                     top:[468,532].repeat(5,true)
                 }
             },
@@ -158,7 +158,7 @@ Burst.Spore=class Spore extends Burst{
             name:"Mutalisk",
             imgPos:{
                 burst:{
-                    left:[8,68,134,198,263,8,68,134,198,263],
+                    left:[8,68,134,198,263].repeat(2),
                     top:[468,532].repeat(5,true)
                 }
             },
@@ -543,7 +543,7 @@ Burst.PurpleFog=class PurpleFog extends Burst{
             name:"Mutalisk",
             imgPos:{
                 burst:{
-                    left:[338,398,464,528,593,338,398,464,528,593],
+                    left:[338,398,464,528,593].repeat(2),
                     top:[468,532].repeat(5,true)
                 }
             },

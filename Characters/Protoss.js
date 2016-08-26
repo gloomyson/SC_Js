@@ -707,8 +707,8 @@ Protoss.Carrier=class Carrier extends AttackableUnit{
             name:"Carrier",
             imgPos:{
                 moving:{
-                    left:[0,2,4,6,8,11,13,15,0,2,4,6,8,11,13,15].map(n=>n*128),
-                    top:[...new Array(8).fill(0),...new Array(8).fill(128)]
+                    left:[0,2,4,6,8,11,13,15].repeat(2).map(n=>n*128),
+                    top:[0,128].repeat(8,true)
                 }
             },
             width:128,//128N(0,2,4,6,8,11,13,15)

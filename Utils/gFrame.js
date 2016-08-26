@@ -160,6 +160,11 @@ Array.prototype.del=function(index,N){
     return this;
 };
 Object.defineProperty(Array.prototype,'del',{enumerable:false});
+Array.prototype.insert=function(index,arr){
+    this.splice(index,0,...arr);
+    return this;
+};
+Object.defineProperty(Array.prototype,'insert',{enumerable:false});
 
 /**************** Add to _$ namespace *******************/
 

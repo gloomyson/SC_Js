@@ -112,11 +112,11 @@ Animation.Lockdown=class Lockdown extends Animation{
             imgPos:{
                 burst:{
                     left:[3,0,1,2,3,0,0,0,1,2,3,0,1,2].map(n=>n*110),
-                    top:[723,834,834,834,834,945,0,612,612,612,612,723,723,723]
+                    top:[1,2,2,2,2,3,0,0,0,0,1,1,1].map(n=>n*111+612).insert(6,[0])
                 }
             },
             width:110,
-            height:111,
+            height:111,//111N+612
             above:true,
             autoSize:'MAX',
             duration:60000,
@@ -133,12 +133,12 @@ Animation.DarkSwarm=class DarkSwarm extends Animation{
             name:"Magic",
             imgPos:{
                 burst:{
-                    left:[1260,752,1006,1260,752,0,752,1006,1260,752,1006],
-                    top:[456,645,645,645,834,0,267,267,267,456,456]
+                    left:[2,0,1,2,0,0,1,2,0,1].map(n=>n*254+752).insert(5,[0]),
+                    top:[1,2,2,2,3,0,0,0,1,1].map(n=>n*189+267).insert(5,[0])
                 }
             },
-            width:254,
-            height:189,
+            width:254,//254N+752
+            height:189,//189N+267
             scale:1.2,
             duration:60000,
             frame:{

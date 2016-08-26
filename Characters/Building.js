@@ -3110,8 +3110,8 @@ Building.ProtossBuilding.WrapRift=class WrapRift extends Building.ProtossBuildin
             name:"WrapRift",
             imgPos:{
                 dock:{
-                    left:[10,74,150,234,328,418,-1,10,74,150,234,328,418],
-                    top:[...new Array(6).fill(722),-1,...new Array(6).fill(658)]
+                    left:[10,74,150,234,328,418].repeat(2).insert(6,[-1]),
+                    top:[722,658].repeat(6,true).insert(6,[-1])
                 }
             },
             width:64,

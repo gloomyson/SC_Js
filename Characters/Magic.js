@@ -316,7 +316,7 @@ var Magic={
                             let bullet=new Bullets.Parasite({
                                 from:myself,
                                 to:target,
-                                damage:99999
+                                damage:99999//Number.MAX_VALUE/MAX_SAFE_INTEGER
                             });
                             //Effect
                             bullet.fire(function(){

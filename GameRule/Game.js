@@ -54,6 +54,7 @@ var Game={
             let name1=(chara1 instanceof Building)?`${chara1.portrait}.${chara1.name}`:chara1.name;
             let name2=(chara2 instanceof Building)?`${chara2.portrait}.${chara2.name}`:chara2.name;
             return ([name1,name2].sort()[0]!=name1)?1:-1;
+            //return name1.localeCompare(name2);
         });
         //Notify referee to redraw
         Referee.alterSelectionMode();

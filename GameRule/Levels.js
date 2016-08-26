@@ -604,7 +604,7 @@ var Levels=[
             },0);
             //Fulfill nuclear bombs
             Magic.NuclearStrike.enabled=999;
-            //Change kill to EXP:
+            //Change kill to EXP: "EXP:".bold().fontcolor('red')
             $('p.kill').html('<b style="color:red">EXP:</b><span></span>');
             //Magic infinite
             Cheat.execute('the gathering');

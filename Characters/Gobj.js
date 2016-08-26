@@ -113,12 +113,12 @@ class Gobj{
     //Distance
     distanceFrom(obj){
         if (obj instanceof Gobj){
-            return Math.pow((this.posX()-obj.posX())*(this.posX()-obj.posX())+
-                (this.posY()-obj.posY())*(this.posY()-obj.posY()),0.5);
+            return Math.sqrt((this.posX()-obj.posX())*(this.posX()-obj.posX())+
+                (this.posY()-obj.posY())*(this.posY()-obj.posY()));
         }
         else {
-            return Math.pow((this.posX()-obj.x)*(this.posX()-obj.x)+
-                (this.posY()-obj.y)*(this.posY()-obj.y),0.5);
+            return Math.sqrt((this.posX()-obj.x)*(this.posX()-obj.x)+
+                (this.posY()-obj.y)*(this.posY()-obj.y));
         }
     };
     insideScreen(){

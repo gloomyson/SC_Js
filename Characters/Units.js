@@ -482,7 +482,10 @@ Unit.moveRange=20;
 Unit.selectRange=20;
 //Range for melee attack
 Unit.meleeRange=25;//50
-//Speed matrix, 2^0.5=>0.7
+//Speed matrix
+//0.7==Number(Math.SQRT1_2.toPrecision(1))
+//0.4==Number(Math.sin(Math.PI/8).toFixed(1))
+//0.9==Number(Math.cos(Math.PI/8).toFixed(1))
 Unit.speedMatrix=[
     {x: 0, y: -1},{x: 0.4, y: -0.9},
     {x: 0.7, y: -0.7},{x: 0.9, y: -0.4},

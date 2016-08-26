@@ -27,7 +27,7 @@ Hero.HeroCruiser=class HeroCruiser extends AttackableUnit{
             imgPos:{
                 moving:{
                     left:Array.gen(7).repeat(2).map(n=>n*120+10),
-                    top:[...new Array(8).fill(10),...new Array(8).fill(130)]
+                    top:[10,130].repeat(8,true)
                 }
             },
             width:100,//120N+10
@@ -96,7 +96,7 @@ Hero.Tassadar=class Tassadar extends Unit{
             imgPos:{
                 moving:{
                     left:Array.gen(7).repeat(2).map(n=>n*95),
-                    top:[...new Array(8).fill(90),...new Array(8).fill(0)]
+                    top:[90,0].repeat(8,true)
                 }
             },
             width:95,//95N

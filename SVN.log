@@ -1,3 +1,25 @@
+Revision: 156
+Author: gloomyson
+Date: 16:48:50, 2016-8-26
+Message:
+1.Change remaining imgPos from raw array to function
+2.Add Array.prototype.insert
+----
+Modified : /StarCraftES6/Characters/Animation.js
+Modified : /StarCraftES6/Characters/Building.js
+Modified : /StarCraftES6/Characters/Bullets.js
+Modified : /StarCraftES6/Characters/Burst.js
+Modified : /StarCraftES6/Characters/Gobj.js
+Modified : /StarCraftES6/Characters/Hero.js
+Modified : /StarCraftES6/Characters/Magic.js
+Modified : /StarCraftES6/Characters/Protoss.js
+Modified : /StarCraftES6/Characters/Units.js
+Modified : /StarCraftES6/Controller/keyController.js
+Modified : /StarCraftES6/GameRule/Game.js
+Modified : /StarCraftES6/GameRule/Levels.js
+Modified : /StarCraftES6/GameRule/SC_server.js
+Modified : /StarCraftES6/Utils/gFrame.js
+
 Revision: 154
 Author: gloomyson
 Date: 16:59:07, 2016-8-24

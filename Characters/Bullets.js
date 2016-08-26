@@ -22,7 +22,7 @@ class Bullets extends Gobj{
         //Initial by fixed speed
         if (this.speedVal){
             //Calculate speed
-            let K=this.speedVal/Math.pow((targetX-ownerX)*(targetX-ownerX)+(targetY-ownerY)*(targetY-ownerY),0.5);
+            let K=this.speedVal/Math.sqrt((targetX-ownerX)*(targetX-ownerX)+(targetY-ownerY)*(targetY-ownerY));
             this.speed={
                 x:K*(targetX-ownerX)>>0,
                 y:K*(targetY-ownerY)>>0
@@ -50,7 +50,7 @@ class Bullets extends Gobj{
     };
     burst(){
         let {owner,target}=this;
-        //Bullet over, now burst turn to show
+        //Bullet over,now burst turn to show
         this.die();
         //Filter out magic bullet with fixed destination
         if (!(target instanceof Gobj)) return;
@@ -134,7 +134,7 @@ class Bullets extends Gobj{
         //Fired flag
         this.used=true;
     };
-    //Upgrade Gobj moving, replace run as fire
+    //Upgrade Gobj moving,replace run as fire
     fire(callback=function(){}){
         //Start firing
         this.moving();
@@ -168,8 +168,8 @@ Bullets.Spooge=class Spooge extends Bullets{
             duration:400,
             imgPos:{
                 moving:{
-                    left:[14, 72, 136, 204],
-                    top:[758,758,758,758]
+                    left:[14,72,136,204],
+                    top:new Array(4).fill(758)
                 }
             },
             width:56,
@@ -194,7 +194,7 @@ Bullets.Thorn=class Thorn extends Bullets{
             imgPos:{
                 moving:{
                     left:[61,88,117,144,117,88],
-                    top:[711,711,711,711,711,711]
+                    top:new Array(6).fill(711)
                 }
             },
             width:28,
@@ -218,7 +218,7 @@ Bullets.Darts=class Darts extends Bullets{
             //Former behavior before override
             super.die();
         }
-        //Override damage, damage reduce
+        //Override damage,damage reduce
         target.getDamageBy(owner,this.life/this.traceTimes);
         target.reactionWhenAttackedBy(owner);
         //Bullet reduce
@@ -282,8 +282,8 @@ Bullets.Darts=class Darts extends Bullets{
             duration:400,
             imgPos:{
                 moving:{
-                    left:[0, 36, 72, 108, 144, 180, 216, 252, 288, 324],
-                    top:[1051,1051,1051,1051,1051,1051,1051,1051,1051,1051]
+                    left:Array.gen(9).map(n=>n*36),
+                    top:new Array(10).fill(1051)
                 }
             },
             width:36,
@@ -408,8 +408,8 @@ Bullets.Flame=class Flame extends Bullets{
             duration:300,
             imgPos:{
                 moving:{
-                    left:[15,15,80,80,170,170],
-                    top:[86,86,86,86,86,86]
+                    left:[15,80,170].repeat(2,true),
+                    top:new Array(6).fill(86)
                 }
             },
             width:76,
@@ -623,8 +623,8 @@ Bullets.Yamato=class Yamato extends Bullets{
             duration:400,
             imgPos:{
                 moving:{
-                    left:[288, 192, 96, 0],
-                    top:[1195,1195,1195,1195]
+                    left:Array.gen(3).reverse().map(n=>n*96),
+                    top:new Array(4).fill(1195)
                 }
             },
             width:96,
@@ -670,8 +670,8 @@ Bullets.DragoonBall=class DragoonBall extends Bullets{
             speedVal:30,
             imgPos:{
                 moving:{
-                    left:[5, 36, 70, 101, 133],
-                    top:[862,862,862,862,862]
+                    left:[5,36,70,101,133],
+                    top:new Array(5).fill(862)
                 }
             },
             width:23,
@@ -690,7 +690,7 @@ Bullets.ArchonLightening=class ArchonLightening extends Bullets{
         //Override position to hands
         this.x+=this.speed.x*6;//N/8==40/70 (ArchonRadius/AttackRange)
         this.y+=this.speed.y*6;
-        //Override speed, will not move
+        //Override speed,will not move
         this.speed={x:0,y:0};
     };
     static [_$.protoProps](){
@@ -700,8 +700,8 @@ Bullets.ArchonLightening=class ArchonLightening extends Bullets{
             duration:800,
             imgPos:{
                 moving:{
-                    left:[4, 192, 388, 580],
-                    top:[704,704,704,704]
+                    left:[4,192,388,580],
+                    top:new Array(4).fill(704)
                 }
             },
             width:90,
@@ -813,8 +813,8 @@ Bullets.Interceptor=class Interceptor extends Bullets{
             duration:1000,
             imgPos:{
                 moving:{
-                    left:[120,170,220,272,272,120,120,120,120,120],
-                    top:[582,582,582,582,582,582,582,582,582,582]
+                    left:new Array(6).fill(120).insert(1,[170,220,272,272]),
+                    top:new Array(10).fill(582)
                 }
             },
             width:44,
@@ -865,7 +865,7 @@ Bullets.DevilBall=class DevilBall extends Bullets{
 //Apply all protoProps
 _$.classPackagePatch(Bullets);
 
-//Mapping for apply, need to move it into Units.js
+//Mapping for apply,need to move it into Units.js
 Zerg.Drone.prototype.Bullet=Bullets.Spooge;
 Zerg.Hydralisk.prototype.Bullet=Bullets.Spooge;
 Zerg.Lurker.prototype.Bullet=Bullets.Thorn;

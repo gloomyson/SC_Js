@@ -14,7 +14,7 @@ var webSockets=[];//Closure
 var getServerTime=function(){
     var now=new Date();
     var timestamp=now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate()+' '
-        +now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
+        +now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();//now.toLocaleString()
     return timestamp;
 };
 wsServer.on('request',function(request){
