@@ -11,9 +11,9 @@ var Unit=Gobj.extends({
         this.selected=false;
         //Each unit instance has its own sound
         this.sound={
-            selected:new Audio('bgm/'+this.name+'.selected.wav'),
-            moving:new Audio('bgm/'+this.name+'.moving.wav'),
-            death:new Audio('bgm/'+this.name+'.death.wav')
+            selected:new Audio(Game.CDN+'bgm/'+this.name+'.selected.wav'),
+            moving:new Audio(Game.CDN+'bgm/'+this.name+'.moving.wav'),
+            death:new Audio(Game.CDN+'bgm/'+this.name+'.death.wav')
         };
         //Execute below after inherited class fully constructed, postpone
         var myself=this;
@@ -541,7 +541,7 @@ var AttackableUnit=Unit.extends({
         //Init attack range
         if (this.meleeAttack) this.attackRange=Math.max(this.radius(),35);
         //Add attack sound for AttackableUnit
-        this.sound.attack=new Audio('bgm/'+this.name+'.attack.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/'+this.name+'.attack.wav');
     },
     prototypePlus:{
         //Add basic unit info
@@ -562,7 +562,7 @@ var AttackableUnit=Unit.extends({
         attack:function(enemy){
             //Cannot attack invisible unit or unit who mismatch your attack type
             if (enemy['isInvisible'+this.team] || !(this.matchAttackLimit(enemy))) {
-                Referee.voice.pError.play();
+                Referee.voice('pError').play();
                 this.stopAttack();
                 return;
             }

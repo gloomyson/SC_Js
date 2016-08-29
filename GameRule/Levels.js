@@ -643,7 +643,7 @@ var Levels=[
                         Cheat.execute("full recovery");
                         Levels.DevilHunter.level=curLevel;
                         Game.refreshInfo();
-                        Referee.voice.upgrade[Game.race.selected].play();
+                        Referee.voice('upgrade')[Game.race.selected].play();
                         Game.showMessage('Upgrade complete');
                     }
                 }

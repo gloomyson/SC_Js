@@ -124,8 +124,8 @@ Building.enemyBuildings=function(){
 Building.ZergBuilding=Building.extends({
     constructorPlus:function(props){
         this.sound={
-            selected:new Audio('bgm/ZergBuilding.selected.wav'),
-            death:new Audio('bgm/ZergBuilding.death.wav')
+            selected:new Audio(Game.CDN+'bgm/ZergBuilding.selected.wav'),
+            death:new Audio(Game.CDN+'bgm/ZergBuilding.death.wav')
         };
         //Need draw mud for it
         Map.needRefresh="MAP";
@@ -145,9 +145,9 @@ Building.ZergBuilding=Building.extends({
 Building.TerranBuilding=Building.extends({
     constructorPlus:function(props){
         this.sound={
-            normal:new Audio('bgm/TerranBuilding.selected.wav'),
-            onfire:new Audio('bgm/Building.onfire.wav'),
-            death:new Audio('bgm/TerranBuilding.death.wav')
+            normal:new Audio(Game.CDN+'bgm/TerranBuilding.selected.wav'),
+            onfire:new Audio(Game.CDN+'bgm/Building.onfire.wav'),
+            death:new Audio(Game.CDN+'bgm/TerranBuilding.death.wav')
         };
         this.sound.selected=this.sound.normal;
     },
@@ -166,9 +166,9 @@ Building.TerranBuilding=Building.extends({
 Building.ProtossBuilding=Building.extends({
     constructorPlus:function(props){
         this.sound={
-            normal:new Audio('bgm/ProtossBuilding.selected.wav'),
-            onfire:new Audio('bgm/Building.onfire.wav'),
-            death:new Audio('bgm/ProtossBuilding.death.wav')
+            normal:new Audio(Game.CDN+'bgm/ProtossBuilding.selected.wav'),
+            onfire:new Audio(Game.CDN+'bgm/Building.onfire.wav'),
+            death:new Audio(Game.CDN+'bgm/ProtossBuilding.death.wav')
         };
         this.sound.selected=this.sound.normal;
     },
@@ -203,7 +203,7 @@ Building.Attackable={
         attack:function(enemy){
             //Cannot attack invisible unit or unit who mismatch your attack type
             if (enemy['isInvisible'+this.team] || !(this.matchAttackLimit(enemy))) {
-                Referee.voice.pError.play();
+                Referee.voice('pError').play();
                 this.stopAttack();
                 return;
             }
@@ -669,7 +669,7 @@ Building.ZergBuilding.CreepColony=Building.ZergBuilding.extends({
 });
 Building.ZergBuilding.SunkenColony=Building.ZergBuilding.extends(Building.Attackable).extends({
     constructorPlus:function(props){
-        this.sound.attack=new Audio('bgm/Colony.attack.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Colony.attack.wav');
     },
     prototypePlus: {
         //Add basic unit info
@@ -712,7 +712,7 @@ Building.ZergBuilding.SporeColony=Building.ZergBuilding.extends(Building.Attacka
     constructorPlus:function(props){
         this.imgPos.attack=this.imgPos.dock;
         this.frame.attack=this.frame.dock;
-        this.sound.attack=new Audio('bgm/Colony.attack.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Colony.attack.wav');
     },
     prototypePlus: {
         //Add basic unit info
@@ -1432,7 +1432,7 @@ Building.TerranBuilding.MissileTurret=Building.TerranBuilding.extends(Building.A
     constructorPlus:function(props){
         this.imgPos.attack=this.imgPos.dock;
         this.frame.attack=this.frame.dock;
-        this.sound.attack=new Audio('bgm/Wraith.attackF.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Wraith.attackF.wav');
     },
     prototypePlus: {
         //Add basic unit info
@@ -2203,7 +2203,7 @@ Building.ProtossBuilding.Forge=Building.ProtossBuilding.extends({
 Building.ProtossBuilding.PhotonCannon=Building.ProtossBuilding.extends(Building.Attackable).extends({
     constructorPlus:function(props){
         this.imgPos.attack=this.imgPos.dock;
-        this.sound.attack=new Audio('bgm/Dragoon.attack.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Dragoon.attack.wav');
     },
     prototypePlus: {
         //Add basic unit info
@@ -2662,8 +2662,8 @@ Building.ProtossBuilding.TeleportPoint=Building.ProtossBuilding.extends({
 Building.ZergBuilding.Egg=Building.ZergBuilding.extends({
     constructorPlus:function(props){
         this.sound={
-            selected:new Audio('bgm/Egg.selected.wav'),
-            death:new Audio('bgm/Egg.death.wav')
+            selected:new Audio(Game.CDN+'bgm/Egg.selected.wav'),
+            death:new Audio(Game.CDN+'bgm/Egg.death.wav')
         };
         //Hidden frames
         this.action=13;
@@ -2694,8 +2694,8 @@ Building.ZergBuilding.Egg=Building.ZergBuilding.extends({
 Building.ZergBuilding.Cocoon=Building.ZergBuilding.extends({
     constructorPlus:function(props){
         this.sound={
-            selected:new Audio('bgm/Cocoon.selected.wav'),
-            death:new Audio('bgm/Mutalisk.death.wav')
+            selected:new Audio(Game.CDN+'bgm/Cocoon.selected.wav'),
+            death:new Audio(Game.CDN+'bgm/Mutalisk.death.wav')
         };
         //Override default flyingFlag for building
         this.isFlying=true;

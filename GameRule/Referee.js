@@ -4,35 +4,42 @@ var Referee={
     _pos:[[-1,0],[1,0],[0,-1],[0,1]],//Collision avoid
     tasks:['judgeArbiter','judgeDetect','judgeCollision','judgeRecover','judgeDying','judgeMan',
         'addLarva','coverFog','alterSelectionMode','judgeBuildingInjury','judgeWinLose','saveReplaySnapshot'],
-    voice:{
-        pError:new Audio('bgm/PointError.wav'),
-        button:new Audio('bgm/Button.wav'),
-        resource:{
-            Zerg:{
-                mine:new Audio('bgm/mine.Zerg.wav'),
-                gas:new Audio('bgm/gas.Zerg.wav'),
-                man:new Audio('bgm/man.Zerg.wav'),
-                magic:new Audio('bgm/magic.Zerg.wav')
-            },
-            Terran:{
-                mine:new Audio('bgm/mine.Terran.wav'),
-                gas:new Audio('bgm/gas.Terran.wav'),
-                man:new Audio('bgm/man.Terran.wav'),
-                magic:new Audio('bgm/magic.Terran.wav')
-            },
-            Protoss:{
-                mine:new Audio('bgm/mine.Protoss.wav'),
-                gas:new Audio('bgm/gas.Protoss.wav'),
-                man:new Audio('bgm/man.Protoss.wav'),
-                magic:new Audio('bgm/magic.Protoss.wav')
-            }
-        },
-        upgrade:{
-            Zerg:new Audio('bgm/upgrade.Zerg.wav'),
-            Terran:new Audio('bgm/upgrade.Terran.wav'),
-            Protoss:new Audio('bgm/upgrade.Protoss.wav')
+    voice:(function(){
+        var voice;
+        return function(name){
+            //Single instance pattern
+            if (!voice) voice={
+                pError:new Audio(Game.CDN+'bgm/PointError.wav'),
+                button:new Audio(Game.CDN+'bgm/Button.wav'),
+                resource:{
+                    Zerg:{
+                        mine:new Audio(Game.CDN+'bgm/mine.Zerg.wav'),
+                        gas:new Audio(Game.CDN+'bgm/gas.Zerg.wav'),
+                        man:new Audio(Game.CDN+'bgm/man.Zerg.wav'),
+                        magic:new Audio(Game.CDN+'bgm/magic.Zerg.wav')
+                    },
+                    Terran:{
+                        mine:new Audio(Game.CDN+'bgm/mine.Terran.wav'),
+                        gas:new Audio(Game.CDN+'bgm/gas.Terran.wav'),
+                        man:new Audio(Game.CDN+'bgm/man.Terran.wav'),
+                        magic:new Audio(Game.CDN+'bgm/magic.Terran.wav')
+                    },
+                    Protoss:{
+                        mine:new Audio(Game.CDN+'bgm/mine.Protoss.wav'),
+                        gas:new Audio(Game.CDN+'bgm/gas.Protoss.wav'),
+                        man:new Audio(Game.CDN+'bgm/man.Protoss.wav'),
+                        magic:new Audio(Game.CDN+'bgm/magic.Protoss.wav')
+                    }
+                },
+                upgrade:{
+                    Zerg:new Audio(Game.CDN+'bgm/upgrade.Zerg.wav'),
+                    Terran:new Audio(Game.CDN+'bgm/upgrade.Terran.wav'),
+                    Protoss:new Audio(Game.CDN+'bgm/upgrade.Protoss.wav')
+                }
+            };
+            return voice[name];
         }
-    },
+    })(),
     winCondition:function(){
         //By default: All our units and buildings are killed
         return (Unit.allEnemyUnits().length==0 && Building.enemyBuildings().length==0);

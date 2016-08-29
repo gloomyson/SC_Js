@@ -132,13 +132,13 @@ var Magic={
                                 if (myself.insideScreen()){
                                     switch (myself.name){
                                         case 'Overlord':
-                                            new Audio('bgm/Magic.Load.Zerg.wav').play();
+                                            new Audio(Game.CDN+'bgm/Magic.Load.Zerg.wav').play();
                                             break;
                                         case 'Dropship':
-                                            new Audio('bgm/Magic.Load.Terran.wav').play();
+                                            new Audio(Game.CDN+'bgm/Magic.Load.Terran.wav').play();
                                             break;
                                         case 'Shuttle':
-                                            new Audio('bgm/Magic.Load.Protoss.wav').play();
+                                            new Audio(Game.CDN+'bgm/Magic.Load.Protoss.wav').play();
                                             break;
                                     }
                                 }
@@ -177,13 +177,13 @@ var Magic={
             if (myself.insideScreen()){
                 switch (myself.name){
                     case 'Overlord':
-                        new Audio('bgm/Magic.Unload.Zerg.wav').play();
+                        new Audio(Game.CDN+'bgm/Magic.Unload.Zerg.wav').play();
                         break;
                     case 'Dropship':
-                        new Audio('bgm/Magic.Unload.Terran.wav').play();
+                        new Audio(Game.CDN+'bgm/Magic.Unload.Terran.wav').play();
                         break;
                     case 'Shuttle':
-                        new Audio('bgm/Magic.Unload.Protoss.wav').play();
+                        new Audio(Game.CDN+'bgm/Magic.Unload.Protoss.wav').play();
                         break;
                 }
             }
@@ -360,7 +360,7 @@ var Magic={
                         bullet.fire(function(){
                             //Ensnare animation and sound
                             var anime=new Animation.Ensnare({x:location.x,y:location.y});
-                            if (anime.insideScreen()) new Audio('bgm/Magic.Ensnare.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Ensnare.wav').play();
                             //Get in range enemy units
                             var targets=Game.getInRangeOnes(location.x,location.y,[76*1.2>>0,62*1.2>>0],myself.team.toString(),true);
                             //Slow moving speed
@@ -410,7 +410,7 @@ var Magic={
                         //Effect
                         var anime=new Animation.Consume({target:target,callback:function(){
                             //Consume sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.Consume.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Consume.wav').play();
                             //Consume animation missing
                             target.die();
                             myself.magic+=50;
@@ -516,7 +516,7 @@ var Magic={
                     if (Resource.payCreditBill.call(myself)){
                         //Plague animation and sound
                         var anime=new Animation.Plague({x:location.x,y:location.y});
-                        if (anime.insideScreen()) new Audio('bgm/Magic.Ensnare.wav').play();
+                        if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Ensnare.wav').play();
                         //Get in range enemy units
                         var targets=Game.getInRangeOnes(location.x,location.y,[64*1.2>>0,64*1.2>>0],myself.team.toString(),true);
                         //Effect:HP losing every seconds
@@ -562,7 +562,7 @@ var Magic={
                 this.life-=10;
                 if (this.life<1) this.life=1;
                 //Stim sound
-                if (this.insideScreen()) new Audio('bgm/Magic.StimPacks.wav').play();
+                if (this.insideScreen()) new Audio(Game.CDN+'bgm/Magic.StimPacks.wav').play();
                 //Effect
                 var bufferObj={
                     attackInterval:800,
@@ -693,7 +693,7 @@ var Magic={
                                     }});
                                     anime.action=7;
                                     //Lockdown sound
-                                    if (anime.insideScreen()) new Audio('bgm/Magic.Lockdown.wav').play();
+                                    if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Lockdown.wav').play();
                                 }
                             });
                         }
@@ -739,7 +739,7 @@ var Magic={
                         //Nuclear animation
                         var anime=new Animation.NuclearStrike({x:location.x,y:location.y});
                         //Nuclear sound
-                        if (anime.insideScreen()) new Audio('bgm/Magic.NuclearStrike.wav').play();
+                        if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.NuclearStrike.wav').play();
                         //Use one our bomb
                         if (Magic.NuclearStrike.enabled>0 && myself.team==Game.team) {
                             Magic.NuclearStrike.enabled--;
@@ -780,7 +780,7 @@ var Magic={
                             if (target.life>target.get('HP')) target.life=target.get('HP');
                             myself.magic--;
                             //Heal action and sound
-                            if (myself.insideScreen()) new Audio('bgm/Magic.Heal.wav').play();
+                            if (myself.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Heal.wav').play();
                         }
                         //# Need heal target automatically until it becomes healthy
                     });
@@ -814,7 +814,7 @@ var Magic={
                             //Restore effect
                             var anime=new Animation.Restoration({target:target});
                             //Restore sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.Restoration.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Restoration.wav').play();
                             //Remove all bufferObjs
                             $.extend([],target.bufferObjs).forEach(function(bufferObj){
                                 target.removeBuffer(bufferObj);
@@ -934,7 +934,7 @@ var Magic={
                                 }
                             }});
                             //DefensiveMatrix sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.DefensiveMatrix.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.DefensiveMatrix.wav').play();
                             //Defensive matrix effect: absorb 250 damage
                             var matrixHP=250;
                             var bufferObj={
@@ -1000,7 +1000,7 @@ var Magic={
                             //EMP shockwave animation
                             var anime=new Animation.EMPShockwave({x:location.x,y:location.y});
                             //EMPShockwave sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.EMPShockwave.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.EMPShockwave.wav').play();
                             //Get in range enemies
                             var targets=Game.getInRangeOnes(location.x,location.y,[90*1.2>>0,74*1.2>>0],myself.team.toString());
                             //Effect
@@ -1047,7 +1047,7 @@ var Magic={
                             }
                         }});
                         //Irradiate sound
-                        if (anime.insideScreen()) new Audio('bgm/Magic.Irradiate.wav').play();
+                        if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Irradiate.wav').play();
                         //Losing life over time and walk around
                         chara.buffer.Irradiate=true;//Flag
                         var bufferObj={
@@ -1109,7 +1109,7 @@ var Magic={
                                 damage:250
                             });
                             bullet.fire();
-                            if (myself.insideScreen()) new Audio('bgm/HeroCruiser.attack.wav').play();
+                            if (myself.insideScreen()) new Audio(Game.CDN+'bgm/HeroCruiser.attack.wav').play();
                         }
                     });
                 }
@@ -1136,7 +1136,7 @@ var Magic={
                     //ScannerSweep animation
                     var anime=new Animation.ScannerSweep({x:location.x,y:location.y,team:this.team});
                     //ScannerSweep sound
-                    if (anime.insideScreen()) new Audio('bgm/Magic.ScannerSweep.wav').play();
+                    if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.ScannerSweep.wav').play();
                 }
             }
             //If missing location info, mark Button.callback, mouseController will call back with location
@@ -1190,7 +1190,7 @@ var Magic={
                         //PsionicStorm animation
                         var anime=new Animation.PsionicStorm({x:location.x,y:location.y});
                         //PsionicStorm sound
-                        if (anime.insideScreen()) new Audio('bgm/Magic.PsionicStorm.wav').play();
+                        if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.PsionicStorm.wav').play();
                         //PsionicStorm effect
                         var targets=[];
                         Magic.PsionicStorm.speller=this;
@@ -1252,7 +1252,7 @@ var Magic={
                             //Hallucination effect
                             var anime=new Animation.Hallucination({target:target});
                             //Hallucination sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.Hallucination.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Hallucination.wav').play();
                             //Initial
                             var halluDamage, halluAttackMode, Hallucinations=[];
                             if (target.attack!=null) {
@@ -1320,7 +1320,7 @@ var Magic={
                             //Feedback effect
                             var anime=new Animation.Feedback({target:target});
                             //Feedback sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.Feedback.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Feedback.wav').play();
                             //Deal damage same as its magic, lose all magic
                             target.getDamageBy(target.magic);
                             target.reactionWhenAttackedBy(myself);
@@ -1358,7 +1358,7 @@ var Magic={
                             //Mind control animation
                             var anime=new Animation.MindControl({target:target});
                             //MindControl sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.MindControl.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.MindControl.wav').play();
                             //Control and tame enemy
                             target.team=myself.team;
                             //Order ours not to attack it anymore
@@ -1423,10 +1423,10 @@ var Magic={
                                 }});
                             });
                             //MaelStorm sound
-                            if (anime.insideScreen()) new Audio('bgm/Magic.MaelStorm.wav').play();
+                            if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.MaelStorm.wav').play();
                         }});
                         //MaelStormSpell sound
-                        if (anime.insideScreen()) new Audio('bgm/Magic.StasisField.wav').play();
+                        if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.StasisField.wav').play();
                     }
                 });
             }
@@ -1482,7 +1482,7 @@ var Magic={
                         //Recall animation again
                         var animeII=new Animation.Recall({x:myself.posX(),y:myself.posY()});
                         //Recall sound
-                        if (animeII.insideScreen()) new Audio('bgm/Magic.Recall.wav').play();
+                        if (animeII.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Recall.wav').play();
                         //Effect
                         targets.forEach(function(chara){
                             //Relocate targets
@@ -1491,7 +1491,7 @@ var Magic={
                         });
                     }});
                     //Recall sound
-                    if (anime.insideScreen()) new Audio('bgm/Magic.Recall.wav').play();
+                    if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Recall.wav').play();
                 }
             }
             //If missing location info, mark Button.callback, mouseController will call back with location
@@ -1552,7 +1552,7 @@ var Magic={
                             });
                         }});
                         //StasisField sound
-                        if (anime.insideScreen()) new Audio('bgm/Magic.StasisField.wav').play();
+                        if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.StasisField.wav').play();
                     }
                 });
             }
@@ -1581,7 +1581,7 @@ var Magic={
                         //DisruptionWeb animation
                         var anime=new Animation.DisruptionWeb({x:location.x,y:location.y});
                         //DisruptionWeb sound
-                        if (anime.insideScreen()) new Audio('bgm/Magic.DisruptionWeb.wav').play();
+                        if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.DisruptionWeb.wav').play();
                         //Dynamic update targets every 1 second
                         var targets=[];
                         //Effect:Disable target attack
@@ -1648,7 +1648,7 @@ var Magic={
                     //Recharge shield animation
                     var anime=new Animation.RechargeShields({target:target});
                     //Recharge shield sound
-                    if (anime.insideScreen()) new Audio('bgm/Magic.RechargeShields.wav').play();
+                    if (anime.insideScreen()) new Audio(Game.CDN+'bgm/Magic.RechargeShields.wav').play();
                     var hurt=target.get('SP')-target.shield;
                     var needMagic=(hurt/2+0.5)>>0;
                     //Remaining magic is sufficient

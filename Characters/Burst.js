@@ -101,7 +101,7 @@ Burst.allEffects=[];
 Burst.GreenFog=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/GreenFog.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/GreenFog.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -122,7 +122,7 @@ Burst.GreenFog=Burst.extends({
 Burst.Parasite=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/Magic.Parasite.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Parasite.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -163,7 +163,7 @@ Burst.Spore=Burst.extends({
 Burst.GreenBallBroken=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/Greenball.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/Greenball.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -184,7 +184,7 @@ Burst.GreenBallBroken=Burst.extends({
 Burst.PurpleCloudSpread=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/PurpleCloud.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/PurpleCloud.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -237,7 +237,7 @@ Burst.PurpleCloudSpread=Burst.extends({
 Burst.Sunken=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/Sunken.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/Sunken.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -258,7 +258,7 @@ Burst.Sunken=Burst.extends({
 Burst.SmallFireSpark=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/FireSpark.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/FireSpark.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -299,7 +299,7 @@ Burst.FireSpark=Burst.extends({
 Burst.FireSparkSound=Burst.FireSpark.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/FireSpark.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/FireSpark.burst.wav').play();
     },
     prototypePlus:{
         //Nothing
@@ -328,7 +328,7 @@ Burst.LaserSpark=Burst.extends({
 Burst.VultureSpark=Burst.LaserSpark.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/VultureSpark.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/VultureSpark.burst.wav').play();
     },
     prototypePlus: {
         //Nothing
@@ -397,7 +397,7 @@ Burst.ArchonBurst=Burst.extends({
 Burst.DragoonBallBroken=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/DragoonBall.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/DragoonBall.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -498,7 +498,7 @@ Burst.ProbeSpark=Burst.extends({
 Burst.ReaverBurst=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/ReaverBomb.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -519,7 +519,7 @@ Burst.ReaverBurst=Burst.extends({
 Burst.PurpleFog=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/ReaverBomb.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info
@@ -541,7 +541,7 @@ Burst.PurpleFog=Burst.extends({
 Burst.InfestedBomb=Burst.extends({
     constructorPlus:function(props){
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/ReaverBomb.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     },
     prototypePlus:{
         //Add basic unit info

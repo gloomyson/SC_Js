@@ -1,3 +1,25 @@
+Revision: 158
+Author: gloomyson
+Date: 17:00:59, 2016-8-29
+Message:
+Double check in from ES6 branch #152:
+Support input CDN location for image/audio materials
+----
+Modified : /StarCraft/Characters/Building.js
+Modified : /StarCraft/Characters/Burst.js
+Modified : /StarCraft/Characters/Button.js
+Modified : /StarCraft/Characters/Magic.js
+Modified : /StarCraft/Characters/Protoss.js
+Modified : /StarCraft/Characters/Terran.js
+Modified : /StarCraft/Characters/Units.js
+Modified : /StarCraft/Characters/Zerg.js
+Modified : /StarCraft/Controller/mouseController.js
+Modified : /StarCraft/GameRule/Game.js
+Modified : /StarCraft/GameRule/Levels.js
+Modified : /StarCraft/GameRule/Multiplayer.js
+Modified : /StarCraft/GameRule/Referee.js
+Modified : /StarCraft/GameRule/Resource.js
+
 Revision: 155
 Author: gloomyson
 Date: 17:01:55, 2016-8-24

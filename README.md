@@ -6,6 +6,7 @@ Classic RTS game at html5 canvas and javascript, only js codes, copyright materi
 * Unzip the folder
 * Extract original resources from starcraft and add into bgm & img folder
 * Double click `index.html` in the folder (this should open the game with your browser)
+* You can play without image/audio materials by input available CDN location instead, for example 'www.nvhae.com/starcraft'
 * Press the radio button (circle next to the level name) to select a level and play
 
 ## Former 2015 version features:

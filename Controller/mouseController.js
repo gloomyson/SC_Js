@@ -105,7 +105,7 @@ var mouseController={
                 if (chara.cannotMove() && !(chara.isInAttackRange(selectedEnemy))) return;
                 //Intercept invisible enemy
                 if (selectedEnemy['isInvisible'+Game.team]) {
-                    if (!chara.isEnemy()) Referee.voice.pError.play();
+                    if (!chara.isEnemy()) Referee.voice('pError').play();
                     return;
                 }
                 chara.targetLock=true;

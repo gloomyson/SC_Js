@@ -2,8 +2,8 @@
 var Zerg={};
 Zerg.Drone=AttackableUnit.extends({
     constructorPlus:function(props){
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=7;
     },
     prototypePlus: {
@@ -218,8 +218,8 @@ Zerg.Drone=AttackableUnit.extends({
 });
 Zerg.Zergling=AttackableUnit.extends({
     constructorPlus:function(props){
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=5;
     },
     prototypePlus: {
@@ -441,8 +441,8 @@ Zerg.Overlord=Unit.extends({
 });
 Zerg.Hydralisk=AttackableUnit.extends({
     constructorPlus:function(props){
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=6;
     },
     prototypePlus: {
@@ -597,9 +597,9 @@ Zerg.Lurker=Unit.extends({
         //Can fire by default
         this.coolDown=true;
         //Add attack sound for AttackableUnit
-        this.sound.attack=new Audio('bgm/Lurker.attack.wav');
-        this.sound.burrow=new Audio('bgm/Lurker.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Lurker.attack.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Lurker.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=6;
     },
     prototypePlus: {
@@ -1303,8 +1303,8 @@ Zerg.Defiler=Unit.extends({
         //Same action mapping
         this.imgPos.dock=this.imgPos.moving;
         this.frame.dock=this.frame.moving;
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=6;
     },
     prototypePlus: {
@@ -1418,8 +1418,8 @@ Zerg.Defiler=Unit.extends({
 });
 Zerg.InfestedTerran=AttackableUnit.extends({
     constructorPlus:function(props){
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
     },
     prototypePlus: {
         //Add basic unit info
