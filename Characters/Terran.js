@@ -484,8 +484,8 @@ Terran.Goliath=class Goliath extends AttackableUnit{
     constructor(props){
         super(props);
         //Bind bgm
-        this.sound.attackG=new Audio(`bgm/${this.name}.attack.wav`);
-        this.sound.attackF=new Audio(`bgm/${this.name}.attackF.wav`);
+        this.sound.attackG=new Audio(`${Game.CDN}bgm/${this.name}.attack.wav`);
+        this.sound.attackF=new Audio(`${Game.CDN}bgm/${this.name}.attackF.wav`);
     };
     static [_$.protoProps](){
         return {
@@ -557,8 +557,8 @@ Terran.Wraith=class Wraith extends AttackableUnit{
         this.imgPos.dock=this.imgPos.moving;
         this.frame.dock=this.frame.moving;
         //Bind bgm
-        this.sound.attackG=new Audio(`bgm/${this.name}.attack.wav`);
-        this.sound.attackF=new Audio(`bgm/${this.name}.attackF.wav`);
+        this.sound.attackG=new Audio(`${Game.CDN}bgm/${this.name}.attack.wav`);
+        this.sound.attackF=new Audio(`${Game.CDN}bgm/${this.name}.attackF.wav`);
     };
     //Override
     dock(){

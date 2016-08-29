@@ -54,13 +54,13 @@ var Resource={
                 oweFlag=true;
                 Game.showMessage('Not enough minerals...mine more minerals');
                 //Advisor voice
-                Referee.voice.resource[Game.race.selected].mine.play();
+                Referee.voice('resource')[Game.race.selected].mine.play();
             }
             if(cost['gas'] && cost['gas']>Resource[team].gas){
                 oweFlag=true;
                 Game.showMessage('Not enough Vespene gases...harvest more gas');
                 //Advisor voice
-                Referee.voice.resource[Game.race.selected].gas.play();
+                Referee.voice('resource')[Game.race.selected].gas.play();
             }
             if(cost['man'] && cost['man']>(Resource[team].totalMan-Resource[team].curMan) && !Cheat.manUnlimited){
                 oweFlag=true;
@@ -76,13 +76,13 @@ var Resource={
                         break;
                 }
                 //Advisor voice
-                Referee.voice.resource[Game.race.selected].man.play();
+                Referee.voice('resource')[Game.race.selected].man.play();
             }
             if(cost['magic'] && cost['magic']>this.magic){
                 oweFlag=true;
                 Game.showMessage('Not enough energy');
                 //Advisor voice
-                Referee.voice.resource[Game.race.selected].magic.play();
+                Referee.voice('resource')[Game.race.selected].magic.play();
             }
             if (oweFlag){
                 //Payment failed

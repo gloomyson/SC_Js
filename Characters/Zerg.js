@@ -3,8 +3,8 @@ var Zerg={};
 Zerg.Drone=class Drone extends AttackableUnit{
     constructor(props){
         super(props);
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=7;
     };
     buildZergBuilding(location){
@@ -148,8 +148,8 @@ Zerg.Drone=class Drone extends AttackableUnit{
 Zerg.Zergling=class Zergling extends AttackableUnit{
     constructor(props){
         super(props);
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=5;
     };
     static [_$.protoProps](){
@@ -288,8 +288,8 @@ Zerg.Overlord=class Overlord extends Unit{
 Zerg.Hydralisk=class Hydralisk extends AttackableUnit{
     constructor(props){
         super(props);
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=6;
     };
     //Override
@@ -375,9 +375,9 @@ Zerg.Lurker=class Lurker extends Unit{
         //Can fire by default
         this.coolDown=true;
         //Add attack sound for AttackableUnit
-        this.sound.attack=new Audio('bgm/Lurker.attack.wav');
-        this.sound.burrow=new Audio('bgm/Lurker.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Lurker.attack.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Lurker.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=6;
     };
     //New type AI for enemy Lurker
@@ -867,8 +867,8 @@ Zerg.Defiler=class Defiler extends Unit{
         //Same action mapping
         this.imgPos.dock=this.imgPos.moving;
         this.frame.dock=this.frame.moving;
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
         this.direction=6;
     };
     static [_$.protoProps](){
@@ -931,8 +931,8 @@ Zerg.Defiler=class Defiler extends Unit{
 Zerg.InfestedTerran=class InfestedTerran extends AttackableUnit{
     constructor(props){
         super(props);
-        this.sound.burrow=new Audio('bgm/Zerg.burrow.wav');
-        this.sound.unburrow=new Audio('bgm/Zerg.unburrow.wav');
+        this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
+        this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
     };
     //Override
     dock(){

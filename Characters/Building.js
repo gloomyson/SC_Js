@@ -126,8 +126,8 @@ Building.ZergBuilding=class ZergBuilding extends Building{
     constructor(props){
         super(props);
         this.sound={
-            selected:new Audio('bgm/ZergBuilding.selected.wav'),
-            death:new Audio('bgm/ZergBuilding.death.wav')
+            selected:new Audio(Game.CDN+'bgm/ZergBuilding.selected.wav'),
+            death:new Audio(Game.CDN+'bgm/ZergBuilding.death.wav')
         };
         //Need draw mud for it
         Map.needRefresh="MAP";
@@ -152,9 +152,9 @@ Building.TerranBuilding=class TerranBuilding extends Building{
     constructor(props){
         super(props);
         this.sound={
-            normal:new Audio('bgm/TerranBuilding.selected.wav'),
-            onfire:new Audio('bgm/Building.onfire.wav'),
-            death:new Audio('bgm/TerranBuilding.death.wav')
+            normal:new Audio(Game.CDN+'bgm/TerranBuilding.selected.wav'),
+            onfire:new Audio(Game.CDN+'bgm/Building.onfire.wav'),
+            death:new Audio(Game.CDN+'bgm/TerranBuilding.death.wav')
         };
         this.sound.selected=this.sound.normal;
     };
@@ -178,9 +178,9 @@ Building.ProtossBuilding=class ProtossBuilding extends Building{
     constructor(props){
         super(props);
         this.sound={
-            normal:new Audio('bgm/ProtossBuilding.selected.wav'),
-            onfire:new Audio('bgm/Building.onfire.wav'),
-            death:new Audio('bgm/ProtossBuilding.death.wav')
+            normal:new Audio(Game.CDN+'bgm/ProtossBuilding.selected.wav'),
+            onfire:new Audio(Game.CDN+'bgm/Building.onfire.wav'),
+            death:new Audio(Game.CDN+'bgm/ProtossBuilding.death.wav')
         };
         this.sound.selected=this.sound.normal;
     };
@@ -223,7 +223,7 @@ Building.Attackable={
         attack:function(enemy){
             //Cannot attack invisible unit or unit who mismatch your attack type
             if (enemy['isInvisible'+this.team] || !(this.matchAttackLimit(enemy))) {
-                Referee.voice.pError.play();
+                Referee.voice('pError').play();
                 this.stopAttack();
                 return;
             }
@@ -686,7 +686,7 @@ Building.ZergBuilding.CreepColony=class CreepColony extends Building.ZergBuildin
 Building.ZergBuilding.SunkenColony=class SunkenColony extends Building.ZergBuilding{
     constructor(props){
         super(props);
-        this.sound.attack=new Audio('bgm/Colony.attack.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Colony.attack.wav');
         //Mixin
         Building.Attackable.constructorPlus.call(this,props);
     };
@@ -734,7 +734,7 @@ Building.ZergBuilding.SporeColony=class SporeColony extends Building.ZergBuildin
         super(props);
         this.imgPos.attack=this.imgPos.dock;
         this.frame.attack=this.frame.dock;
-        this.sound.attack=new Audio('bgm/Colony.attack.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Colony.attack.wav');
         //Mixin
         Building.Attackable.constructorPlus.call(this,props);
     };
@@ -1439,7 +1439,7 @@ Building.TerranBuilding.MissileTurret=class MissileTurret extends Building.Terra
         super(props);
         this.imgPos.attack=this.imgPos.dock;
         this.frame.attack=this.frame.dock;
-        this.sound.attack=new Audio('bgm/Wraith.attackF.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Wraith.attackF.wav');
         //Mixin
         Building.Attackable.constructorPlus.call(this,props);
     };
@@ -2194,7 +2194,7 @@ Building.ProtossBuilding.PhotonCannon=class PhotonCannon extends Building.Protos
     constructor(props){
         super(props);
         this.imgPos.attack=this.imgPos.dock;
-        this.sound.attack=new Audio('bgm/Dragoon.attack.wav');
+        this.sound.attack=new Audio(Game.CDN+'bgm/Dragoon.attack.wav');
         //Mixin
         Building.Attackable.constructorPlus.call(this,props);
     };
@@ -2645,8 +2645,8 @@ Building.ZergBuilding.Egg=class Egg extends Building.ZergBuilding{
     constructor(props){
         super(props);
         this.sound={
-            selected:new Audio('bgm/Egg.selected.wav'),
-            death:new Audio('bgm/Egg.death.wav')
+            selected:new Audio(Game.CDN+'bgm/Egg.selected.wav'),
+            death:new Audio(Game.CDN+'bgm/Egg.death.wav')
         };
         //Hidden frames
         this.action=13;
@@ -2680,8 +2680,8 @@ Building.ZergBuilding.Cocoon=class Cocoon extends Building.ZergBuilding{
     constructor(props){
         super(props);
         this.sound={
-            selected:new Audio('bgm/Cocoon.selected.wav'),
-            death:new Audio('bgm/Mutalisk.death.wav')
+            selected:new Audio(Game.CDN+'bgm/Cocoon.selected.wav'),
+            death:new Audio(Game.CDN+'bgm/Mutalisk.death.wav')
         };
         //Override default flyingFlag for building
         this.isFlying=true;

@@ -222,7 +222,7 @@ var Multiplayer={
                                             Upgrade[name].effect(team);
                                             delete owner.processing;
                                             if (team==Game.team){
-                                                Referee.voice.upgrade[Game.race.selected].play();
+                                                Referee.voice('upgrade')[Game.race.selected].play();
                                                 Game.refreshInfo();
                                                 Game.showMessage('Upgrade complete');
                                             }

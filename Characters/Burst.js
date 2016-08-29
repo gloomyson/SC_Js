@@ -103,7 +103,7 @@ Burst.GreenFog=class GreenFog extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/GreenFog.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/GreenFog.burst.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -127,7 +127,7 @@ Burst.Parasite=class Parasite extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/Magic.Parasite.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Parasite.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -174,7 +174,7 @@ Burst.GreenBallBroken=class GreenBallBroken extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/Greenball.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/Greenball.burst.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -198,7 +198,7 @@ Burst.PurpleCloudSpread=class PurpleCloudSpread extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/PurpleCloud.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/PurpleCloud.burst.wav').play();
     };
     callback(){
         let chara=this.target;
@@ -254,7 +254,7 @@ Burst.Sunken=class Sunken extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/Sunken.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/Sunken.burst.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -278,7 +278,7 @@ Burst.SmallFireSpark=class SmallFireSpark extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/FireSpark.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/FireSpark.burst.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -321,7 +321,7 @@ Burst.FireSparkSound=class FireSparkSound extends Burst.FireSpark{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/FireSpark.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/FireSpark.burst.wav').play();
     };
 };
 Burst.LaserSpark=class LaserSpark extends Burst{
@@ -347,7 +347,7 @@ Burst.VultureSpark=class VultureSpark extends Burst.LaserSpark{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/VultureSpark.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/VultureSpark.burst.wav').play();
     };
 };
 Burst.HydraSpark=class HydraSpark extends Burst{
@@ -411,7 +411,7 @@ Burst.DragoonBallBroken=class DragoonBallBroken extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/DragoonBall.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/DragoonBall.burst.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -511,7 +511,7 @@ Burst.ReaverBurst=class ReaverBurst extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/ReaverBomb.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -535,7 +535,7 @@ Burst.PurpleFog=class PurpleFog extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/ReaverBomb.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     };
     static [_$.protoProps](){
         return {
@@ -560,7 +560,7 @@ Burst.InfestedBomb=class InfestedBomb extends Burst{
     constructor(props){
         super(props);
         //Has burst sound effect
-        if (this.insideScreen()) new Audio('bgm/ReaverBomb.burst.wav').play();
+        if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     };
     static [_$.protoProps](){
         return {

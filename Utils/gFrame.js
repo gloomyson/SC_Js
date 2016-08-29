@@ -482,7 +482,7 @@ _$.levelUpProps=Symbol('levelUpProps');
 _$.classPatch=function(targetClass){
     if (targetClass[_$.protoProps]){
         Object.assign(targetClass.prototype,targetClass[_$.protoProps]());
-        //delete targetClass[_$.protoProps];
+        delete targetClass[_$.protoProps];
     }
 };
 //Decorator: @classPackagePatch

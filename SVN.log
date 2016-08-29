@@ -1,3 +1,25 @@
+Revision: 157
+Author: gloomyson
+Date: 16:49:35, 2016-8-29
+Message:
+Support input CDN location for image/audio materials
+----
+Modified : /StarCraftES6/Characters/Building.js
+Modified : /StarCraftES6/Characters/Burst.js
+Modified : /StarCraftES6/Characters/Button.js
+Modified : /StarCraftES6/Characters/Magic.js
+Modified : /StarCraftES6/Characters/Protoss.js
+Modified : /StarCraftES6/Characters/Terran.js
+Modified : /StarCraftES6/Characters/Units.js
+Modified : /StarCraftES6/Characters/Zerg.js
+Modified : /StarCraftES6/Controller/mouseController.js
+Modified : /StarCraftES6/GameRule/Game.js
+Modified : /StarCraftES6/GameRule/Levels.js
+Modified : /StarCraftES6/GameRule/Multiplayer.js
+Modified : /StarCraftES6/GameRule/Referee.js
+Modified : /StarCraftES6/GameRule/Resource.js
+Modified : /StarCraftES6/Utils/gFrame.js
+
 Revision: 156
 Author: gloomyson
 Date: 16:48:50, 2016-8-26

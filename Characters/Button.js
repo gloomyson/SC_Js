@@ -15,7 +15,7 @@ var Button={
         if (chara=={} || (chara.isEnemy && chara.isEnemy())) return;
         //Add button press sound
         $('div.panel_Control button').on('click',function(){
-            Referee.voice.button.play();
+            Referee.voice('button').play();
         });
         //Show buttons
         if (chara instanceof Unit){

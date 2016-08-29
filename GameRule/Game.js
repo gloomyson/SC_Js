@@ -28,6 +28,8 @@ var Game={
     _oldAllSelected:[],
     hackMode:false,
     isApp:false,
+    offline:false,
+    CDN:'',
     addIntoAllSelected:function(chara,override){
         if (chara instanceof Gobj){
             //Add into allSelected if not included
@@ -93,94 +95,102 @@ var Game={
         window.onresize=Game.resizeWindow;
         /*window.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame
          || mozRequestAnimationFrame || msRequestAnimationFrame || oRequestAnimationFrame;//Old browser compatible*/
+        //Online mode
+        if (!Game.offline){
+            Game.CDN=prompt('Please input CDN location for images and audios:');
+            if (Game.CDN){
+                if (!Game.CDN.startsWith('http://')) Game.CDN='http://'+Game.CDN;
+                if (!Game.CDN.endsWith('/')) Game.CDN+='/';
+            }
+        }
         //Start loading
         Game.layerSwitchTo("GameLoading");
         //Zerg
-        SourceLoader.load("img","img/Charas/Mutalisk.png","Mutalisk");
-        SourceLoader.load("img","img/Charas/Devourer.png","Devourer");
-        SourceLoader.load("img","img/Charas/Guardian.png","Guardian");
-        SourceLoader.load("img","img/Charas/Overlord.png","Overlord");
-        SourceLoader.load("img","img/Charas/Drone.png","Drone");
-        SourceLoader.load("img","img/Charas/Zergling.png","Zergling");
-        SourceLoader.load("img","img/Charas/Hydralisk.png","Hydralisk");
-        SourceLoader.load("img","img/Charas/Scourge.png","Scourge");
-        SourceLoader.load("img","img/Charas/Lurker.png","Lurker");
-        SourceLoader.load("img","img/Charas/Ultralisk.png","Ultralisk");
-        SourceLoader.load("img","img/Charas/Broodling.png","Broodling");
-        SourceLoader.load("img","img/Charas/InfestedTerran.png","InfestedTerran");
-        SourceLoader.load("img","img/Charas/Queen.png","Queen");
-        SourceLoader.load("img","img/Charas/Defiler.png","Defiler");
-        SourceLoader.load("img","img/Charas/Larva.png","Larva");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Mutalisk.png`,"Mutalisk");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Devourer.png`,"Devourer");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Guardian.png`,"Guardian");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Overlord.png`,"Overlord");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Drone.png`,"Drone");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Zergling.png`,"Zergling");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Hydralisk.png`,"Hydralisk");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Scourge.png`,"Scourge");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Lurker.png`,"Lurker");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Ultralisk.png`,"Ultralisk");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Broodling.png`,"Broodling");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/InfestedTerran.png`,"InfestedTerran");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Queen.png`,"Queen");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Defiler.png`,"Defiler");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Larva.png`,"Larva");
         //Terran
-        SourceLoader.load("img","img/Charas/BattleCruiser.png","BattleCruiser");
-        SourceLoader.load("img","img/Charas/Wraith.png","Wraith");
-        SourceLoader.load("img","img/Charas/SCV.png","SCV");
-        SourceLoader.load("img","img/Charas/Civilian.png","Civilian");
-        SourceLoader.load("img","img/Charas/Marine.png","Marine");
-        SourceLoader.load("img","img/Charas/Firebat.png","Firebat");
-        SourceLoader.load("img","img/Charas/Ghost.png","Ghost");
-        SourceLoader.load("img","img/Charas/Vulture.png","Vulture");
-        SourceLoader.load("img","img/Charas/Tank.png","Tank");
-        SourceLoader.load("img","img/Charas/Goliath.png","Goliath");
-        SourceLoader.load("img","img/Charas/Medic.png","Medic");
-        SourceLoader.load("img","img/Charas/Dropship.png","Dropship");
-        SourceLoader.load("img","img/Charas/Vessel.png","Vessel");
-        SourceLoader.load("img","img/Charas/Valkyrie.png","Valkyrie");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/BattleCruiser.png`,"BattleCruiser");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Wraith.png`,"Wraith");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/SCV.png`,"SCV");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Civilian.png`,"Civilian");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Marine.png`,"Marine");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Firebat.png`,"Firebat");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Ghost.png`,"Ghost");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Vulture.png`,"Vulture");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Tank.png`,"Tank");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Goliath.png`,"Goliath");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Medic.png`,"Medic");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Dropship.png`,"Dropship");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Vessel.png`,"Vessel");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Valkyrie.png`,"Valkyrie");
         //Protoss
-        SourceLoader.load("img","img/Charas/Probe.png","Probe");
-        SourceLoader.load("img","img/Charas/Zealot.png","Zealot");
-        SourceLoader.load("img","img/Charas/Dragoon.png","Dragoon");
-        SourceLoader.load("img","img/Charas/Templar.png","Templar");
-        SourceLoader.load("img","img/Charas/DarkTemplar.png","DarkTemplar");
-        SourceLoader.load("img","img/Charas/Reaver.png","Reaver");
-        SourceLoader.load("img","img/Charas/Archon.png","Archon");
-        SourceLoader.load("img","img/Charas/DarkArchon.png","DarkArchon");
-        SourceLoader.load("img","img/Charas/Shuttle.png","Shuttle");
-        SourceLoader.load("img","img/Charas/Observer.png","Observer");
-        SourceLoader.load("img","img/Charas/Arbiter.png","Arbiter");
-        SourceLoader.load("img","img/Charas/Scout.png","Scout");
-        SourceLoader.load("img","img/Charas/Carrier.png","Carrier");
-        SourceLoader.load("img","img/Charas/Corsair.png","Corsair");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Probe.png`,"Probe");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Zealot.png`,"Zealot");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Dragoon.png`,"Dragoon");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Templar.png`,"Templar");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/DarkTemplar.png`,"DarkTemplar");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Reaver.png`,"Reaver");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Archon.png`,"Archon");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/DarkArchon.png`,"DarkArchon");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Shuttle.png`,"Shuttle");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Observer.png`,"Observer");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Arbiter.png`,"Arbiter");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Scout.png`,"Scout");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Carrier.png`,"Carrier");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Corsair.png`,"Corsair");
         //Neuture
-        SourceLoader.load("img","img/Charas/Ragnasaur.png","Ragnasaur");
-        SourceLoader.load("img","img/Charas/Rhynsdon.png","Rhynsdon");
-        SourceLoader.load("img","img/Charas/Ursadon.png","Ursadon");
-        SourceLoader.load("img","img/Charas/Bengalaas.png","Bengalaas");
-        SourceLoader.load("img","img/Charas/Scantid.png","Scantid");
-        SourceLoader.load("img","img/Charas/Kakaru.png","Kakaru");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Ragnasaur.png`,"Ragnasaur");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Rhynsdon.png`,"Rhynsdon");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Ursadon.png`,"Ursadon");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Bengalaas.png`,"Bengalaas");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Scantid.png`,"Scantid");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Kakaru.png`,"Kakaru");
         //Hero
-        SourceLoader.load("img","img/Charas/HeroCruiser.png","HeroCruiser");
-        SourceLoader.load("img","img/Charas/Sarah.png","Sarah");
-        SourceLoader.load("img","img/Charas/Kerrigan.png","Kerrigan");
-        SourceLoader.load("img","img/Charas/DevilHunter.png","DevilHunter");
-        SourceLoader.load("img","img/Charas/Tassadar.png","Tassadar");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/HeroCruiser.png`,"HeroCruiser");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Sarah.png`,"Sarah");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Kerrigan.png`,"Kerrigan");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/DevilHunter.png`,"DevilHunter");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Tassadar.png`,"Tassadar");
         //Building
-        SourceLoader.load("img","img/Charas/ZergBuilding.png","ZergBuilding");
-        SourceLoader.load("img","img/Charas/TerranBuilding.png","TerranBuilding");
-        SourceLoader.load("img","img/Charas/ProtossBuilding.png","ProtossBuilding");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/ZergBuilding.png`,"ZergBuilding");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/TerranBuilding.png`,"TerranBuilding");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/ProtossBuilding.png`,"ProtossBuilding");
         /*SourceLoader.load("audio","bgm/PointError.wav","PointError");*/
         //Map
-        SourceLoader.load("img","img/Maps/(2)Switchback.jpg","Map_Switchback");
-        SourceLoader.load("img","img/Maps/(2)Volcanis.jpg","Map_Volcanis");
-        SourceLoader.load("img","img/Maps/(3)Trench wars.jpg","Map_TrenchWars");
-        SourceLoader.load("img","img/Maps/(4)Blood Bath.jpg","Map_BloodBath");
-        SourceLoader.load("img","img/Maps/(4)Orbital Relay.jpg","Map_OrbitalRelay");
-        SourceLoader.load("img","img/Maps/(4)TowerDefense.jpg","Map_TowerDefense");
-        SourceLoader.load("img","img/Maps/(6)Thin Ice.jpg","Map_ThinIce");
-        SourceLoader.load("img","img/Maps/(8)BigGameHunters.jpg","Map_BigGameHunters");
-        SourceLoader.load("img","img/Maps/(8)TheHunters.jpg","Map_TheHunters");
-        SourceLoader.load("img","img/Maps/(8)Turbo.jpg","Map_Turbo");
-        SourceLoader.load("img","img/Maps/Map_Grass.jpg","Map_Grass");
-        SourceLoader.load("img","img/Charas/Mud.png","Mud");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(2)Switchback.jpg`,"Map_Switchback");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(2)Volcanis.jpg`,"Map_Volcanis");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(3)Trench wars.jpg`,"Map_TrenchWars");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(4)Blood Bath.jpg`,"Map_BloodBath");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(4)Orbital Relay.jpg`,"Map_OrbitalRelay");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(4)TowerDefense.jpg`,"Map_TowerDefense");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(6)Thin Ice.jpg`,"Map_ThinIce");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(8)BigGameHunters.jpg`,"Map_BigGameHunters");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(8)TheHunters.jpg`,"Map_TheHunters");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/(8)Turbo.jpg`,"Map_Turbo");
+        SourceLoader.load("img",`${Game.CDN}img/Maps/Map_Grass.jpg`,"Map_Grass");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Mud.png`,"Mud");
         //Extra
-        SourceLoader.load("img","img/Charas/Burst.png","Burst");
-        SourceLoader.load("img","img/Charas/BuildingBurst.png","BuildingBurst");
-        SourceLoader.load("img","img/Charas/Portrait.png","Portrait");
-        SourceLoader.load("img","img/Charas/Magic.png","Magic");
-        SourceLoader.load("img","img/Menu/ControlPanel.png","ControlPanel");
-        SourceLoader.load("img","img/Bg/GameStart.jpg","GameStart");
-        SourceLoader.load("img","img/Bg/GameWin.jpg","GameWin");
-        SourceLoader.load("img","img/Bg/GameLose.jpg","GameLose");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Burst.png`,"Burst");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/BuildingBurst.png`,"BuildingBurst");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Portrait.png`,"Portrait");
+        SourceLoader.load("img",`${Game.CDN}img/Charas/Magic.png`,"Magic");
+        SourceLoader.load("img",`${Game.CDN}img/Menu/ControlPanel.png`,"ControlPanel");
+        SourceLoader.load("img",`${Game.CDN}img/Bg/GameStart.jpg`,"GameStart");
+        SourceLoader.load("img",`${Game.CDN}img/Bg/GameWin.jpg`,"GameWin");
+        SourceLoader.load("img",`${Game.CDN}img/Bg/GameLose.jpg`,"GameLose");
 
         SourceLoader.allOnLoad(function(){
             $('#GameStart').prepend(SourceLoader.sources.get('GameStart'));
@@ -979,7 +989,7 @@ var Game={
             Game.stop(Unit.allUnits);
             //Win poster
             Game.layerSwitchTo("GameWin");
-            new Audio('bgm/GameWin.wav').play();
+            new Audio(Game.CDN+'bgm/GameWin.wav').play();
         });
         //Self destruction to prevent duplicate fadeout
         Game.win=function(){};
@@ -998,7 +1008,7 @@ var Game={
             Game.stop(Unit.allUnits);
             //Lose poster
             Game.layerSwitchTo("GameLose");
-            new Audio('bgm/GameLose.wav').play();
+            new Audio(Game.CDN+'bgm/GameLose.wav').play();
         });
         //Self destruction to prevent duplicate fadeout
         Game.lose=function(){};
