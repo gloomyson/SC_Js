@@ -2,3 +2,5 @@ Thumbs.db
 .svn/
 .idea/
 Original/
+*.map
+node_modules/
