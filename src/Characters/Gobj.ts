@@ -3,14 +3,20 @@ import {Map} from './Map';
 //Gobj is original object used in StarCraft
 export class Gobj {
 
-    function(props) {
+    x: number;
+    y: number;
+    action: number;
+    status: string;
+
+
+    static init = function (props) {
         this.x = props.x;
         this.y = props.y;
         if (props.target instanceof Gobj) {
             this.x = (props.target.posX() - this.width / 2) >> 0;
             this.y = (props.target.posY() - this.height / 2) >> 0;
         }
-        this.action = 0;//Only for moving
+        this.action = 0; //Only for moving
         this.status = "";
         this.buffer = {};//Buffer names
         this.override = {};//Buffer effects
@@ -126,7 +132,9 @@ export class Gobj {
         return Math.pow(circle.centerX - this.posX(), 2) + Math.pow(circle.centerY - this.posY(), 2) < Math.pow(circle.radius, 2);
     };
     //Default is circle mode
-    inside = insideCircle;
+    inside = function (circle) {
+        return Math.pow(circle.centerX - this.posX(), 2) + Math.pow(circle.centerY - this.posY(), 2) < Math.pow(circle.radius, 2);
+    };
     //Radius
     radius = function () {
         return (this.width < this.height) ? (this.width / 2) : (this.height / 2);//Math.min

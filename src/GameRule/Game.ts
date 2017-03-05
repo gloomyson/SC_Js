@@ -454,7 +454,7 @@ export class Game {
             return chara.selected;
         });
     }
-    showInfoFor= function(chara){
+    static showInfoFor= function(chara){
         //Show selected living unit info
         if (Game.selectedUnit instanceof Gobj && Game.selectedUnit.status!="dead") {
             //Display info
@@ -572,7 +572,7 @@ export class Game {
             $('div.panel_Info>div').hide();
         }
     }
-    static public refreshInfo= function(){
+    public static refreshInfo = function(){
         Game.showInfoFor(Game.selectedUnit);
     } 
 
