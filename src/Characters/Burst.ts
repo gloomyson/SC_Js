@@ -1,6 +1,8 @@
+import {Gobj} from './Gobj';
+
 //One animation period which only play for a while and die
-var Burst=Gobj.extends({
-    constructorPlus:function(props){
+export class Burst extends Gobj{
+    constructorPlus= function(props){
         //Override if has props.scale
         if (props.scale) this.scale=props.scale;
         //Resize drawing by scale
@@ -54,7 +56,7 @@ var Burst=Gobj.extends({
     },
     prototypePlus:{
         //Override Gobj method
-        animeFrame:function(){
+        animeFrame= function(){
             //Animation play
             this.action++;
             //Override Gobj here, can have hidden frames
@@ -70,7 +72,7 @@ var Burst=Gobj.extends({
                 this.y=(this.target.posY()-this.height*times/2)>>0;
             }
         },
-        burst:function(){
+        burst= function(){
             this.status="burst";
             //Start play burst animation
             var myself=this;
@@ -88,7 +90,7 @@ var Burst=Gobj.extends({
                 },duration);
             }
         },
-        die:function(){
+        die= function(){
             //Run callback when burst die
             if (this.callback) this.callback();
             Gobj.prototype.die.call(this);
@@ -99,7 +101,7 @@ var Burst=Gobj.extends({
 Burst.allEffects=[];
 //Define different bursts
 Burst.GreenFog=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/GreenFog.burst.wav').play();
     },
@@ -120,7 +122,7 @@ Burst.GreenFog=Burst.extends({
     }
 });
 Burst.Parasite=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/Magic.Parasite.wav').play();
     },
@@ -141,7 +143,7 @@ Burst.Parasite=Burst.extends({
     }
 });
 Burst.Spore=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //No sound
     },
     prototypePlus:{
@@ -161,7 +163,7 @@ Burst.Spore=Burst.extends({
     }
 });
 Burst.GreenBallBroken=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/Greenball.burst.wav').play();
     },
@@ -182,7 +184,7 @@ Burst.GreenBallBroken=Burst.extends({
     }
 });
 Burst.PurpleCloudSpread=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/PurpleCloud.burst.wav').play();
     },
@@ -197,7 +199,7 @@ Burst.PurpleCloudSpread=Burst.extends({
         },
         width:50,
         height:60,
-        callback:function(){
+        callback= function(){
             var chara=this.target;
             //Fix all spored issue
             if (chara.status=='dead' || chara.status==null) return;
@@ -217,7 +219,7 @@ Burst.PurpleCloudSpread=Burst.extends({
             if (!chara.purpleBuffer) chara.purpleBuffer=[];
             chara.purpleBuffer.push(bufferObj);
             //Purple effect
-            new Animation.PurpleEffect({team:this.team,target:chara,callback:function(){
+            new Animation.PurpleEffect({team:this.team,target:chara,callback= function(){
                 //Restore in 30 seconds, Last In First Out
                 if (chara.purpleBuffer && chara.removeBuffer(chara.purpleBuffer.pop())) {
                     chara.buffer.PurpleCloud--;
@@ -235,7 +237,7 @@ Burst.PurpleCloudSpread=Burst.extends({
     }
 });
 Burst.Sunken=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/Sunken.burst.wav').play();
     },
@@ -256,7 +258,7 @@ Burst.Sunken=Burst.extends({
     }
 });
 Burst.SmallFireSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/FireSpark.burst.wav').play();
     },
@@ -277,7 +279,7 @@ Burst.SmallFireSpark=Burst.extends({
     }
 });
 Burst.FireSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -297,7 +299,7 @@ Burst.FireSpark=Burst.extends({
     }
 });
 Burst.FireSparkSound=Burst.FireSpark.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/FireSpark.burst.wav').play();
     },
@@ -306,7 +308,7 @@ Burst.FireSparkSound=Burst.FireSpark.extends({
     }
 });
 Burst.LaserSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -326,7 +328,7 @@ Burst.LaserSpark=Burst.extends({
     }
 });
 Burst.VultureSpark=Burst.LaserSpark.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/VultureSpark.burst.wav').play();
     },
@@ -335,7 +337,7 @@ Burst.VultureSpark=Burst.LaserSpark.extends({
     }
 });
 Burst.HydraSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -355,7 +357,7 @@ Burst.HydraSpark=Burst.extends({
     }
 });
 Burst.CorsairCloud=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -375,7 +377,7 @@ Burst.CorsairCloud=Burst.extends({
     }
 });
 Burst.ArchonBurst=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -395,7 +397,7 @@ Burst.ArchonBurst=Burst.extends({
     }
 });
 Burst.DragoonBallBroken=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/DragoonBall.burst.wav').play();
     },
@@ -416,7 +418,7 @@ Burst.DragoonBallBroken=Burst.extends({
     }
 });
 Burst.ShootSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -436,7 +438,7 @@ Burst.ShootSpark=Burst.extends({
     }
 });
 Burst.BlueShootSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -456,7 +458,7 @@ Burst.BlueShootSpark=Burst.extends({
     }
 });
 Burst.SCVSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -476,7 +478,7 @@ Burst.SCVSpark=Burst.extends({
     }
 });
 Burst.ProbeSpark=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -496,7 +498,7 @@ Burst.ProbeSpark=Burst.extends({
     }
 });
 Burst.ReaverBurst=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     },
@@ -517,7 +519,7 @@ Burst.ReaverBurst=Burst.extends({
     }
 });
 Burst.PurpleFog=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     },
@@ -539,7 +541,7 @@ Burst.PurpleFog=Burst.extends({
 });
 
 Burst.InfestedBomb=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Has burst sound effect
         if (this.insideScreen()) new Audio(Game.CDN+'bgm/ReaverBomb.burst.wav').play();
     },
@@ -560,7 +562,7 @@ Burst.InfestedBomb=Burst.extends({
     }
 });
 Burst.ScourgeBomb=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -581,7 +583,7 @@ Burst.ScourgeBomb=Burst.extends({
 });
 
 Burst.SmallExplode=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -601,7 +603,7 @@ Burst.SmallExplode=Burst.extends({
     }
 });
 Burst.MiddleExplode=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -621,7 +623,7 @@ Burst.MiddleExplode=Burst.extends({
     }
 });
 Burst.BigExplode=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -641,7 +643,7 @@ Burst.BigExplode=Burst.extends({
     }
 });
 Burst.SmallBlueExplode=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -661,7 +663,7 @@ Burst.SmallBlueExplode=Burst.extends({
     }
 });
 Burst.MiddleBlueExplode=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -681,7 +683,7 @@ Burst.MiddleBlueExplode=Burst.extends({
     }
 });
 Burst.BigBlueExplode=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -701,7 +703,7 @@ Burst.BigBlueExplode=Burst.extends({
     }
 });
 Burst.ZergBuildingBurst=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Need clear mud when ZergBuildingBurst finished
         this.callback=function(){
             Map.needRefresh="MAP";
@@ -724,7 +726,7 @@ Burst.ZergBuildingBurst=Burst.extends({
     }
 });
 Burst.TerranBuildingBurst=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -744,7 +746,7 @@ Burst.TerranBuildingBurst=Burst.extends({
     }
 });
 Burst.ProtossBuildingBurst=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -764,7 +766,7 @@ Burst.ProtossBuildingBurst=Burst.extends({
     }
 });
 Burst.HumanDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -784,7 +786,7 @@ Burst.HumanDeath=Burst.extends({
     }
 });
 Burst.MedicDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -804,7 +806,7 @@ Burst.MedicDeath=Burst.extends({
     }
 });
 Burst.SmallZergFlyingDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -824,7 +826,7 @@ Burst.SmallZergFlyingDeath=Burst.extends({
     }
 });
 Burst.BigZergFlyingDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -844,7 +846,7 @@ Burst.BigZergFlyingDeath=Burst.extends({
     }
 });
 Burst.DroneDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -864,7 +866,7 @@ Burst.DroneDeath=Burst.extends({
     }
 });
 Burst.ZerglingDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -884,7 +886,7 @@ Burst.ZerglingDeath=Burst.extends({
     }
 });
 Burst.HydraliskDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -904,7 +906,7 @@ Burst.HydraliskDeath=Burst.extends({
     }
 });
 Burst.LurkerDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -924,7 +926,7 @@ Burst.LurkerDeath=Burst.extends({
     }
 });
 Burst.UltraliskDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -944,7 +946,7 @@ Burst.UltraliskDeath=Burst.extends({
     }
 });
 Burst.DefilerDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -964,7 +966,7 @@ Burst.DefilerDeath=Burst.extends({
     }
 });
 Burst.BroodlingDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -984,7 +986,7 @@ Burst.BroodlingDeath=Burst.extends({
     }
 });
 Burst.LarvaDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1004,7 +1006,7 @@ Burst.LarvaDeath=Burst.extends({
     }
 });
 Burst.EggDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1024,7 +1026,7 @@ Burst.EggDeath=Burst.extends({
     }
 });
 Burst.EggBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1044,7 +1046,7 @@ Burst.EggBirth=Burst.extends({
     }
 });
 Burst.DroneBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1064,7 +1066,7 @@ Burst.DroneBirth=Burst.extends({
     }
 });
 Burst.OverlordBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1084,7 +1086,7 @@ Burst.OverlordBirth=Burst.extends({
     }
 });
 Burst.ZerglingBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1104,7 +1106,7 @@ Burst.ZerglingBirth=Burst.extends({
     }
 });
 Burst.HydraliskBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1124,7 +1126,7 @@ Burst.HydraliskBirth=Burst.extends({
     }
 });
 Burst.MutaliskBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1144,7 +1146,7 @@ Burst.MutaliskBirth=Burst.extends({
     }
 });
 Burst.ScourgeBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1164,7 +1166,7 @@ Burst.ScourgeBirth=Burst.extends({
     }
 });
 Burst.QueenBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1184,7 +1186,7 @@ Burst.QueenBirth=Burst.extends({
     }
 });
 Burst.UltraliskBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1204,7 +1206,7 @@ Burst.UltraliskBirth=Burst.extends({
     }
 });
 Burst.DefilerBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1224,7 +1226,7 @@ Burst.DefilerBirth=Burst.extends({
     }
 });
 Burst.LurkerBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1244,7 +1246,7 @@ Burst.LurkerBirth=Burst.extends({
     }
 });
 Burst.GuardianBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1264,7 +1266,7 @@ Burst.GuardianBirth=Burst.extends({
     }
 });
 Burst.DevourerBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1284,7 +1286,7 @@ Burst.DevourerBirth=Burst.extends({
     }
 });
 Burst.SmallProtossDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1304,7 +1306,7 @@ Burst.SmallProtossDeath=Burst.extends({
     }
 });
 Burst.DragoonDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1324,7 +1326,7 @@ Burst.DragoonDeath=Burst.extends({
     }
 });
 Burst.TemplarDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1344,7 +1346,7 @@ Burst.TemplarDeath=Burst.extends({
     }
 });
 Burst.HallucinationDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1364,7 +1366,7 @@ Burst.HallucinationDeath=Burst.extends({
     }
 });
 Burst.ArchonBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1384,7 +1386,7 @@ Burst.ArchonBirth=Burst.extends({
     }
 });
 Burst.DarkArchonBirth=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Mixin
     },
     prototypePlus:{
@@ -1405,7 +1407,7 @@ Burst.DarkArchonBirth=Burst.extends({
 });
 
 Burst.RagnasaurDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1425,7 +1427,7 @@ Burst.RagnasaurDeath=Burst.extends({
     }
 });
 Burst.RhynsdonDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1445,7 +1447,7 @@ Burst.RhynsdonDeath=Burst.extends({
     }
 });
 Burst.UrsadonDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1465,7 +1467,7 @@ Burst.UrsadonDeath=Burst.extends({
     }
 });
 Burst.BengalaasDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1485,7 +1487,7 @@ Burst.BengalaasDeath=Burst.extends({
     }
 });
 Burst.ScantidDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{
@@ -1505,7 +1507,7 @@ Burst.ScantidDeath=Burst.extends({
     }
 });
 Burst.KakaruDeath=Burst.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus:{

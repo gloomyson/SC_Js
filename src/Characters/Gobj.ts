@@ -1,5 +1,8 @@
 import { Game } from '../GameRule/Game';
-import {Map} from './Map';
+import { Map } from './Map';
+import { Building } from './Building';
+import { Burst } from './Burst';
+
 //Gobj is original object used in StarCraft
 export class Gobj {
 
@@ -275,4 +278,5 @@ export class Gobj {
         return newTypeChara;
     };
     //This buffer makes invisible units visible
-    Gobj.detectorBuffer = [];
+    //  Gobj.detectorBuffer = [];
+}

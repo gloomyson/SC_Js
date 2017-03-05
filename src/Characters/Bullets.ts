@@ -1,5 +1,7 @@
-var Bullets=Gobj.extends({
-    constructorPlus:function(props){
+import {Gobj} from './Gobj';
+
+export class Bullets extends Gobj {
+    constructorPlus= function(props){
         this.owner=props.from;
         this.target=props.to;
         //Makes below initial steps before fire
@@ -40,15 +42,15 @@ var Bullets=Gobj.extends({
         if (props.damage!=null) this.damage=props.damage;
         //Will show after constructed
         Bullets.allBullets.push(this);
-    },
+    }
     prototypePlus:{
         //Override to use 8 directions speed
-        updateLocation:function(){
+        updateLocation= function(){
             //No direction speed
             this.x+=this.speed.x;
             this.y+=this.speed.y;
         },
-        burst:function(){
+        burst= function(){
             var owner=this.owner;
             var target=this.target;
             //Bullet over, now burst turn to show
@@ -140,7 +142,7 @@ var Bullets=Gobj.extends({
             this.used=true;
         },
         //Upgrade Gobj moving, replace run as fire
-        fire:function(callback){
+        fire= function(callback){
             //Start firing
             this.moving();
             //Layout bullet in front by add one frame
@@ -158,10 +160,15 @@ var Bullets=Gobj.extends({
         }
     }
 });
+
+
+
+
+
 //All bullets here for show
 Bullets.allBullets=[];
 Bullets.Spooge=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Hydralisk",
@@ -181,7 +188,7 @@ Bullets.Spooge=Bullets.extends({
     }
 });
 Bullets.Thorn=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Lurker",
@@ -202,7 +209,7 @@ Bullets.Thorn=Bullets.extends({
     }
 });
 Bullets.Darts=Bullets.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.life=this.traceTimes;
     },
     prototypePlus:{
@@ -226,7 +233,7 @@ Bullets.Darts=Bullets.extends({
         traceRadius:100,
         //Override
         noDamage:true,
-        die:function(){
+        die= function(){
             var target=this.target;
             var owner=this.owner;
             //Interrupt tracing if target is dead first
@@ -299,7 +306,7 @@ Bullets.Darts=Bullets.extends({
     }
 });
 Bullets.Parasite=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -319,7 +326,7 @@ Bullets.Parasite=Bullets.extends({
     }
 });
 Bullets.GreenBall=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Guardian",
@@ -340,7 +347,7 @@ Bullets.GreenBall=Bullets.extends({
     }
 });
 Bullets.PurpleCloud=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Devourer",
@@ -360,7 +367,7 @@ Bullets.PurpleCloud=Bullets.extends({
     }
 });
 Bullets.Spore=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -380,7 +387,7 @@ Bullets.Spore=Bullets.extends({
     }
 });
 Bullets.Flame=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -399,7 +406,7 @@ Bullets.Flame=Bullets.extends({
     }
 });
 Bullets.VultureBall=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -419,7 +426,7 @@ Bullets.VultureBall=Bullets.extends({
     }
 });
 Bullets.Missile=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Wraith",
@@ -439,7 +446,7 @@ Bullets.Missile=Bullets.extends({
     }
 });
 Bullets.LongMissile=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -459,7 +466,7 @@ Bullets.LongMissile=Bullets.extends({
     }
 });
 Bullets.SingleMissile=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -479,7 +486,7 @@ Bullets.SingleMissile=Bullets.extends({
     }
 });
 Bullets.MultipleMissile=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -499,7 +506,7 @@ Bullets.MultipleMissile=Bullets.extends({
     }
 });
 Bullets.Laser=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"BattleCruiser",
@@ -519,7 +526,7 @@ Bullets.Laser=Bullets.extends({
     }
 });
 Bullets.SmallLaser=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"BattleCruiser",
@@ -539,7 +546,7 @@ Bullets.SmallLaser=Bullets.extends({
     }
 });
 /*Bullets.HeatLaser=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"HeroCruiser",
@@ -559,7 +566,7 @@ Bullets.SmallLaser=Bullets.extends({
     }
 });*/
 Bullets.Yamato=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -579,7 +586,7 @@ Bullets.Yamato=Bullets.extends({
     }
 });
 Bullets.NuclearBomb=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -598,7 +605,7 @@ Bullets.NuclearBomb=Bullets.extends({
     }
 });
 Bullets.DragoonBall=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -619,7 +626,7 @@ Bullets.DragoonBall=Bullets.extends({
     }
 });
 Bullets.ArchonLightening=Bullets.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Override position to hands
         this.x+=this.speed.x*6;//N/8==40/70 (ArchonRadius/AttackRange)
         this.y+=this.speed.y*6;
@@ -644,7 +651,7 @@ Bullets.ArchonLightening=Bullets.extends({
     }
 });
 Bullets.ScoutMissile=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -664,7 +671,7 @@ Bullets.ScoutMissile=Bullets.extends({
     }
 });
 Bullets.ReaverBomb=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -682,7 +689,7 @@ Bullets.ReaverBomb=Bullets.extends({
         },
         burstEffect:Burst.ReaverBurst,
         //Override
-        fire:function(){
+        fire= function(){
             Bullets.prototype.fire.call(this);
             //Consume scarab
             if (this.owner.scarabNum>0) {
@@ -693,7 +700,7 @@ Bullets.ReaverBomb=Bullets.extends({
     }
 });
 Bullets.ReaverBombII=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -714,7 +721,7 @@ Bullets.ReaverBombII=Bullets.extends({
     }
 });
 Bullets.Interceptor=Bullets.extends({
-    constructorPlus:function(props){},
+    constructorPlus= function(props){},
     prototypePlus:{
         //Add basic unit info
         name:"Burst",
@@ -732,7 +739,7 @@ Bullets.Interceptor=Bullets.extends({
         },
         //Override cause damage timing
         noDamage:true,
-        fire:function(){
+        fire= function(){
             this.inherited.fire.call(this);
             var target=this.target;
             var owner=this.owner;
@@ -744,7 +751,7 @@ Bullets.Interceptor=Bullets.extends({
     }
 });
 Bullets.DevilBall=Bullets.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.life=this.traceTimes;
     },
     prototypePlus:{

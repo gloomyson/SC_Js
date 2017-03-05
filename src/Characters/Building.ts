@@ -1,5 +1,10 @@
-class Building extends Gobj {
-    constructorPlus:function(props){
+import {Gobj} from './Gobj';
+import {Unit} from './Units';
+import {Game} from '../GameRule/Game';
+
+export class Building extends Gobj {
+    
+    constructorPlus= function(props){
         //Add id for building
         this.id=Unit.currentID++;
         this.life=this.get('HP');
@@ -16,13 +21,13 @@ class Building extends Gobj {
             //Show unit
             myself.dock();
         },0);
-    },
-    prototypePlus:{
+    }
+    prototypePlus = {
         name:"Building",
         armor:0,
         sight:385,
         //Override to support multiple hidden frames
-        animeFrame:function(){
+        animeFrame= function(){
             //Animation play
             this.action++;
             //Override Gobj here, building doesn't have direction
@@ -32,7 +37,7 @@ class Building extends Gobj {
             if (this.imgPos[this.status].left[this.action]==-1) this.action=0;
         },
         //Dock means stop moving but keep animation
-        dock:function(){
+        dock= function(){
             //Clear old timer
             this.stop();
             //Launch new dock timer
@@ -45,11 +50,11 @@ class Building extends Gobj {
             this.allFrames['animate']=animateFrame;
         },
         //Cannot move
-        moving:function(){
+        moving= function(){
             //Nothing
         },
         //Override for sound effect
-        die:function(){
+        die= function(){
             //Old behavior
             Gobj.prototype.die.call(this);
             this.life=0;
@@ -62,7 +67,7 @@ class Building extends Gobj {
                 this.sound.death.play();
             }
         },
-        reactionWhenAttackedBy:function(enemy){
+        reactionWhenAttackedBy= function(enemy){
             //Cannot fight back or escape
             //Resign and give reward to enemy if has no life before dead
             if (this.life<=0) {
@@ -76,11 +81,11 @@ class Building extends Gobj {
             }
         },
         //Fix bug, for consistent, cause 100% damage on building
-        calculateDamageBy:function(enemyObj){
+        calculateDamageBy= function(enemyObj){
             return (enemyObj instanceof Gobj)?enemyObj.get('damage'):enemyObj;
         },
         //Calculate damage, for consistence
-        getDamageBy:function(enemy,percent){
+        getDamageBy= function(enemy,percent){
             if (percent==undefined) percent=1;//100% by default
             var damage=0;
             //If has SP and shield remain
@@ -101,12 +106,15 @@ class Building extends Gobj {
             }
         },
         //Life status
-        lifeStatus:function(){
+        lifeStatus= function(){
             var lifeRatio=this.life/this.get('HP');
             return ((lifeRatio>0.7)?"green":(lifeRatio>0.3)?"yellow":"red");
         }
     }
-});
+};
+
+
+
 //Store all buildings
 Building.allBuildings=[];
 Building.ourBuildings=function(){
@@ -122,7 +130,7 @@ Building.enemyBuildings=function(){
 
 //Zerg buildings
 Building.ZergBuilding=Building.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.sound={
             selected:new Audio(Game.CDN+'bgm/ZergBuilding.selected.wav'),
             death:new Audio(Game.CDN+'bgm/ZergBuilding.death.wav')
@@ -135,7 +143,7 @@ Building.ZergBuilding=Building.extends({
         name: "ZergBuilding",
         dieEffect:Burst.ZergBuildingBurst,
         injuryNames:['bloodA','bloodB','bloodC'],
-        recover:function(){
+        recover= function(){
             if (this.life<this.get('HP')) this.life+=0.5;
             if (this.magic!=null && this.magic<this.get('MP')) this.magic+=0.5;
         }
@@ -143,7 +151,7 @@ Building.ZergBuilding=Building.extends({
 });
 //Terran buildings
 Building.TerranBuilding=Building.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.sound={
             normal:new Audio(Game.CDN+'bgm/TerranBuilding.selected.wav'),
             onfire:new Audio(Game.CDN+'bgm/Building.onfire.wav'),
@@ -156,7 +164,7 @@ Building.TerranBuilding=Building.extends({
         name: "TerranBuilding",
         dieEffect:Burst.TerranBuildingBurst,
         injuryNames:['redFireL','redFireM','redFireR'],
-        recover:function(){
+        recover= function(){
             if (this.life<(this.get('HP')/4) && (this instanceof Building)) this.life--;
             if (this.magic!=null && this.magic<this.get('MP')) this.magic+=0.5;
         }
@@ -164,7 +172,7 @@ Building.TerranBuilding=Building.extends({
 });
 //Protoss buildings
 Building.ProtossBuilding=Building.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.sound={
             normal:new Audio(Game.CDN+'bgm/ProtossBuilding.selected.wav'),
             onfire:new Audio(Game.CDN+'bgm/Building.onfire.wav'),
@@ -178,7 +186,7 @@ Building.ProtossBuilding=Building.extends({
         plasma:0,
         dieEffect:Burst.ProtossBuildingBurst,
         injuryNames:['blueFireL','blueFireM','blueFireR'],
-        recover:function(){
+        recover= function(){
             if (this.shield<this.get('SP')) this.shield+=0.5;
             if (this.magic!=null && this.magic<this.get('MP')) this.magic+=0.5;
         }
@@ -186,7 +194,7 @@ Building.ProtossBuilding=Building.extends({
 });
 //Attackable interface
 Building.Attackable={
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.bullet={};
         this.kill=0;
         this.target={};
@@ -200,7 +208,7 @@ Building.Attackable={
         name:"AttackableBuilding",
         isInAttackRange:AttackableUnit.prototype.isInAttackRange,
         matchAttackLimit:AttackableUnit.prototype.matchAttackLimit,
-        attack:function(enemy){
+        attack= function(enemy){
             //Cannot attack invisible unit or unit who mismatch your attack type
             if (enemy['isInvisible'+this.team] || !(this.matchAttackLimit(enemy))) {
                 Referee.voice('pError').play();
@@ -377,7 +385,7 @@ Building.Attackable={
             }
         },
         stopAttack:AttackableUnit.prototype.stopAttack,
-        findNearbyTargets:function(){
+        findNearbyTargets= function(){
             //Initial
             var myself=this;
             var units=Unit.allUnits.filter(function(chara){
@@ -402,7 +410,7 @@ Building.Attackable={
             return results;
         },
         highestPriorityTarget:AttackableUnit.prototype.highestPriorityTarget,
-        AI:function(){
+        AI= function(){
             //Dead unit doesn't have following AI
             if (this.status=='dead') return;
             //AI:Attack insight enemy automatically when alive
@@ -422,13 +430,13 @@ Building.Attackable={
             }
         },
         isAttacking:AttackableUnit.prototype.isAttacking,
-        cannotReachTarget:function(){
+        cannotReachTarget= function(){
             return !(this.isInAttackRange(this.target));
         },
         isMissingTarget:AttackableUnit.prototype.isMissingTarget,
         isReloaded:AttackableUnit.prototype.isReloaded,
         //Override for attackable unit
-        die:function(){
+        die= function(){
             //Old behavior
             Building.prototype.die.call(this);
             //Clear new timer for unit
@@ -439,7 +447,7 @@ Building.Attackable={
 };
 //Define all buildings
 Building.ZergBuilding.Hatchery=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.larvas=[];
     },
     prototypePlus: {
@@ -467,7 +475,7 @@ Building.ZergBuilding.Hatchery=Building.ZergBuilding.extends({
             '1':{name:'SelectLarva'},
             '2':{name:'SetRallyPoint'},
             '3':{name:'EvolveBurrow'},
-            '7':{name:'Lair',condition:function(){
+            '7':{name:'Lair',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='SpawningPool';
                 })
@@ -478,7 +486,7 @@ Building.ZergBuilding.Hatchery=Building.ZergBuilding.extends({
             {step:'ZergBuilding.MutationS',percent:0},
             {step:'ZergBuilding.MutationM',percent:0.5}
         ],
-        buildZergBuilding:function(){
+        buildZergBuilding= function(){
             var target=Building.ZergBuilding[this.buildName];
             var mutation=this.evolveTo({
                 type:eval('Building.'+target.prototype.evolves[0].step),
@@ -535,7 +543,7 @@ Building.ZergBuilding.Hatchery=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.Lair=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.larvas=[];
     },
     prototypePlus: {
@@ -567,7 +575,7 @@ Building.ZergBuilding.Lair=Building.ZergBuilding.extends({
             '4':{name:'EvolveVentralSacs'},
             '5':{name:'EvolveAntennas'},
             '6':{name:'EvolvePneumatizedCarapace'},
-            '7':{name:'Hive',condition:function(){
+            '7':{name:'Hive',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='QueenNest';
                 })
@@ -577,13 +585,13 @@ Building.ZergBuilding.Lair=Building.ZergBuilding.extends({
         evolves: [
             {step:'ZergBuilding.MutationM',percent:0}
         ],
-        buildZergBuilding:function(){
+        buildZergBuilding= function(){
             Building.ZergBuilding.Hatchery.prototype.buildZergBuilding.call(this);
         }
     }
 });
 Building.ZergBuilding.Hive=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.larvas=[];
     },
     prototypePlus: {
@@ -624,7 +632,7 @@ Building.ZergBuilding.Hive=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.CreepColony=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -647,12 +655,12 @@ Building.ZergBuilding.CreepColony=Building.ZergBuilding.extends({
             time:200
         },
         items: {
-            '7':{name:'SporeColony',condition:function(){
+            '7':{name:'SporeColony',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='EvolutionChamber';
                 })
             }},
-            '8':{name:'SunkenColony',condition:function(){
+            '8':{name:'SunkenColony',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='SpawningPool';
                 })
@@ -662,13 +670,13 @@ Building.ZergBuilding.CreepColony=Building.ZergBuilding.extends({
         evolves: [
             {step:'ZergBuilding.MutationS',percent:0}
         ],
-        buildZergBuilding:function(){
+        buildZergBuilding= function(){
             Building.ZergBuilding.Hatchery.prototype.buildZergBuilding.call(this);
         }
     }
 });
 Building.ZergBuilding.SunkenColony=Building.ZergBuilding.extends(Building.Attackable).extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.sound.attack=new Audio(Game.CDN+'bgm/Colony.attack.wav');
     },
     prototypePlus: {
@@ -709,7 +717,7 @@ Building.ZergBuilding.SunkenColony=Building.ZergBuilding.extends(Building.Attack
     }
 });
 Building.ZergBuilding.SporeColony=Building.ZergBuilding.extends(Building.Attackable).extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.imgPos.attack=this.imgPos.dock;
         this.frame.attack=this.frame.dock;
         this.sound.attack=new Audio(Game.CDN+'bgm/Colony.attack.wav');
@@ -747,7 +755,7 @@ Building.ZergBuilding.SporeColony=Building.ZergBuilding.extends(Building.Attacka
     }
 });
 Building.ZergBuilding.Extractor=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -776,7 +784,7 @@ Building.ZergBuilding.Extractor=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.SpawningPool=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -810,7 +818,7 @@ Building.ZergBuilding.SpawningPool=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.EvolutionChamber=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -845,7 +853,7 @@ Building.ZergBuilding.EvolutionChamber=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.HydraliskDen=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -881,7 +889,7 @@ Building.ZergBuilding.HydraliskDen=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.Spire=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -907,7 +915,7 @@ Building.ZergBuilding.Spire=Building.ZergBuilding.extends({
         items: {
             '1':{name:'UpgradeFlyerAttacks'},
             '2':{name:'UpgradeFlyerCarapace'},
-            '7':{name:'GreaterSpire',condition:function(){
+            '7':{name:'GreaterSpire',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='Hive';
                 })
@@ -918,13 +926,13 @@ Building.ZergBuilding.Spire=Building.ZergBuilding.extends({
             {step:'ZergBuilding.MutationS',percent:0},
             {step:'ZergBuilding.MutationM',percent:0.5}
         ],
-        buildZergBuilding:function(){
+        buildZergBuilding= function(){
             Building.ZergBuilding.Hatchery.prototype.buildZergBuilding.call(this);
         }
     }
 });
 Building.ZergBuilding.GreaterSpire=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -958,7 +966,7 @@ Building.ZergBuilding.GreaterSpire=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.QueenNest=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -994,7 +1002,7 @@ Building.ZergBuilding.QueenNest=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.NydusCanal=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1027,7 +1035,7 @@ Building.ZergBuilding.NydusCanal=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.UltraliskCavern=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1062,7 +1070,7 @@ Building.ZergBuilding.UltraliskCavern=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.DefilerMound=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1098,7 +1106,7 @@ Building.ZergBuilding.DefilerMound=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.InfestedBase=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1125,7 +1133,7 @@ Building.ZergBuilding.InfestedBase=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.OvermindI=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1147,7 +1155,7 @@ Building.ZergBuilding.OvermindI=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.OvermindII=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1170,7 +1178,7 @@ Building.ZergBuilding.OvermindII=Building.ZergBuilding.extends({
 });
 
 Building.TerranBuilding.CommandCenter=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1196,12 +1204,12 @@ Building.TerranBuilding.CommandCenter=Building.TerranBuilding.extends({
         items: {
             '1':{name:'SCV'},
             '6':{name:'SetRallyPoint'},
-            '7':{name:'ComstatStation',condition:function(){
+            '7':{name:'ComstatStation',condition= function(){
                 return (!Game.selectedUnit.attachment || Game.selectedUnit.attachment.status=='dead') && Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='Academy';
                 })
             }},
-            '8':{name:'NuclearSilo',condition:function(){
+            '8':{name:'NuclearSilo',condition= function(){
                 return (!Game.selectedUnit.attachment || Game.selectedUnit.attachment.status=='dead') && Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='ConvertOps';
                 })
@@ -1215,7 +1223,7 @@ Building.TerranBuilding.CommandCenter=Building.TerranBuilding.extends({
             {step:'step3',percent:0.5},
             {step:'TerranBuilding.ConstructionF',percent:0.75}
         ],
-        buildTerranBuilding:function(){
+        buildTerranBuilding= function(){
             var target=Building.TerranBuilding[this.buildName];
             var construction=new (eval('Building.'+target.prototype.evolves[0].step))
                 ({x:this.x+this.width,y:this.y+this.height-target.prototype.height,team:this.team});
@@ -1274,7 +1282,7 @@ Building.TerranBuilding.CommandCenter=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.SupplyDepot=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1308,7 +1316,7 @@ Building.TerranBuilding.SupplyDepot=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.Refinery=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1339,7 +1347,7 @@ Building.TerranBuilding.Refinery=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.Barracks=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1363,19 +1371,19 @@ Building.TerranBuilding.Barracks=Building.TerranBuilding.extends({
         },
         items: {
             '1':{name:'Marine'},
-            '2':{name:'Firebat',condition:function(){
+            '2':{name:'Firebat',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='Academy';
                 })
             }},
-            '3':{name:'Ghost',condition:function(){
+            '3':{name:'Ghost',condition= function(){
                 //Has ScienceFacility with attachment ConvertOps
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='ScienceFacility'
                         && (chara.attachment && chara.attachment.status!='dead' && chara.attachment.name=='ConvertOps');
                 });
             }},
-            '4':{name:'Medic',condition:function(){
+            '4':{name:'Medic',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='Academy';
                 })
@@ -1393,7 +1401,7 @@ Building.TerranBuilding.Barracks=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.EngineeringBay=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1429,7 +1437,7 @@ Building.TerranBuilding.EngineeringBay=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.MissileTurret=Building.TerranBuilding.extends(Building.Attackable).extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.imgPos.attack=this.imgPos.dock;
         this.frame.attack=this.frame.dock;
         this.sound.attack=new Audio(Game.CDN+'bgm/Wraith.attackF.wav');
@@ -1471,7 +1479,7 @@ Building.TerranBuilding.MissileTurret=Building.TerranBuilding.extends(Building.A
     }
 });
 Building.TerranBuilding.Academy=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1510,7 +1518,7 @@ Building.TerranBuilding.Academy=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.Bunker=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1546,7 +1554,7 @@ Building.TerranBuilding.Bunker=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.Factory=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1571,17 +1579,17 @@ Building.TerranBuilding.Factory=Building.TerranBuilding.extends({
         },
         items: {
             '1':{name:'Vulture'},
-            '2':{name:'Tank',condition:function(){
+            '2':{name:'Tank',condition= function(){
                 var attach=Game.selectedUnit.attachment;
                 return (attach && attach.status!='dead' && attach.name=='MachineShop');
             }},
-            '3':{name:'Goliath',condition:function(){
+            '3':{name:'Goliath',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='Armory';
                 })
             }},
             '6':{name:'SetRallyPoint'},
-            '7':{name:'MachineShop',condition:function(){
+            '7':{name:'MachineShop',condition= function(){
                 return (!Game.selectedUnit.attachment || Game.selectedUnit.attachment.status=='dead');
             }},
             '9':{name:'LiftOff'}
@@ -1593,13 +1601,13 @@ Building.TerranBuilding.Factory=Building.TerranBuilding.extends({
             {step:'step3',percent:0.5},
             {step:'TerranBuilding.ConstructionF',percent:0.75}
         ],
-        buildTerranBuilding:function(){
+        buildTerranBuilding= function(){
             Building.TerranBuilding.CommandCenter.prototype.buildTerranBuilding.call(this);
         }
     }
 });
 Building.TerranBuilding.Starport=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1624,11 +1632,11 @@ Building.TerranBuilding.Starport=Building.TerranBuilding.extends({
         },
         items: {
             '1':{name:'Wraith'},
-            '2':{name:'Dropship',condition:function(){
+            '2':{name:'Dropship',condition= function(){
                 var attach=Game.selectedUnit.attachment;
                 return (attach && attach.status!='dead' && attach.name=='ControlTower');
             }},
-            '3':{name:'Vessel',condition:function(){
+            '3':{name:'Vessel',condition= function(){
                 var attach=Game.selectedUnit.attachment;
                 //Has attachment ControlTower, and has ScienceFacility
                 return (attach && attach.status!='dead' && attach.name=='ControlTower')
@@ -1636,7 +1644,7 @@ Building.TerranBuilding.Starport=Building.TerranBuilding.extends({
                     return !(chara.isEnemy()) && chara.name=='ScienceFacility';
                 })
             }},
-            '4':{name:'BattleCruiser',condition:function(){
+            '4':{name:'BattleCruiser',condition= function(){
                 var attach=Game.selectedUnit.attachment;
                 //Has attachment ControlTower, and has ScienceFacility with attachment PhysicsLab
                 return (attach && attach.status!='dead' && attach.name=='ControlTower')
@@ -1645,7 +1653,7 @@ Building.TerranBuilding.Starport=Building.TerranBuilding.extends({
                         && (chara.attachment && chara.attachment.status!='dead' && chara.attachment.name=='PhysicsLab');
                     });
             }},
-            '5':{name:'Valkyrie',condition:function(){
+            '5':{name:'Valkyrie',condition= function(){
                 var attach=Game.selectedUnit.attachment;
                 //Has attachment ControlTower, and has Armory
                 return (attach && attach.status!='dead' && attach.name=='ControlTower')
@@ -1654,7 +1662,7 @@ Building.TerranBuilding.Starport=Building.TerranBuilding.extends({
                 })
             }},
             '6':{name:'SetRallyPoint'},
-            '7':{name:'ControlTower',condition:function(){
+            '7':{name:'ControlTower',condition= function(){
                 return (!Game.selectedUnit.attachment || Game.selectedUnit.attachment.status=='dead');
             }},
             '9':{name:'LiftOff'}
@@ -1666,13 +1674,13 @@ Building.TerranBuilding.Starport=Building.TerranBuilding.extends({
             {step:'step3',percent:0.5},
             {step:'TerranBuilding.ConstructionF',percent:0.75}
         ],
-        buildTerranBuilding:function(){
+        buildTerranBuilding= function(){
             Building.TerranBuilding.CommandCenter.prototype.buildTerranBuilding.call(this);
         }
     }
 });
 Building.TerranBuilding.ScienceFacility=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1699,10 +1707,10 @@ Building.TerranBuilding.ScienceFacility=Building.TerranBuilding.extends({
             '1':{name:'ResearchEMPShockwaves'},
             '2':{name:'ResearchIrradiate'},
             '3':{name:'ResearchTitanReactor'},
-            '7':{name:'ConvertOps',condition:function(){
+            '7':{name:'ConvertOps',condition= function(){
                 return (!Game.selectedUnit.attachment || Game.selectedUnit.attachment.status=='dead');
             }},
-            '8':{name:'PhysicsLab',condition:function(){
+            '8':{name:'PhysicsLab',condition= function(){
                 return (!Game.selectedUnit.attachment || Game.selectedUnit.attachment.status=='dead');
             }},
             '9':{name:'LiftOff'}
@@ -1714,13 +1722,13 @@ Building.TerranBuilding.ScienceFacility=Building.TerranBuilding.extends({
             {step:'step3',percent:0.5},
             {step:'TerranBuilding.ConstructionF',percent:0.75}
         ],
-        buildTerranBuilding:function(){
+        buildTerranBuilding= function(){
             Building.TerranBuilding.CommandCenter.prototype.buildTerranBuilding.call(this);
         }
     }
 });
 Building.TerranBuilding.Armory=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1759,7 +1767,7 @@ Building.TerranBuilding.Armory=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.ComstatStation=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1797,7 +1805,7 @@ Building.TerranBuilding.ComstatStation=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.NuclearSilo=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1834,7 +1842,7 @@ Building.TerranBuilding.NuclearSilo=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.MachineShop=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1874,7 +1882,7 @@ Building.TerranBuilding.MachineShop=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.ControlTower=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1912,7 +1920,7 @@ Building.TerranBuilding.ControlTower=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.PhysicsLab=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1950,7 +1958,7 @@ Building.TerranBuilding.PhysicsLab=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.ConvertOps=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -1990,7 +1998,7 @@ Building.TerranBuilding.ConvertOps=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.CrashCruiser=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2012,7 +2020,7 @@ Building.TerranBuilding.CrashCruiser=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.BigCannon=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2035,7 +2043,7 @@ Building.TerranBuilding.BigCannon=Building.TerranBuilding.extends({
 });
 
 Building.ProtossBuilding.Nexus=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2067,7 +2075,7 @@ Building.ProtossBuilding.Nexus=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.Pylon=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2096,7 +2104,7 @@ Building.ProtossBuilding.Pylon=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.Assimilator=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2123,7 +2131,7 @@ Building.ProtossBuilding.Assimilator=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.Gateway=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2148,17 +2156,17 @@ Building.ProtossBuilding.Gateway=Building.ProtossBuilding.extends({
         },
         items: {
             '1':{name:'Zealot'},
-            '2':{name:'Dragoon',condition:function(){
+            '2':{name:'Dragoon',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='CyberneticsCore';
                 })
             }},
-            '3':{name:'Templar',condition:function(){
+            '3':{name:'Templar',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='TemplarArchives';
                 })
             }},
-            '4':{name:'DarkTemplar',condition:function(){
+            '4':{name:'DarkTemplar',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='TemplarArchives';
                 })
@@ -2169,7 +2177,7 @@ Building.ProtossBuilding.Gateway=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.Forge=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2201,7 +2209,7 @@ Building.ProtossBuilding.Forge=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.PhotonCannon=Building.ProtossBuilding.extends(Building.Attackable).extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.imgPos.attack=this.imgPos.dock;
         this.sound.attack=new Audio(Game.CDN+'bgm/Dragoon.attack.wav');
     },
@@ -2238,7 +2246,7 @@ Building.ProtossBuilding.PhotonCannon=Building.ProtossBuilding.extends(Building.
     }
 });
 Building.ProtossBuilding.CyberneticsCore=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2270,7 +2278,7 @@ Building.ProtossBuilding.CyberneticsCore=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.ShieldBattery=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2302,7 +2310,7 @@ Building.ProtossBuilding.ShieldBattery=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.RoboticsFacility=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2328,12 +2336,12 @@ Building.ProtossBuilding.RoboticsFacility=Building.ProtossBuilding.extends({
         },
         items: {
             '1':{name:'Shuttle'},
-            '2':{name:'Reaver',condition:function(){
+            '2':{name:'Reaver',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='RoboticsSupportBay';
                 })
             }},
-            '3':{name:'Observer',condition:function(){
+            '3':{name:'Observer',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='Observatory';
                 })
@@ -2344,7 +2352,7 @@ Building.ProtossBuilding.RoboticsFacility=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.StarGate=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2370,12 +2378,12 @@ Building.ProtossBuilding.StarGate=Building.ProtossBuilding.extends({
         },
         items: {
             '1':{name:'Scout'},
-            '2':{name:'Carrier',condition:function(){
+            '2':{name:'Carrier',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='FleetBeacon';
                 })
             }},
-            '3':{name:'Arbiter',condition:function(){
+            '3':{name:'Arbiter',condition= function(){
                 return Building.allBuildings.some(function(chara){
                     return !(chara.isEnemy()) && chara.name=='ArbiterTribunal';
                 })
@@ -2387,7 +2395,7 @@ Building.ProtossBuilding.StarGate=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.CitadelOfAdun=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2418,7 +2426,7 @@ Building.ProtossBuilding.CitadelOfAdun=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.RoboticsSupportBay=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2452,7 +2460,7 @@ Building.ProtossBuilding.RoboticsSupportBay=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.FleetBeacon=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2487,7 +2495,7 @@ Building.ProtossBuilding.FleetBeacon=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.TemplarArchives=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2523,7 +2531,7 @@ Building.ProtossBuilding.TemplarArchives=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.Observatory=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2555,7 +2563,7 @@ Building.ProtossBuilding.Observatory=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.ArbiterTribunal=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2589,7 +2597,7 @@ Building.ProtossBuilding.ArbiterTribunal=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.TeleportGate=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2612,7 +2620,7 @@ Building.ProtossBuilding.TeleportGate=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.Pyramid=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2635,7 +2643,7 @@ Building.ProtossBuilding.Pyramid=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.TeleportPoint=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2660,7 +2668,7 @@ Building.ProtossBuilding.TeleportPoint=Building.ProtossBuilding.extends({
 });
 //Evolve related
 Building.ZergBuilding.Egg=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.sound={
             selected:new Audio(Game.CDN+'bgm/Egg.selected.wav'),
             death:new Audio(Game.CDN+'bgm/Egg.death.wav')
@@ -2692,7 +2700,7 @@ Building.ZergBuilding.Egg=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.Cocoon=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.sound={
             selected:new Audio(Game.CDN+'bgm/Cocoon.selected.wav'),
             death:new Audio(Game.CDN+'bgm/Mutalisk.death.wav')
@@ -2726,7 +2734,7 @@ Building.ZergBuilding.Cocoon=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.MutationS=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Hidden frames
         this.action=7;
     },
@@ -2751,7 +2759,7 @@ Building.ZergBuilding.MutationS=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.MutationM=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2775,7 +2783,7 @@ Building.ZergBuilding.MutationM=Building.ZergBuilding.extends({
     }
 });
 Building.ZergBuilding.MutationL=Building.ZergBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Nothing
     },
     prototypePlus: {
@@ -2799,7 +2807,7 @@ Building.ZergBuilding.MutationL=Building.ZergBuilding.extends({
     }
 });
 Building.TerranBuilding.ConstructionS=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.imgPos.dock=this.imgPos.step1;
     },
     prototypePlus: {
@@ -2833,7 +2841,7 @@ Building.TerranBuilding.ConstructionS=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.ConstructionM=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.imgPos.dock=this.imgPos.step1;
     },
     prototypePlus: {
@@ -2867,7 +2875,7 @@ Building.TerranBuilding.ConstructionM=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.ConstructionL=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.imgPos.dock=this.imgPos.step1;
     },
     prototypePlus: {
@@ -2901,7 +2909,7 @@ Building.TerranBuilding.ConstructionL=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.ConstructionR=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.imgPos.dock=this.imgPos.step1;
     },
     prototypePlus: {
@@ -2930,7 +2938,7 @@ Building.TerranBuilding.ConstructionR=Building.TerranBuilding.extends({
     }
 });
 Building.TerranBuilding.ConstructionF=Building.TerranBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.type=props.type;
         //Override imgPos
         this.imgPos=_$.clone(this.imgPos);
@@ -3031,7 +3039,7 @@ Building.TerranBuilding.ConstructionF=Building.TerranBuilding.extends({
     }
 });
 Building.ProtossBuilding.ArchonEvolve=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Hidden frames
         this.action=7;
     },
@@ -3060,7 +3068,7 @@ Building.ProtossBuilding.ArchonEvolve=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.DarkArchonEvolve=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Hidden frames
         this.action=7;
     },
@@ -3089,7 +3097,7 @@ Building.ProtossBuilding.DarkArchonEvolve=Building.ProtossBuilding.extends({
     }
 });
 Building.ProtossBuilding.WrapRift=Building.ProtossBuilding.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         //Hidden frames
         this.action=7;
     },

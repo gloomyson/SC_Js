@@ -1,9 +1,13 @@
-var Cheat={
-    isShown:false,
-    cwal:false,
-    gathering:false,
-    manUnlimited:false,
-    handler:function(){
+import {Multiplayer} from './Multiplayer';
+import {Game} from './Game';
+
+
+class Cheat {
+    static isShown:false
+    static cwal:false
+    static gathering:false
+    static manUnlimited:false
+    handler= function(){
         if (Cheat.isShown){
             if (Multiplayer.ON){
                 Multiplayer.webSocket.send(JSON.stringify({
@@ -34,8 +38,8 @@ var Cheat={
             Cheat.isShown=true;
             keyController.disable=true;
         }
-    },
-    execute:function(cheatCode){
+    }
+    execute= function(cheatCode){
         //Forbid cheating when multiplayer mode
         if (Multiplayer.ON) return;
         var cheatFlag=true;

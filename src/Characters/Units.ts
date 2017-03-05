@@ -1,6 +1,10 @@
+import {Gobj} from './Gobj';
+import {Game} from '../GameRule/Game';
+
 //Define unit which has HP/direction and be selectable, unattackable unit
-var Unit=Gobj.extends({
-    constructorPlus:function(props){
+export class Unit extends Gobj {
+    
+    constructorPlus= function(props){
         //Add id for unit
         this.id=Unit.currentID++;
         this.direction=Unit.randomDirection();
@@ -25,12 +29,13 @@ var Unit=Gobj.extends({
             //Show unit
             myself.dock();
         },0);
-    },
+    }
+    
     prototypePlus:{
         name:"Unit",
         isFlying:true,
         //Override Gobj method
-        animeFrame:function(){
+        animeFrame= function(){
             //Animation play
             this.action++;
             //Override Gobj here, support hidden frames
@@ -41,7 +46,7 @@ var Unit=Gobj.extends({
             //Multiple hidden frames support
             if (this.imgPos[this.status].left[0][this.action]==-1) this.action=0;
         },
-        detectOutOfBound:function(){
+        detectOutOfBound= function(){
             var boundX=Map.getCurrentMap().width-this.width;
             var boundY=Map.getCurrentMap().height-this.height;
             //Right Bound
@@ -62,17 +67,17 @@ var Unit=Gobj.extends({
             }
         },
         //Can move in any direction
-        updateLocation:function(){
+        updateLocation= function(){
             this.x=Math.round(this.x+this.get('speed')*Math.cos(this.angle));
             this.y=Math.round(this.y+this.get('speed')*Math.sin(this.angle));
         },
         //Add new functions to prototype
-        turnTo:function(direction){
+        turnTo= function(direction){
             //Change direction
             this.direction=direction;
         },
         //Dock means stop moving but keep animation
-        dock:function(){
+        dock= function(){
             //Clear old timer
             this.stop();
             //Launch new dock timer
@@ -87,16 +92,16 @@ var Unit=Gobj.extends({
             };
             this.allFrames['animate']=animateFrame;
         },
-        stand:function(){
+        stand= function(){
             this.dock();
         },//alias
-        stopMoving:function(){
+        stopMoving= function(){
             this.dock();
         },//alias
-        run:function(){
+        run= function(){
             this.moving();
         },//alias
-        navigateTo:function(clickX,clickY,range){
+        navigateTo= function(clickX,clickY,range){
             if (!range) range=Unit.moveRange;//Smallest limit by default
             //Center position
             var charaX=this.posX();
@@ -149,7 +154,7 @@ var Unit=Gobj.extends({
                 this.angle=Math.atan2(vector[0],vector[1]);
             }
         },
-        faceTo:function(target,preventAction){
+        faceTo= function(target,preventAction){
             var direction;
             //Unit or Building
             if (target instanceof Gobj){
@@ -162,7 +167,7 @@ var Unit=Gobj.extends({
             if (!preventAction) this.turnTo(direction);
             return direction;
         },
-        escapeFrom:function(enemy){
+        escapeFrom= function(enemy){
             //Add to fix holding issue
             if (this.hold) return;
             //From enemy to myself
@@ -174,7 +179,7 @@ var Unit=Gobj.extends({
             //Escape along vector
             this.moveTo(this.posX()+escapeVector[0],this.posY()+escapeVector[1]);
         },
-        moveTo:function(clickX,clickY,range,callback){
+        moveTo= function(clickX,clickY,range,callback){
             if (!range) range=Unit.moveRange;//Smallest limit by default
             //Start new routing
             var myself=this;
@@ -189,7 +194,7 @@ var Unit=Gobj.extends({
             //Start moving
             this.run();
         },
-        moveToward:function(target,range,callback){
+        moveToward= function(target,range,callback){
             if (!range) range=Unit.moveRange;//Smallest limit by default
             //Start new routing
             var myself=this;
@@ -213,7 +218,7 @@ var Unit=Gobj.extends({
             this.run();
         },
         //Override for sound effect
-        die:function(){
+        die= function(){
             //Old behavior
             Gobj.prototype.die.call(this);
             this.life=0;
@@ -225,7 +230,7 @@ var Unit=Gobj.extends({
             }
         },
         //AI when attacked by enemy
-        reactionWhenAttackedBy:function(enemy,onlyDamage){
+        reactionWhenAttackedBy= function(enemy,onlyDamage){
             //Resign and give reward to enemy if has no life before dead
             if (this.life<=0) {
                 //If multiple target, only die once and give reward
@@ -244,7 +249,7 @@ var Unit=Gobj.extends({
             }
         },
         //Calculate damage, if enemy is damage itself, return that damage directly
-        calculateDamageBy:function(enemyObj){
+        calculateDamageBy= function(enemyObj){
             var damage=0;
             if (enemyObj instanceof Gobj){
                 var enemyAttackType=enemyObj.attackType;
@@ -256,7 +261,7 @@ var Unit=Gobj.extends({
             else damage=enemyObj;
             return damage;
         },
-        getDamageBy:function(enemy,percent){
+        getDamageBy= function(enemy,percent){
             if (percent==undefined) percent=1;//100% by default
             var damage=0;
             //If has SP and shield remain
@@ -277,7 +282,7 @@ var Unit=Gobj.extends({
             }
         },
         //Attack ground action
-        attackGround:function(position,loop){
+        attackGround= function(position,loop){
             //Convert to array
             var positions=[].concat(position);
             if (this.attack) this.stopAttack();
@@ -294,19 +299,19 @@ var Unit=Gobj.extends({
             if (loop) checkpoint.next=this.destination;
         },
         //Patrol action
-        patrol:function(position,addHere){
+        patrol= function(position,addHere){
             //Convert to array
             var positions=[].concat(position);
             if (addHere) positions.push({x:this.posX(),y:this.posY()});
             this.attackGround(positions,true);
         },
-        isMachine:function(){
+        isMachine= function(){
             return ["SCV","Vulture","Tank","Goliath","Wraith","Dropship","Vessel","BattleCruiser","Valkyrie",
                 "Probe","Dragoon","Shuttle","Reaver","Observer","Scout","Carrier","Arbiter","Corsair","HeroCruiser"]
                 .indexOf(this.name)!=-1;
         },
         //Life status
-        lifeStatus:function(){
+        lifeStatus= function(){
             var lifeRatio=this.life/this.get('HP');
             return ((lifeRatio>0.7)?"green":(lifeRatio>0.3)?"yellow":"red");
         }
@@ -530,7 +535,7 @@ Unit.walkAroundLarva=function(){
     this.allFrames['dock']=dockFrame;
 };
 var AttackableUnit=Unit.extends({
-    constructorPlus:function(props){
+    constructorPlus= function(props){
         this.bullet={};
         this.kill=0;
         this.target={};
@@ -546,10 +551,10 @@ var AttackableUnit=Unit.extends({
     prototypePlus:{
         //Add basic unit info
         name:"AttackableUnit",
-        isInAttackRange:function(enemy){
+        isInAttackRange= function(enemy){
             return enemy.inside({centerX:this.posX(),centerY:this.posY(),radius:this.get('attackRange')});
         },
-        matchAttackLimit:function(enemy){
+        matchAttackLimit= function(enemy){
             //Has attack limit
             if (this.attackLimit){
                 //Doesn't match attack limit
@@ -559,7 +564,7 @@ var AttackableUnit=Unit.extends({
             //No attack limit or match attack limit
             return true;
         },
-        attack:function(enemy){
+        attack= function(enemy){
             //Cannot attack invisible unit or unit who mismatch your attack type
             if (enemy['isInvisible'+this.team] || !(this.matchAttackLimit(enemy))) {
                 Referee.voice('pError').play();
@@ -775,13 +780,13 @@ var AttackableUnit=Unit.extends({
                 this.allFrames['attack']=attackFrame;
             }
         },
-        stopAttack:function(){
+        stopAttack= function(){
             //Stop attacking animation
             delete this.allFrames['attack'];
             //Clear target
             this.target={};
         },
-        findNearbyTargets:function(){
+        findNearbyTargets= function(){
             //Initial
             var myself=this;
             var units=Unit.allUnits.filter(function(chara){
@@ -815,10 +820,10 @@ var AttackableUnit=Unit.extends({
             //Take attackable>>unattackable,unit>>building,near>>far as priority, will attracted if be attacked
             return results;
         },
-        highestPriorityTarget:function(){
+        highestPriorityTarget= function(){
             return this.findNearbyTargets()[0];
         },
-        AI:function(){
+        AI= function(){
             //Dead unit doesn't have following AI
             if (this.status=='dead') return;
             //If no mission, return it to scout status
@@ -853,7 +858,7 @@ var AttackableUnit=Unit.extends({
             }
         },
         //Override
-        reactionWhenAttackedBy:function(enemy,onlyDamage){
+        reactionWhenAttackedBy= function(enemy,onlyDamage){
             //Resign and give reward to enemy if has no life before dead
             if (this.life<=0) {
                 //If multiple target, only die once and give reward
@@ -883,43 +888,43 @@ var AttackableUnit=Unit.extends({
                 }
             }
         },
-        isAttacking:function(){
+        isAttacking= function(){
             //Has target
             return (this.target instanceof Gobj);
         },
-        followEnemy:function(){
+        followEnemy= function(){
             //Remind to attack again
             this.attack(this.target);
             //Filter out building target
             if (this.target instanceof Unit) this.tracing=true;
         },
-        isTracing:function(){
+        isTracing= function(){
             return this.isAttacking() && this.status=="moving";
         },
-        isFiring:function(){
+        isFiring= function(){
             //May out of range and cannot fire, don't follow when attack status
             return this.isAttacking() && this.status=="dock";
         },
         //Override
-        isIdle:function(){
+        isIdle= function(){
             //Not moving or attacking
             return !this.isAttacking() && this.status=="dock";
         },
-        cannotReachTarget:function(){
+        cannotReachTarget= function(){
             //Found target outside attack range after once firing, need follow once
             return this.isFiring() && !(this.isInAttackRange(this.target));
         },
-        isMissingTarget:function(){
+        isMissingTarget= function(){
             //Lock on target has global sight, lock off (attackGround) use its own sight
             return !this.targetLock && this.isAttacking() && !(this.canSee(this.target));
         },
-        isReloaded:function(){
+        isReloaded= function(){
             //Add for newly reloaded yamato, two kinds of bullet conflict, ignore bullet array
             if ((this.bullet instanceof Gobj) && this.bullet.status!='dead') return false;
             return this.coolDown;
         },
         //Override for attackable unit
-        die:function(){
+        die= function(){
             //Old behavior
             Unit.prototype.die.call(this);
             //Clear new timer for unit
