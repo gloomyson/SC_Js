@@ -1,12 +1,10 @@
-import {Game} from './Game';
-
-export class Multiplayer {
-    static ON = false//by default
-    static webSocket = null
-    static cmds =[]
-    static snapshotFlag = false
-    static replaySnapshotFlag = true
-    static getSocket= function(){
+var Multiplayer={
+    ON:false,//by default
+    webSocket:null,
+    cmds:[],
+    snapshotFlag:false,
+    replaySnapshotFlag:true,
+    getSocket:function(){
         if (window.WebSocket) {
             //ServerList: (1)HongKong:nvhae.com (3)Canada:104.128.82.12
             var webSocket=Multiplayer.webSocket=new WebSocket('ws://nvhae.com:28082');
@@ -17,8 +15,8 @@ export class Multiplayer {
             return webSocket;
         }
         else return null;
-    }
-    static sendUserInfo= function(){
+    },
+    sendUserInfo:function(){
         var webSocket=Multiplayer.getSocket();
         if (webSocket) {
             webSocket.onopen=function(){
@@ -77,8 +75,8 @@ export class Multiplayer {
                 }
             };
         }
-    }
-   static enable= function(){
+    },
+    enable:function(){
         var webSocket=Multiplayer.getSocket();
         if (webSocket) {
             webSocket.onopen=function(){
@@ -122,8 +120,8 @@ export class Multiplayer {
         else {
             Game.showMessage("Your browser doesn't support WebSocket...");
         }
-    }
-    parseTickCmd= function(msgObj){
+    },
+    parseTickCmd:function(msgObj){
         if (msgObj.cmds){
             if (!Game.commands[msgObj.tick]) Game.commands[msgObj.tick]=[];
             msgObj.cmds.forEach(function(cmdStr){
@@ -390,12 +388,12 @@ export class Multiplayer {
             });
         }
     },
-    getUIDs= function(charas){
+    getUIDs:function(charas){
         return charas.map(function(chara){
             return chara.id;
         });
     },
-    getUnitsByUIDs= function(uids){
+    getUnitsByUIDs:function(uids){
         return Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
             //Need filter out dead units to execute commands
             return uids.indexOf(chara.id)!=-1 && chara.status!='dead';

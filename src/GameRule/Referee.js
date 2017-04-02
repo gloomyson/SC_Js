@@ -1,13 +1,10 @@
-import {Game} from './Game'
-import {Unit} from '../Characters/Units'
-
-export class Referee {
-    ourDetectedUnits = []//Detected enemies
-    enemyDetectedUnits = []//Detected ours
-    _pos = [[-1,0],[1,0],[0,-1],[0,1]] //Collision avoid
-    tasks = ['judgeArbiter','judgeDetect','judgeCollision','judgeRecover','judgeDying','judgeMan',
+var Referee={
+    ourDetectedUnits:[],//Detected enemies
+    enemyDetectedUnits:[],//Detected ours
+    _pos:[[-1,0],[1,0],[0,-1],[0,1]],//Collision avoid
+    tasks:['judgeArbiter','judgeDetect','judgeCollision','judgeRecover','judgeDying','judgeMan',
         'addLarva','coverFog','alterSelectionMode','judgeBuildingInjury','judgeWinLose','saveReplaySnapshot'],
-    voice = (function(){
+    voice:(function(){
         var voice;
         return function(name){
             //Single instance pattern
@@ -42,16 +39,16 @@ export class Referee {
             };
             return voice[name];
         }
-    })
-    static winCondition = function(){
+    })(),
+    winCondition:function(){
         //By default: All our units and buildings are killed
         return (Unit.allEnemyUnits().length==0 && Building.enemyBuildings().length==0);
-    }
-    static loseCondition= function(){
+    },
+    loseCondition:function(){
         //By default: All enemies and buildings are killed
         return (Unit.allOurUnits().length==0 && Building.ourBuildings().length==0);
-    }
-    static judgeArbiter= function(){
+    },
+    judgeArbiter:function(){
         //Every 0.4 sec
         if (Game.mainTick%4==0){
             //Special skill: make nearby units invisible
@@ -85,9 +82,9 @@ export class Referee {
                 });
             });
         }
-    }
+    },
     //detectorBuffer are reverse of arbiterBuffer
-    static judgeDetect= function(){
+    judgeDetect:function(){
         //Every 0.4 sec
         if (Game.mainTick%4==0){
             //Same detector buffer reference
@@ -135,8 +132,8 @@ export class Referee {
                 }
             });
         }
-    }
-    static judgeReachDestination= function(chara){
+    },
+    judgeReachDestination:function(chara){
         //Idle but has destination
         if (chara.destination && chara.isIdle()) {
             //Already here
@@ -158,16 +155,16 @@ export class Referee {
                 chara.targetLock=false;
             }
         }
-    }
-    static judgeRecover= function(){
+    },
+    judgeRecover:function(){
         //Every 1 sec
         if (Game.mainTick%10==0){
             Unit.allUnits.concat(Building.allBuildings).forEach(function(chara){
                 if (chara.recover) chara.recover();
             });
         }
-    }
-    static judgeDying= function(){
+    },
+    judgeDying:function(){
         //Kill die survivor every 1 sec
         if (Game.mainTick%10==0){
             Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
@@ -176,9 +173,9 @@ export class Referee {
                 chara.die();
             });
         }
-    }
+    },
     //Avoid collision
-    static judgeCollision= function(){
+    judgeCollision:function(){
         //N*N->N
         var units=Unit.allGroundUnits().concat(Building.allBuildings);
         for(var N=0;N<units.length;N++) {
@@ -299,12 +296,12 @@ export class Referee {
                 }
             }
         }
-    }
-    static coverFog= function(){
+    },
+    coverFog:function(){
         //No need to set interval as 1sec
         if (Game.mainTick%10==0) Map.drawFogAndMinimap();
-    }
-    static alterSelectionMode= function(){
+    },
+    alterSelectionMode:function(){
         //GC after some user changes
         $.extend([],Game.allSelected).forEach(function(chara){
             if (chara.status=='dead' || (chara['isInvisible'+Game.team] && chara.isEnemy()))
@@ -332,8 +329,8 @@ export class Referee {
             $('div.override').hide();
             $('div.override div.multiSelection').hide();
         }
-    }
-    static addLarva= function(){
+    },
+    addLarva:function(){
         //Every 20 sec
         if (Game.mainTick%200==0){
             Building.allBuildings.filter(function(build){
@@ -350,8 +347,8 @@ export class Referee {
                 }
             });
         }
-    }
-    static judgeBuildingInjury= function(){
+    },
+    judgeBuildingInjury:function(){
         //Every 1 sec
         if (Game.mainTick%10==0){
             Building.allBuildings.filter(function(build){
@@ -382,8 +379,8 @@ export class Referee {
                 }
             });
         }
-    }
-    static judgeMan= function(){
+    },
+    judgeMan:function(){
         //Update current man and total man for all teams
         //?We may only need to judge our team's man for client consume use
         var curMan=Game.getPropArray(0),totalMan=Game.getPropArray(0);
@@ -401,8 +398,8 @@ export class Referee {
             Resource[N].curMan=curMan[N];
             Resource[N].totalMan=totalMan[N];
         }
-    }
-    static judgeWinLose= function(){
+    },
+    judgeWinLose:function(){
         //Every 1 sec
         if (Game.mainTick%10==0){
             if (Referee.loseCondition())
@@ -410,11 +407,11 @@ export class Referee {
             if (Referee.winCondition())
                 Game.win();
         }
-    }
-    static saveReplaySnapshot= function(){
+    },
+    saveReplaySnapshot:function(){
         //Save replay snapshot every 3 sec
         if (Game.mainTick%30==0){
             Game.saveReplay();
         }
     }
-}
+};

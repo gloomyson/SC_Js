@@ -1,5 +1,4 @@
-class Resource {
-
+var Resource={
     init:function(){
         for (var N=0;N<Game.playerNum;N++){
             Resource[N]={

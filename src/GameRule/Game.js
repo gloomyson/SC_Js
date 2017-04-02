@@ -1,42 +1,36 @@
-import * as $ from 'jquery';
-import {Gobj} from '../Characters/Gobj';
-import {Referee} from './Referee';
-
-export class Game {
-
+var Game={
     //Global variables
-    static public HBOUND = innerWidth//$('body')[0].scrollWidth
-    static public VBOUND = innerHeight//$('body')[0].scrollHeight
-    public infoBox = {
+    HBOUND:innerWidth,//$('body')[0].scrollWidth
+    VBOUND:innerHeight,//$('body')[0].scrollHeight
+    infoBox:{
         x:145,
         y:innerHeight-110,
         width:innerWidth-295,
         height:110
-    }
-    public static team:number = 0
-    public playerNum:number = 2//By default
-    public teams = {}
-    public multiplayer:boolean = false//By default
-    public cxt =  ($('#middleCanvas')[0] as any) .getContext('2d')
-    public frontCxt = ($('#frontCanvas')[0]as any).getContext('2d')
-    public static backCxt = ($('#backCanvas')[0]as any).getContext('2d')
-    public static fogCxt = ($('#fogCanvas')[0]as any).getContext('2d') 
-    private _timer:number = -1
-    private _frameInterval:number = 100
-    public static mainTick: number = 0
-    public serverTick:number = 0
-    public commands = {}
-    public replay = {}
-    public randomSeed:number = 0//For later use
-    public static selectedUnit={}
-    public static allSelected = []
-    public _oldAllSelected = []
-    public hackMode = false
-    public isApp = false
-    public static offline =false
-    public static CDN =''
-
-    static public addIntoAllSelected = function(chara, override){
+    },
+    team:0,
+    playerNum:2,//By default
+    teams:{},
+    multiplayer:false,//By default
+    cxt:$('#middleCanvas')[0].getContext('2d'),
+    frontCxt:$('#frontCanvas')[0].getContext('2d'),
+    backCxt:$('#backCanvas')[0].getContext('2d'),
+    fogCxt:$('#fogCanvas')[0].getContext('2d'),
+    _timer:-1,
+    _frameInterval:100,
+    mainTick:0,
+    serverTick:0,
+    commands:{},
+    replay:{},
+    randomSeed:0,//For later use
+    selectedUnit:{},
+    allSelected:[],
+    _oldAllSelected:[],
+    hackMode:false,
+    isApp:false,
+    offline:false,
+    CDN:'',
+    addIntoAllSelected:function(chara,override){
         if (chara instanceof Gobj){
             //Add into allSelected if not included
             if (Game.allSelected.indexOf(chara)==-1) {
@@ -65,29 +59,33 @@ export class Game {
         });
         //Notify referee to redraw
         Referee.alterSelectionMode();
-    }
-
+    },
     //To replace setTimeout
-    static commandTimeout= function(func,delay){
+    commandTimeout:function(func,delay){
         var dueTick=Game.mainTick+(delay/100>>0);
         if (!Game.commands[dueTick]) Game.commands[dueTick]=[];
         Game.commands[dueTick].push(func);
-    }
+    },
     //To replace setInterval
-    static commandInterval= function(func,interval){
+    commandInterval:function(func,interval){
         var funcAdjust=function(){
             func();
             Game.commandTimeout(funcAdjust,interval);
         };
         Game.commandTimeout(funcAdjust,interval);
-    }
-
-   static  layerSwitchTo = function(layerName){
+    },
+    race:{
+        selected:'Terran',//Terran race by default
+        choose:function(race){
+            this.selected=race;
+            $('div#GamePlay').attr('race',race);
+        }
+    },
+    layerSwitchTo:function(layerName){
         $('div.GameLayer').hide();
         $('#'+layerName).show(); //show('slow')
-    }
-
-    static init= function(){
+    },
+    init:function(){
         //Prevent full select
         $('div.GameLayer').on("selectstart",function(event){
             event.preventDefault();
@@ -207,8 +205,8 @@ export class Game {
             AlloyImage(sourceLoader.sources['BattleCruiser']).act("setHSI",100,0,0,false).replace(sourceLoader.sources['BattleCruiser']);*/
             Game.start();
         })
-    }
-   static  start= function(){
+    },
+    start:function(){
         //Game start
         Game.layerSwitchTo("GameStart");
         //Init level selector
@@ -225,8 +223,8 @@ export class Game {
             Game.level=parseInt(this.value);
             Game.play();
         });
-    }
-   static  play= function(){
+    },
+    play:function(){
         //Load level to initial when no error occurs
         if (!(Levels[Game.level-1].load())){
             //Need Game.playerNum before expansion
@@ -244,16 +242,16 @@ export class Game {
             Game.initIndexDB();//Hew H5 feature:Indexed DB
             Game.animation();
         }
-    }
-    static getPropArray= function(prop){
+    },
+    getPropArray:function(prop){
         var result=[];
         for (var N=0;N<Game.playerNum;N++){
             result.push(typeof(prop)=='object'?(_$.clone(prop)):prop);
         }
         return result;
-    }
+    },
     //Do we need this because we only support Zerg vs Terran vs Protoss?
-    static expandUnitProps= function(){
+    expandUnitProps:function(){
         //Post-operation for all unit types, prepare basic properties for different team numbers, init in level.js
         _$.traverse([Zerg,Terran,Protoss,Neutral,Hero],function(unitType){
             ['HP','SP','MP','damage','armor','speed','attackRange','attackInterval','plasma','sight'].forEach(function(prop){
@@ -303,12 +301,12 @@ export class Game {
                 Upgrade[grade].level=Game.getPropArray(Upgrade[grade].level);
             }
         }
-    }
-    static addSelectedIntoTeam= function(teamNum){
+    },
+    addSelectedIntoTeam:function(teamNum){
         //Build a new team
         Game.teams[teamNum]=_$.mixin([],Game.allSelected);
-    }
-   static  callTeam= function(teamNum){
+    },
+    callTeam:function(teamNum){
         var team=_$.mixin([],Game.teams[teamNum]);
         //When team already exist
         if (team instanceof Array){
@@ -326,14 +324,14 @@ export class Game {
                 Map.relocateAt(team[0].posX(),team[0].posY());
             }
         }
-    }
-    static unselectAll= function(){
+    },
+    unselectAll:function(){
         //Unselect all
         var units=Unit.allUnits.concat(Building.allBuildings);
         units.forEach(function(chara){chara.selected=false});
         Game.addIntoAllSelected([],true);
-    }
-    static multiSelectInRect= function(){
+    },
+    multiSelectInRect:function(){
         Game.unselectAll();
         //Multi select in rect
         var startPoint={x:Map.offsetX+Math.min(mouseController.startPoint.x,mouseController.endPoint.x),
@@ -346,8 +344,8 @@ export class Game {
         if (inRectUnits.length>0) Game.changeSelectedTo(inRectUnits[0]);
         else Game.changeSelectedTo({});
         Game.addIntoAllSelected(inRectUnits,true);
-    }
-   static  getSelectedOne= function(clickX,clickY,isEnemyFilter,unitBuildingFilter,isFlyingFilter,customFilter){
+    },
+    getSelectedOne:function(clickX,clickY,isEnemyFilter,unitBuildingFilter,isFlyingFilter,customFilter){
         var distance=function(chara){
             return (clickX-chara.posX())*(clickX-chara.posX())+(clickY-chara.posY())*(clickY-chara.posY());//Math.pow2
         };
@@ -396,8 +394,8 @@ export class Game {
         })[0];
         if (!selectedOne) selectedOne={};
         return selectedOne;
-    }
-    getInRangeOnes= function(clickX,clickY,range,isEnemyFilter,unitBuildingFilter,isFlyingFilter,customFilter){
+    },
+    getInRangeOnes:function(clickX,clickY,range,isEnemyFilter,unitBuildingFilter,isFlyingFilter,customFilter){
         //Initial
         var selectedOnes=[],charas=[];
         switch (unitBuildingFilter){
@@ -440,14 +438,14 @@ export class Game {
             return chara.status!='dead' && chara.insideSquare({centerX:clickX,centerY:clickY,radius:range});
         });
         return selectedOnes;
-    }
+    },
     //For test use
-    getSelected= function(){
+    getSelected:function(){
         return Unit.allUnits.concat(Building.allBuildings).filter(function(chara){
             return chara.selected;
         });
-    }
-    static showInfoFor= function(chara){
+    },
+    showInfoFor:function(chara){
         //Show selected living unit info
         if (Game.selectedUnit instanceof Gobj && Game.selectedUnit.status!="dead") {
             //Display info
@@ -564,20 +562,19 @@ export class Game {
             //Hide info
             $('div.panel_Info>div').hide();
         }
-    }
-    public static refreshInfo = function(){
+    },
+    refreshInfo:function(){
         Game.showInfoFor(Game.selectedUnit);
-    } 
-
-    static changeSelectedTo = function(chara){
+    },
+    changeSelectedTo:function(chara){
         Game.selectedUnit=chara;
         Button.equipButtonsFor(chara);
         if (chara instanceof Gobj){
             chara.selected=true;
         }
         Game.showInfoFor(chara);
-    }
-    static draw= function(chara){
+    },
+    draw:function(chara){
         //Can draw units and no-rotate bullets
         if (!(chara instanceof Gobj)) return;//Will only show Gobj
         if (chara.status=="dead") return;//Will not show dead
@@ -689,8 +686,8 @@ export class Game {
                 cxt.strokeRect(chara.x-Map.offsetX,chara.y-Map.offsetY+offsetY+(chara.SP?10:5),chara.width,5);
             }
         }
-    }
-    static drawEffect= function(chara){
+    },
+    drawEffect:function(chara){
         //Can draw units and no-rotate bullets
         if (!(chara instanceof Burst)) return;//Will only show Burst
         if (chara.status=="dead") return;//Will not show dead
@@ -726,8 +723,8 @@ export class Game {
         }
         //Remove shadow
         cxt.restore();
-    }
-    static drawBullet= function(chara){
+    },
+    drawBullet:function(chara){
         //Can draw bullets need rotate
         if (!(chara instanceof Bullets)) return;//Will only show bullet
         if (chara.status=="dead") return;//Will not show dead
@@ -768,8 +765,8 @@ export class Game {
         //Below 2 separated steps might cause mess
         //Game.frontCxt.translate(-centerX,-centerY);
         //Game.frontCxt.rotate(chara.angle);
-    }
-    static drawInfoBox= function(){
+    },
+    drawInfoBox:function(){
         //Update selected unit active info which need refresh
         if (Game.selectedUnit instanceof Gobj && Game.selectedUnit.status!="dead") {
             //Update selected unit life,shield and magic
@@ -787,8 +784,8 @@ export class Game {
                 $('div.infoCenter p.kill span')[0].innerHTML=Game.selectedUnit.kill;
             }
         }
-    }
-    static drawSourceBox= function(){
+    },
+    drawSourceBox:function(){
         //Update min, gas, curMan and totalMan
         $('div.resource_Box span.mineNum')[0].innerHTML=Resource[Game.team].mine;
         $('div.resource_Box span.gasNum')[0].innerHTML=Resource[Game.team].gas;
@@ -796,8 +793,8 @@ export class Game {
         $('div.resource_Box span.manNum>span')[1].innerHTML=Resource[Game.team].totalMan;
         //Check if man overflow
         $('div.resource_Box span.manNum')[0].style.color=(Resource[Game.team].curMan>Resource[Game.team].totalMan)?"red":"#00ff00";
-    }
-    static drawProcessingBox= function(){
+    },
+    drawProcessingBox:function(){
         //Show processing box if it's processing
         var processing=Game.selectedUnit.processing;
         //Can disable this filter for testing
@@ -824,15 +821,15 @@ export class Game {
             }
             else $('div.upgrading').removeAttr('title').hide();
         }
-    }
-    static refreshMultiSelectBox= function(){
+    },
+    refreshMultiSelectBox:function(){
         var divs=$('div.override div.multiSelection div');
         //Only refresh border color on current multiSelect box
         for (var n=0;n<divs.length;n++){
             divs[n].style.borderColor=Game.allSelected[n].lifeStatus();
         }
-    }
-    static drawMultiSelectBox= function(){
+    },
+    drawMultiSelectBox:function(){
         //Clear old icons
         $('div.override div.multiSelection')[0].innerHTML='';
         //Redraw all icons
@@ -865,8 +862,8 @@ export class Game {
             }).join(' ');
             $('div.override div.multiSelection div:nth-child('+n+')').css('background-position',bgPosition);
         }
-    }
-   static animation= function(){
+    },
+    animation:function(){
         Game.animation.loop=function(){
             //Process due commands for current frame before drawing
             var commands=Game.commands[Game.mainTick];
@@ -1002,21 +999,21 @@ export class Game {
             },Game._frameInterval);
         }
         else Game.startAnimation();
-    }
-    static stopAnimation= function(){
+    },
+    stopAnimation:function(){
         if (Game._timer!=-1) clearInterval(Game._timer);
         Game._timer=-1;
-    }
-    static startAnimation= function(){
+    },
+    startAnimation:function(){
         if (Game._timer==-1) Game._timer=setInterval(Game.animation.loop,Game._frameInterval);
-    }
-    static stop= function(charas){
+    },
+    stop:function(charas){
         charas.forEach(function(chara){
             chara.stop();
         });
         Game.stopAnimation();
-    }
-    static win= function(){
+    },
+    win:function(){
         if (Multiplayer.ON){
             Multiplayer.webSocket.send(JSON.stringify({
                 type:'getReplay'
@@ -1034,8 +1031,8 @@ export class Game {
         });
         //Self destruction to prevent duplicate fadeout
         Game.win=function(){};
-    }
-    static lose= function(){
+    },
+    lose:function(){
         if (Multiplayer.ON){
             Multiplayer.webSocket.send(JSON.stringify({
                 type:'getReplay'
@@ -1053,8 +1050,8 @@ export class Game {
         });
         //Self destruction to prevent duplicate fadeout
         Game.lose=function(){};
-    }
-    static saveReplay= function(replayData){
+    },
+    saveReplay:function(replayData){
         if (!Game.replayFlag) {
             localStorage.setItem('lastReplay',JSON.stringify({
                 level:Game.level,
@@ -1064,9 +1061,8 @@ export class Game {
                 end:Game.mainTick
             }));
         }
-    } 
-
-    static showWarning= function(msg,interval){
+    },
+    showWarning:function(msg,interval){
         //Default interval
         if (!interval) interval=3000;
         //Show message for a period
@@ -1075,8 +1071,8 @@ export class Game {
         setTimeout(function(){
             $('div.warning_Box').html('').hide();
         },interval);
-    }
-    static showMessage= function(){
+    },
+    showMessage:function(){
         //Clossure timer
         var _timer=0;
         return function(msg,interval){
@@ -1113,7 +1109,7 @@ export class Game {
             return rands.shift()/100;
         };
     })(),
-    resizeWindow= function(){
+    resizeWindow:function(){
         //Update parameters
         Game.HBOUND=innerWidth;//$('body')[0].scrollWidth
         Game.VBOUND=innerHeight;//$('body')[0].scrollHeight
@@ -1134,7 +1130,7 @@ export class Game {
             Map.drawFogAndMinimap();
         }
     },
-    getCurrentTs= function(){
+    getCurrentTs:function(){
         var now=new Date();
         var formatNum=function(num){
             if (num<10) return ('0'+num);
@@ -1145,7 +1141,7 @@ export class Game {
         return timestamp;
     },
     //New H5 features demo
-    pauseWhenHide= function(){
+    pauseWhenHide:function(){
         //Add pause when hide window
         $(document).on('visibilitychange',function(){
             if ($(document).attr('hidden')!=null){
@@ -1159,8 +1155,8 @@ export class Game {
                 }
             }
         });
-    }
-    initIndexDB = function(){
+    },
+    initIndexDB:function(){
         window.indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
         var connect=indexedDB.open('StarCraftHTML5',1);
         connect.onupgradeneeded=function(evt){
@@ -1174,9 +1170,8 @@ export class Game {
             objStore.createIndex('offlineIndex','offline',{unique:false});
             db.close();
         }
-    } 
-    
-    saveReplayIntoDB = function(){
+    },
+    saveReplayIntoDB:function(){
         var connect=indexedDB.open('StarCraftHTML5',1);
         connect.onsuccess=function(evt){
             var db=evt.target.result;
@@ -1193,4 +1188,4 @@ export class Game {
             db.close();
         }
     }
-}
+};

@@ -1,7 +1,6 @@
 /******* Define Zerg units *******/
 var Zerg={};
-
-export class Zerg.Drone extends AttackableUnit{
+Zerg.Drone=AttackableUnit.extends({
     constructorPlus:function(props){
         this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
         this.sound.unburrow=new Audio(Game.CDN+'bgm/Zerg.unburrow.wav');
@@ -217,8 +216,6 @@ export class Zerg.Drone extends AttackableUnit{
         }
     }
 });
-
-
 Zerg.Zergling=AttackableUnit.extends({
     constructorPlus:function(props){
         this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');

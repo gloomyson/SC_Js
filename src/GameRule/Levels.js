@@ -1,11 +1,3 @@
-import {Game} from './Game';
-import {Map} from '../Characters/Map';
-import {Terran} from '../Characters/Terran';
-import {Building} from '../Characters/Building';
-import {Zerg} from '../Characters/Zerg';
-
-
-
 var Levels=[
     {
         level:1,

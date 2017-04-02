@@ -1,28 +1,25 @@
-import {Game} from '../GameRule/Game'
-import {Unit} from './Units';
-
-export class Map {
-    static currentMap = 'Switchback'//By default
-    ready=false
-    static offsetX =0
-    static offsetY=0
-    speed=40
-    triggerMargin=20
+var Map={
+    currentMap:'Switchback',//By default
+    ready:false,
+    offsetX:0,
+    offsetY:0,
+    speed:40,
+    triggerMargin:20,
     //To synchronize drawing map and units, will not refresh immediately
-    needRefresh=false
-    static fogFlag=true
-    fogUnits=[]//Units need to draw fog on screen
-    allUnits=[]//Units need to draw fog on minimap
-    batchSize=0//Draw fog by each batch
-    miniCxt=($('canvas[name="mini_map"]')[0] as any).getContext('2d')
-    static fogCanvas=document.createElement('canvas')
-    static shadowCanvas=document.createElement('canvas')//Pre-render for fog shadow
-     static insideStroke ={
+    needRefresh:false,
+    fogFlag:true,
+    fogUnits:[],//Units need to draw fog on screen
+    allUnits:[],//Units need to draw fog on minimap
+    batchSize:0,//Draw fog by each batch
+    miniCxt:$('canvas[name="mini_map"]')[0].getContext('2d'),
+    fogCanvas:document.createElement('canvas'),
+    shadowCanvas:document.createElement('canvas'),//Pre-render for fog shadow
+    insideStroke:{
         width:0,
         height:0
-    }
+    },
     //Init map
-    setCurrentMap= function(name){
+    setCurrentMap:function(name){
         Map.currentMap=name;
         $('canvas[name="mini_map"]').attr('class',name);
         //Init inside stroke size
@@ -45,13 +42,12 @@ export class Map {
         Map.shadowCxt.fill();
         //Map is ready after current map set
         Map.ready=true;
-    }
-
-    static getCurrentMap= function(){
+    },
+    getCurrentMap:function(){
         return sourceLoader.sources['Map_'+Map.currentMap];
-    }
+    },
     //Draw interface call
-     static drawFogAndMinimap= function(){
+    drawFogAndMinimap:function(){
         if (Map.fogFlag){
             Map.refreshFog();
             //Draw fog on main map
@@ -62,9 +58,9 @@ export class Map {
         }
         //Draw mini-map
         Map.drawMiniMap();
-    }
+    },
     //Used by drawFogAndMinimap
-    static  refreshFog= function(){
+    refreshFog:function(){
         //Reset composite operation
         Map.fogCxt.globalCompositeOperation='source-over';
         //Brush black fog to clean old fog
@@ -92,9 +88,9 @@ export class Map {
             var radius=Math.round(chara.get('sight')*ratio<<1);
             Map.fogCxt.drawImage(Map.shadowCanvas,0,0,100,100,centerX-radius,centerY-radius,radius<<1,radius<<1);
         });
-    }
+    },
     //Used by drawFogAndMinimap: draw red&green block and white stroke
-    static drawMiniMap= function(){
+    drawMiniMap:function(){
         //Selected map size
         var mapWidth=Map.getCurrentMap().width;
         var mapHeight=Map.getCurrentMap().height;
@@ -117,8 +113,8 @@ export class Map {
         Map.miniCxt.strokeStyle='white';
         Map.miniCxt.lineWidth=2;
         Map.miniCxt.strokeRect((130*Map.offsetX/mapWidth)>>0,(130*Map.offsetY/mapHeight)>>0,Map.insideStroke.width,Map.insideStroke.height);
-    }
-    static  drawMud= function(){
+    },
+    drawMud:function(){
         var _increments=[[0,1],[-1,0],[0,-1],[1,0]];
         var mudRadius=120;
         var mudIncrements=_$.mapTraverse(_increments,function(x){
@@ -153,8 +149,8 @@ export class Map {
         //Fill mud
         Game.backCxt.fill();
         Game.backCxt.restore();
-    }
-     static drawBg= function(){
+    },
+    drawBg:function(){
         //Clear background
         Game.backCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
         //Draw map as background
@@ -162,8 +158,8 @@ export class Map {
             0,0,Game.HBOUND,Game.VBOUND-Game.infoBox.height+5);
         //Draw mud for ZergBuildings
         Map.drawMud();
-    }
-    static  refresh= function(direction){
+    },
+    refresh:function(direction){
         var edgeX=Map.getCurrentMap().width-Game.HBOUND;
         var edgeY=Map.getCurrentMap().height-Game.VBOUND+Game.infoBox.height-5;
         var onlyMap;
@@ -191,15 +187,15 @@ export class Map {
         Map.drawBg();
         //Need re-calculate fog when screen moves
         if (!onlyMap) Map.drawFogAndMinimap();
-    }
-    static  clickHandler= function(event){
+    },
+    clickHandler:function(event){
         //Mouse at (clickX,clickY)
         var clickX=event.pageX-$('canvas[name="mini_map"]').offset().left;
         var clickY=event.pageY-$('canvas[name="mini_map"]').offset().top;
         //Relocate map center
         Map.relocateAt(Map.getCurrentMap().width*clickX/130,Map.getCurrentMap().height*clickY/130);
-    }
-    static dblClickHandler= function(event){
+    },
+    dblClickHandler:function(event){
         //Mouse at (clickX,clickY)
         var clickX=event.pageX-$('canvas[name="mini_map"]').offset().left;
         var clickY=event.pageY-$('canvas[name="mini_map"]').offset().top;
@@ -214,8 +210,8 @@ export class Map {
             chara.targetLock=true;
             chara.moveTo(mapX,mapY);
         });
-    } 
-   static relocateAt= function(centerX,centerY){
+    },
+    relocateAt:function(centerX,centerY){
         //Get map edge
         var edgeX=Map.getCurrentMap().width-Game.HBOUND;
         var edgeY=Map.getCurrentMap().height-Game.VBOUND+Game.infoBox.height-5;
