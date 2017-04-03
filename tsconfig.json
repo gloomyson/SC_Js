@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
+    "noImplicitReturns": true,
     "typeRoots": ["node_modules/@types/"],
     "types": [
       "node",
@@ -12,10 +15,14 @@
       "es6-shim"
     ]
   },
+  "include": [
+    "./src/**/*"
+  ],
   "compileOnSave": false,
   "filesGlob": [
     "src/**/*.ts",
     "src/**/*.tsx",
+    "src/**/*.js",
     "!node_modules/**"
   ]
 }
