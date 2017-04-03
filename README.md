@@ -41,3 +41,9 @@ Classic RTS game at html5 canvas and javascript, only js codes, copyright materi
 	
 ## Try it online at:
 [SC Html5 Online](http://www.nvhae.com/starcraft/)
+
+## Build it
+* npm install
+* npm run serve
+* go to http://localhost:3000 (more info see console.log)
+
