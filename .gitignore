@@ -5,3 +5,5 @@ Original/
 *.map
 node_modules/
 dist/
+bgm/
+img/
