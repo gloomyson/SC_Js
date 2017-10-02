@@ -1,8 +1,6 @@
 {
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/es6-shim": "^0.31.32",
     "@types/jasmine": "^2.5.43",
     "@types/jquery": "^2.0.40",
     "@types/node": "^7.0.5",

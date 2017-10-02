@@ -1,3 +1,9 @@
+declare var Gobj, $, _$, Building, Referee, sourceLoader;
+declare var Levels, Resource, Multiplayer, Button, Map; 
+declare var webkitIndexedDB, mozIndexedDB, msIndexedDB;
+declare var Protoss, Zerg, Hero, Terran, Upgrade, Unit, Neutral, mouseController, Burst, Bullets;
+declare var keyController;
+
 var Game={
     //Global variables
     HBOUND:innerWidth,//$('body')[0].scrollWidth
@@ -23,13 +29,16 @@ var Game={
     commands:{},
     replay:{},
     randomSeed:0,//For later use
-    selectedUnit:{},
+    selectedUnit:null,
     allSelected:[],
     _oldAllSelected:[],
     hackMode:false,
     isApp:false,
     offline:false,
     CDN:'',
+    level: null,
+    replayFlag: null,
+    endTick: null,
     addIntoAllSelected:function(chara,override){
         if (chara instanceof Gobj){
             //Add into allSelected if not included
@@ -863,7 +872,7 @@ var Game={
             $('div.override div.multiSelection div:nth-child('+n+')').css('background-position',bgPosition);
         }
     },
-    animation:function(){
+    animation:function() {
         Game.animation.loop=function(){
             //Process due commands for current frame before drawing
             var commands=Game.commands[Game.mainTick];
@@ -994,7 +1003,7 @@ var Game={
             }
         };
         if (Multiplayer.ON){
-            Game._timer=setInterval(function(){
+            Game._timer= setInterval(function(){
                 if (Game.mainTick<Game.serverTick) Game.animation.loop();
             },Game._frameInterval);
         }
@@ -1051,7 +1060,7 @@ var Game={
         //Self destruction to prevent duplicate fadeout
         Game.lose=function(){};
     },
-    saveReplay:function(replayData){
+    saveReplay:function(replayData?){
         if (!Game.replayFlag) {
             localStorage.setItem('lastReplay',JSON.stringify({
                 level:Game.level,
@@ -1157,10 +1166,10 @@ var Game={
         });
     },
     initIndexDB:function(){
-        window.indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
+        (window as any) .indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
         var connect=indexedDB.open('StarCraftHTML5',1);
         connect.onupgradeneeded=function(evt){
-            var db=evt.target.result;
+            var db=(evt.target as any).result;
             var objStore=db.createObjectStore('Replays',{keyPath:'id',autoIncrement:true});
             objStore.createIndex('levelIndex','level',{unique:false});
             objStore.createIndex('teamIndex','team',{unique:false});

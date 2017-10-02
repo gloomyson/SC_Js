@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "allowJs": true,
+    "allowJs": false,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -11,8 +11,7 @@
     "typeRoots": ["node_modules/@types/"],
     "types": [
       "node",
-      "jasmine",
-      "es6-shim"
+      "jasmine"
     ]
   },
   "include": [

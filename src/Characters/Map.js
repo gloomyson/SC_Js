@@ -6,7 +6,7 @@ var Map={
     speed:40,
     triggerMargin:20,
     //To synchronize drawing map and units, will not refresh immediately
-    needRefresh:false,
+    needRefresh:null,
     fogFlag:true,
     fogUnits:[],//Units need to draw fog on screen
     allUnits:[],//Units need to draw fog on minimap
