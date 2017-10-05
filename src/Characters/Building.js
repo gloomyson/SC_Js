@@ -1,3 +1,4 @@
+
 var Building=Gobj.extends({
     constructorPlus:function(props){
         //Add id for building

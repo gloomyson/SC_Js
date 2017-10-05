@@ -1,4 +1,7 @@
-var Resource={
+declare var Game,Zerg,Terran,Protoss,Building,TerranBuilding,ProtossBuilding,Magic,Upgrade;
+declare var Referee, _$, Cheat;
+
+export var Resource={
     init:function(){
         for (var N=0;N<Game.playerNum;N++){
             Resource[N]={

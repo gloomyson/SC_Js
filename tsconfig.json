@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "typeRoots": ["node_modules/@types/"],
     "types": [
       "node",

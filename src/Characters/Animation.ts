@@ -1,5 +1,7 @@
+declare var Burst;
+
 //Alias
-var Animation=Burst;
+export var Animation=Burst;
 Animation.getAllAnimations=function(){
     var allAnimes=[];
     for (var attr in Animation){

@@ -1655,9 +1655,1218 @@ exports.Map = {
 exports.__esModule = true;
 var Game_1 = __webpack_require__(0);
 var Map_1 = __webpack_require__(2);
+var Resource_1 = __webpack_require__(4);
+var Animation_1 = __webpack_require__(5);
 window.Map = Map_1.Map;
 window.Game = Game_1.Game;
+window.Resource = Resource_1.Resource;
+window.Animation = Animation_1.Animation;
 Game_1.Game.init();
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+exports.Resource = {
+    init: function () {
+        for (var N = 0; N < Game.playerNum; N++) {
+            exports.Resource[N] = {
+                mine: 50,
+                gas: 0,
+                curMan: 0,
+                totalMan: 0
+            };
+        }
+    },
+    getCost: function (name, team) {
+        var cost, count;
+        if (!team)
+            team = Game.team;
+        [Zerg, Terran, Protoss, Building.ZergBuilding, Building.TerranBuilding, Building.ProtossBuilding, Magic, Upgrade].forEach(function (Type) {
+            //Not found yet
+            if (!cost) {
+                for (var item in Type) {
+                    //Filter out noise
+                    if (item == 'inherited' || item == 'super' || item == 'extends')
+                        continue;
+                    if (item == name) {
+                        if (typeof (Type[item]) == 'function') {
+                            cost = Type[item].prototype.cost;
+                            count = Type[item].prototype.birthCount;
+                        }
+                        else
+                            cost = Type[item].cost;
+                        //Resolve array cost
+                        if (cost) {
+                            //Clone fetched cost object, but sometimes undefined
+                            cost = _$.clone(cost);
+                            ['mine', 'gas', 'man', 'magic', 'time'].forEach(function (res) {
+                                if (cost[res]) {
+                                    if (cost[res] instanceof Array) {
+                                        cost[res] = cost[res][Type[item].level[team]];
+                                    }
+                                    if (count) {
+                                        cost[res] *= count;
+                                    }
+                                }
+                            });
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+        return cost;
+    },
+    //Check if paid successfully
+    paypal: function (cost) {
+        if (cost) {
+            var oweFlag = false;
+            if (Cheat.gathering)
+                cost.magic = 0;
+            var team = (this.team != null) ? this.team : Game.team;
+            if (cost['mine'] && cost['mine'] > exports.Resource[team].mine) {
+                oweFlag = true;
+                Game.showMessage('Not enough minerals...mine more minerals');
+                //Advisor voice
+                Referee.voice('resource')[Game.race.selected].mine.play();
+            }
+            if (cost['gas'] && cost['gas'] > exports.Resource[team].gas) {
+                oweFlag = true;
+                Game.showMessage('Not enough Vespene gases...harvest more gas');
+                //Advisor voice
+                Referee.voice('resource')[Game.race.selected].gas.play();
+            }
+            if (cost['man'] && cost['man'] > (exports.Resource[team].totalMan - exports.Resource[team].curMan) && !Cheat.manUnlimited) {
+                oweFlag = true;
+                switch (Game.race.selected) {
+                    case 'Zerg':
+                        Game.showMessage('Too many underlings...create more Overlords');
+                        break;
+                    case 'Terran':
+                        Game.showMessage('Not enough supplies...build more Supply Depots');
+                        break;
+                    case 'Protoss':
+                        Game.showMessage('Not enough psi...build more Pylons');
+                        break;
+                }
+                //Advisor voice
+                Referee.voice('resource')[Game.race.selected].man.play();
+            }
+            if (cost['magic'] && cost['magic'] > this.magic) {
+                oweFlag = true;
+                Game.showMessage('Not enough energy');
+                //Advisor voice
+                Referee.voice('resource')[Game.race.selected].magic.play();
+            }
+            if (oweFlag) {
+                //Payment failed
+                return false;
+            }
+            else {
+                if (!this.creditBill) {
+                    //Pay immediately
+                    if (cost['mine']) {
+                        exports.Resource[team].mine -= cost['mine'];
+                    }
+                    if (cost['gas']) {
+                        exports.Resource[team].gas -= cost['gas'];
+                    }
+                    if (cost['magic']) {
+                        this.magic -= cost['magic'];
+                    }
+                }
+                //Already paid
+                return true;
+            }
+        }
+        else
+            return true;
+    },
+    //Pay credit card bill
+    payCreditBill: function () {
+        var cost = this.creditBill;
+        //Paid credit bill, no longer owe money this time
+        delete this.creditBill;
+        return exports.Resource.paypal.call(this, cost);
+    }
+};
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+//Alias
+exports.Animation = Burst;
+exports.Animation.getAllAnimations = function () {
+    var allAnimes = [];
+    for (var attr in exports.Animation) {
+        if (exports.Animation[attr]["super"] === exports.Animation)
+            allAnimes.push(exports.Animation[attr]);
+    }
+    return allAnimes;
+};
+exports.Animation.getName = function (anime) {
+    for (var attr in exports.Animation) {
+        //Should be animation constructor firstly
+        if (exports.Animation[attr]["super"] === exports.Animation && (anime instanceof exports.Animation[attr]))
+            return attr;
+    }
+};
+exports.Animation.RightClickCursor = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Burst",
+        imgPos: {
+            burst: {
+                left: [0, 44, 88, 132],
+                top: [1087, 1087, 1087, 1087]
+            }
+        },
+        width: 44,
+        height: 28,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.PsionicStorm = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 188, 376, 564, 0, 188, 376, 564, 0, 188, 376, 564, 0, 188],
+                top: [0, 0, 0, 0, 153, 153, 153, 153, 306, 306, 306, 306, 459, 459]
+            }
+        },
+        width: 188,
+        height: 153,
+        scale: 1.2,
+        duration: 7000,
+        frame: {
+            burst: 14
+        }
+    }
+});
+exports.Animation.Hallucination = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [752, 815, 878, 941, 1004, 1067, 1130, 1193, 1256, 752, 815, 878, 941, 1004, 1067, 1130, 1193, 1256],
+                top: [0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 63, 63, 63, 63, 63, 63, 63, 63]
+            }
+        },
+        width: 63,
+        height: 63,
+        above: true,
+        frame: {
+            burst: 18
+        }
+    }
+});
+exports.Animation.Consume = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [752, 826, 900, 974, 1048, 1122, 1196, 1270, 1344, 752, 826, 900, 974, 1048, 1122, 1196, 1270, 1344],
+                top: [126, 126, 126, 126, 126, 126, 126, 126, 126, 196, 196, 196, 196, 196, 196, 196, 196, 196]
+            }
+        },
+        width: 74,
+        height: 70,
+        above: true,
+        autoSize: true,
+        frame: {
+            burst: 18
+        }
+    }
+});
+exports.Animation.StasisField = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: 376,
+                top: 459
+            }
+        },
+        width: 130,
+        height: 110,
+        above: true,
+        autoSize: 'MAX',
+        scale: 1.25,
+        duration: 30000,
+        frame: {
+            burst: 1
+        }
+    }
+});
+exports.Animation.Lockdown = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [330, 0, 110, 220, 330, 0, 0, 0, 110, 220, 330, 0, 110, 220],
+                top: [723, 834, 834, 834, 834, 945, 0, 612, 612, 612, 612, 723, 723, 723]
+            }
+        },
+        width: 110,
+        height: 111,
+        above: true,
+        autoSize: 'MAX',
+        duration: 60000,
+        frame: {
+            burst: 6
+        }
+    }
+});
+exports.Animation.DarkSwarm = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1260, 752, 1006, 1260, 752, 0, 752, 1006, 1260, 752, 1006],
+                top: [456, 645, 645, 645, 834, 0, 267, 267, 267, 456, 456]
+            }
+        },
+        width: 254,
+        height: 189,
+        scale: 1.2,
+        duration: 60000,
+        frame: {
+            burst: 5
+        }
+    }
+});
+exports.Animation.Plague = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1144, 1274, 1404, 754, 884, 1014, 1144, 1274, 1404, 754, 884, 1014, 1144, 1274],
+                top: [892, 892, 892, 1022, 1022, 1022, 1022, 1022, 1022, 1152, 1152, 1152, 1152, 1152]
+            }
+        },
+        width: 130,
+        height: 130,
+        scale: 1.2,
+        frame: {
+            burst: 14
+        }
+    }
+});
+exports.Animation.PurpleEffect = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [440, 499, 558, 617],
+                top: [902, 902, 902, 902]
+            }
+        },
+        width: 59,
+        height: 60,
+        above: true,
+        autoSize: 'MIN',
+        duration: 30000,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.RedEffect = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1006, 1068, 1130, 1192],
+                top: [836, 836, 836, 836]
+            }
+        },
+        width: 62,
+        height: 50,
+        above: true,
+        autoSize: 'MIN',
+        duration: 30000,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.GreenEffect = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1256, 1313, 1370, 1427],
+                top: [836, 836, 836, 836]
+            }
+        },
+        width: 57,
+        height: 46,
+        above: true,
+        autoSize: 'MIN',
+        duration: 30000,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.Ensnare = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 131, 262, 393, 524, 0, 131, 262, 393, 524, 0, 131, 262, 393, 524],
+                top: [1056, 1056, 1056, 1056, 1056, 1181, 1181, 1181, 1181, 1181, 1306, 1306, 1306, 1306, 1306]
+            }
+        },
+        width: 131,
+        height: 125,
+        scale: 1.2,
+        frame: {
+            burst: 15
+        }
+    }
+});
+exports.Animation.ScannerSweep = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1012, 1012, 1167, 1167, 1322, 1322, 1012, 1012, 1167, 1167, 1322, 1322],
+                top: [2220, 2220, 2220, 2220, 2220, 2220, 2335, 2335, 2335, 2335, 2335, 2335]
+            }
+        },
+        width: 155,
+        height: 115,
+        scale: 1.5,
+        duration: 15600,
+        sight: 350,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.Feedback = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [632, 702, 772, 842, 912, 982, 1052, 1122, 1192, 1262, 1332, 1402],
+                top: [2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872, 2872]
+            }
+        },
+        width: 70,
+        height: 70,
+        above: true,
+        autoSize: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.HellFire = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [655, 730, 805, 880, 955, 1030, 1105, 1180, 1255, 1330],
+                top: [1284, 1284, 1284, 1284, 1284, 1284, 1284, 1284, 1284, 1284]
+            }
+        },
+        width: 75,
+        height: 75,
+        above: true,
+        autoSize: true,
+        frame: {
+            burst: 10
+        }
+    }
+});
+exports.Animation.MindControl = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [658, 720, 782, 844, 906, 968, 1030, 1092, 1154, 1216, 1278, 1340],
+                top: [1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378, 1378]
+            }
+        },
+        width: 62,
+        height: 40,
+        above: true,
+        autoSize: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.RechargeShields = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 64, 128, 192, 256, 320, 384, 448, 0, 64, 128, 192, 256, 320, 384, 448],
+                top: [1432, 1432, 1432, 1432, 1432, 1432, 1432, 1432, 1496, 1496, 1496, 1496, 1496, 1496, 1496, 1496]
+            }
+        },
+        width: 64,
+        height: 64,
+        above: true,
+        autoSize: true,
+        frame: {
+            burst: 16
+        }
+    }
+});
+exports.Animation.DisruptionWeb = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1396, 1396, 1396, 1396, 1088, 1088, 1242, 1242, 1392, 1392, 1392, 1392],
+                top: [1194, 1194, 1322, 1322, 1432, 1432, 1432, 1432, 1432, 1432, 1538, 1538]
+            }
+        },
+        width: 154,
+        height: 112,
+        scale: 1.2,
+        duration: 25000,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.DefensiveMatrix = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1327, 1427, 1327, 1427, 1327],
+                top: [1664, 1664, 1751, 1751, 1838]
+            }
+        },
+        width: 90,
+        height: 84,
+        above: true,
+        autoSize: true,
+        duration: 60000,
+        frame: {
+            burst: 5
+        }
+    }
+});
+exports.Animation.BlueShield = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 130, 260, 390, 520, 0, 130, 260, 390, 520],
+                top: [1560, 1560, 1560, 1560, 1560, 1690, 1690, 1690, 1690, 1690]
+            }
+        },
+        width: 130,
+        height: 130,
+        above: true,
+        autoSize: true,
+        duration: 60000,
+        frame: {
+            burst: 10
+        }
+    }
+});
+exports.Animation.MaelStorm = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [2, 70, 130, 195, 252, 312, 372, 430, 492, 554],
+                top: [2870, 2870, 2870, 2870, 2870, 2870, 2870, 2870, 2870, 2870]
+            }
+        },
+        width: 60,
+        height: 60,
+        above: true,
+        autoSize: true,
+        duration: 18000,
+        frame: {
+            burst: 10
+        }
+    }
+});
+exports.Animation.RedShield = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [650, 780, 910, 1040, 1170, 650, 780, 910, 1040, 1170],
+                top: [1560, 1560, 1560, 1560, 1560, 1690, 1690, 1690, 1690, 1690]
+            }
+        },
+        width: 130,
+        height: 130,
+        above: true,
+        autoSize: true,
+        duration: 18000,
+        frame: {
+            burst: 10
+        }
+    }
+});
+exports.Animation.BurningCircle = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 112, 224, 336, 448, 560],
+                top: [1820, 1820, 1820, 1820, 1820, 1820]
+            }
+        },
+        width: 112,
+        height: 126,
+        above: true,
+        autoSize: true,
+        duration: 18000,
+        frame: {
+            burst: 6
+        }
+    }
+});
+exports.Animation.Irradiate = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [668, 792, 916, 1042, 1172],
+                top: [1820, 1820, 1820, 1820, 1820]
+            }
+        },
+        width: 126,
+        height: 110,
+        above: true,
+        autoSize: true,
+        duration: 30000,
+        frame: {
+            burst: 5
+        }
+    }
+});
+exports.Animation.Recall = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 86, 188, 282, 386, 488, 588, 688, 788, 894],
+                top: [1938, 1938, 1938, 1938, 1938, 1938, 1938, 1938, 1938, 1938]
+            }
+        },
+        width: 98,
+        height: 98,
+        frame: {
+            burst: 10
+        }
+    }
+});
+exports.Animation.Ice = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1024, 1164, 1304, 1444],
+                top: [1942, 1942, 1942, 1942]
+            }
+        },
+        width: 78,
+        height: 88,
+        above: true,
+        autoSize: true,
+        duration: 30000,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.EMPShockwave = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 180, 356, 534, 708, 886, 1068],
+                top: [2038, 2038, 2038, 2038, 2038, 2038, 2038]
+            }
+        },
+        width: 180,
+        height: 146,
+        scale: 1.5,
+        frame: {
+            burst: 7
+        }
+    }
+});
+exports.Animation.StasisFieldSpell = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1384, 1250, 1250, 1384],
+                top: [2044, 2044, 2044, 2044]
+            }
+        },
+        width: 128,
+        height: 84,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.MaelStormSpell = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [1384, 1250, 1250, 1384],
+                top: [2134, 2134, 2134, 2134]
+            }
+        },
+        width: 128,
+        height: 84,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.Restoration = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 128, 256, 384, 512, 640, 768, 896, 0, 128, 256, 384, 512, 640, 768, 896],
+                top: [2190, 2190, 2190, 2190, 2190, 2190, 2190, 2190, 2318, 2318, 2318, 2318, 2318, 2318, 2318, 2318]
+            }
+        },
+        width: 128,
+        height: 128,
+        above: true,
+        autoSize: true,
+        frame: {
+            burst: 16
+        }
+    }
+});
+exports.Animation.Shockwave = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 135, 270, 405, 540, 675, 810, 945, 1080, 1215, 1350],
+                top: [2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446, 2446]
+            }
+        },
+        width: 135,
+        height: 120,
+        frame: {
+            burst: 11
+        }
+    }
+});
+exports.Animation.NuclearStrike = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [0, 154, 308, 462, 616, 770, 924, 1078, 1232, 1386, 0, 154, 308, 462, 616, 770, 924, 1078, 1232, 1386],
+                top: [2562, 2562, 2562, 2562, 2562, 2562, 2562, 2562, 2562, 2562, 2716, 2716, 2716, 2716, 2716, 2716, 2716, 2716, 2716, 2716]
+            }
+        },
+        width: 154,
+        height: 154,
+        scale: 2.5,
+        frame: {
+            burst: 20
+        }
+    }
+});
+//Evolve related
+exports.Animation.EvolveGroundUnit = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [524, 562, 600, 638, 676, 714, 524, 562, 600, 638, 676, 714],
+                top: [724, 724, 724, 724, 724, 724, 766, 766, 766, 766, 766, 766]
+            }
+        },
+        width: 38,
+        height: 43,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.EvolveFlyingUnit = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "Magic",
+        imgPos: {
+            burst: {
+                left: [438, 501, 564, 627, 690, 438, 501, 564, 627],
+                top: [810, 810, 810, 810, 810, 855, 855, 855, 855]
+            }
+        },
+        width: 63,
+        height: 46,
+        frame: {
+            burst: 9
+        }
+    }
+});
+exports.Animation.SmallMutationComplete = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ZergBuilding",
+        imgPos: {
+            burst: {
+                left: [1316, 1476, 1636, 1796],
+                top: [962, 962, 962, 962]
+            }
+        },
+        width: 88,
+        height: 84,
+        frame: {
+            burst: 4
+        }
+    }
+});
+exports.Animation.MiddleMutationComplete = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ZergBuilding",
+        imgPos: {
+            burst: {
+                left: [980, 1140, 1300],
+                top: [1048, 1048, 1048]
+            }
+        },
+        width: 120,
+        height: 112,
+        frame: {
+            burst: 3
+        }
+    }
+});
+exports.Animation.LargeMutationComplete = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ZergBuilding",
+        imgPos: {
+            burst: {
+                left: [960, 1120, 1280],
+                top: [1160, 1160, 1160]
+            }
+        },
+        width: 160,
+        height: 150,
+        frame: {
+            burst: 3
+        }
+    }
+});
+exports.Animation.ProtossBuildingComplete = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ProtossBuilding",
+        imgPos: {
+            burst: {
+                left: [486, 486, 636, 636],
+                top: [648, 648, 648, 648]
+            }
+        },
+        width: 152,
+        height: 152,
+        frame: {
+            burst: 4
+        }
+    }
+});
+//Damaged related
+exports.Animation.redFireL = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "TerranBuilding",
+        imgPos: {
+            burst: {
+                left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
+                top: [546, 546, 546, 546, 546, 546, 546, 546, 546, 546, 546, 546]
+            }
+        },
+        width: 40,
+        height: 70,
+        //above:true,
+        //Keep playing until killed
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.redFireM = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "TerranBuilding",
+        imgPos: {
+            burst: {
+                left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
+                top: [632, 632, 632, 632, 632, 632, 632, 632, 632, 632, 632, 632]
+            }
+        },
+        width: 40,
+        height: 70,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.redFireR = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "TerranBuilding",
+        imgPos: {
+            burst: {
+                left: [10, 74, 138, 202, 266, 330, 394, 458, 522, 586, 650, 714],
+                top: [722, 722, 722, 722, 722, 722, 722, 722, 722, 722, 722, 722]
+            }
+        },
+        width: 48,
+        height: 60,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.blueFireL = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ProtossBuilding",
+        imgPos: {
+            burst: {
+                left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
+                top: [424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 424]
+            }
+        },
+        width: 40,
+        height: 70,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.blueFireM = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ProtossBuilding",
+        imgPos: {
+            burst: {
+                left: [14, 78, 142, 206, 270, 334, 398, 462, 526, 590, 654, 718],
+                top: [506, 506, 506, 506, 506, 506, 506, 506, 506, 506, 506, 506]
+            }
+        },
+        width: 40,
+        height: 70,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.blueFireR = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ProtossBuilding",
+        imgPos: {
+            burst: {
+                left: [10, 74, 138, 202, 266, 330, 394, 458, 522, 586, 650, 714],
+                top: [588, 588, 588, 588, 588, 588, 588, 588, 588, 588, 588, 588]
+            }
+        },
+        width: 48,
+        height: 60,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.bloodA = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ZergBuilding",
+        imgPos: {
+            burst: {
+                left: [768, 832, 896, 960, 1024, 1088, 1152, 1216, 1280, 1344, 1408, 1472],
+                top: [1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320]
+            }
+        },
+        width: 64,
+        height: 50,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.bloodB = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ZergBuilding",
+        imgPos: {
+            burst: {
+                left: [768, 832, 896, 960, 1024, 1088, 1152, 1216, 1280, 1344, 1408, 1472],
+                top: [1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376]
+            }
+        },
+        width: 64,
+        height: 50,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.bloodC = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ZergBuilding",
+        imgPos: {
+            burst: {
+                left: [0, 64, 128, 192, 256, 320, 384, 448, 512, 576, 640, 704],
+                top: [1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376, 1376]
+            }
+        },
+        width: 64,
+        height: 50,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
+exports.Animation.bloodD = exports.Animation["extends"]({
+    constructorPlus: function (props) {
+        //Nothing
+    },
+    prototypePlus: {
+        //Add basic unit info
+        name: "ZergBuilding",
+        imgPos: {
+            burst: {
+                left: [0, 64, 128, 192, 256, 320, 384, 448, 512, 576, 640, 704],
+                top: [1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320, 1320]
+            }
+        },
+        width: 64,
+        height: 50,
+        //above:true,
+        forever: true,
+        frame: {
+            burst: 12
+        }
+    }
+});
 
 
 /***/ })
