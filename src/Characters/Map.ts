@@ -1,4 +1,9 @@
-var Map={
+declare var $, _$, Building,Unit, Burst;
+
+import {Game} from '../GameRule/Game'
+import {sourceLoader} from '../Utils/sourceLoader'
+
+export var Map={
     currentMap:'Switchback',//By default
     ready:false,
     offsetX:0,
@@ -12,12 +17,14 @@ var Map={
     allUnits:[],//Units need to draw fog on minimap
     batchSize:0,//Draw fog by each batch
     miniCxt:$('canvas[name="mini_map"]')[0].getContext('2d'),
-    fogCanvas:document.createElement('canvas'),
+    fogCanvas:(document.createElement('canvas') as any),
     shadowCanvas:document.createElement('canvas'),//Pre-render for fog shadow
     insideStroke:{
         width:0,
         height:0
     },
+    fogCxt:null,
+    shadowCxt: null,
     //Init map
     setCurrentMap:function(name){
         Map.currentMap=name;

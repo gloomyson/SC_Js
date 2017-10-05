@@ -4,9 +4,9 @@ div.panel_Control button{
     width:36px;
     height:34px;
     display:none;
-    background-image: url('http://www.nvhae.com/starcraft/img/Menu/CmdIcons.png');
+    background-image: url('http://localhost:3000/img/Menu/CmdIcons.png');
     border-width:2px;
-    cursor:url('http://www.nvhae.com/starcraft/img/Menu/cursor.ico'),auto;
+    cursor:url('http://localhost:3000/img/Menu/cursor.ico'),auto;
     /*For text inside button*/
     color:red;
     font-weight:bolder;
@@ -15,7 +15,7 @@ div.panel_Control button{
     vertical-align:bottom;
 }
 div.panel_Control button[disabled='disabled']{
-    background-image: url('http://www.nvhae.com/starcraft/img/Menu/CmdIconsDisabled.png');
+    background-image: url('http://localhost:3000/img/Menu/CmdIconsDisabled.png');
     /*filter:grayscale(100%);
     -webkit-filter:grayscale(100%);
     -moz-filter:grayscale(100%);

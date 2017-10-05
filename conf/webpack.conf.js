@@ -67,7 +67,15 @@ module.exports = {
           configuration: require('../tslint.json')
         }
       },
-      debug: true
+      debug: true,
+      /*alias: {
+        'img': path.resolve(__dirname, 'img'), // or wherever it is located relative to this file
+        'bgm': path.resolve(__dirname, 'bmg')
+      },*/
+      /*build: {
+        assetsPublicPath: '/img',
+        assetsSubDirectory: 'img'
+      }*/
     })
   ],
   devtool: 'source-map',

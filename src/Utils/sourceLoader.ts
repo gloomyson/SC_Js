@@ -1,6 +1,6 @@
-import
+declare var $, _$;
 
-var sourceLoader={
+export var sourceLoader={
     sources:{},
     sourceNum:0,
     loadedNum:0,

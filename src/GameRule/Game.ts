@@ -1,10 +1,12 @@
-declare var Gobj, $, _$, Building, Referee, sourceLoader;
-declare var Levels, Resource, Multiplayer, Button, Map; 
+declare var Gobj, $, _$, Building, Referee, Map;
+declare var Levels, Resource, Multiplayer, Button; 
 declare var webkitIndexedDB, mozIndexedDB, msIndexedDB;
 declare var Protoss, Zerg, Hero, Terran, Upgrade, Unit, Neutral, mouseController, Burst, Bullets;
 declare var keyController;
 
-var Game={
+import {sourceLoader} from '../Utils/sourceLoader'
+
+export var Game={
     //Global variables
     HBOUND:innerWidth,//$('body')[0].scrollWidth
     VBOUND:innerHeight,//$('body')[0].scrollHeight
@@ -22,19 +24,19 @@ var Game={
     frontCxt:$('#frontCanvas')[0].getContext('2d'),
     backCxt:$('#backCanvas')[0].getContext('2d'),
     fogCxt:$('#fogCanvas')[0].getContext('2d'),
-    _timer:-1,
+    _timer:(-1 as any),
     _frameInterval:100,
     mainTick:0,
     serverTick:0,
     commands:{},
     replay:{},
     randomSeed:0,//For later use
-    selectedUnit:null,
+    selectedUnit:({} as any),
     allSelected:[],
     _oldAllSelected:[],
     hackMode:false,
     isApp:false,
-    offline:false,
+    offline:true,
     CDN:'',
     level: null,
     replayFlag: null,
@@ -107,8 +109,8 @@ var Game={
         if (!Game.offline){
             Game.CDN=prompt('Please input CDN location for images and audios:');
             if (Game.CDN){
-                if (!Game.CDN.startsWith('http://')) Game.CDN='http://'+Game.CDN;
-                if (!Game.CDN.endsWith('/')) Game.CDN+='/';
+                if (!(Game.CDN as any).startsWith('http://')) Game.CDN='http://'+Game.CDN;
+                if (!(Game.CDN as any).endsWith('/')) Game.CDN+='/';
             }
         }
         //Start loading
@@ -872,139 +874,142 @@ var Game={
             $('div.override div.multiSelection div:nth-child('+n+')').css('background-position',bgPosition);
         }
     },
-    animation:function() {
-        Game.animation.loop=function(){
-            //Process due commands for current frame before drawing
-            var commands=Game.commands[Game.mainTick];
-            if (commands instanceof Array){
-                for (var N=0;N<commands.length;N++){
-                    commands[N]();
-                }
-                delete Game.commands[Game.mainTick];
+
+    loop:function(){
+        //Process due commands for current frame before drawing
+        var commands=Game.commands[Game.mainTick];
+        if (commands instanceof Array){
+            for (var N=0;N<commands.length;N++){
+                commands[N]();
             }
-            /************ Draw part *************/
-            //Clear all canvas
-            Game.cxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
-            Game.frontCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
-            //DrawLayer0: Refresh map if needed
-            if (mouseController.mouseX<Map.triggerMargin) Map.needRefresh="LEFT";
-            if (mouseController.mouseX>(Game.HBOUND-Map.triggerMargin)) Map.needRefresh="RIGHT";
-            if (mouseController.mouseY<Map.triggerMargin) Map.needRefresh="TOP";
-            if (mouseController.mouseY>(Game.VBOUND-Map.triggerMargin)) Map.needRefresh="BOTTOM";
-            if (Map.needRefresh) {
-                Map.refresh(Map.needRefresh);
-                Map.needRefresh=false;
+            delete Game.commands[Game.mainTick];
+        }
+        /************ Draw part *************/
+        //Clear all canvas
+        Game.cxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
+        Game.frontCxt.clearRect(0,0,Game.HBOUND,Game.VBOUND);
+        //DrawLayer0: Refresh map if needed
+        if (mouseController.mouseX<Map.triggerMargin) Map.needRefresh="LEFT";
+        if (mouseController.mouseX>(Game.HBOUND-Map.triggerMargin)) Map.needRefresh="RIGHT";
+        if (mouseController.mouseY<Map.triggerMargin) Map.needRefresh="TOP";
+        if (mouseController.mouseY>(Game.VBOUND-Map.triggerMargin)) Map.needRefresh="BOTTOM";
+        if (Map.needRefresh) {
+            Map.refresh(Map.needRefresh);
+            Map.needRefresh=false;
+        }
+        //DrawLayer1: Show all buildings
+        for (var N=0;N<Building.allBuildings.length;N++){
+            var build=Building.allBuildings[N];
+            //GC
+            if (build.status=="dead") {
+                Building.allBuildings.splice(N,1);
+                N--;//Next unit come to this position
+                continue;
             }
-            //DrawLayer1: Show all buildings
-            for (var N=0;N<Building.allBuildings.length;N++){
-                var build=Building.allBuildings[N];
-                //GC
-                if (build.status=="dead") {
-                    Building.allBuildings.splice(N,1);
-                    N--;//Next unit come to this position
-                    continue;
-                }
-                //Draw
-                Game.draw(build);
+            //Draw
+            Game.draw(build);
+        }
+        //DrawLayer2: Show all existed units
+        for (var N=0;N<Unit.allUnits.length;N++){
+            var chara=Unit.allUnits[N];
+            //GC
+            if (chara.status=="dead") {
+                Unit.allUnits.splice(N,1);
+                N--;
+                continue;
             }
-            //DrawLayer2: Show all existed units
-            for (var N=0;N<Unit.allUnits.length;N++){
-                var chara=Unit.allUnits[N];
-                //GC
-                if (chara.status=="dead") {
-                    Unit.allUnits.splice(N,1);
-                    N--;
-                    continue;
-                }
-                //Draw
-                Game.draw(chara);
+            //Draw
+            Game.draw(chara);
+        }
+        //DrawLayer3: Draw all bullets
+        for (var N=0;N<Bullets.allBullets.length;N++){
+            var bullet=Bullets.allBullets[N];
+            //GC
+            if (bullet.status=="dead" && bullet.used) {
+                Bullets.allBullets.splice(N,1);
+                N--;
+                continue;
             }
-            //DrawLayer3: Draw all bullets
-            for (var N=0;N<Bullets.allBullets.length;N++){
-                var bullet=Bullets.allBullets[N];
-                //GC
-                if (bullet.status=="dead" && bullet.used) {
-                    Bullets.allBullets.splice(N,1);
-                    N--;
-                    continue;
-                }
-                Game.drawBullet(bullet);
+            Game.drawBullet(bullet);
+        }
+        //DrawLayer4: Draw effects above units
+        for (var N=0;N<Burst.allEffects.length;N++){
+            var effect=Burst.allEffects[N];
+            //GC
+            if (effect.status=="dead" || (effect.target && effect.target.status=="dead")) {
+                Burst.allEffects.splice(N,1);
+                N--;
+                continue;
             }
-            //DrawLayer4: Draw effects above units
-            for (var N=0;N<Burst.allEffects.length;N++){
-                var effect=Burst.allEffects[N];
-                //GC
-                if (effect.status=="dead" || (effect.target && effect.target.status=="dead")) {
-                    Burst.allEffects.splice(N,1);
-                    N--;
-                    continue;
-                }
-                Game.drawEffect(effect);
-            }
-            //DrawLayer5: Draw drag rect
-            if (mouseController.drag) {
-                Game.cxt.lineWidth=3;
-                Game.cxt.strokeStyle="green";
-                Game.cxt.strokeRect(mouseController.startPoint.x,mouseController.startPoint.y,
-                    mouseController.endPoint.x-mouseController.startPoint.x,
-                    mouseController.endPoint.y-mouseController.startPoint.y);
-            }
-            //DrawLayerBottom: Draw info box and resource box
-            Game.drawInfoBox();
-            Game.drawSourceBox();
-            Game.drawProcessingBox();
-            /************ Calculate for next frame *************/
-            //Clock ticking
-            Game.mainTick++;
-            //For network mode
-            if (Multiplayer.ON){
-                //Send current tick to server
-                Multiplayer.webSocket.send(JSON.stringify({
-                    type:'tick',
+            Game.drawEffect(effect);
+        }
+        //DrawLayer5: Draw drag rect
+        if (mouseController.drag) {
+            Game.cxt.lineWidth=3;
+            Game.cxt.strokeStyle="green";
+            Game.cxt.strokeRect(mouseController.startPoint.x,mouseController.startPoint.y,
+                mouseController.endPoint.x-mouseController.startPoint.x,
+                mouseController.endPoint.y-mouseController.startPoint.y);
+        }
+        //DrawLayerBottom: Draw info box and resource box
+        Game.drawInfoBox();
+        Game.drawSourceBox();
+        Game.drawProcessingBox();
+        /************ Calculate for next frame *************/
+        //Clock ticking
+        Game.mainTick++;
+        //For network mode
+        if (Multiplayer.ON){
+            //Send current tick to server
+            Multiplayer.webSocket.send(JSON.stringify({
+                type:'tick',
+                tick:Game.mainTick,
+                cmds:(Multiplayer.cmds.length?Multiplayer.cmds:null)
+            }));
+        }
+        else {
+            //Record user moves and execute if have
+            if (Multiplayer.cmds.length>0) {
+                //MainTick++ just before this code piece
+                Game.replay[Game.mainTick]=$.extend([],Multiplayer.cmds);
+                //Execute command
+                Multiplayer.parseTickCmd({
                     tick:Game.mainTick,
-                    cmds:(Multiplayer.cmds.length?Multiplayer.cmds:null)
-                }));
+                    cmds:Multiplayer.cmds
+                });
             }
-            else {
-                //Record user moves and execute if have
-                if (Multiplayer.cmds.length>0) {
-                    //MainTick++ just before this code piece
-                    Game.replay[Game.mainTick]=$.extend([],Multiplayer.cmds);
-                    //Execute command
-                    Multiplayer.parseTickCmd({
-                        tick:Game.mainTick,
-                        cmds:Multiplayer.cmds
-                    });
-                }
+        }
+        //Clear commands
+        if (Multiplayer.cmds.length>0){
+            Multiplayer.cmds=[];
+        }
+        //Postpone play frames and AI after drawing (consume time)
+        Building.allBuildings.concat(Unit.allUnits).concat(Bullets.allBullets).concat(Burst.allEffects).forEach(function(chara){
+            //Add this makes chara intelligent for attack
+            if (chara.AI) chara.AI();
+            //Judge reach destination
+            if (chara instanceof Unit) Referee.judgeReachDestination(chara);
+            //Join timers together
+            chara.playFrames();
+        });
+        //Will invite Mr.Referee to make some judgments
+        Referee.tasks.forEach(function(task){
+            Referee[task]();
+        });
+        //Release selected unit when unit died or is invisible enemy
+        if (Game.selectedUnit instanceof Gobj){
+            if (Game.selectedUnit.status=="dead" || (Game.selectedUnit['isInvisible'+Game.team] && Game.selectedUnit.isEnemy())) {
+                Game.selectedUnit.selected=false;
+                Game.changeSelectedTo({});
             }
-            //Clear commands
-            if (Multiplayer.cmds.length>0){
-                Multiplayer.cmds=[];
-            }
-            //Postpone play frames and AI after drawing (consume time)
-            Building.allBuildings.concat(Unit.allUnits).concat(Bullets.allBullets).concat(Burst.allEffects).forEach(function(chara){
-                //Add this makes chara intelligent for attack
-                if (chara.AI) chara.AI();
-                //Judge reach destination
-                if (chara instanceof Unit) Referee.judgeReachDestination(chara);
-                //Join timers together
-                chara.playFrames();
-            });
-            //Will invite Mr.Referee to make some judgments
-            Referee.tasks.forEach(function(task){
-                Referee[task]();
-            });
-            //Release selected unit when unit died or is invisible enemy
-            if (Game.selectedUnit instanceof Gobj){
-                if (Game.selectedUnit.status=="dead" || (Game.selectedUnit['isInvisible'+Game.team] && Game.selectedUnit.isEnemy())) {
-                    Game.selectedUnit.selected=false;
-                    Game.changeSelectedTo({});
-                }
-            }
-        };
+        }
+    },
+
+    animation:function() {
+        
         if (Multiplayer.ON){
             Game._timer= setInterval(function(){
-                if (Game.mainTick<Game.serverTick) Game.animation.loop();
+                if (Game.mainTick<Game.serverTick) Game.loop();
             },Game._frameInterval);
         }
         else Game.startAnimation();
@@ -1014,7 +1019,7 @@ var Game={
         Game._timer=-1;
     },
     startAnimation:function(){
-        if (Game._timer==-1) Game._timer=setInterval(Game.animation.loop,Game._frameInterval);
+        if (Game._timer==-1) Game._timer=setInterval(Game.loop,Game._frameInterval);
     },
     stop:function(charas){
         charas.forEach(function(chara){
@@ -1071,7 +1076,7 @@ var Game={
             }));
         }
     },
-    showWarning:function(msg,interval){
+    showWarning:function(msg, interval?){
         //Default interval
         if (!interval) interval=3000;
         //Show message for a period
@@ -1084,7 +1089,7 @@ var Game={
     showMessage:function(){
         //Clossure timer
         var _timer=0;
-        return function(msg,interval){
+        return function(msg,interval?){
             //Default interval
             if (!interval) interval=3000;
             //Show message for a period
@@ -1166,7 +1171,7 @@ var Game={
         });
     },
     initIndexDB:function(){
-        (window as any) .indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
+        //(window as any).indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
         var connect=indexedDB.open('StarCraftHTML5',1);
         connect.onupgradeneeded=function(evt){
             var db=(evt.target as any).result;
@@ -1183,7 +1188,7 @@ var Game={
     saveReplayIntoDB:function(){
         var connect=indexedDB.open('StarCraftHTML5',1);
         connect.onsuccess=function(evt){
-            var db=evt.target.result;
+            var db= (evt.target as any).result;
             var objStore=db.transaction(['Replays'],'readwrite').objectStore('Replays');
             objStore.add({
                 level:Game.level,

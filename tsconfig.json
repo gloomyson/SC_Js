@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "target": "es3",
     "outDir": "./dist",
-    "allowJs": false,
+    "allowJs": true,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -17,7 +18,7 @@
   "include": [
     "./src/**/*"
   ],
-  "compileOnSave": false,
+  "compileOnSave": true,
   "filesGlob": [
     "src/**/*.ts",
     "src/**/*.tsx",

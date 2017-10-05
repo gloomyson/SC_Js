@@ -10,7 +10,7 @@ div.GameLayer{
     height:100%;
     position:absolute;
     display:none;
-    cursor:url('http://www.nvhae.com/starcraft/img/Menu/cursor.ico'),auto;
+    cursor:url('http://localhost:3000/img/Menu/cursor.ico'),auto;
 }
 .GameLayer img{
     width:100%;
@@ -19,7 +19,7 @@ div.GameLayer{
     z-index:-1;/*As background*/
 }
 div.GameLayer[status="button"]{
-    cursor:url('http://www.nvhae.com/starcraft/img/Menu/cursorLocating.ico'),auto;
+    cursor:url('http://localhost:3000/img/Menu/cursorLocating.ico'),auto;
 }
 #backCanvas{
     position:absolute;
@@ -104,7 +104,7 @@ div#GamePlay div.panel_Map {
     bottom:0;
     width:145px;
     height:165px;
-    background-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png');
+    background-image: url('http://localhost:3000/img/Menu/ControlPanel.png');
 }
 div#GamePlay div.panel_Info {
     left:145px;
@@ -128,7 +128,7 @@ div#GamePlay div.panel_Info div.infoLeft div[name="portrait"] {
     width:60px;
     height:56px;
     margin-top:12px;
-    background-image:url('http://www.nvhae.com/starcraft/img/Charas/Portrait.png');
+    background-image:url('http://localhost:3000/img/Charas/Portrait.png');
 }
 div.infoLeft div#HP_SP,div.infoLeft div#MP {
     width:100%;
@@ -168,7 +168,7 @@ div#GamePlay div.panel_Info div.infoCenter p.icons span {
     display:inline-block;
     width:36px;
     height:34px;
-    background-image: url('http://www.nvhae.com/starcraft/img/Menu/CmdIcons.png');
+    background-image: url('http://localhost:3000/img/Menu/CmdIcons.png');
     border:2px solid white;
     border-radius:6px;
     margin-right:1px;
@@ -202,7 +202,7 @@ div.infoRight div.upgrading{
 div.infoRight div[name='icon']{
     width:32px;
     height:34px;
-    background-image: url('http://www.nvhae.com/starcraft/img/Menu/CmdIcons.png');
+    background-image: url('http://localhost:3000/img/Menu/CmdIcons.png');
     /*For text inside icon*/
     color:red;
     font:bolder 1.8em Verdana,Arial;
@@ -215,7 +215,7 @@ div#GamePlay div.infoRight div.upgraded div[name='icon']{
     display:inline-block;
 }
 div.infoRight div[name='icon'][disabled='true']{
-    background-image: url('http://www.nvhae.com/starcraft/img/Menu/CmdIconsDisabled.png');
+    background-image: url('http://localhost:3000/img/Menu/CmdIconsDisabled.png');
 }
 div.infoRight div.upgrading div[name='processing']{
     right:6px;
@@ -228,18 +228,18 @@ div.infoRight div.upgrading div[name='processing']{
 div.infoRight div.upgrading div.processBar{
     width:100%;
     height:14px;
-    background:url('http://www.nvhae.com/starcraft/img/Menu/Thingy.png') 0 -14px;
+    background:url('http://localhost:3000/img/Menu/Thingy.png') 0 -14px;
 }
 div.infoRight div.upgrading div.processedBar{
     height:100%;
-    background:url('http://www.nvhae.com/starcraft/img/Menu/Thingy.png') 0 -28px;
+    background:url('http://localhost:3000/img/Menu/Thingy.png') 0 -28px;
 }
 div#GamePlay div.panel_Control {
     right:0;
     bottom:0;
     width:150px;
     height:155px;
-    background-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png');
+    background-image: url('http://localhost:3000/img/Menu/ControlPanel.png');
 }
 div#GamePlay div.panel_Info {
     border-width:22px 0 0 0;
@@ -249,9 +249,9 @@ div#GamePlay[race="Zerg"] div.panel_Map {
     background-position: 0 bottom;
 }
 div#GamePlay[race="Zerg"] div.panel_Info {
-    -webkit-border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
-    -o-border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
-    border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
+    -webkit-border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
+    -o-border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
+    border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 1265 0 163 repeat;
 }
 div#GamePlay[race="Zerg"] div.panel_Control {
     background-position: -400px bottom;
@@ -260,9 +260,9 @@ div#GamePlay[race="Protoss"] div.panel_Map {
     background-position: -555px bottom;
 }
 div#GamePlay[race="Protoss"] div.panel_Info {
-    -webkit-border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 743 0 745 repeat;
-    -o-border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 743 0 745 repeat;
-    border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 743 0 745 repeat;
+    -webkit-border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 743 0 745 repeat;
+    -o-border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 743 0 745 repeat;
+    border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 743 0 745 repeat;
 }
 div#GamePlay[race="Protoss"] div.panel_Control {
     background-position: -958px bottom;
@@ -271,9 +271,9 @@ div#GamePlay[race="Terran"] div.panel_Map {
     background-position: -1110px bottom;
 }
 div#GamePlay[race="Terran"] div.panel_Info {
-    -webkit-border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
-    -o-border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
-    border-image: url('http://www.nvhae.com/starcraft/img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
+    -webkit-border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
+    -o-border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
+    border-image: url('http://localhost:3000/img/Menu/ControlPanel.png') 22 149 0 1284 repeat;
 }
 div#GamePlay[race="Terran"] div.panel_Control {
     background-position: -1516px bottom;
@@ -298,7 +298,7 @@ div#GamePlay div.panel_Info div.override div.multiSelection div{
     float:left;
     width:45px;
     height:42px;
-    background-image:url('http://www.nvhae.com/starcraft/img/Charas/Portrait.png');
+    background-image:url('http://localhost:3000/img/Charas/Portrait.png');
     background-size:720px 210px;
     border:3px solid white;
     border-radius:6px;
@@ -360,7 +360,7 @@ div#GamePlay div.resource_Box div, div#GamePlay div.tooltip_Box div.cost div{
     position:relative;
     width:14px;
     height:14px;
-    background-image:url('http://www.nvhae.com/starcraft/img/Menu/Thingy.png');
+    background-image:url('http://localhost:3000/img/Menu/Thingy.png');
     display:inline-block;
 }
 div#GamePlay div.mine{

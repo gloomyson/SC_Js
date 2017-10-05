@@ -4,7 +4,7 @@ div#GamePlay div.panel_Map canvas[name='mini_map']{
     top:32px;
     width:130px;
     height:130px;
-    background-image: url('http://www.nvhae.com/starcraft/img/Maps/Snapshot.jpg');
+    background-image: url('http://localhost:3000/img/Maps/Snapshot.jpg');
 }
 canvas[name='mini_map'].Switchback {
     background-position: 0 0;
