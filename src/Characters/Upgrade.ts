@@ -1,4 +1,6 @@
-var Upgrade={
+declare var Bullets, Protos, Zerg,Terran, Hero, Protoss, Building, Game, Magic;
+
+export var Upgrade={
     //Terran
     UpgradeInfantryWeapons:{
         name:"UpgradeInfantryWeapons",

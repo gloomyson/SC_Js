@@ -1,4 +1,7 @@
-var Magic={
+declare var $, Game, Button, Gobj, Animation,Cheat, Burst, Resource, Building, Unit;
+declare var Bullets, _$,Neutral, AttackableUnit, Zerg
+
+export var Magic={
     //Zerg
     Burrow:{
         name:"Burrow",
@@ -11,6 +14,7 @@ var Magic={
             var myself=this;
             //Effect:Freeze target
             var bufferObj={
+                attack: null,
                 moveTo:function(){},
                 moveToward:function(){},
                 dock:function(){},
@@ -619,8 +623,8 @@ var Magic={
             }
             //Change icon
             var items=_$.clone(this.items);
-            for (var N in items){
-                if (items[N].name=="Cloak") items[N].name="Decloak";
+            for (var N2 in items){
+                if (items[N2].name=="Cloak") items[N2].name="Decloak";
             }
             this.items=items;
             //Apply callback

@@ -1,4 +1,10 @@
-var mouseController={
+declare var Hammer, keyController, $, Game, Map, Gobj, Referee, Unit, Button, Multiplayer, Burst;
+
+export var mouseController={
+    mobileScreen: null,
+    canvasScreen: null,
+    mouseX: null,
+    mouseY: null,
     down:false,
     drag:false,
     startPoint:{x:0,y:0},
@@ -54,7 +60,7 @@ var mouseController={
         //Login user statistic
         if (Multiplayer.statistic!=null) Multiplayer.statistic.left++;
     },
-    rightClick:function(event,unlock,btn){
+    rightClick:function(event,unlock?,btn?){
         //Mouse at (clickX,clickY)
         var offset=$('#fogCanvas').offset();
         var clickX=event.pageX-offset.left;

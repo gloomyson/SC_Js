@@ -1,4 +1,6 @@
-var Button={
+declare var Game,$,Resource, Map,Building, Burst, Unit, Magic, Gobj, Zerg, Referee, Multiplayer, mouseController, Upgrade, Terran, Protoss;
+
+export var Button={
     callback:null,
     /***************Functions***************/
     reset:function(){
@@ -578,7 +580,7 @@ var Button={
         }
     },
     //Stop button
-    stopHandler:function(charas){
+    stopHandler:function(charas?){
         if (charas==null){
             var charas=Unit.allUnits.filter(function(chara){
                 return chara.selected && chara.team==Game.team;
@@ -627,7 +629,7 @@ var Button={
         }
     },
     //Hold button
-    holdHandler:function(charas){
+    holdHandler:function(charas?){
         //Part A: Before get charas
         if (charas==null){
             var charas=Unit.allUnits.filter(function(chara){

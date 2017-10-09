@@ -1,11 +1,15 @@
-var Multiplayer={
+declare var Upgrade, Referee,Zerg, Protoss, Terran, Hero, Cheat, mouseController, keyController;
+declare var Game, $, Unit, Building, Resource, Magic, Button
+
+export var Multiplayer={
     ON:false,//by default
     webSocket:null,
     cmds:[],
     snapshotFlag:false,
     replaySnapshotFlag:true,
+    statistic: null,
     getSocket:function(){
-        if (window.WebSocket) {
+        if ((window as any).WebSocket) {
             //ServerList: (1)HongKong:nvhae.com (3)Canada:104.128.82.12
             var webSocket=Multiplayer.webSocket=new WebSocket('ws://nvhae.com:28082');
             webSocket.onerror=function(){

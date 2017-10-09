@@ -1,4 +1,5 @@
-var keyController={
+declare var Cheat,$, Button, Game, Map;
+export var keyController={
 	shift:false,
     ctrl:false,
     disable:false,

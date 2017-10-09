@@ -1,8 +1,12 @@
-var Cheat={
+declare var Upgrade, Referee, Zerg, Terran, Protoss, Multiplayer, Hero, keyController, Building, Unit, Game, Map, $;
+declare var Building, Resource
+
+export var Cheat={
     isShown:false,
     cwal:false,
     gathering:false,
     manUnlimited:false,
+    oldCalculateDamageBy: null,
     handler:function(){
         if (Cheat.isShown){
             if (Multiplayer.ON){

@@ -1,4 +1,9 @@
-var Referee={
+declare var Animation, Zerg, Terran, Protoss, _$, Game, Resource, Building, $;
+declare var Unit, Map, Gobj;
+
+export var Referee={
+    underArbiterUnits:[],
+    detectedUnits: [],
     ourDetectedUnits:[],//Detected enemies
     enemyDetectedUnits:[],//Detected ours
     _pos:[[-1,0],[1,0],[0,-1],[0,1]],//Collision avoid
