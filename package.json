@@ -1,0 +1,64 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jasmine": "^2.5.43",
+    "@types/jquery": "^2.0.40",
+    "@types/node": "^7.0.5",
+    "autoprefixer": "^6.7.3",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.3.2",
+    "browser-sync": "^2.18.8",
+    "browser-sync-spa": "^1.0.3",
+    "css-loader": "^0.26.1",
+    "del": "^2.2.2",
+    "es6-shim": "^0.35.3",
+    "eslint": "^3.15.0",
+    "eslint-config-xo-space": "^0.15.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-babel": "^4.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "gulp": "gulpjs/gulp#4ed9a4a3275559c73a396eff7e1fde3824951ebb",
+    "gulp-filter": "^5.0.0",
+    "gulp-hub": "frankwallis/gulp-hub#d461b9c700df9010d0a8694e4af1fb96d9f38bf4",
+    "gulp-sass": "^3.1.0",
+    "gulp-util": "^3.0.8",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.28.0",
+    "jasmine": "^2.5.3",
+    "json-loader": "^0.5.4",
+    "karma": "^1.4.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-webpack": "^2.0.2",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^1.3.1",
+    "sass-loader": "^6.0.1",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^2.0.0",
+    "tslint": "^4.4.2",
+    "tslint-loader": "^3.4.2",
+    "typescript": "^2.1.0",
+    "webpack": "^2.2.1",
+    "webpack-fail-plugin": "^1.0.5"
+  },
+  "scripts": {
+    "build": "gulp",
+    "serve": "gulp serve",
+    "serve:dist": "gulp serve:dist",
+    "test": "gulp test",
+    "test:auto": "gulp test:auto"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": true,
+      "jasmine": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+      "xo-space/esnext"
+    ]
+  }
+}

@@ -2,3 +2,9 @@ Thumbs.db
 .svn/
 .idea/
 Original/
+*.map
+node_modules/
+dist/
+bgm/
+img/
+npm-debug.log
